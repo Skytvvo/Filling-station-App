@@ -1,0 +1,40 @@
+﻿<Window x:Class="FogOilAssistant.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FogOilAssistant" xmlns:svgc="http://sharpvectors.codeplex.com/svgc/" 
+        mc:Ignorable="d"
+        Title="Fog Oil Assistant" Height="766" Width="1366" WindowStyle="None" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" Foreground="#FF262B26">
+    
+    <Grid Background="#FF262B26">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.4*"/>
+            <RowDefinition Height="7*"/>
+         
+        </Grid.RowDefinitions>
+        <Grid Name="Toolbar" Grid.Row="0" Background="#FF222121" MouseDown="Toolbar_MouseDown">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
+                <svgc:SvgViewbox  Stretch="Uniform" Width="15" Height="15" Margin="10" Panel.ZIndex="10" Source="Components/Images/minimize.svg"/>
+                <Image Cursor="Hand" Stretch="Uniform" Name="CloseApp" Height="15" Width="15" Source="cancel.png" MouseDown="CloseApp_MouseDown">
+                    <Image.Style>
+                        <Style TargetType="{x:Type Image}">
+                            <Setter Property="Opacity" Value="0.4"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsMouseOver, ElementName=CloseApp}" Value="True">
+                                    <Setter Property="Opacity" Value="1"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                    <Image.Effect>
+                        <BlurEffect Radius="2"/>
+                    </Image.Effect>
+                </Image>
+            </StackPanel>
+        </Grid>
+        <Frame Name="MainPage" Grid.Row="1" NavigationUIVisibility="Hidden" >
+            
+        </Frame>
+    </Grid>
+</Window>
