@@ -27,20 +27,24 @@ namespace FogOilAssistant
             MainPage.Content = new MainPage();
         }
 
-        private void CloseApp_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            this.Close();
-        }
-
-        private void Minimize_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            this.WindowState = WindowState.Minimized;
-        }
+     
+      
 
         private void Toolbar_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
+        }
+
+        private void close_app_button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void minimize_button_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+
         }
     }
 }

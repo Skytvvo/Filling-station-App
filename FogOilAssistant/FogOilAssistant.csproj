@@ -135,6 +135,8 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Components\Images\minimize.svg" />
+    <Resource Include="Components\Images\cancel.svg" />
+    <Content Include="cancel.svg" />
     <Content Include="minimize.svg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

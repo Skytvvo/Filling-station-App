@@ -5,14 +5,26 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:FogOilAssistant.Components"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="684" d:DesignWidth="1366"
       Title="MainPage">
 
     <Grid>
-        <TextBlock >
-            <TextBlock.Text>
-                asdasdadsadasdasdasd
-            </TextBlock.Text>
-        </TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                
+            </Grid.ColumnDefinitions>
+        </Grid>
+        <Grid Grid.Row="1">
+            
+        </Grid>
+        <Grid Grid.Row="2">
+            
+        </Grid>
     </Grid>
 </Page>
