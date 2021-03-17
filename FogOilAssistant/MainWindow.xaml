@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FogOilAssistant" xmlns:svgc="http://sharpvectors.codeplex.com/svgc/" 
         mc:Ignorable="d"
-        Title="Fog Oil Assistant" Height="720" Width="1366" WindowStyle="None" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" Foreground="#FF262B26">
+        Title="Fog Oil Assistant" Height="720" Width="1280" WindowStyle="None" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" Foreground="#FF262B26">
     <Window.Resources>
         <Style x:Key="tool_button" TargetType="Button">
             <Setter Property="Opacity" Value="0.4"/>
@@ -34,7 +34,7 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    <Grid Background="#FF262B26">
+    <Grid Background="#1E1E1E">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="19*"/>

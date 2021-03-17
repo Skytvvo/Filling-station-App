@@ -61,6 +61,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -137,6 +138,19 @@
     <Resource Include="Components\Images\minimize.svg" />
     <Resource Include="Components\Images\cancel.svg" />
     <Content Include="cancel.svg" />
+    <Resource Include="Components\Images\location.svg" />
+    <Resource Include="Components\Images\oil-bottle.svg" />
+    <Resource Include="Components\Images\shop.svg" />
+    <Resource Include="Components\Images\support.svg" />
+    <Resource Include="Components\Images\login.svg" />
+    <Resource Include="Components\slide4.jpg" />
+    <Resource Include="Components\Images\Slider\slide3.jpg" />
+    <Resource Include="Components\Images\Slider\slide4.jpg" />
+    <Resource Include="Components\Images\Slider\slide5.jpg" />
+    <Resource Include="Components\Images\Slider\slide6.jpg" />
+    <Resource Include="Components\Images\Slider\slide7.jpg" />
+    <Resource Include="Components\slide3.jpg" />
+    <Content Include="Components\support.svg" />
     <Content Include="minimize.svg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

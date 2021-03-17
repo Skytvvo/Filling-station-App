@@ -3,10 +3,98 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:FogOilAssistant.Components"
+      xmlns:local="clr-namespace:FogOilAssistant.Components" xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
       mc:Ignorable="d" 
-      d:DesignHeight="684" d:DesignWidth="1366"
+      d:DesignHeight="684" d:DesignWidth="1280"
       Title="MainPage">
+    <Page.Resources>
+        <!-- -->
+        <Style x:Key="menu_item_loyout" TargetType="StackPanel">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <!-- -->
+        <Style x:Key="menu_item" TargetType="Button">
+            <Setter Property="MinHeight" Value="200"/>
+            <Setter Property="MinWidth" Value="200"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="ForceCursor" Value="True"/>
+
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+
+                        <Border BorderBrush="#FF0000" BorderThickness="2" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FF0000"/>
+                </Trigger>
+
+            </Style.Triggers>
+
+        </Style>
+
+        <!-- -->
+        <Style x:Key="footer_description" TargetType="StackPanel">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="40 0 0 0"/>
+        </Style>
+
+        <!-- -->
+        <Style x:Key="style_link" TargetType="Hyperlink" >
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="TextDecorations" Value="{x:Null}"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="#FF0000"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- -->
+        <Style x:Key="image_menu" TargetType="svgc:SvgViewbox">
+            <Setter Property="Height" Value="100"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Margin" Value="10"/>
+        </Style>
+
+        <!-- -->
+        <Style x:Key="text_menu" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#ffffff"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="MinHeight" Value="50"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+        </Style>
+
+        <!-- -->
+        <Style x:Key="link_container" TargetType="TextBlock">
+            <Setter Property="Margin" Value="0 10 0 0"/>
+        </Style>
+        <!-- Slider -->
+        <Style x:Key="image_slider" TargetType="Image">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value='Bottom'/>
+            <Setter Property="Grid.Column" Value="1"/>
+            <Setter Property="Grid.ColumnSpan" Value="3"/>
+            <Setter Property="Grid.Row" Value="0"/>
+            <Setter Property="Grid.RowSpan" Value="6"/>
+            <Setter Property="Stretch" Value="UniformToFill"/>
+        </Style>
+
+    </Page.Resources>
+
 
     <Grid>
         <Grid.RowDefinitions>
@@ -17,14 +105,116 @@
 
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
                 
             </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+           
+                <Image Style="{StaticResource image_slider}"  Source="/Components/Images/Slider/slide4.jpg"  />
+                <Image Style="{StaticResource image_slider}"  Source="/Components/Images/Slider/slide5.jpg"  />
+                <Image  Style="{StaticResource image_slider}"  Source="/Components/Images/Slider/slide3.jpg"  />
+
         </Grid>
+
+
         <Grid Grid.Row="1">
-            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Style="{StaticResource menu_item_loyout}" Grid.Column="0">
+                <Button Style="{StaticResource menu_item}"  x:Name="button_menu_support">
+                    <StackPanel>
+                        <svgc:SvgViewbox Style="{StaticResource image_menu}" Stretch="Uniform" Source="/Components/Images/support.svg" />
+                        <TextBlock Style="{StaticResource text_menu}">
+                            <TextBlock.Text>
+                                Support
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </StackPanel>
+
+                </Button>
+            </StackPanel>
+
+            <StackPanel Style="{StaticResource menu_item_loyout}" Grid.Column="1">
+                <Button Style="{StaticResource menu_item}"  x:Name="button_menu_shop">
+                    <StackPanel>
+                        <svgc:SvgViewbox Style="{StaticResource image_menu}" Stretch="Uniform" Source="/Components/Images/sHOP.svg" />
+                        <TextBlock Style="{StaticResource text_menu}">
+                            <TextBlock.Text>
+                                Shop
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+            <StackPanel Style="{StaticResource menu_item_loyout}" Grid.Column="2">
+                <Button Style="{StaticResource menu_item}"  x:Name="button_menu_repair">
+                    <StackPanel>
+                        <svgc:SvgViewbox Style="{StaticResource image_menu}" Stretch="Uniform" Source="/Components/Images/oil-bottle.svg" />
+                        <TextBlock Style="{StaticResource text_menu}">
+                            <TextBlock.Text>
+                                Oil
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+            <StackPanel Style="{StaticResource menu_item_loyout}" Grid.Column="3">
+                <Button Style="{StaticResource menu_item}"  x:Name="button_menu_location">
+                    <StackPanel>
+                        <svgc:SvgViewbox Style="{StaticResource image_menu}" Stretch="Uniform" Source="/Components/Images/location.svg" />
+                        <TextBlock Style="{StaticResource text_menu}">
+                            <TextBlock.Text>
+                                Refueling map
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+            <StackPanel Style="{StaticResource menu_item_loyout}" Grid.Column="4">
+                <Button Style="{StaticResource menu_item}"  x:Name="button_menu_login">
+                    <StackPanel>
+                        <svgc:SvgViewbox Style="{StaticResource image_menu}" Stretch="Uniform" Source="/Components/Images/login.svg" />
+                        <TextBlock Style="{StaticResource text_menu}">
+                            <TextBlock.Text>
+                                Login
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+
         </Grid>
+
+
         <Grid Grid.Row="2">
-            
+            <StackPanel Style="{StaticResource footer_description}" >
+                <TextBlock Style="{StaticResource link_container}" x:Name="link_about">
+                   <Hyperlink RequestNavigate="Hyperlink_RequestNavigate" Style="{StaticResource style_link}" NavigateUri="https://www.google.by/">
+                       About
+                   </Hyperlink>
+                </TextBlock>
+                <TextBlock Style="{StaticResource link_container}" x:Name="link_telegram">
+                   <Hyperlink RequestNavigate="Hyperlink_RequestNavigate" Style="{StaticResource style_link}" NavigateUri="https://t.me/ithumor">
+                       Telegram
+                   </Hyperlink>
+                </TextBlock>
+            </StackPanel>
         </Grid>
     </Grid>
 </Page>
