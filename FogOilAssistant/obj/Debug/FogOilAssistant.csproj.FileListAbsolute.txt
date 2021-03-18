@@ -33,3 +33,8 @@ C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\SharpVectors.Rendering.Wpf.xml
 C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\SharpVectors.Runtime.Wpf.xml
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\FogOilAssistant_Content.g.cs
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\FogOilAssistant.csproj.CopyComplete
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\ToggleMenu.g.cs
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\Dictionary\ToggleMenuDictionary.baml
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\ToggleMenu.baml
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\Dictionary\MainWindowDictionary.baml

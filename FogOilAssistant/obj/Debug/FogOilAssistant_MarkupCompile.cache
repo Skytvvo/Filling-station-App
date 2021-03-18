@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\data\FogOilAssistant\FogOilAssistant\App.xaml
-289872716
+51303439593
 3565224470
-62054303088
-221787244806
-Components\MainPage.xaml;MainWindow.xaml;
+7694404887
+232001631542
+Components\Dictionary\MainWindowDictionary.xaml;Components\Dictionary\ToggleMenuDictionary.xaml;Components\MainPage.xaml;Components\View\ToggleMenu.xaml;MainWindow.xaml;
 
 False
 

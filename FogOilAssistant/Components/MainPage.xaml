@@ -91,8 +91,24 @@
             <Setter Property="Grid.Row" Value="0"/>
             <Setter Property="Grid.RowSpan" Value="6"/>
             <Setter Property="Stretch" Value="UniformToFill"/>
+            <Style.Triggers>
+                <Trigger Property="Visibility" Value="Visible">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="00:00:2" BeginTime="00:00:00" From="0.0" To="1.0"/>
+                                <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="00:00:2" BeginTime="00:00:10" From="0.0" To="1.0"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                </Trigger>
+            </Style.Triggers>
         </Style>
 
+
+
+
+       
     </Page.Resources>
 
 
@@ -120,10 +136,10 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-           
-                <Image Style="{StaticResource image_slider}"  Source="/Components/Images/Slider/slide4.jpg"  />
-                <Image Style="{StaticResource image_slider}"  Source="/Components/Images/Slider/slide5.jpg"  />
-                <Image  Style="{StaticResource image_slider}"  Source="/Components/Images/Slider/slide3.jpg"  />
+
+            <Image Style="{StaticResource image_slider}"  Source="/Components/Images/Slider/slide4.jpg"  />
+            <Image Style="{StaticResource image_slider}"  Source="/Components/Images/Slider/slide5.jpg"  />
+            <Image  Style="{StaticResource image_slider}"  Source="/Components/Images/Slider/slide3.jpg"  />
 
         </Grid>
 
