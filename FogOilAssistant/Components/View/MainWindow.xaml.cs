@@ -30,20 +30,6 @@ namespace FogOilAssistant
       
 
 
-        private void toggle_menu_handler(object sender, RoutedEventArgs e)
-        {
-            if(this.toggle_menu.Visibility == Visibility.Visible)
-            {
-                this.toggle_menu.Visibility = Visibility.Collapsed;
-                Grid.SetRow(this.toggle_menu_button, 3);
-            }
-            else 
-            { 
-                this.toggle_menu.Visibility = Visibility.Visible;
-                Grid.SetRow(this.toggle_menu_button, 0);
-            }
-            
-        }
 
         private void Toolbar_MouseDown(object sender, MouseButtonEventArgs e)
         {

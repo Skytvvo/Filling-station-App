@@ -1,0 +1,70 @@
+﻿<Window x:Class="FogOilAssistant.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FogOilAssistant" xmlns:svgc="http://sharpvectors.codeplex.com/svgc/" xmlns:views="clr-namespace:FogOilAssistant.Components.View" xmlns:viewmodels="clr-namespace:FogOilAssistant.Components.Models.MainWindow"
+        mc:Ignorable="d"
+        Title="Fog Oil Assistant" Height="720" Width="1280" MinHeight="600" MinWidth="1000" AllowsTransparency="True"  WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Foreground="#FF262B26">
+    
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Components/Dictionary/MainWindowDictionary.xaml"/>
+                <ResourceDictionary Source="/Components/Dictionary/ToggleMenuExpanderDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Window.DataContext>
+        <viewmodels:ViewModelMW/>
+    </Window.DataContext>
+    
+    <Grid Background="#1E1E1E">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="19*"/>
+
+        </Grid.RowDefinitions>
+        <Grid Name="Toolbar" Grid.Row="0" Background="#FF222121" MouseDown="Toolbar_MouseDown">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
+                <Button Command="{Binding MinimizeWindow}" Style="{StaticResource tool_button}" x:Name="minimize_button" >
+                    <svgc:SvgViewbox Height="20" Stretch="Uniform" Source="/Components/Images/minimize.svg"/>
+                </Button>
+                <Button Command="{Binding CloseAppWindow}" Style="{StaticResource tool_button}" x:Name="close_app_button" >
+                    <svgc:SvgViewbox Height="20" Stretch="Uniform" Source="/Components/Images/cancel.svg" />
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                
+             
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+              
+            </Grid.RowDefinitions>
+
+            <views:ToggleMenuExpander Grid.Row="4" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="7"/>
+        </Grid>
+        
+        <!--<Frame Name="MainPage" Grid.Row="1" NavigationUIVisibility="Hidden" >
+
+        </Frame>-->
+    </Grid>
+</Window>

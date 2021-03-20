@@ -73,6 +73,16 @@ namespace FogOilAssistant.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
+        internal static byte[] exp_btn {
+            get {
+                object obj = ResourceManager.GetObject("exp_btn", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
         internal static byte[] location {
             get {
                 object obj = ResourceManager.GetObject("location", resourceCulture);

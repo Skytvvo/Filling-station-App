@@ -27,32 +27,5 @@
 
         </Style.Triggers>
     </Style>
-    <Style x:Key="expander_block" TargetType="StackPanel">
-        <Setter Property="VerticalAlignment" Value="Bottom"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-    </Style>
-    <Style x:Key="expander_block_button" TargetType="Button">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="ForceCursor" Value="True"/>
-        <Setter Property="Margin" Value="5,5,5,5"/>
-        <Setter Property="Template">
-            <Setter.Value>
-            <ControlTemplate TargetType="{x:Type Button}">
-                <Border Background="{TemplateBinding Background}" BorderBrush="#FF0000" BorderThickness="2" CornerRadius="5">
-                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                </Border>
-            </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#FF0000"/>
-            </Trigger>
-
-        </Style.Triggers>
-    </Style>
-    <Style x:Key="expander_block_content" TargetType="StackPanel">
-        
-    </Style>
+   
 </ResourceDictionary>

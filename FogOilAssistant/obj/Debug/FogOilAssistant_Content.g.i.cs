@@ -8,8 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("cancel.svg")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("components/support.svg")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("minimize.svg")]
 
 

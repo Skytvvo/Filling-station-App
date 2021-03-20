@@ -89,6 +89,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Components\Dictionary\ToggleMenuExpanderDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Components\MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -97,7 +101,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Components\View\ToggleMenuExpander.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -108,10 +116,15 @@
     <Compile Include="Components\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Components\Models\MainWindow\MWICommand.cs" />
+    <Compile Include="Components\Models\MainWindow\ViewModelMW.cs" />
     <Compile Include="Components\View\ToggleMenu.xaml.cs">
       <DependentUpon>ToggleMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Components\View\ToggleMenuExpander.xaml.cs">
+      <DependentUpon>ToggleMenuExpander.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -145,31 +158,25 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Components\Data\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="cancel.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="minimize.png" />
+    <Folder Include="Components\Images\ViewModels\" />
+    <Folder Include="Components\Models\ToggleMenu\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Components\Images\minimize.svg" />
     <Resource Include="Components\Images\cancel.svg" />
-    <Content Include="cancel.svg" />
     <Resource Include="Components\Images\location.svg" />
     <Resource Include="Components\Images\oil-bottle.svg" />
     <Resource Include="Components\Images\shop.svg" />
     <Resource Include="Components\Images\support.svg" />
     <Resource Include="Components\Images\login.svg" />
-    <Resource Include="Components\slide4.jpg" />
     <Resource Include="Components\Images\Slider\slide3.jpg" />
     <Resource Include="Components\Images\Slider\slide4.jpg" />
     <Resource Include="Components\Images\Slider\slide5.jpg" />
     <Resource Include="Components\Images\Slider\slide6.jpg" />
     <Resource Include="Components\Images\Slider\slide7.jpg" />
-    <Resource Include="Components\slide3.jpg" />
-    <Content Include="Components\support.svg" />
-    <Content Include="minimize.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Components\Images\exp_btn.svg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
