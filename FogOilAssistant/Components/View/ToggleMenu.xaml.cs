@@ -23,6 +23,7 @@ namespace FogOilAssistant.Components.View
         public ToggleMenu()
         {
             InitializeComponent();
+            
         }
     }
 }

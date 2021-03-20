@@ -9,12 +9,12 @@
               d:DesignWidth="1280">
 
     <UserControl.Resources>
-        <ResourceDictionary Source="/Components/Dictionary/ToggleMenuExpanderDictionary.xaml"/>
+        <ResourceDictionary Source="/Components/Dictionary/ToggleMenuExpanderDictionary.xaml" />
     </UserControl.Resources>
     
     <Grid>
       
-        <Expander Style="{StaticResource expander_block_style}" />
+        <Expander  Style="{StaticResource expander_block_style}" />
 
     </Grid>
 </UserControl>

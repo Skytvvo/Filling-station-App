@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("minimize.svg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("components/dictionary/togglemenuexpanderdictionary.xaml")]
 
 

@@ -88,6 +88,7 @@
     <Page Include="Components\Dictionary\ToggleMenuDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <CustomToolNamespace>FogOilAssistant.Components.View</CustomToolNamespace>
     </Page>
     <Page Include="Components\Dictionary\ToggleMenuExpanderDictionary.xaml">
       <SubType>Designer</SubType>
@@ -113,11 +114,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Components\Data\MenuButton\ButtonMenu.cs" />
     <Compile Include="Components\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Components\Models\MainWindow\MWICommand.cs" />
     <Compile Include="Components\Models\MainWindow\ViewModelMW.cs" />
+    <Compile Include="Components\Models\ToggleMenu\ViewModelToggleMenu.cs" />
     <Compile Include="Components\View\ToggleMenu.xaml.cs">
       <DependentUpon>ToggleMenu.xaml</DependentUpon>
     </Compile>
@@ -157,9 +160,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Components\Data\" />
     <Folder Include="Components\Images\ViewModels\" />
-    <Folder Include="Components\Models\ToggleMenu\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Components\Images\minimize.svg" />

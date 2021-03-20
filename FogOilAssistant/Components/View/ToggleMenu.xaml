@@ -3,12 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:FogOilAssistant.Components.View" xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
+             xmlns:local="clr-namespace:FogOilAssistant.Components.View" xmlns:svgc="http://sharpvectors.codeplex.com/svgc/" xmlns:vm="clr-namespace:FogOilAssistant.Components.Models.ToggleMenu"
              mc:Ignorable="d" 
             >
     <UserControl.Resources>
         <ResourceDictionary Source="/Components/Dictionary/ToggleMenuDictionary.xaml"/>
     </UserControl.Resources>
+    <UserControl.DataContext>
+        <!-- Make connection between veiw and viewmodel-->
+        <vm:ViewModelToggleMenu/>
+    </UserControl.DataContext>
     <Grid Background="#FF222121">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>

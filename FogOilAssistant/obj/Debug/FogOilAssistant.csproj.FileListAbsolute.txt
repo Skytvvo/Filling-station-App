@@ -30,13 +30,13 @@ C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\SharpVectors.Rendering.Wpf.xml
 C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\SharpVectors.Runtime.Wpf.xml
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\FogOilAssistant.csproj.CopyComplete
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\ToggleMenu.g.cs
-C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\Dictionary\ToggleMenuDictionary.baml
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\ToggleMenu.baml
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\Dictionary\MainWindowDictionary.baml
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\ToggleMenuExpander.g.cs
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\MainWindow.g.cs
-C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\Dictionary\ToggleMenuExpanderDictionary.baml
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\ToggleMenuExpander.baml
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\MainWindow.baml
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\FogOilAssistant.csprojAssemblyReference.cache
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\Dictionary\ToggleMenuExpanderDictionary.baml
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\Dictionary\ToggleMenuDictionary.baml

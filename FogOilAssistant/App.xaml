@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:FogOilAssistant"
              StartupUri="Components\View\MainWindow.xaml">
     <Application.Resources>
-         
+        
     </Application.Resources>
 </Application>
