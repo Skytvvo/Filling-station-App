@@ -5,6 +5,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace FogOilAssistant.Components.Data.MenuButton
 {
@@ -44,5 +46,35 @@ namespace FogOilAssistant.Components.Data.MenuButton
                 OnPropertyChanged("Path");
             }
         }
+
+        public ICommand Command { get; }
+
+
+        public void Execute()
+        {
+            if (!String.IsNullOrEmpty(this.Text))
+                navigateToPage(this.Text);
+        }
+
+        private void navigateToPage(string text)
+        {
+            foreach(System.Windows.Window window in Application.Current.Windows)
+            {
+                if (window.GetType() == typeof(MainWindow))
+                {
+                    (window as MainWindow).MainPage.Navigate(new Uri(string.Format("{0}{1}{2}", "/Components/View/Pages/", text, ".xaml"), UriKind.RelativeOrAbsolute));
+                }
+            }
+        }
+
+
+        public ButtonMenu()
+        {
+            this.Command = new CommandViewModel(Execute);
+        }
     }
+
+
+
+   
 }

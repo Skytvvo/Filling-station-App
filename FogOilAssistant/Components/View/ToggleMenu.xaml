@@ -25,7 +25,7 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Button Style="{StaticResource menu_item}">
+                    <Button Style="{StaticResource menu_item}" Command="{Binding Path=Command}">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="3*"/>

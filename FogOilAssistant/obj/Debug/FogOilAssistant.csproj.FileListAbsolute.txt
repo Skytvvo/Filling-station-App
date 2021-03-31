@@ -10,8 +10,6 @@ C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\FogOilAssistant.csproj.Generat
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\FogOilAssistant.csproj.CoreCompileInputs.cache
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\FogOilAssistant.exe
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\FogOilAssistant.pdb
-C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\MainPage.g.cs
-C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\MainPage.baml
 C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\SharpVectors.Converters.Wpf.dll
 C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\SharpVectors.Core.dll
 C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\SharpVectors.Css.dll
@@ -40,3 +38,13 @@ C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\MainWindow.bam
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\FogOilAssistant.csprojAssemblyReference.cache
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\Dictionary\ToggleMenuExpanderDictionary.baml
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\Dictionary\ToggleMenuDictionary.baml
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\Login.g.cs
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\Oil.g.cs
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\Refueling map.g.cs
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\Shop.g.cs
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\Support.g.cs
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\Login.baml
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\Oil.baml
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\Refueling map.baml
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\Shop.baml
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\Support.baml

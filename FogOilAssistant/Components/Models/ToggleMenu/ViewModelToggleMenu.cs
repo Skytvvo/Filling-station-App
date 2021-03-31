@@ -23,7 +23,10 @@ namespace FogOilAssistant.Components.Models.ToggleMenu
                 };
             }
         }
-   
+        
+
+
+
 
         public ViewModelToggleMenu()
         {
