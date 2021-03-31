@@ -5,139 +5,44 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FogOilAssistant.Components.View" xmlns:svgc="http://sharpvectors.codeplex.com/svgc/" xmlns:vm="clr-namespace:FogOilAssistant.Components.Models.ToggleMenu"
              mc:Ignorable="d" 
-            >
+            
+             Width="1280">
     <UserControl.Resources>
         <ResourceDictionary Source="/Components/Dictionary/ToggleMenuDictionary.xaml"/>
     </UserControl.Resources>
     <UserControl.DataContext>
-        <!-- Make connection between veiw and viewmodel-->
+      
         <vm:ViewModelToggleMenu/>
     </UserControl.DataContext>
-    <Grid Background="#FF222121">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-          
-            <Grid Style="{StaticResource menu_item_loyout}" Grid.Column="0">
+    <Grid  Background="#FF222121">
+        <ItemsControl Style="{StaticResource menu_item_loyout}"  ItemsSource="{Binding buttonMenus}"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                      ScrollViewer.VerticalScrollBarVisibility="Disabled">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button Style="{StaticResource menu_item}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <svgc:SvgViewbox Grid.Row="0" Style="{StaticResource image_menu}" Stretch="Uniform" Source="{Binding Path=Path}" />
+                            <TextBlock Grid.Row="1" Text="{Binding Path=Text}" Style="{StaticResource text_menu}"/>
 
-                <Button Style="{StaticResource menu_item}"  x:Name="button_menu_support">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="3*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="3*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <svgc:SvgViewbox  Style="{StaticResource image_menu}" Stretch="Uniform" Source="/Components/Images/support.svg" />
-                        <TextBlock  Style="{StaticResource text_menu}">
-                            <TextBlock.Text>
-                                Support
-                            </TextBlock.Text>
-                        </TextBlock>
-                    </Grid>
-
-                </Button>
-            </Grid>
-
-            <Grid Style="{StaticResource menu_item_loyout}" Grid.Column="1">
-                <Button Style="{StaticResource menu_item}"  x:Name="button_menu_shop">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="3*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="3*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <svgc:SvgViewbox Grid.Row="0" Style="{StaticResource image_menu}" Stretch="Uniform" Source="/Components/Images/sHOP.svg" />
-                        <TextBlock Grid.Row="1" Style="{StaticResource text_menu}">
-                            <TextBlock.Text>
-                                Shop
-                            </TextBlock.Text>
-                        </TextBlock>
-                    </Grid>
-                </Button>
-            </Grid>
-            <Grid Style="{StaticResource menu_item_loyout}" Grid.Column="2">
-                <Button Style="{StaticResource menu_item}"  x:Name="button_menu_repair">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="3*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="3*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <svgc:SvgViewbox Grid.Row="0" Style="{StaticResource image_menu}" Stretch="Uniform" Source="/Components/Images/oil-bottle.svg" />
-                        <TextBlock Grid.Row="1" Style="{StaticResource text_menu}">
-                            <TextBlock.Text>
-                                Oil
-                            </TextBlock.Text>
-                        </TextBlock>
-                    </Grid>
-                </Button>
-            </Grid>
-            <Grid Style="{StaticResource menu_item_loyout}" Grid.Column="3">
-                <Button  Style="{StaticResource menu_item}"  x:Name="button_menu_location">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="3*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="3*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <svgc:SvgViewbox Grid.Row="0" Style="{StaticResource image_menu}" Stretch="Uniform" Source="/Components/Images/location.svg" />
-                        <TextBlock Grid.Row="1" Style="{StaticResource text_menu}">
-                            <TextBlock.Text>
-                                Refueling map
-                            </TextBlock.Text>
-                        </TextBlock>
-                    </Grid>
-                </Button>
-            </Grid>
-            <Grid Style="{StaticResource menu_item_loyout}" Grid.Column="4">
-                <Button Style="{StaticResource menu_item}"  x:Name="button_menu_login">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="3*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="3*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <svgc:SvgViewbox Grid.Row="0" Style="{StaticResource image_menu}" Stretch="Uniform" Source="/Components/Images/login.svg" />
-                        <TextBlock Grid.Row="1" Style="{StaticResource text_menu}">
-                            <TextBlock.Text>
-                                Login
-                            </TextBlock.Text>
-                        </TextBlock>
-                    </Grid>
-                </Button>
-            </Grid>
-
-        </Grid>
+                        </Grid>
+                    </Button>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </Grid>
 </UserControl>

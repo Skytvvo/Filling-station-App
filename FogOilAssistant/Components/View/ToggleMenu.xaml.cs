@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FogOilAssistant.Components.Data.MenuButton;
+using FogOilAssistant.Components.Models.ToggleMenu;
 
 namespace FogOilAssistant.Components.View
 {
@@ -23,7 +25,13 @@ namespace FogOilAssistant.Components.View
         public ToggleMenu()
         {
             InitializeComponent();
-            
+
+        }
+         
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

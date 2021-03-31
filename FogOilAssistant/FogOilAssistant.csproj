@@ -120,6 +120,7 @@
     </Compile>
     <Compile Include="Components\Models\MainWindow\MWICommand.cs" />
     <Compile Include="Components\Models\MainWindow\ViewModelMW.cs" />
+    <Compile Include="Components\Models\ToggleMenu\BindableCollection.cs" />
     <Compile Include="Components\Models\ToggleMenu\ViewModelToggleMenu.cs" />
     <Compile Include="Components\View\ToggleMenu.xaml.cs">
       <DependentUpon>ToggleMenu.xaml</DependentUpon>

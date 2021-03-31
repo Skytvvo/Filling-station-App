@@ -17,7 +17,7 @@ namespace FogOilAssistant.Components.Data.MenuButton
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
 
-        private string text;
+        public string text;
         public string Text
         {
             get
@@ -31,7 +31,7 @@ namespace FogOilAssistant.Components.Data.MenuButton
             }
         }
 
-        private string path;
+        public string path;
         public string Path
         {
             get
