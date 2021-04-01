@@ -48,3 +48,4 @@ C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\Refuelin
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\Shop.baml
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\Support.baml
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\FogOilAssistant.csprojAssemblyReference.cache
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\Dictionary\Pages\ShopDictionary.baml

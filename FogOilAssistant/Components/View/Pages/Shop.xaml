@@ -7,9 +7,15 @@
       mc:Ignorable="d" 
       Title="Shop">
 
+
+    <Page.Resources>
+        <ResourceDictionary Source="/Components/Dictionary/Pages/ShopDictionary.xaml"/>
+    </Page.Resources>
+    
     <Page.DataContext>
         <viewmodels:ViewModelShop/>
     </Page.DataContext>
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled"  CanContentScroll="True" VerticalScrollBarVisibility="Hidden">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -26,11 +32,60 @@
             <RowDefinition Height="250"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Column="0" Grid.ColumnSpan="7" Grid.Row="0">
+        
+            <Grid Grid.Column="0" Grid.ColumnSpan="7" Grid.Row="0">
             <Image Source="{Binding Path, UpdateSourceTrigger=PropertyChanged}"/>
         </Grid>
         <Grid Grid.Row="1"  Grid.Column="0" Grid.ColumnSpan="7">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0">
+                
+            </StackPanel>
+            <Grid Grid.Row="1">
+               
+                <ItemsControl ItemsSource="{Binding Products}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                                <Grid  Cursor="Hand">
+                                    <Grid x:Name="product_panel" Style="{StaticResource product_panel_item}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                      
+                                        <Image Grid.Column="0"   Style="{StaticResource product_img}" Source="{Binding Img}" />
+                                        <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource product_name}" Text="{Binding Name}"/>
+                                        <TextBlock Grid.Column="3" Grid.ColumnSpan="2" Style="{StaticResource product_price}" Text="{Binding Price}"/>
+                                        <!--Symbols limit - 695-->
+                                        <TextBlock Grid.Column="5" Grid.ColumnSpan="4" Style="{StaticResource product_description}" Text="{Binding Description}" />
+                                    </Grid>
+                                    <Button x:Name="product_buy"  Style="{StaticResource product_hover_button}" >
+                                        <Button.Content>
+                                            <TextBlock Text="Buy"/>
+                                            
+                                        </Button.Content>
+                                        
+                                    </Button>   
+                                </Grid>
+                            </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
             
         </Grid>
     </Grid>
+    </ScrollViewer>
 </Page>

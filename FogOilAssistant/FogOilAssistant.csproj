@@ -85,6 +85,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Components\Dictionary\Pages\ShopDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Components\Dictionary\ToggleMenuDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -132,6 +136,7 @@
     </Compile>
     <Compile Include="Components\Data\Commands.cs" />
     <Compile Include="Components\Data\MenuButton\ButtonMenu.cs" />
+    <Compile Include="Components\Data\Product\Product.cs" />
     <Compile Include="Components\Models\MainWindow\MWICommand.cs" />
     <Compile Include="Components\Models\MainWindow\ViewModelMW.cs" />
     <Compile Include="Components\Models\Pages\ViewModelShop.cs" />
@@ -212,6 +217,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Components\Images\Slider\3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Components\Images\Products\oil.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
