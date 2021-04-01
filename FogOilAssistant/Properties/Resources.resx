@@ -139,19 +139,16 @@
   <data name="shop" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Components\Images\shop.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="slide3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Components\Images\Slider\slide3.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="slide4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Components\Images\Slider\slide4.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="slide5" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Components\Images\Slider\slide5.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="slide6" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Components\Images\Slider\slide6.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="support" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Components\Images\support.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Components\Images\Slider\1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Components\Images\Slider\2.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Components\Images\Slider\3.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

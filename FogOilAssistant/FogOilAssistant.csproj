@@ -134,6 +134,7 @@
     <Compile Include="Components\Data\MenuButton\ButtonMenu.cs" />
     <Compile Include="Components\Models\MainWindow\MWICommand.cs" />
     <Compile Include="Components\Models\MainWindow\ViewModelMW.cs" />
+    <Compile Include="Components\Models\Pages\ViewModelShop.cs" />
     <Compile Include="Components\Models\ToggleMenu\ViewModelToggleMenu.cs" />
     <Compile Include="Components\View\Pages\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
@@ -199,14 +200,18 @@
     <Resource Include="Components\Images\shop.svg" />
     <Resource Include="Components\Images\support.svg" />
     <Resource Include="Components\Images\login.svg" />
-    <Resource Include="Components\Images\Slider\slide3.jpg" />
-    <Resource Include="Components\Images\Slider\slide4.jpg" />
-    <Resource Include="Components\Images\Slider\slide5.jpg" />
-    <Resource Include="Components\Images\Slider\slide6.jpg" />
-    <Resource Include="Components\Images\Slider\slide7.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Components\Images\exp_btn.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Components\Images\Slider\1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Components\Images\Slider\2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Components\Images\Slider\3.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

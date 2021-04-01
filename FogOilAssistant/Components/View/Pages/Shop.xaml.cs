@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FogOilAssistant.Components.Models.Pages;
 
 namespace FogOilAssistant.Components.View.Pages
 {
@@ -23,6 +24,7 @@ namespace FogOilAssistant.Components.View.Pages
         public Shop()
         {
             InitializeComponent();
+           
         }
     }
 }
