@@ -11,9 +11,20 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
-    <Style x:Key="support_panel" TargetType="WrapPanel">
-        <Setter Property="Background" Value="#FF222121"/>
+    <Style x:Key="support_panel" TargetType="Grid">
+    </Style>
+
+    <Style x:Key="support_action" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="#FFF"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
         
     </Style>
+
     
+  
 </ResourceDictionary>

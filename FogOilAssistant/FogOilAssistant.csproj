@@ -140,6 +140,7 @@
     </Compile>
     <Compile Include="Components\Data\Commands.cs" />
     <Compile Include="Components\Data\MenuButton\ButtonMenu.cs" />
+    <Compile Include="Components\Data\Pages\Support\Item.cs" />
     <Compile Include="Components\Data\Product\Product.cs" />
     <Compile Include="Components\Models\MainWindow\MWICommand.cs" />
     <Compile Include="Components\Models\MainWindow\ViewModelMW.cs" />
