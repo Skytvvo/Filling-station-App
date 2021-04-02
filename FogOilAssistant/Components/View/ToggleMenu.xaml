@@ -14,7 +14,7 @@
       
         <vm:ViewModelToggleMenu/>
     </UserControl.DataContext>
-    <Grid  Background="#FF222121">
+    <Grid  Background="#181818">
         <ItemsControl Style="{StaticResource menu_item_loyout}"  ItemsSource="{Binding buttonMenus}"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                       ScrollViewer.VerticalScrollBarVisibility="Disabled">

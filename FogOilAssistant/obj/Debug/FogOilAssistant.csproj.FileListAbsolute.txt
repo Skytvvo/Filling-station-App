@@ -47,5 +47,6 @@ C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\Oil.baml
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\Refueling map.baml
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\Shop.baml
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\Support.baml
-C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\FogOilAssistant.csprojAssemblyReference.cache
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\Dictionary\Pages\ShopDictionary.baml
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\FogOilAssistant.csprojAssemblyReference.cache
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\Dictionary\Pages\SupportDictionary.baml

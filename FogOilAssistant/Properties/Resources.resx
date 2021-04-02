@@ -142,6 +142,12 @@
   <data name="shop" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Components\Images\shop.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="sort_down" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Components\Images\ViewModels\Shop\sort-down.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="sort_up" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Components\Images\ViewModels\Shop\sort-up.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="support" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Components\Images\support.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>

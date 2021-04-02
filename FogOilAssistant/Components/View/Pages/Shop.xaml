@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
-      xmlns:viewmodels="clr-namespace:FogOilAssistant.Components.Models.Pages"
+      xmlns:viewmodels="clr-namespace:FogOilAssistant.Components.Models.Pages" xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
       mc:Ignorable="d" 
       Title="Shop">
 
@@ -41,9 +41,60 @@
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0">
-                
-            </StackPanel>
+            <Grid Grid.Row="0" Style="{StaticResource products_filter}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                         
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Command="{Binding SortDesc}" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource product_filter_btn}">
+
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource filter_panel}">
+                            <TextBlock Style="{StaticResource product_description}" Text="Price"/>
+                            <svgc:SvgViewbox Margin="10,10,10,10" Cursor="Hand" Source="/Components/Images/ViewModels/Shop/sort-down.svg"/>
+
+                        </StackPanel>
+                    </Button>
+                    <Button Grid.ColumnSpan="2" Command="{Binding Sort}" Grid.Column="3" Style="{StaticResource product_filter_btn}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource product_description}" Text="Price"/>
+                            <svgc:SvgViewbox Margin="10,10,10,10" Cursor="Hand" Source="/Components/Images/ViewModels/Shop/sort-up.svg"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Grid.ColumnSpan="2" Command="{Binding SortByNameDesc}" Grid.Column="5" Style="{StaticResource product_filter_btn}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource product_description}" Text="Name"/>
+                            <svgc:SvgViewbox Margin="10,10,10,10" Cursor="Hand" Source="/Components/Images/ViewModels/Shop/sort-down.svg"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Grid.ColumnSpan="2" Command="{Binding SortByName}" Grid.Column="7" Style="{StaticResource product_filter_btn}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource product_description}" Text="Name"/>
+                            <svgc:SvgViewbox Margin="10,10,10,10" Cursor="Hand" Source="/Components/Images/ViewModels/Shop/sort-up.svg"/>
+                        </StackPanel>
+                    </Button>
+                 
+                </Grid>
             <Grid Grid.Row="1">
                
                 <ItemsControl ItemsSource="{Binding Products}">
@@ -68,7 +119,7 @@
                                       
                                         <Image Grid.Column="0"   Style="{StaticResource product_img}" Source="{Binding Img}" />
                                         <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource product_name}" Text="{Binding Name}"/>
-                                        <TextBlock Grid.Column="3" Grid.ColumnSpan="2" Style="{StaticResource product_price}" Text="{Binding Price}"/>
+                                        <TextBlock Grid.Column="3" Grid.ColumnSpan="2" Style="{StaticResource product_price}" Text="{Binding Gov_price}" TextWrapping="Wrap" TextTrimming="WordEllipsis"/>
                                         <!--Symbols limit - 695-->
                                         <TextBlock Grid.Column="5" Grid.ColumnSpan="4" Style="{StaticResource product_description}" Text="{Binding Description}" />
                                     </Grid>
