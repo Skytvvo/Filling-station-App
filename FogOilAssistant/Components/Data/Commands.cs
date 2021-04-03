@@ -32,4 +32,5 @@ namespace FogOilAssistant.Components.Data
             remove { }
         }
     }
+
 }

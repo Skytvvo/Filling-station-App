@@ -62,7 +62,7 @@ namespace FogOilAssistant.Components.Data.MenuButton
             {
                 if (window.GetType() == typeof(MainWindow))
                 {
-                    (window as MainWindow).MainPage.Navigate(new Uri(string.Format("{0}{1}{2}", "/Components/View/Pages/", text, ".xaml"), UriKind.RelativeOrAbsolute));
+                    (window as MainWindow).Frame.Navigate(new Uri(string.Format("{0}{1}{2}", "/Components/View/Pages/", text, ".xaml"), UriKind.RelativeOrAbsolute));
                 }
             }
         }

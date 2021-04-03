@@ -126,7 +126,6 @@
                                     <Button x:Name="product_buy"  Style="{StaticResource product_hover_button}" >
                                         <Button.Content>
                                             <TextBlock Text="Buy"/>
-                                            
                                         </Button.Content>
                                         
                                     </Button>   

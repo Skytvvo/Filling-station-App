@@ -63,10 +63,10 @@
 
             <views:ToggleMenuExpander Panel.ZIndex="1999"  Grid.Row="4" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="7"/>
             
-            <Frame Grid.Column="0"
+            <Frame x:Name="Frame" Grid.Column="0"
                    Grid.Row="0"
                    Source="/Components/View/Pages/Shop.xaml" 
-                   Name="MainPage"
+                  
                    NavigationUIVisibility="Hidden" 
                    Grid.ColumnSpan="7"
                    Grid.RowSpan="7"

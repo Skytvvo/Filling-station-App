@@ -55,80 +55,163 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Row="0" Grid.ColumnSpan="2" Style="{StaticResource support_panel}">
-                    <ItemsControl ItemsSource="{Binding SupportItems}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="0.5*"/>
-                                        <RowDefinition Height="0.5*"/>
-                                        <RowDefinition Height="*"/>
-                                    </Grid.RowDefinitions>
+                   
+                                <StackPanel Orientation="Vertical">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="0.5*"/>
+                                            <RowDefinition Height="0.5*"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
 
-                                    <Grid.Style>
-                                        <Style TargetType="Grid">
-                                            <Setter Property="Background" Value="#FF222121"/>
-                                            <Setter Property="MinWidth" Value="400"/>
-                                            <Setter Property="MaxWidth" Value="1000"/>
-                                            <Setter Property="MaxHeight" Value="500"/>
-                                            <Setter Property="MinHeight" Value="200"/>
-                                            <Setter Property="Margin" Value="70, 20, 70,20"/>
-                                            
-                                        </Style>
-                                    </Grid.Style>
-                                    <Border Grid.Row="0" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="5" BorderBrush="{Binding Color}" BorderThickness="2">
-                                        
-                                    </Border>
+                                        <Grid.Style>
+                                            <Style TargetType="Grid">
+                                                <Setter Property="Background" Value="#FF222121"/>
+                                                <Setter Property="MinWidth" Value="400"/>
+                                                <Setter Property="MaxWidth" Value="1000"/>
+                                                <Setter Property="MaxHeight" Value="500"/>
+                                                <Setter Property="MinHeight" Value="200"/>
+                                                <Setter Property="Margin" Value="70, 20, 70,20"/>
+                                </Style>
+                                        </Grid.Style>
+                                        <Border Grid.Row="0" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="5" BorderBrush="{Binding Path=SupportItems.Color}" BorderThickness="2">
 
-                                    
-                                    <Button Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" >
-                                        <TextBlock Style="{StaticResource support_action}" Grid.Column="0" Grid.Row="1" Text="{Binding Name}">
+                                        </Border>
+
+
+                                        <Button Command="{Binding ToggleButton}" Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" >
+                                            <Grid> 
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>   
+                                                 <TextBlock Grid.Column="0" Grid.ColumnSpan="5" Style="{StaticResource support_action}"  Text="{Binding Path=SupportItems.Name}">
+                                                </TextBlock>
+                                    <svgc:SvgViewbox  RenderTransformOrigin="0.5,0.5"  Stretch="Uniform"  Grid.Column="5" Margin="2" x:Name="collapsed_img" Source="{Binding CollapsePanel}">
+                                        <svgc:SvgViewbox.RenderTransform>
+                                            <RotateTransform x:Name="collapsed_angle"  Angle="180"/>
+                                        </svgc:SvgViewbox.RenderTransform>
+                                    </svgc:SvgViewbox>
+
+                                </Grid> 
+
+                                <Button.Style>
+                                                <Style TargetType="Button">
+                                                    <Setter Property="Margin" Value="10,10,10,10"/>
+                                                    <Setter Property="Background" Value="#FF222121"/>
+                                                    <Setter Property="Cursor" Value="Hand"/>
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="Button">
+                                                    <Border BorderBrush="{Binding  Path=SupportItems.Color}" BorderThickness="2" Background="{TemplateBinding Background}">
+                                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                </Border>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                          <Setter Property="Background" Value="{Binding  Path=SupportItems.Color}"/>
+                                                        </Trigger>
+
+                                                    </Style.Triggers>
+                                                </Style>
+
+                                            </Button.Style>
+                                        </Button>
+                                        <TextBlock Style="{StaticResource support_action}" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="4" Text="{Binding Path=SupportItems.Text}">
 
                                         </TextBlock>
-                                        <Button.Style>
-                                            <Style TargetType="Button">
-                                                <Setter Property="Margin" Value="10,10,10,10"/>
+                                    </Grid>
+                                    <Grid x:Name="expanded__sub_panel" Visibility="Collapsed">
+                                        <Grid.Style>
+                                            <Style TargetType="Grid">
                                                 <Setter Property="Background" Value="#FF222121"/>
-                                                <Setter Property="Cursor" Value="Hand"/>
-                                                <Setter Property="Template">
-                                                    <Setter.Value>
-                                                        <ControlTemplate TargetType="Button">
-                                                            <Border BorderBrush="{Binding Color}" BorderThickness="2" Background="{TemplateBinding Background}">
-                                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                            </Border>
-                                                        </ControlTemplate>
-                                                    </Setter.Value>
-                                                </Setter>
-                                                <Style.Triggers>
-                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter Property="Background" Value="{Binding Color}"/>
-                                                    </Trigger>
-
-                                                </Style.Triggers>
+                                                <Setter Property="MinWidth" Value="400"/>
+                                                <Setter Property="MaxWidth" Value="1000"/>
+                                                <Setter Property="MaxHeight" Value="500"/>
+                                                <Setter Property="MinHeight" Value="200"/>
+                                                <Setter Property="Margin" Value="70, 20, 70,20"/>
+                                                
                                             </Style>
-                                            
-                                        </Button.Style>
-                                    </Button>
-                                    <TextBlock Style="{StaticResource support_action}" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="4" Text="{Binding Text}">
-                                        
-                                    </TextBlock>
-                                    
-                                    
+                                        </Grid.Style>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
 
-                                   
-                                </Grid>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
+                                        <Border Grid.Row="0"  Grid.Column="0" Grid.ColumnSpan="8" Grid.RowSpan="5" BorderBrush="#FF0000" BorderThickness="2" />
+
+                                        <Grid  Grid.Row="0" Grid.RowSpan="5" Grid.Column="2" Grid.ColumnSpan="6">
+                                            <TextBox x:Name="feedback_message">
+                                                <TextBox.Style>
+                                                    <Style TargetType="TextBox">
+                                                        <Setter Property="Background" Value="Transparent"/>
+                                                        <Setter Property="Padding" Value="5"/>
+                                                        <Setter Property="Foreground" Value="#FFF"/>
+                                                        <Setter Property="BorderBrush" Value="#FF0000"/>
+                                                        <Setter Property="BorderThickness" Value="2"/>
+                                                        <Setter Property="FontSize" Value="14" />
+                                                        <Setter Property="Margin" Value="20"/>
+                                                        <Setter Property="FontWeight" Value="Bold"/>
+                                                        <Style.Triggers>
+                                                         
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </TextBox.Style>
+                                            </TextBox>
+                                        </Grid>
+
+                                        <Grid Style="{StaticResource support__sub_panel}" x:Name="choosen_radiobuttons" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="3">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Style="{StaticResource form_text}" Text="Type"  Grid.Row="0"/>
+                                            <RadioButton Style="{StaticResource cb__style}" GroupName="Feedback" Content="Application" x:Name="cb__application" Grid.Row="1"/>
+                                            <RadioButton Style="{StaticResource cb__style}" GroupName="Feedback" Content="Purchase" x:Name="cb__purchase" Grid.Row="2"/>
+                                            <RadioButton Style="{StaticResource cb__style}" GroupName="Feedback" Content="Account" x:Name="cb__account" Grid.Row="3"/>
+                                            <RadioButton Style="{StaticResource cb__style}" GroupName="Feedback" Content="Help" x:Name="cb__help"  Grid.Row="4"/>
+                                        </Grid>
+                                        <Button Style="{StaticResource send_btn}" Command="{Binding SendFeedback}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Grid.RowSpan="2" >
+                                            Send
+                                        </Button>
+                                    </Grid>
+                                </StackPanel>
+                          
+                   
                 </Grid>
+                
+
             </Grid>
         </Grid>
     </ScrollViewer>
