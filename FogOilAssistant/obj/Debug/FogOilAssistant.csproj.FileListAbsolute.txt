@@ -50,3 +50,4 @@ C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\Support.
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\Dictionary\Pages\ShopDictionary.baml
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\Dictionary\Pages\SupportDictionary.baml
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\FogOilAssistant.csprojAssemblyReference.cache
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\Dictionary\Pages\OilDictionary.baml

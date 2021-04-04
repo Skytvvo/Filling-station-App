@@ -85,6 +85,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Components\Dictionary\Pages\OilDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Components\Dictionary\Pages\ShopDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -140,11 +144,15 @@
     </Compile>
     <Compile Include="Components\Data\Commands.cs" />
     <Compile Include="Components\Data\MenuButton\ButtonMenu.cs" />
+    <Compile Include="Components\Data\Pages\Oil\CarBrand.cs" />
+    <Compile Include="Components\Data\Pages\Oil\CarModel.cs" />
+    <Compile Include="Components\Data\Pages\Oil\CarType.cs" />
     <Compile Include="Components\Data\Pages\Support\Feedback.cs" />
     <Compile Include="Components\Data\Pages\Support\Item.cs" />
     <Compile Include="Components\Data\Product\Product.cs" />
     <Compile Include="Components\Models\MainWindow\MWICommand.cs" />
     <Compile Include="Components\Models\MainWindow\ViewModelMW.cs" />
+    <Compile Include="Components\Models\Pages\ViewModelOil.cs" />
     <Compile Include="Components\Models\Pages\ViewModelShop.cs" />
     <Compile Include="Components\Models\Pages\ViewModelSupport.cs" />
     <Compile Include="Components\Models\ToggleMenu\ViewModelToggleMenu.cs" />
