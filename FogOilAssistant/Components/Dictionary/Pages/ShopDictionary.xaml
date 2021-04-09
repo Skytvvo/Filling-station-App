@@ -4,13 +4,11 @@
                     
     <Style x:Key="product_panel_item" TargetType="Grid">
         
-        <Setter Property="Margin" Value="10,10,10,10"/>
         <Setter Property="Height" Value="200"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Margin" Value="0,10,10,10"/>
+        <Setter Property="Margin" Value="10,10,10,10"/>
         <Setter Property="Background" Value="#FF222121"/>
-        <Setter Property="MinWidth" Value="1200"/>
 
         <Style.Triggers>
             <DataTrigger Binding="{Binding ElementName=product_buy, Path=IsMouseOver}" Value="True">

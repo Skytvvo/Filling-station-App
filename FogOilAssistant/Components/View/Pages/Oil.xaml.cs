@@ -24,5 +24,7 @@ namespace FogOilAssistant.Components.View.Pages
         {
             InitializeComponent();
         }
+
+     
     }
 }

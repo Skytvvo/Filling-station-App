@@ -5,6 +5,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using FogOilAssistant.Components.Data;
 using FogOilAssistant.Components.Data.Pages.Oil;
 using FogOilAssistant.Components.Data.Product;
 
@@ -12,6 +14,12 @@ namespace FogOilAssistant.Components.Models.Pages
 {
     public class ViewModelOil : INotifyPropertyChanged
     {
+
+        #region Oil Page
+        FogOilAssistant.Components.View.Pages.Oil oil;
+        #endregion
+
+        #region Events
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
@@ -19,6 +27,9 @@ namespace FogOilAssistant.Components.Models.Pages
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
 
+        #endregion
+
+        #region Select parts
         List<CarType> carTypes;
 
         public List<CarType> CarTypes { 
@@ -41,6 +52,8 @@ namespace FogOilAssistant.Components.Models.Pages
             }
         }
 
+      
+
 
         List<CarModel> carModels;
         public List<CarModel> CarModels { 
@@ -52,7 +65,9 @@ namespace FogOilAssistant.Components.Models.Pages
             }
         }
 
+        #endregion
 
+        #region Results (Products, Select partial)
         List<Product> products; 
         public List<Product> Products { 
             get => products;
@@ -62,6 +77,131 @@ namespace FogOilAssistant.Components.Models.Pages
                 OnPropertyChanged("Products");
             }
         }
+
+        private CarObject carObject;
+        #endregion
+
+        #region Commands
+        public CommandViewModel Select { get => new CommandViewModel(select); }
+        
+        
+        private void select()
+        {
+            MessageBox.Show("ok");
+        }
+       
+
+
+        #endregion
+
+        #region Selected Car Type
+
+        private CarType carType;
+        public CarType CarType {
+            get => carType;
+            set 
+            {
+                carType = value;
+                OnPropertyChanged("CarType");
+                OnPropertyChanged("IsCar");
+                OnPropertyChanged("IsBus");
+                OnPropertyChanged("IsMotorcycle");
+                OnPropertyChanged("IsTruck");
+
+                this.getPage();
+        
+
+            }
+        }
+
+     
+        public bool IsCar
+        {
+            get { return this.CarType == CarTypes[0]; }
+            set
+            {
+                this.CarType = value ? CarTypes[0] : this.CarType;
+            }
+        }
+
+        public bool IsBus
+        {
+            get { return this.CarType == CarTypes[1]; }
+            set
+            {
+                this.CarType = value ? CarTypes[1] : this.CarType;
+            }
+        }
+        public bool IsMotorcycle
+        {
+            get { return this.CarType == CarTypes[2]; }
+            set
+            {
+                this.CarType = value ? CarTypes[2] : this.CarType;
+            }
+        }
+        public bool IsTruck
+        {
+            get { return this.CarType == CarTypes[3]; }
+            set
+            {
+                this.CarType = value ? CarTypes[3] : this.CarType;
+            }
+        }
+        #endregion
+
+
+        #region Selected Car parts
+        private int selectedModelIndex = 0;
+        private int selectedBrandIndex = 0;
+
+        public int SelectedModelIndex { 
+            get => selectedModelIndex;
+            set
+            {
+                this.selectedModelIndex = value;
+                OnPropertyChanged("SelectedModelIndex");
+              
+                MessageBox.Show(value.ToString());
+            }
+        }
+        public int SelectedBrandIndex { 
+            get => selectedBrandIndex;
+            set
+            {
+                this.selectedBrandIndex = value;
+                OnPropertyChanged("SelectedBrandIndex");
+             
+                MessageBox.Show(value.ToString());
+            } 
+        }
+
+
+       
+        #endregion
+
+        #region DOM ELEMENTS QUERIES
+
+        private void getPage()
+        {
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window.GetType() == typeof(FogOilAssistant.MainWindow))
+                {
+                    var frame_content = (window as FogOilAssistant.MainWindow).Frame.Content;
+                    if(frame_content.GetType() == typeof(FogOilAssistant.Components.View.Pages.Oil))
+                    {
+                        this.oil = frame_content as FogOilAssistant.Components.View.Pages.Oil;
+
+                    }
+
+                }
+            }
+        }
+
+
+
+        #endregion
 
         public ViewModelOil()
         {
@@ -74,27 +214,21 @@ namespace FogOilAssistant.Components.Models.Pages
             };
             this.carBrands = new List<CarBrand>()
             {
-                new CarBrand(){  ID=0, Name="Volkswagen"},
-                new CarBrand(){ ID=1, Name="Toyota"},
-                new CarBrand(){ ID=2, Name="Subaru"},
-                new CarBrand(){ ID=3, Name="Honda"}
-            };
+                new CarBrand(){  ID=0, Name="Volkswagen" },
+                new CarBrand(){ ID=1, Name="Toyota" },
+                new CarBrand(){ ID=2, Name="Subaru" },
+                new CarBrand(){ ID=3, Name="Honda" }
+                };
             this.CarModels = new List<CarModel>()
             {
-                new CarModel(){ ID=0, Name="ASD"},
-                new CarModel(){ ID=0, Name="ASD"},
-                new CarModel(){ ID=0, Name="ASD"},
-                new CarModel(){ ID=0, Name="ASD"}
+                new CarModel(){ ID=1, Name="asd"}
             };
             this.Products = new List<Product>()
             {
-                new Product( "Joil", 12, "Petroleum engineering is a field of engineering concerned with the activities related to the production of Hydrocarbons, which can be either crude oil or natural gas.[1] Exploration and production are deemed to fall within the upstream sector of the oil and gas industry. Exploration, by earth scientists, and petroleum engineering are the oil and gas industry's two main subsurface disciplines, which focus on maximizing economic recovery of hydrocarbons from subsurface reservoirs. Petroleum geology and geophysics focus on provision of a static description of the hydrocarbon reservoir rock, while petroleum engineering focuses on estimation of the recoverable volume of this resource using a detailed understanding of the physical behavior of oil, water and gas within porous rock at very high pressure.","/Components/Images/Products/oil.png", 0),
-                new Product( "Smart oil", 25, "Oil for your engine","/Components/Images/Products/oil.png", 0),
-                new Product( "Eco oil", 67, "Oil for your engine","/Components/Images/Products/oil.png", 0),
-                new Product( "Oil", 44, "Oil for your engine","/Components/Images/Products/oil.png", 0),
-                new Product( "Palm oil", 129, "Oil for your engine","/Components/Images/Products/oil.png", 0),
-                new Product( "Oil", 5, "Oil for your engine","/Components/Images/Products/oil.png", 0)
+                
             };
+            this.carObject = new CarObject();
+
         }
     }
 }

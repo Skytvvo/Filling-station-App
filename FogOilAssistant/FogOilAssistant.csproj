@@ -146,6 +146,7 @@
     <Compile Include="Components\Data\MenuButton\ButtonMenu.cs" />
     <Compile Include="Components\Data\Pages\Oil\CarBrand.cs" />
     <Compile Include="Components\Data\Pages\Oil\CarModel.cs" />
+    <Compile Include="Components\Data\Pages\Oil\CarObject.cs" />
     <Compile Include="Components\Data\Pages\Oil\CarType.cs" />
     <Compile Include="Components\Data\Pages\Support\Feedback.cs" />
     <Compile Include="Components\Data\Pages\Support\Item.cs" />

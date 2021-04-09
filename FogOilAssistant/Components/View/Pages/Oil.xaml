@@ -12,27 +12,34 @@
     <Page.DataContext>
         <vm:ViewModelOil/>
     </Page.DataContext>
+
     <Page.Resources>
-        <ResourceDictionary Source="/Components/Dictionary/Pages/OilDictionary.xaml"/>
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Components/Dictionary/Pages/OilDictionary.xaml"/>
+                <ResourceDictionary Source="/Components/Dictionary/Pages/ShopDictionary.xaml"/>
+
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+       
     </Page.Resources>
 
-   
+    <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.5*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="0.5*"/>
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+               
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3">
+            <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -41,11 +48,11 @@
                 <svgc:SvgViewbox Margin="10" Source="/Components/Images/oil-bottle.svg" Grid.Column="0" />
                 <TextBlock Style="{StaticResource description_text}" Text="Oil constructor" Grid.Column="1" Grid.ColumnSpan="2"/>
             </Grid>
-            <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="3">
+            <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="100"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
@@ -63,22 +70,28 @@
                     </Grid.RowDefinitions>
                     <Border Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="0" Grid.RowSpan="2" BorderThickness="2" BorderBrush="#ff0000" />
                     <TextBlock Margin="20,0,0,0" Style="{StaticResource description_text}" Grid.Column="0" Grid.ColumnSpan="4" Text="Choose machine type"/>
-                    <ItemsControl Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding CarTypes}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <RadioButton Style="{StaticResource rb_style}"  Content="{Binding Path=Name}" GroupName="car_type" >
-                                    <RadioButton.RenderTransform>
-                                        <ScaleTransform ScaleX="1.2" ScaleY="1.2"/>
-                                    </RadioButton.RenderTransform>
-                                </RadioButton>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel Orientation="Horizontal" />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
+                    <StackPanel Grid.Row="1" Grid.ColumnSpan="4" HorizontalAlignment="Center" Orientation="Horizontal">
+                        <RadioButton  Style="{StaticResource rb_style}" IsChecked="{Binding IsCar}"  Content="Car" GroupName="car_type" >
+                            <RadioButton.RenderTransform>
+                                <ScaleTransform ScaleX="1.2" ScaleY="1.2"/>
+                            </RadioButton.RenderTransform>
+                        </RadioButton>
+                        <RadioButton  Style="{StaticResource rb_style}" IsChecked="{Binding IsBus}"  Content="Bus" GroupName="car_type" >
+                            <RadioButton.RenderTransform>
+                                <ScaleTransform ScaleX="1.2" ScaleY="1.2"/>
+                            </RadioButton.RenderTransform>
+                        </RadioButton>
+                        <RadioButton  Style="{StaticResource rb_style}" IsChecked="{Binding IsMotorcycle}"  Content="Motorcycle" GroupName="car_type" >
+                            <RadioButton.RenderTransform>
+                                <ScaleTransform ScaleX="1.2" ScaleY="1.2"/>
+                            </RadioButton.RenderTransform>
+                        </RadioButton>
+                        <RadioButton  Style="{StaticResource rb_style}" IsChecked="{Binding IsTruck}"  Content="Truck" GroupName="car_type" >
+                            <RadioButton.RenderTransform>
+                                <ScaleTransform ScaleX="1.2" ScaleY="1.2"/>
+                            </RadioButton.RenderTransform>
+                        </RadioButton>
+                    </StackPanel>
                 </Grid>
 
                 <Grid Grid.Row="1" Margin="0,10,0,0">
@@ -87,10 +100,16 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Border Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="0" Grid.RowSpan="2" BorderThickness="2" BorderBrush="#ff0000" />
-                    <TextBlock Margin="20,0,0,0" Style="{StaticResource description_text}" Text="Choose brand" Grid.Row="0"/>
-                    <ComboBox    Grid.Row="1" 
-                              x:Name="choosen_brand" Style="{StaticResource  ComboBoxTest2}" ItemsSource="{Binding CarBrands}" DisplayMemberPath="Name">
-
+                    <TextBlock x:Name="ср_br_describe"  Margin="20,0,0,0" Style="{StaticResource description_text}" Text="Choose brand" Grid.Row="0"/>
+                    <ComboBox 
+                        Grid.Row="1"
+                        x:Name="choosen_brand" 
+                        Style="{StaticResource  ComboBoxTest2}" 
+                        ItemsSource="{Binding CarBrands}"
+                        DisplayMemberPath="Name"
+                        SelectedIndex="{Binding SelectedBrandIndex}"
+                        >
+                        
                     </ComboBox>
                 </Grid>
 
@@ -101,9 +120,15 @@
                     </Grid.RowDefinitions>
                     <Border Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="0" Grid.RowSpan="2" BorderThickness="2" BorderBrush="#ff0000" />
 
-                    <TextBlock Margin="20,0,0,0" Style="{StaticResource description_text}" Text="Choose model" Grid.Row="0"/>
-                    <ComboBox    Grid.Row="1" 
-                              x:Name="choosen_model" Style="{StaticResource  ComboBoxTest2}" ItemsSource="{Binding CarModels}" DisplayMemberPath="Name">
+                    <TextBlock x:Name="ch_mo_describe" Margin="20,0,0,0" Style="{StaticResource description_text}" Text="Choose model" Grid.Row="0"/>
+                    <ComboBox
+                        Grid.Row="1"
+                        x:Name="choosen_model" 
+                        Style="{StaticResource  ComboBoxTest2}" 
+                        ItemsSource="{Binding CarModels}" 
+                        DisplayMemberPath="Name"
+                        SelectedIndex="{Binding SelectedModelIndex}"
+                        >
 
                     </ComboBox>
                 </Grid>
@@ -119,23 +144,50 @@
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Button Grid.Column="2" Style="{StaticResource send_btn}">
+                    <Button x:Name="select_button"  Grid.Column="2" Style="{StaticResource send_btn}" Command="{Binding Select}">
                         <TextBlock FontSize="20" Text="Select"/>
                     </Button>
 
-                    <Grid Margin="0,10,0,0" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5">
+                    <Grid Margin="0,10,0,0" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" >
+                     
                         <ItemsControl ItemsSource="{Binding Products}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid Height="100">
-                                        <TextBlock Text="{Binding Path=Name}"/>
+                                    <Grid Cursor="Hand" >
+                                        <Grid Margin="10,10,10,10" x:Name="product_panel" Style="{StaticResource product_panel_item }" >
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="500"/>
+
+                                            </Grid.ColumnDefinitions>
+
+
+                                            <Image Margin="15"  Grid.Column="0"   Style="{StaticResource product_img}" Source="{Binding Img}" />
+                                            <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource product_name}" Text="{Binding Name}"/>
+                                            <TextBlock Grid.Column="3" Grid.ColumnSpan="2" Style="{StaticResource product_price}" Text="{Binding Gov_price}" TextWrapping="Wrap" TextTrimming="WordEllipsis"/>
+                                            <!--Symbols limit - 695-->
+                                            <TextBlock Margin="5" Grid.Column="5"    Grid.ColumnSpan="3" Style="{StaticResource product_description}" Text="Petroleum engineering is a field of engineering concerned with the activities related to the production of Hydrocarbons, which can be either crude oil or natural gas.[1] Exploration and production are deemed to fall within the upstream sector of the oil and gas industry. Exploration, by earth scientists, and petroleum engineering are the oil and gas industry's two main subsurface disciplines, which focus on maximizing economic recovery of hydrocarbons from subsurface reservoirs. Petroleum geology and geophysics focus on provision of a static description of the hydrocarbon reservoir rock, while petroleum engineering focuses on estimation of the recoverable volume of this resource using a detailed understanding of the physical behavior of oil, water and gas within porous rock at very high pressure." TextWrapping="WrapWithOverflow" TextTrimming="CharacterEllipsis"/>
+
+                                        </Grid>
+                                        <Button   x:Name="product_buy"  Style="{StaticResource product_hover_button}" >
+                                            <Button.Content>
+                                                <TextBlock Text="Buy"/>
+                                            </Button.Content>
+
+                                        </Button>
                                     </Grid>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
+                        
                     </Grid>
                 </Grid>
             </Grid>
         </Grid>
-   
+    </ScrollViewer>
 </Page>
