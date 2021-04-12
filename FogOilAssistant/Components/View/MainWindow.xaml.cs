@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FogOilAssistant.Components;
+using FogOilAssistant.Components.Models.MainWindow;
 
 namespace FogOilAssistant
 {
@@ -24,6 +25,7 @@ namespace FogOilAssistant
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = new ViewModelMW();
         }
 
      
@@ -31,21 +33,6 @@ namespace FogOilAssistant
 
 
 
-        private void Toolbar_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton == MouseButton.Left)
-                this.DragMove();
-        }
-
-        private void close_app_button_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
-        private void minimize_button_Click(object sender, RoutedEventArgs e)
-        {
-            this.WindowState = WindowState.Minimized;
-
-        }
+       
     }
 }

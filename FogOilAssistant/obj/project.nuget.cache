@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "8AIbNI6ucABSgHfwzESGA1A3gLkD1LwKyE4ZBj7UsL40A/eS7+stvezJeAfKHkrw1Re1Aii2jomt1C+de9hwhg==",
+  "success": true,
+  "projectFilePath": "C:\\data\\FogOilAssistant\\FogOilAssistant\\FogOilAssistant.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\sky2\\.nuget\\packages\\microsoft.vcrtforwarders.140\\1.0.6\\microsoft.vcrtforwarders.140.1.0.6.nupkg.sha512"
+  ],
+  "logs": []
+}

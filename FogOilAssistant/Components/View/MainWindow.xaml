@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FogOilAssistant" xmlns:svgc="http://sharpvectors.codeplex.com/svgc/" xmlns:views="clr-namespace:FogOilAssistant.Components.View" xmlns:viewmodels="clr-namespace:FogOilAssistant.Components.Models.MainWindow"
         mc:Ignorable="d"
-        Title="Fog Oil Assistant" Height="720" Width="1280" MinHeight="600" MinWidth="1000" AllowsTransparency="True"  WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Foreground="#FF262B26">
+        Title="Fog Oil Assistant" Height="720" Width="1280" MinHeight="600" MinWidth="1000" AllowsTransparency="False"  WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Foreground="#FF262B26">
     
     <Window.Resources>
         <ResourceDictionary>
@@ -15,17 +15,14 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <Window.DataContext>
-        <viewmodels:ViewModelMW/>
-    </Window.DataContext>
-    
+  
     <Grid Background="#1E1E1E">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="19*"/>
 
         </Grid.RowDefinitions>
-        <Grid Name="Toolbar" Grid.Row="0" Background="#FF222121" MouseDown="Toolbar_MouseDown">
+        <Grid Name="Toolbar" Grid.Row="0" Background="#FF222121">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
                 <Button Command="{Binding MinimizeWindow}" Style="{StaticResource tool_button}" x:Name="minimize_button" >
                     <svgc:SvgViewbox Height="20" Stretch="Uniform" Source="/Components/Images/minimize.svg"/>
