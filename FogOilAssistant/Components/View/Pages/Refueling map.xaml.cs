@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using FogOilAssistant.Components.Models.Pages;
+using Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT;
+using Microsoft.Toolkit.Wpf.UI.Controls;
 
 namespace FogOilAssistant.Components.View.Pages
 {
@@ -20,13 +22,12 @@ namespace FogOilAssistant.Components.View.Pages
             this.DataContext = new ViewModelMap();
         }
 
-        private  void map_container_Loaded(object sender, RoutedEventArgs e)
+        private  async void map_container_Loaded(object sender, RoutedEventArgs e)
         {
-           /* BasicGeoposition basicGeoposition = new BasicGeoposition() { Latitude = 53.8144, Longitude = 28.0241 };
+            BasicGeoposition basicGeoposition = new BasicGeoposition() { Latitude = 53.8144, Longitude = 28.0241 };
             var center = new Geopoint(basicGeoposition);
-            await ((MapControl)sender).TrySetViewAsync(center, 5.8);*/
-
-                
+            await ((MapControl)sender).TrySetViewAsync(center, 5.8);
+           
         }
     }
 }

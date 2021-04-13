@@ -6,8 +6,11 @@
       xmlns:local="clr-namespace:FogOilAssistant.Components.View.Pages"
       mc:Ignorable="d" 
       Title="Refueling_map"
+      xmlns:vm="clr-namespace:FogOilAssistant.Components.Models.Pages" 
       xmlns:controls="clr-namespace:Microsoft.Toolkit.Wpf.UI.Controls;assembly=Microsoft.Toolkit.Wpf.UI.Controls" 
-      xmlns:vm="clr-namespace:FogOilAssistant.Components.Models.Pages">
+
+      >
+    
 
     <Page.Resources>
         <ResourceDictionary Source="/Components/Dictionary/Pages/MapDictionary.xaml"/>
@@ -25,11 +28,13 @@
             <RowDefinition Height="0.5*"/>
             <RowDefinition Height="0.5*"/>
         </Grid.RowDefinitions>
-        <Grid  Grid.Row="0">
-
-            <controls:MapControl Loaded="map_container_Loaded" ZoomLevel="10" x:Name="map_container"   MapServiceToken="pUMqRFcmEZp5HMoLfXlE~62S-NM4FqjCPsL_8HjYQOw~AiEE25MfdflaH5XO-kycZRiUuEPLvwo4Zh9wDHqgoVRN_11xf1dYGflVMCr0GMX7">
+        <Grid  x:Name="map_grid" Grid.Row="0">
+            <controls:MapControl Loaded="map_container_Loaded"  ZoomLevel="10" x:Name="map_container"   MapServiceToken="pUMqRFcmEZp5HMoLfXlE~62S-NM4FqjCPsL_8HjYQOw~AiEE25MfdflaH5XO-kycZRiUuEPLvwo4Zh9wDHqgoVRN_11xf1dYGflVMCr0GMX7">
                 
             </controls:MapControl>
+            <Grid Style="{StaticResource map_over}">
+                
+            </Grid>
 
         </Grid>
         <Grid Grid.Row="1">
@@ -41,7 +46,26 @@
         </Grid>
       
         <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
+            <Button Grid.Row="0" Grid.Column="2" Style="{StaticResource find_btn}">
+                <TextBlock Foreground="#FFFFFF" FontSize="20" FontWeight="Bold">
+                    <TextBlock.Text>
+                        Find near
+                    </TextBlock.Text>
+                </TextBlock>
+            </Button>
         </Grid>
     </Grid>
 </Page>

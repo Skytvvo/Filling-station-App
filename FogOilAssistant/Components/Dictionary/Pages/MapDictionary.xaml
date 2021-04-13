@@ -8,5 +8,29 @@
         <Setter Property="Padding" Value="10"/>
         <Setter Property="TextAlignment" Value="Center"/>
     </Style>
-    
+
+    <Style x:Key="map_over" TargetType="Grid">
+        <Setter Property="Background" Value="Red"/>
+        <Setter Property="Opacity" Value="0.3"/>
+    </Style>
+
+    <Style x:Key="find_btn" TargetType="Button">
+        <Setter Property="Background" Value="Transparent"/>
+       
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border BorderBrush="#FF0000" BorderThickness="2"  Background="{TemplateBinding Background}" >
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FF0000"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>

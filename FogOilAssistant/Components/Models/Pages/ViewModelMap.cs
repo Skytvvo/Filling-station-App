@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using FogOilAssistant.Components.View.Pages;
-
+using Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT;
 
 namespace FogOilAssistant.Components.Models.Pages
 {
@@ -22,8 +23,6 @@ namespace FogOilAssistant.Components.Models.Pages
 
         #region Fields and Props
 
-
-
         #endregion
 
         #region DOM Handlers
@@ -33,6 +32,7 @@ namespace FogOilAssistant.Components.Models.Pages
 
             try
             {
+                
                 var frame_content = (Application.Current.MainWindow as FogOilAssistant.MainWindow).Frame.Content;
                 if (frame_content.GetType() == typeof(Refueling_map))
                 {

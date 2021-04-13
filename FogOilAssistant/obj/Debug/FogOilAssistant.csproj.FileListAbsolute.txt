@@ -49,7 +49,6 @@ C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\Shop.bam
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\Support.baml
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\Dictionary\Pages\ShopDictionary.baml
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\Dictionary\Pages\SupportDictionary.baml
-C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\FogOilAssistant.csprojAssemblyReference.cache
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\Dictionary\Pages\OilDictionary.baml
 C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\Microsoft.Toolkit.Win32.UI.XamlHost.xml
 C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\Microsoft.Toolkit.Win32.UI.XamlHost.Managed.dll
@@ -57,11 +56,8 @@ C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\Microsoft.Toolkit.Win32.UI.Xam
 C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\Microsoft.Toolkit.Wpf.UI.Controls.dll
 C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\Microsoft.Toolkit.Wpf.UI.XamlHost.dll
 C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\Microsoft.Toolkit.Win32.UI.XamlHost.Managed.pdb
-C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\Microsoft.Toolkit.Win32.UI.XamlHost.Managed.xml
 C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\Microsoft.Toolkit.Wpf.UI.Controls.pdb
-C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\Microsoft.Toolkit.Wpf.UI.Controls.xml
 C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\Microsoft.Toolkit.Wpf.UI.XamlHost.pdb
-C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\Microsoft.Toolkit.Wpf.UI.XamlHost.xml
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\Dictionary\Pages\MapDictionary.baml
 C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\Microsoft.VisualStudio.DesignTools.Interaction.dll
 C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\Microsoft.Windows.Design.Interaction.dll
@@ -75,3 +71,8 @@ C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\en\Microsoft.VisualStudio.Desi
 C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\ru\Microsoft.VisualStudio.DesignTools.Extensibility.resources.dll
 C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\en\Microsoft.Windows.Design.Extensibility.resources.dll
 C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\ru\Microsoft.Windows.Design.Extensibility.resources.dll
+C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\Microsoft.Toolkit.Win32.UI.XamlHost.Managed.xml
+C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\Microsoft.Toolkit.Wpf.UI.Controls.xml
+C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\Microsoft.Toolkit.Wpf.UI.XamlHost.xml
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\Dictionary\Pages\AuthDictionary.baml
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\FogOilAssistant.csprojAssemblyReference.cache
