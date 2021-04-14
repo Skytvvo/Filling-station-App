@@ -91,6 +91,16 @@ namespace FogOilAssistant.Properties {
         }
         
         /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
+        internal static byte[] add {
+            get {
+                object obj = ResourceManager.GetObject("add", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap auth_1 {
@@ -196,6 +206,16 @@ namespace FogOilAssistant.Properties {
         internal static byte[] shop {
             get {
                 object obj = ResourceManager.GetObject("shop", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
+        internal static byte[] sign_in {
+            get {
+                object obj = ResourceManager.GetObject("sign_in", resourceCulture);
                 return ((byte[])(obj));
             }
         }

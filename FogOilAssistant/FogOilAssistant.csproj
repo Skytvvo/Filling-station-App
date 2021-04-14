@@ -288,6 +288,12 @@
   <ItemGroup>
     <Resource Include="Components\Images\Auth\auth_2.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Components\Images\Auth\button_form\add.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Components\Images\Auth\button_form\sign-in.svg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
