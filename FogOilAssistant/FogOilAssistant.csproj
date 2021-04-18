@@ -176,6 +176,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Components\Data\Commands.cs" />
+    <Compile Include="Components\Data\GlobalStorage\DataBaseData.cs" />
     <Compile Include="Components\Data\MenuButton\ButtonMenu.cs" />
     <Compile Include="Components\Data\Pages\Oil\CarBrand.cs" />
     <Compile Include="Components\Data\Pages\Oil\CarModel.cs" />

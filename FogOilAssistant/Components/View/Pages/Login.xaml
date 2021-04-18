@@ -87,10 +87,20 @@
                     </TextBox>
                 </Grid>
 
-                <Grid Grid.Row="1">
+                <StackPanel Grid.Row="1">
+
                     <TextBox Text="{Binding Password}"  Style="{StaticResource  form_input}"  >
+                        <TextBox.Effect>
+                            <BlurEffect Radius="{Binding Blur}"/>    
+                        </TextBox.Effect>
                     </TextBox>
-                </Grid>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="30">
+ 
+                        <TextBlock FontWeight="Bold" Foreground="#fff" Text="Show password"/>
+                        <CheckBox IsChecked="{Binding IsChecked}" Style="{StaticResource checkbox_style}"  Margin="5,0,0,0" />
+                        
+                    </StackPanel>
+                </StackPanel>
                 <Grid Grid.Row="2" >
                     <Grid.ColumnDefinitions >
                         <ColumnDefinition Width="*"/>

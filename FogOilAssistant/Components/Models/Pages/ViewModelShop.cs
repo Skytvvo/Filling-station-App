@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 using FogOilAssistant.Components.Data;
+using FogOilAssistant.Components.Data.GlobalStorage;
 using FogOilAssistant.Components.Data.Product;
 
 namespace FogOilAssistant.Components.Models.Pages
@@ -94,15 +95,7 @@ namespace FogOilAssistant.Components.Models.Pages
             aTimer.Elapsed += OnTimedEvent;
             aTimer.Enabled = true;
 
-            this.Products = new List<Product>()
-            {
-                new Product( "Joil", 12, "Petroleum engineering is a field of engineering concerned with the activities related to the production of Hydrocarbons, which can be either crude oil or natural gas.[1] Exploration and production are deemed to fall within the upstream sector of the oil and gas industry. Exploration, by earth scientists, and petroleum engineering are the oil and gas industry's two main subsurface disciplines, which focus on maximizing economic recovery of hydrocarbons from subsurface reservoirs. Petroleum geology and geophysics focus on provision of a static description of the hydrocarbon reservoir rock, while petroleum engineering focuses on estimation of the recoverable volume of this resource using a detailed understanding of the physical behavior of oil, water and gas within porous rock at very high pressure.","/Components/Images/Products/oil.png", 0),
-                new Product( "Smart oil", 25, "Oil for your engine","/Components/Images/Products/oil.png", 0),
-                new Product( "Eco oil", 67, "Oil for your engine","/Components/Images/Products/oil.png", 0),
-                new Product( "Oil", 44, "Oil for your engine","/Components/Images/Products/oil.png", 0),
-                new Product( "Palm oil", 129, "Oil for your engine","/Components/Images/Products/oil.png", 0),
-                new Product( "Oil", 5, "Oil for your engine","/Components/Images/Products/oil.png", 0)
-            };               
+            this.Products = DataBaseData.getInstance().Products;
 
         }
 

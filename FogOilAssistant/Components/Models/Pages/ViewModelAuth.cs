@@ -156,6 +156,41 @@ namespace FogOilAssistant.Components.Models.Pages
             }
         }
 
+
+
+
+        //checkbox
+
+        bool isChecked = false;
+        public bool IsChecked 
+        { 
+            get => isChecked;
+            set
+            {
+                isChecked = value;
+                OnPropertyChanged("IsChecked");
+
+                if (value)
+                    Blur = 0;
+                else
+                    Blur = 20;
+                    
+            } 
+        }
+
+
+        //blur
+        double blur = 20;
+        public double Blur 
+        { 
+            get => blur;
+            set 
+            {
+                blur = value;
+                OnPropertyChanged("Blur");
+            }
+        }
+
         #endregion
         public ViewModelAuth()
         {
