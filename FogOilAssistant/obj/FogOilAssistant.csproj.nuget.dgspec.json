@@ -38,6 +38,14 @@
       "frameworks": {
         "net472": {
           "dependencies": {
+            "EntityFramework": {
+              "target": "Package",
+              "version": "[6.2.0, )"
+            },
+            "EntityFramework.ru": {
+              "target": "Package",
+              "version": "[6.2.0, )"
+            },
             "Microsoft.VCRTForwarders.140": {
               "target": "Package",
               "version": "[1.0.6, )"

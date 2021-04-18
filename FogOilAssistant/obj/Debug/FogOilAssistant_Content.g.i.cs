@@ -8,6 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("components/dictionary/togglemenuexpanderdictionary.xaml")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("components/database/model1.context.tt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("components/database/model1.tt")]
 
 

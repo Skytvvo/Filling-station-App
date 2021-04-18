@@ -131,6 +131,16 @@ namespace FogOilAssistant.Properties {
         }
         
         /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Booster_Titanium_C3_5W_30 {
+            get {
+                object obj = ResourceManager.GetObject("Booster_Titanium_C3_5W_30", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
         internal static byte[] cancel {
@@ -141,12 +151,42 @@ namespace FogOilAssistant.Properties {
         }
         
         /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Castrol_EDGE_DIESEL {
+            get {
+                object obj = ResourceManager.GetObject("Castrol_EDGE_DIESEL", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
         internal static byte[] exp_btn {
             get {
                 object obj = ResourceManager.GetObject("exp_btn", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap GENESIS_ACEA_C3_5W_30 {
+            get {
+                object obj = ResourceManager.GetObject("GENESIS_ACEA_C3_5W_30", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Kixx_PAO_5W_40 {
+            get {
+                object obj = ResourceManager.GetObject("Kixx_PAO_5W_40", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -183,9 +223,19 @@ namespace FogOilAssistant.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap oil {
+        internal static System.Drawing.Bitmap Mobil_Super_3000_5W_40 {
             get {
-                object obj = ResourceManager.GetObject("oil", resourceCulture);
+                object obj = ResourceManager.GetObject("Mobil_Super_3000_5W_40", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Mobil_Super_5W_30 {
+            get {
+                object obj = ResourceManager.GetObject("Mobil_Super_5W_30", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -197,6 +247,36 @@ namespace FogOilAssistant.Properties {
             get {
                 object obj = ResourceManager.GetObject("oil_bottle", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PENNZOIL_5W_30 {
+            get {
+                object obj = ResourceManager.GetObject("PENNZOIL_5W_30", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap PENRITE_OW_20 {
+            get {
+                object obj = ResourceManager.GetObject("PENRITE_OW_20", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Shel_HELIX_HX3_20W_50 {
+            get {
+                object obj = ResourceManager.GetObject("Shel_HELIX_HX3_20W_50", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

@@ -130,11 +130,23 @@
   <data name="auth_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Components\Images\Auth\auth_3.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Booster_Titanium_C3_5W_30" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Components\Images\Products\Booster_Titanium_C3_5W-30.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="cancel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Components\Images\cancel.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Castrol_EDGE_DIESEL" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Components\Images\Products\Castrol_EDGE_DIESEL.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="exp_btn" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Components\Images\exp_btn.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="GENESIS_ACEA_C3_5W_30" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Components\Images\Products\GENESIS_ACEA_C3_5W-30.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Kixx_PAO_5W_40" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Components\Images\Products\Kixx_PAO_5W-40.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="location" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Components\Images\location.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -145,11 +157,23 @@
   <data name="minimize" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Components\Images\minimize.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="oil" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Components\Images\Products\oil.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Mobil_Super_3000_5W_40" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Components\Images\Products\Mobil_Super_3000_5W-40.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Mobil_Super_5W_30" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Components\Images\Products\Mobil_Super_5W-30.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="oil_bottle" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Components\Images\oil-bottle.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="PENNZOIL_5W_30" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Components\Images\Products\PENNZOIL_5W-30.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PENRITE_OW_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Components\Images\Products\PENRITE_OW-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Shel_HELIX_HX3_20W_50" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Components\Images\Products\Shel_HELIX_HX3_20W-50.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="shop" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Components\Images\shop.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

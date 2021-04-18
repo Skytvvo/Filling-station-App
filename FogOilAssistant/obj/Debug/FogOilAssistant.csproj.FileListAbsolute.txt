@@ -76,3 +76,8 @@ C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\Microsoft.Toolkit.Wpf.UI.Contr
 C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\Microsoft.Toolkit.Wpf.UI.XamlHost.xml
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\Dictionary\Pages\AuthDictionary.baml
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\FogOilAssistant.csprojAssemblyReference.cache
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\FogOilAssistant_Content.g.cs
+C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\EntityFramework.SqlServer.dll
+C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\EntityFramework.dll
+C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\ru\EntityFramework.SqlServer.resources.dll
+C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\ru\EntityFramework.resources.dll

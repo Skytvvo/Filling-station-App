@@ -29,8 +29,8 @@ namespace FogOilAssistant.Components.Models.Pages
                 OnPropertyChanged("Path");
             }
         }
-        private List<Product> products;
-        public List<Product> Products
+        private List<Database.Product> products;
+        public List<Database.Product> Products
         {
             get
             {   
@@ -47,9 +47,9 @@ namespace FogOilAssistant.Components.Models.Pages
         public CommandViewModel SortDesc { get => new CommandViewModel(sort_desc); }
         public void sort_desc()
         {
-            var SortedList = this.Products.OrderByDescending(item => item.Price).Cast<Product>();
-            List<Product> finish = new List<Product>();
-            foreach (Product product in SortedList)
+            var SortedList = this.Products.OrderByDescending(item => item.Price).Cast<Database.Product>();
+            List<Database.Product> finish = new List<Database.Product>();
+            foreach (Database.Product product in SortedList)
                 finish.Add(product);
             this.Products = finish;
         }
@@ -58,9 +58,9 @@ namespace FogOilAssistant.Components.Models.Pages
         public CommandViewModel Sort { get => new CommandViewModel(sort); }
         public void sort()
         {
-            var SortedList = this.Products.OrderBy(item => item.Price).Cast<Product>();
-            List<Product> finish = new List<Product>();
-            foreach (Product product in SortedList)
+            var SortedList = this.Products.OrderBy(item => item.Price).Cast<Database.Product>();
+            List<Database.Product> finish = new List<Database.Product>();
+            foreach (Database.Product product in SortedList)
                 finish.Add(product);
             this.Products = finish;
         }
@@ -68,9 +68,9 @@ namespace FogOilAssistant.Components.Models.Pages
         public CommandViewModel SortByName { get => new CommandViewModel(sortByName); }
         public void sortByName()
         {
-            var SortedList = this.Products.OrderBy(item => item.Name).Cast<Product>();
-            List<Product> finish = new List<Product>();
-            foreach (Product product in SortedList)
+            var SortedList = this.Products.OrderBy(item => item.Name).Cast<Database.Product>();
+            List<Database.Product> finish = new List<Database.Product>();
+            foreach (Database.Product product in SortedList)
                 finish.Add(product);
             this.Products = finish;
         }
@@ -78,9 +78,9 @@ namespace FogOilAssistant.Components.Models.Pages
         public CommandViewModel SortByNameDesc { get => new CommandViewModel(sortByNameDesc); }
         public void sortByNameDesc()
         {
-            var SortedList = this.Products.OrderByDescending(item => item.Name).Cast<Product>();
-            List<Product> finish = new List<Product>();
-            foreach (Product product in SortedList)
+            var SortedList = this.Products.OrderByDescending(item => item.Name).Cast<Database.Product>();
+            List<Database.Product> finish = new List<Database.Product>();
+            foreach (Database.Product product in SortedList)
                 finish.Add(product);
             this.Products = finish;
         }
@@ -96,7 +96,7 @@ namespace FogOilAssistant.Components.Models.Pages
             aTimer.Enabled = true;
 
             this.Products = DataBaseData.getInstance().Products;
-
+            
         }
 
 

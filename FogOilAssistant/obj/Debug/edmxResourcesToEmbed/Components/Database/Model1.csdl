@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FogOilModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CarBrand">
+    <Key>
+      <PropertyRef Name="BrandId" />
+    </Key>
+    <Property Name="BrandId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="CarObjects" Relationship="Self.FK_CarObjects_CarBrands" FromRole="CarBrands" ToRole="CarObjects" />
+  </EntityType>
+  <EntityType Name="CarModel">
+    <Key>
+      <PropertyRef Name="ModelId" />
+    </Key>
+    <Property Name="ModelId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="CarObjects" Relationship="Self.FK_CarObjects_CarModels" FromRole="CarModels" ToRole="CarObjects" />
+  </EntityType>
+  <EntityType Name="CarObject">
+    <Key>
+      <PropertyRef Name="CarId" />
+    </Key>
+    <Property Name="CarId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CarType" Type="Int32" Nullable="false" />
+    <Property Name="CarModel" Type="Int32" Nullable="false" />
+    <Property Name="CarProduct" Type="Int32" Nullable="false" />
+    <Property Name="CarBrand" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CarBrand1" Relationship="Self.FK_CarObjects_CarBrands" FromRole="CarObjects" ToRole="CarBrands" />
+    <NavigationProperty Name="CarModel1" Relationship="Self.FK_CarObjects_CarModels" FromRole="CarObjects" ToRole="CarModels" />
+    <NavigationProperty Name="CarType1" Relationship="Self.FK_CarObjects_CarTypes" FromRole="CarObjects" ToRole="CarTypes" />
+    <NavigationProperty Name="Products" Relationship="Self.CarProducts" FromRole="CarObjects" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="CarType">
+    <Key>
+      <PropertyRef Name="TypeId" />
+    </Key>
+    <Property Name="TypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="CarObjects" Relationship="Self.FK_CarObjects_CarTypes" FromRole="CarTypes" ToRole="CarObjects" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Price" Type="Double" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Img" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="CarObjects" Relationship="Self.CarProducts" FromRole="Products" ToRole="CarObjects" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_CarObjects_CarBrands">
+    <End Role="CarBrands" Type="Self.CarBrand" Multiplicity="1" />
+    <End Role="CarObjects" Type="Self.CarObject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarBrands">
+        <PropertyRef Name="BrandId" />
+      </Principal>
+      <Dependent Role="CarObjects">
+        <PropertyRef Name="CarBrand" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarObjects_CarModels">
+    <End Role="CarModels" Type="Self.CarModel" Multiplicity="1" />
+    <End Role="CarObjects" Type="Self.CarObject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarModels">
+        <PropertyRef Name="ModelId" />
+      </Principal>
+      <Dependent Role="CarObjects">
+        <PropertyRef Name="CarModel" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarObjects_CarTypes">
+    <End Role="CarTypes" Type="Self.CarType" Multiplicity="1" />
+    <End Role="CarObjects" Type="Self.CarObject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarTypes">
+        <PropertyRef Name="TypeId" />
+      </Principal>
+      <Dependent Role="CarObjects">
+        <PropertyRef Name="CarType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CarProducts">
+    <End Role="CarObjects" Type="Self.CarObject" Multiplicity="*" />
+    <End Role="Products" Type="Self.Product" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="FogOilEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CarBrands" EntityType="Self.CarBrand" />
+    <EntitySet Name="CarModels" EntityType="Self.CarModel" />
+    <EntitySet Name="CarObjects" EntityType="Self.CarObject" />
+    <EntitySet Name="CarTypes" EntityType="Self.CarType" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <AssociationSet Name="FK_CarObjects_CarBrands" Association="Self.FK_CarObjects_CarBrands">
+      <End Role="CarBrands" EntitySet="CarBrands" />
+      <End Role="CarObjects" EntitySet="CarObjects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarObjects_CarModels" Association="Self.FK_CarObjects_CarModels">
+      <End Role="CarModels" EntitySet="CarModels" />
+      <End Role="CarObjects" EntitySet="CarObjects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarObjects_CarTypes" Association="Self.FK_CarObjects_CarTypes">
+      <End Role="CarTypes" EntitySet="CarTypes" />
+      <End Role="CarObjects" EntitySet="CarObjects" />
+    </AssociationSet>
+    <AssociationSet Name="CarProducts" Association="Self.CarProducts">
+      <End Role="CarObjects" EntitySet="CarObjects" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(FogOilModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(FogOilModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>

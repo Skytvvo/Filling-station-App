@@ -12,23 +12,19 @@ namespace FogOilAssistant.Components.Data.GlobalStorage
     {
         private static DataBaseData instance;
         
-        
-        public List<Product.Product> Products = new List<Product.Product>();
-        
-        public List<CarBrand> CarBrands;
-        public List<CarModel> CarModels;
-        public List<CarType> CarTypes;
+        private FogOilAssistant.Components.Database.FogOilEntities DB = new FogOilAssistant.Components.Database.FogOilEntities(); 
 
-        public List<CarObject> CarObjects;
+        public List<Database.Product> Products = new List<Database.Product>();
+        
+        public List<CarBrand> CarBrands = new List<CarBrand>();
+        public List<CarModel> CarModels = new List<CarModel>();
+        public List<CarType> CarTypes = new List<CarType>();
+
+        public List<CarObject> CarObjects = new List<CarObject>();
 
         private DataBaseData()
         {
-            
-            this.CarObjects = new List<CarObject>();
-
-            this.CarBrands = new List<CarBrand>();
-            this.CarTypes = new List<CarType>();
-            this.CarModels = new List<CarModel>();
+            this.Products = DB.Products.ToList<Database.Product>();
         }
 
         public static DataBaseData getInstance()

@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище FogOilModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CarBrands">
+    <Key>
+      <PropertyRef Name="BrandId" />
+    </Key>
+    <Property Name="BrandId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CarModels">
+    <Key>
+      <PropertyRef Name="ModelId" />
+    </Key>
+    <Property Name="ModelId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CarObjects">
+    <Key>
+      <PropertyRef Name="CarId" />
+    </Key>
+    <Property Name="CarId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CarType" Type="int" Nullable="false" />
+    <Property Name="CarModel" Type="int" Nullable="false" />
+    <Property Name="CarProduct" Type="int" Nullable="false" />
+    <Property Name="CarBrand" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "FogOil.dbo.CarProducts" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="CarProducts">
+    <Key>
+      <PropertyRef Name="Product" />
+      <PropertyRef Name="Car" />
+    </Key>
+    <Property Name="Product" Type="int" Nullable="false" />
+    <Property Name="Car" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CarTypes">
+    <Key>
+      <PropertyRef Name="TypeId" />
+    </Key>
+    <Property Name="TypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Price" Type="float" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="300" Nullable="false" />
+    <Property Name="Img" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_CarObjects_CarBrands">
+    <End Role="CarBrands" Type="Self.CarBrands" Multiplicity="1" />
+    <End Role="CarObjects" Type="Self.CarObjects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarBrands">
+        <PropertyRef Name="BrandId" />
+      </Principal>
+      <Dependent Role="CarObjects">
+        <PropertyRef Name="CarBrand" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarObjects_CarModels">
+    <End Role="CarModels" Type="Self.CarModels" Multiplicity="1" />
+    <End Role="CarObjects" Type="Self.CarObjects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarModels">
+        <PropertyRef Name="ModelId" />
+      </Principal>
+      <Dependent Role="CarObjects">
+        <PropertyRef Name="CarModel" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarObjects_CarTypes">
+    <End Role="CarTypes" Type="Self.CarTypes" Multiplicity="1" />
+    <End Role="CarObjects" Type="Self.CarObjects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarTypes">
+        <PropertyRef Name="TypeId" />
+      </Principal>
+      <Dependent Role="CarObjects">
+        <PropertyRef Name="CarType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarProducts_CarObjects">
+    <End Role="CarObjects" Type="Self.CarObjects" Multiplicity="1" />
+    <End Role="CarProducts" Type="Self.CarProducts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarObjects">
+        <PropertyRef Name="CarId" />
+      </Principal>
+      <Dependent Role="CarProducts">
+        <PropertyRef Name="Car" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarProducts_Products">
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
+    <End Role="CarProducts" Type="Self.CarProducts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="CarProducts">
+        <PropertyRef Name="Product" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="Хранилище FogOilModelContainer">
+    <EntitySet Name="CarBrands" EntityType="Self.CarBrands" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CarModels" EntityType="Self.CarModels" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CarObjects" EntityType="Self.CarObjects" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CarTypes" EntityType="Self.CarTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CarProducts" EntityType="Self.CarProducts" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [CarProducts].[Product] AS [Product], 
+    [CarProducts].[Car] AS [Car]
+    FROM [dbo].[CarProducts] AS [CarProducts]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_CarObjects_CarBrands" Association="Self.FK_CarObjects_CarBrands">
+      <End Role="CarBrands" EntitySet="CarBrands" />
+      <End Role="CarObjects" EntitySet="CarObjects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarObjects_CarModels" Association="Self.FK_CarObjects_CarModels">
+      <End Role="CarModels" EntitySet="CarModels" />
+      <End Role="CarObjects" EntitySet="CarObjects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarObjects_CarTypes" Association="Self.FK_CarObjects_CarTypes">
+      <End Role="CarTypes" EntitySet="CarTypes" />
+      <End Role="CarObjects" EntitySet="CarObjects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarProducts_CarObjects" Association="Self.FK_CarProducts_CarObjects">
+      <End Role="CarObjects" EntitySet="CarObjects" />
+      <End Role="CarProducts" EntitySet="CarProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarProducts_Products" Association="Self.FK_CarProducts_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="CarProducts" EntitySet="CarProducts" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
