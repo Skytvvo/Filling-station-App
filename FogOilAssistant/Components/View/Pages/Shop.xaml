@@ -119,7 +119,7 @@
                                       
                                         <Image Grid.Column="0"   Style="{StaticResource product_img}" Source="{Binding Img}" />
                                         <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource product_name}" Text="{Binding Name}"/>
-                                        <TextBlock Grid.Column="3" Grid.ColumnSpan="2" Style="{StaticResource product_price}" Text="{Binding Gov_price}" TextWrapping="Wrap" TextTrimming="WordEllipsis"/>
+                                        <TextBlock Grid.Column="3" Grid.ColumnSpan="2" Style="{StaticResource product_price}" Text="{Binding Price}" TextWrapping="Wrap" TextTrimming="WordEllipsis"/>
                                         <!--Symbols limit - 695-->
                                         <TextBlock Grid.Column="5" Grid.ColumnSpan="4" Style="{StaticResource product_description}" Text="{Binding Description}" />
                                     </Grid>

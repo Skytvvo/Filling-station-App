@@ -19,10 +19,13 @@ namespace FogOilAssistant.Components.Database
         {
             this.CarObjects = new HashSet<CarObject>();
         }
-    
+        
         public int ProductId { get; set; }
         public string Name { get; set; }
-        public double Price { get; set; }
+        public double Price {
+            get;
+            set; 
+        }
         public string Description { get; set; }
         public string Img { get; set; }
     

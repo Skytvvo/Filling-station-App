@@ -141,6 +141,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Components\View\BasketProducts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Components\View\Pages\Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -234,6 +238,9 @@
     <Compile Include="Components\Models\Pages\ViewModelShop.cs" />
     <Compile Include="Components\Models\Pages\ViewModelSupport.cs" />
     <Compile Include="Components\Models\ToggleMenu\ViewModelToggleMenu.cs" />
+    <Compile Include="Components\View\BasketProducts.xaml.cs">
+      <DependentUpon>BasketProducts.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Components\View\Pages\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
@@ -261,6 +268,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FogOilDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FogOilDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -286,6 +298,17 @@
     </EntityDeploy>
     <None Include="Components\Database\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
+    </None>
+    <None Include="FogOilDataSet.xsc">
+      <DependentUpon>FogOilDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="FogOilDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>FogOilDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="FogOilDataSet.xss">
+      <DependentUpon>FogOilDataSet.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

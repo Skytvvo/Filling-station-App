@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FogOilAssistant.Components.Data.Pages.Oil;
+using FogOilAssistant.Components.Database;
 
 namespace FogOilAssistant.Components.Data.GlobalStorage
 {
@@ -22,9 +22,17 @@ namespace FogOilAssistant.Components.Data.GlobalStorage
 
         public List<CarObject> CarObjects = new List<CarObject>();
 
+        public List<Database.Product> BasketProducts = new List<Database.Product>();
+
         private DataBaseData()
         {
             this.Products = DB.Products.ToList<Database.Product>();
+            
+            this.CarTypes = DB.CarTypes.ToList<CarType>();
+            this.CarBrands = DB.CarBrands.ToList<CarBrand>();
+            this.CarModels = DB.CarModels.ToList<CarModel>();
+
+            this.CarObjects = DB.CarObjects.ToList<CarObject>();
         }
 
         public static DataBaseData getInstance()

@@ -6,9 +6,16 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Forms;
 using FogOilAssistant.Components.Data;
+using FogOilAssistant.Components.Data.GlobalStorage;
 using FogOilAssistant.Components.Data.Pages.Oil;
 using FogOilAssistant.Components.Data.Product;
+using Application = System.Windows.Application;
+using CarBrand = FogOilAssistant.Components.Database.CarBrand;
+using CarModel = FogOilAssistant.Components.Database.CarModel;
+using MessageBox = System.Windows.MessageBox;
+using Product = FogOilAssistant.Components.Database.Product;
 
 namespace FogOilAssistant.Components.Models.Pages
 {
@@ -30,9 +37,9 @@ namespace FogOilAssistant.Components.Models.Pages
         #endregion
 
         #region Select parts
-        List<CarType> carTypes;
+        List<FogOilAssistant.Components.Database.CarType> carTypes;
 
-        public List<CarType> CarTypes { 
+        public List<FogOilAssistant.Components.Database.CarType> CarTypes { 
             get => carTypes;
             set
             {
@@ -42,8 +49,9 @@ namespace FogOilAssistant.Components.Models.Pages
         }
 
 
-        List<CarBrand> carBrands;
-        public List<CarBrand> CarBrands {
+        //Brands List
+        List<Database.CarBrand> carBrands;
+        public List<Database.CarBrand> CarBrands {
             get => carBrands;
             set
             {
@@ -54,9 +62,9 @@ namespace FogOilAssistant.Components.Models.Pages
 
       
 
-
-        List<CarModel> carModels;
-        public List<CarModel> CarModels { 
+        //Models List
+        List<Database.CarModel> carModels;
+        public List<Database.CarModel> CarModels { 
             get => carModels;
             set
             {
@@ -68,8 +76,8 @@ namespace FogOilAssistant.Components.Models.Pages
         #endregion
 
         #region Results (Products, Select partial)
-        List<Product> products; 
-        public List<Product> Products { 
+        List<Database.Product> products; 
+        public List<Database.Product> Products { 
             get => products;
             set
             {
@@ -78,7 +86,7 @@ namespace FogOilAssistant.Components.Models.Pages
             }
         }
 
-        private CarObject carObject;
+        private Database.CarObject carObject;
         #endregion
 
         #region Commands
@@ -87,17 +95,30 @@ namespace FogOilAssistant.Components.Models.Pages
         
         private void select()
         {
-            MessageBox.Show("ok");
+
+            try
+            {
+                this.Products = DataBaseData.getInstance().CarObjects.FindAll(item =>
+                    item.CarBrand1.BrandId == this.CarBrands[SelectedBrandIndex].BrandId &&
+                    item.CarType1.TypeId == this.CarType.TypeId &&
+                    item.CarModel1.ModelId == this.CarModels[SelectedModelIndex].ModelId
+                ).SelectMany(item => item.Products).ToList() as List<Product>;
+            }
+            catch (Exception e)
+            {
+                this.Products = new List<Product>();
+            }
+          
         }
-       
+
 
 
         #endregion
 
         #region Selected Car Type
 
-        private CarType carType;
-        public CarType CarType {
+        private Database.CarType carType;
+        public Database.CarType CarType {
             get => carType;
             set 
             {
@@ -108,8 +129,14 @@ namespace FogOilAssistant.Components.Models.Pages
                 OnPropertyChanged("IsMotorcycle");
                 OnPropertyChanged("IsTruck");
 
+                this.CarBrands  =  DataBaseData.getInstance().CarObjects.FindAll(item => item.CarType == value.TypeId)
+                    .Select(item => item.CarBrand1).Distinct().ToList() as List<CarBrand>;
+                if (this.CarBrands != null && this.CarBrands.Count != 0)
+                    SelectedBrandIndex = 0;
+                else
+                    SelectedBrandIndex = -1;
                 this.getPage();
-        
+                 
 
             }
         }
@@ -152,6 +179,7 @@ namespace FogOilAssistant.Components.Models.Pages
 
 
         #region Selected Car parts
+
         private int selectedModelIndex = 0;
         private int selectedBrandIndex = 0;
 
@@ -160,9 +188,9 @@ namespace FogOilAssistant.Components.Models.Pages
             set
             {
                 this.selectedModelIndex = value;
+                
                 OnPropertyChanged("SelectedModelIndex");
               
-                MessageBox.Show(value.ToString());
             }
         }
         public int SelectedBrandIndex { 
@@ -170,9 +198,24 @@ namespace FogOilAssistant.Components.Models.Pages
             set
             {
                 this.selectedBrandIndex = value;
-                OnPropertyChanged("SelectedBrandIndex");
+
+                try
+                {
+                    this.CarModels = DataBaseData.getInstance().CarObjects.FindAll(item => item.CarBrand == CarBrands[value].BrandId)
+                        .Select(item => item.CarModel1).ToList() as List<CarModel>;
+                }
+                catch (Exception e)
+                {
+                    SelectedModelIndex = -1;
+                    CarModels = new List<CarModel>();
+                }
              
-                MessageBox.Show(value.ToString());
+                if (this.carModels != null && this.CarModels.Count != 0)
+                    SelectedModelIndex = 0;
+                else
+                    SelectedModelIndex = -1;
+
+                OnPropertyChanged("SelectedBrandIndex");
             } 
         }
 
@@ -205,29 +248,9 @@ namespace FogOilAssistant.Components.Models.Pages
 
         public ViewModelOil()
         {
-            this.CarTypes = new List<CarType>()
-            {
-                new CarType(){ ID=0, Name="Car"},
-                new CarType(){ ID=1, Name="Bus"},
-                new CarType(){ ID=2, Name="Motorcycle"},
-                new CarType(){ ID=3, Name="Truck"}
-            };
-            this.carBrands = new List<CarBrand>()
-            {
-                new CarBrand(){  ID=0, Name="Volkswagen" },
-                new CarBrand(){ ID=1, Name="Toyota" },
-                new CarBrand(){ ID=2, Name="Subaru" },
-                new CarBrand(){ ID=3, Name="Honda" }
-                };
-            this.CarModels = new List<CarModel>()
-            {
-                new CarModel(){ ID=1, Name="asd"}
-            };
-            this.Products = new List<Product>()
-            {
-                
-            };
-            this.carObject = new CarObject();
+            this.CarTypes = DataBaseData.getInstance().CarTypes;
+           
+            
 
         }
     }
