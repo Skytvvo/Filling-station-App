@@ -4,9 +4,96 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FogOilAssistant.Components.View"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             xmlns:basket="clr-namespace:FogOilAssistant.Components.Models.Basket"
+             xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
+
+             mc:Ignorable="d" >
+    <UserControl.DataContext>
+        <basket:ViewModelBasketProducts/>
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <ResourceDictionary Source="../Dictionary/BasketProductsDictionary.xaml"></ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
-            
+       
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="0.1*"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <ScrollViewer VerticalScrollBarVisibility="Hidden" x:Name="Products">
+            <Grid Margin="10,0">
+              
+                <ItemsControl ItemsSource="{Binding BaskedProducts}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0,10" MaxHeight="300" MinHeight="150">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+
+                                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <Image Margin="5" Source="{Binding Img}"></Image>
+                                <TextBlock Grid.Column="1" Text="{Binding Name}" Style="{StaticResource product_name}"></TextBlock>
+                                <TextBlock Grid.Column="2" Text="{Binding Price}" Style="{StaticResource product_name}"></TextBlock>
+                                <TextBlock Grid.Column="3" Text="{Binding Description}" Style="{StaticResource product_name}"></TextBlock>
+                               
+                                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="4">
+                                  
+                                    <Button Style="{StaticResource product_btn}" Height="70" Width="70" >
+                                        
+
+                                    </Button>
+                                  
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
+        </ScrollViewer>
+        <Grid x:Name="Summarize" Grid.Row="1">
+            <Border BorderBrush="#ff0000" BorderThickness="0,2,0,0">
+                <Grid >
+                   
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.125*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.5*"></ColumnDefinition>
+
+                            <ColumnDefinition Width="0.175*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Button Style="{StaticResource product_cancel}">
+                            <TextBlock Text="Cancel" Style="{StaticResource product_name}"></TextBlock>
+                        </Button>
+                        <TextBlock Text="Location: " Style="{StaticResource product_name}" Grid.Column="1"></TextBlock>
+                        <ComboBox Style="{StaticResource ComboBoxTest2}" Grid.Column="2"></ComboBox>
+                        <Grid Grid.Column="3">
+                            <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="Total:" Style="{StaticResource product_name}"></TextBlock>
+                            <TextBlock Grid.Column="1" Style="{StaticResource product_name}"></TextBlock>
+                            
+                        </Grid>
+                        <Grid Grid.Column="4" >
+                            <Button Style="{StaticResource product_cancel}">
+                                <TextBlock Style="{StaticResource product_name}" Text="Buy"></TextBlock>
+                            </Button>
+                        </Grid>
+                    </Grid>
+                    
+                   
+                </Grid>
+
+            </Border>
+        </Grid> 
     </Grid>
 </UserControl>

@@ -27,7 +27,9 @@ namespace FogOilAssistant.Components.Data.GlobalStorage
         private DataBaseData()
         {
             this.Products = DB.Products.ToList<Database.Product>();
-            
+            this.BasketProducts = DB.Products.ToList<Database.Product>();
+
+
             this.CarTypes = DB.CarTypes.ToList<CarType>();
             this.CarBrands = DB.CarBrands.ToList<CarBrand>();
             this.CarModels = DB.CarModels.ToList<CarModel>();

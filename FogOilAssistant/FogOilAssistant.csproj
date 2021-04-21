@@ -108,6 +108,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Components\Dictionary\BasketProductsDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Components\Dictionary\MainWindowDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -230,6 +234,7 @@
     <Compile Include="Components\Data\Pages\Support\Feedback.cs" />
     <Compile Include="Components\Data\Pages\Support\Item.cs" />
     <Compile Include="Components\Data\Product\Product.cs" />
+    <Compile Include="Components\Models\Basket\ViewModelBasketProducts.cs" />
     <Compile Include="Components\Models\MainWindow\MWICommand.cs" />
     <Compile Include="Components\Models\MainWindow\ViewModelMW.cs" />
     <Compile Include="Components\Models\Pages\ViewModelAuth.cs" />
@@ -273,6 +278,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FogOilDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -375,6 +381,8 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Resource Include="Components\Images\trash.svg" />
+    <Resource Include="Components\Images\delete.svg" />
     <Resource Include="Components\Images\Products\Shel_HELIX_HX3_20W-50.png" />
     <Resource Include="Components\Images\Products\PENRITE_OW-20.png" />
     <Resource Include="Components\Images\Products\PENNZOIL_5W-30.png" />
@@ -396,6 +404,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -163,6 +163,16 @@ namespace FogOilAssistant.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
+        internal static byte[] delete {
+            get {
+                object obj = ResourceManager.GetObject("delete", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
         internal static byte[] exp_btn {
             get {
                 object obj = ResourceManager.GetObject("exp_btn", resourceCulture);
@@ -326,6 +336,16 @@ namespace FogOilAssistant.Properties {
         internal static byte[] support {
             get {
                 object obj = ResourceManager.GetObject("support", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
+        internal static byte[] trash {
+            get {
+                object obj = ResourceManager.GetObject("trash", resourceCulture);
                 return ((byte[])(obj));
             }
         }

@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\data\FogOilAssistant\FogOilAssistant\App.xaml
-171867157246
+18-632836617
 2709431648
-43461257991
+45368133415
 1451094077656
-Components\Dictionary\MainWindowDictionary.xaml;Components\Dictionary\Pages\AuthDictionary.xaml;Components\Dictionary\Pages\MapDictionary.xaml;Components\Dictionary\Pages\OilDictionary.xaml;Components\Dictionary\Pages\ShopDictionary.xaml;Components\Dictionary\Pages\SupportDictionary.xaml;Components\Dictionary\ToggleMenuDictionary.xaml;Components\Dictionary\ToggleMenuExpanderDictionary.xaml;Components\View\BasketProducts.xaml;Components\View\Pages\Login.xaml;Components\View\Pages\Oil.xaml;Components\View\Pages\Refueling map.xaml;Components\View\Pages\Shop.xaml;Components\View\Pages\Support.xaml;Components\View\ToggleMenu.xaml;Components\View\ToggleMenuExpander.xaml;Components\View\MainWindow.xaml;
+Components\Dictionary\BasketProductsDictionary.xaml;Components\Dictionary\MainWindowDictionary.xaml;Components\Dictionary\Pages\AuthDictionary.xaml;Components\Dictionary\Pages\MapDictionary.xaml;Components\Dictionary\Pages\OilDictionary.xaml;Components\Dictionary\Pages\ShopDictionary.xaml;Components\Dictionary\Pages\SupportDictionary.xaml;Components\Dictionary\ToggleMenuDictionary.xaml;Components\Dictionary\ToggleMenuExpanderDictionary.xaml;Components\View\BasketProducts.xaml;Components\View\Pages\Login.xaml;Components\View\Pages\Oil.xaml;Components\View\Pages\Refueling map.xaml;Components\View\Pages\Shop.xaml;Components\View\Pages\Support.xaml;Components\View\ToggleMenu.xaml;Components\View\ToggleMenuExpander.xaml;Components\View\MainWindow.xaml;
 
-True
+False
 
