@@ -15,7 +15,7 @@ namespace FogOilAssistant.Components.Models.Basket
     {
 
         #region Props
-
+        //purchase
         private List<Product> baskedProducts;
         public List<Product> BaskedProducts
         {
@@ -26,6 +26,9 @@ namespace FogOilAssistant.Components.Models.Basket
                 OnPropertyChanged("BaskedProducts");
             }
         }
+
+        //total
+
 
         #endregion
 

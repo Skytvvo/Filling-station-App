@@ -6,9 +6,10 @@
              xmlns:local="clr-namespace:FogOilAssistant.Components.View"
              xmlns:basket="clr-namespace:FogOilAssistant.Components.Models.Basket"
              xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
-
+             
              mc:Ignorable="d" >
-    <UserControl.DataContext>
+ 
+            <UserControl.DataContext>
         <basket:ViewModelBasketProducts/>
     </UserControl.DataContext>
     <UserControl.Resources>

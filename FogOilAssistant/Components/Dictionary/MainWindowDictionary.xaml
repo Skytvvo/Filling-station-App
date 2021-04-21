@@ -28,4 +28,26 @@
         </Style.Triggers>
     </Style>
    
+
+    <Style x:Key="main_basket" TargetType="Button">
+        <Setter Property="Height" Value="35"></Setter>
+        <Setter Property="Width" Value="35"></Setter>
+        <Setter Property="Margin" Value="15"></Setter>
+        <Setter Property="Background" Value="#212122"></Setter>
+        <Setter Property="Cursor" Value="Hand"></Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border BorderBrush="#ff0000" BorderThickness="2" CornerRadius="5" Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FF0000"></Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>

@@ -130,6 +130,9 @@
   <data name="auth_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Components\Images\Auth\auth_3.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="basket" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Components\Images\basket.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="Booster_Titanium_C3_5W_30" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Components\Images\Products\Booster_Titanium_C3_5W-30.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

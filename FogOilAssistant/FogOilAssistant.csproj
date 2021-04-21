@@ -381,6 +381,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Resource Include="Components\Images\basket.svg" />
     <Resource Include="Components\Images\trash.svg" />
     <Resource Include="Components\Images\delete.svg" />
     <Resource Include="Components\Images\Products\Shel_HELIX_HX3_20W-50.png" />

@@ -25,14 +25,18 @@ namespace FogOilAssistant
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new ViewModelMW();
         }
 
-     
-      
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
+            
+        }
 
 
 
-       
+
     }
 }

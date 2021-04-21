@@ -19,15 +19,16 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-
-  
-    <Grid Background="#1E1E1E">
+    <Window.DataContext>
+        <viewmodels:ViewModelMW/>
+    </Window.DataContext>
+    <Grid Background="#1E1E1E" >
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="19*"/>
 
         </Grid.RowDefinitions>
-        <Grid Name="Toolbar" Grid.Row="0" Background="#FF222121">
+        <Grid Name="Toolbar"  MouseDown="Window_MouseDown"  Grid.Row="0" Background="#FF222121">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
                 <Button Command="{Binding MinimizeWindow}" Style="{StaticResource tool_button}" x:Name="minimize_button" >
                     <svgc:SvgViewbox Height="20" Stretch="Uniform" Source="/Components/Images/minimize.svg"/>
@@ -43,9 +44,11 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                
                 <ColumnDefinition Width="*"/>
                 
              
@@ -75,8 +78,14 @@
                    >
 
             </Frame>
-
-            <views:BasketProducts Background="#1E1E1E" BorderBrush="#ff0000" BorderThickness="2" Grid.Row="0" Grid.RowSpan="6"  Grid.Column="1" Grid.ColumnSpan="5"></views:BasketProducts>
+            <StackPanel Grid.Column="6" HorizontalAlignment="Right" VerticalAlignment="Top">
+                <Button Panel.ZIndex="9999" Style="{StaticResource  main_basket}" Command="{Binding OnBasket}">
+                    <svgc:SvgViewbox Margin="5" IsEnabled="False" Stretch="Uniform" Source="/Components/Images/basket.svg" />
+                </Button>
+            </StackPanel>
+            <views:BasketProducts x:Name="BasketProducts" Visibility="Hidden" Background="#1E1E1E" BorderBrush="#ff0000" BorderThickness="2" Grid.Row="0" Grid.RowSpan="6"  Grid.Column="1" Grid.ColumnSpan="5">
+               
+            </views:BasketProducts>
         </Grid>
         
        
