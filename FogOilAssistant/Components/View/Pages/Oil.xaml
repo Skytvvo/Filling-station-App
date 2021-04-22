@@ -1,4 +1,5 @@
-﻿<Page x:Class="FogOilAssistant.Components.View.Pages.Oil"
+﻿<Page x:Name="oil_page"
+      x:Class="FogOilAssistant.Components.View.Pages.Oil"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -174,7 +175,11 @@
                                             <TextBlock Margin="5" Grid.Column="5"    Grid.ColumnSpan="3" Style="{StaticResource product_description}" Text="Petroleum engineering is a field of engineering concerned with the activities related to the production of Hydrocarbons, which can be either crude oil or natural gas.[1] Exploration and production are deemed to fall within the upstream sector of the oil and gas industry. Exploration, by earth scientists, and petroleum engineering are the oil and gas industry's two main subsurface disciplines, which focus on maximizing economic recovery of hydrocarbons from subsurface reservoirs. Petroleum geology and geophysics focus on provision of a static description of the hydrocarbon reservoir rock, while petroleum engineering focuses on estimation of the recoverable volume of this resource using a detailed understanding of the physical behavior of oil, water and gas within porous rock at very high pressure." TextWrapping="WrapWithOverflow" TextTrimming="CharacterEllipsis"/>
 
                                         </Grid>
-                                        <Button   x:Name="product_buy"  Style="{StaticResource product_hover_button}" >
+                                        <Button Command="{Binding ElementName=oil_page, Path=DataContext.BuyProduct}"
+                                                x:Name="product_buy"
+                                                Style="{StaticResource product_hover_button}" 
+                                                CommandParameter="{Binding ProductId}"
+                                                >
                                             <Button.Content>
                                                 <TextBlock Text="Buy"/>
                                             </Button.Content>

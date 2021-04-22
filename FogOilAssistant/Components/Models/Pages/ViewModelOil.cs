@@ -112,7 +112,15 @@ namespace FogOilAssistant.Components.Models.Pages
         }
 
 
-
+        public RelayCommand BuyProduct
+        {
+            get => new RelayCommand(productId =>
+            {
+                DataBaseData.getInstance().basketProducts.Add(
+                    DataBaseData.getInstance().Products.First(item => item.ProductId == (int)productId)
+                );
+            });
+        }
         #endregion
 
         #region Selected Car Type

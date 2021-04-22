@@ -1,4 +1,5 @@
-﻿<Page x:Class="FogOilAssistant.Components.View.Pages.Shop"
+﻿<Page x:Name="shop_page"
+      x:Class="FogOilAssistant.Components.View.Pages.Shop"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -123,7 +124,11 @@
                                         <!--Symbols limit - 695-->
                                         <TextBlock Grid.Column="5" Grid.ColumnSpan="4" Style="{StaticResource product_description}" Text="{Binding Description}" />
                                     </Grid>
-                                    <Button x:Name="product_buy"  Style="{StaticResource product_hover_button}" >
+                                    <Button Command="{Binding ElementName=shop_page, Path=DataContext.BuyProduct}"
+                                            x:Name="product_buy"
+                                            Style="{StaticResource product_hover_button}" 
+                                            CommandParameter="{Binding ProductId}"
+                                            >
                                         <Button.Content>
                                             <TextBlock Text="Buy"/>
                                         </Button.Content>

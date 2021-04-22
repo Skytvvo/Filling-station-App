@@ -17,6 +17,7 @@ namespace FogOilAssistant.Components.Models.Pages
     public class ViewModelShop: INotifyPropertyChanged
     {
 
+        #region Props
         private string _Path;
         private int ID = 1;
 
@@ -42,8 +43,10 @@ namespace FogOilAssistant.Components.Models.Pages
                 OnPropertyChanged("Products");
             }
         }
+        #endregion
 
         #region Commands
+        //Desc price
         public CommandViewModel SortDesc { get => new CommandViewModel(sort_desc); }
         public void sort_desc()
         {
@@ -54,7 +57,7 @@ namespace FogOilAssistant.Components.Models.Pages
             this.Products = finish;
         }
 
-
+        //Price
         public CommandViewModel Sort { get => new CommandViewModel(sort); }
         public void sort()
         {
@@ -64,7 +67,7 @@ namespace FogOilAssistant.Components.Models.Pages
                 finish.Add(product);
             this.Products = finish;
         }
-
+        //Name
         public CommandViewModel SortByName { get => new CommandViewModel(sortByName); }
         public void sortByName()
         {
@@ -74,7 +77,7 @@ namespace FogOilAssistant.Components.Models.Pages
                 finish.Add(product);
             this.Products = finish;
         }
-
+        //Desc name
         public CommandViewModel SortByNameDesc { get => new CommandViewModel(sortByNameDesc); }
         public void sortByNameDesc()
         {
@@ -84,8 +87,22 @@ namespace FogOilAssistant.Components.Models.Pages
                 finish.Add(product);
             this.Products = finish;
         }
+
+        public RelayCommand BuyProduct
+        {
+            get => new RelayCommand(productId =>
+            {
+                DataBaseData.getInstance().basketProducts.Add(
+                    DataBaseData.getInstance().Products.First(item => item.ProductId == (int)productId)
+                );
+            });
+        }
+
+        
+
         #endregion
 
+        #region Constructor
         public ViewModelShop()
         {
             this.Path = "/Components/Images/Slider/1.jpg";
@@ -98,8 +115,7 @@ namespace FogOilAssistant.Components.Models.Pages
             this.Products = DataBaseData.getInstance().Products;
             
         }
-
-
+        #endregion
 
         #region Events
 
