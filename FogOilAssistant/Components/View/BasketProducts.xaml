@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="FogOilAssistant.Components.View.BasketProducts"
+﻿<UserControl x:Name="basket_control" x:Class="FogOilAssistant.Components.View.BasketProducts"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -25,10 +25,10 @@
         <ScrollViewer VerticalScrollBarVisibility="Hidden" x:Name="Products">
             <Grid Margin="10,0">
               
-                <ItemsControl ItemsSource="{Binding BaskedProducts}">
+                <ItemsControl  ItemsSource="{Binding   BaskedProducts}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Grid Margin="0,10" MaxHeight="300" MinHeight="150">
+                            <Grid Background="#FF222121" Margin="0,10" MaxHeight="300" MinHeight="150">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"></ColumnDefinition>
                                     <ColumnDefinition Width="*"></ColumnDefinition>
@@ -44,9 +44,14 @@
                                 <TextBlock Grid.Column="3" Text="{Binding Description}" Style="{StaticResource product_name}"></TextBlock>
                                
                                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="4">
-                                  
-                                    <Button Style="{StaticResource product_btn}" Height="70" Width="70" >
-                                        
+
+                                    <Button  Style="{StaticResource product_btn}" 
+                                             CommandParameter="{Binding Path=ProductId}" 
+                                             Height="70"
+                                             Width="70"
+                                             Command="{Binding ElementName=basket_control, Path=DataContext.basket_remove}"
+                                    >
+                                       
 
                                     </Button>
                                   
@@ -63,29 +68,26 @@
                    
                     <Grid >
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.1*"></ColumnDefinition>
                             <ColumnDefinition Width="0.125*"></ColumnDefinition>
                             <ColumnDefinition Width="0.5*"></ColumnDefinition>
 
                             <ColumnDefinition Width="0.175*"></ColumnDefinition>
                             <ColumnDefinition Width="0.1*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button Style="{StaticResource product_cancel}">
-                            <TextBlock Text="Cancel" Style="{StaticResource product_name}"></TextBlock>
-                        </Button>
-                        <TextBlock Text="Location: " Style="{StaticResource product_name}" Grid.Column="1"></TextBlock>
-                        <ComboBox Style="{StaticResource ComboBoxTest2}" Grid.Column="2"></ComboBox>
-                        <Grid Grid.Column="3">
+                        
+                        <TextBlock Text="Location: " Style="{StaticResource product_name}" Grid.Column="0"></TextBlock>
+                        <ComboBox Style="{StaticResource ComboBoxTest2}" Grid.Column="1"></ComboBox>
+                        <Grid Grid.Column="2">
                             <Grid.ColumnDefinitions>
                                     <ColumnDefinition></ColumnDefinition>
                                     <ColumnDefinition></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0" Text="Total:" Style="{StaticResource product_name}"></TextBlock>
-                            <TextBlock Grid.Column="1" Style="{StaticResource product_name}"></TextBlock>
+                            <TextBlock Grid.Column="1" Style="{StaticResource product_name}" Text="{Binding Total}"></TextBlock>
                             
                         </Grid>
-                        <Grid Grid.Column="4" >
-                            <Button Style="{StaticResource product_cancel}">
+                        <Grid Grid.Column="3" >
+                            <Button Command="{Binding BuyItems}" Style="{StaticResource product_cancel}">
                                 <TextBlock Style="{StaticResource product_name}" Text="Buy"></TextBlock>
                             </Button>
                         </Grid>

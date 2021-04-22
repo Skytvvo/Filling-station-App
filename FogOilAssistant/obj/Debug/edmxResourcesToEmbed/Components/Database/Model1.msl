@@ -90,5 +90,65 @@
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище FogOilModel.sp_renamediagram" />
     <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище FogOilModel.sp_upgraddiagrams" />
+    <EntitySetMapping Name="Bonuses">
+      <EntityTypeMapping TypeName="FogOilModel.Bonus">
+        <MappingFragment StoreEntitySet="Bonuses">
+          <ScalarProperty Name="Bonus1" ColumnName="Bonus" />
+          <ScalarProperty Name="BonusId" ColumnName="BonusId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Locations">
+      <EntityTypeMapping TypeName="FogOilModel.Location">
+        <MappingFragment StoreEntitySet="Locations">
+          <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Passwords">
+      <EntityTypeMapping TypeName="FogOilModel.Password">
+        <MappingFragment StoreEntitySet="Passwords">
+          <ScalarProperty Name="Password1" ColumnName="Password" />
+          <ScalarProperty Name="PasswordId" ColumnName="PasswordId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserNicks">
+      <EntityTypeMapping TypeName="FogOilModel.UserNick">
+        <MappingFragment StoreEntitySet="UserNicks">
+          <ScalarProperty Name="Nick" ColumnName="Nick" />
+          <ScalarProperty Name="NickId" ColumnName="NickId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="FogOilModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Nick" ColumnName="Nick" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Bonus" ColumnName="Bonus" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserProducts">
+      <EntityTypeMapping TypeName="FogOilModel.UserProduct">
+        <MappingFragment StoreEntitySet="UserProducts">
+          <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Basket" TypeName="FogOilModel.Basket" StoreEntitySet="Basket">
+      <EndProperty Name="User">
+        <ScalarProperty Name="UserId" ColumnName="UserId" />
+      </EndProperty>
+      <EndProperty Name="Product">
+        <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

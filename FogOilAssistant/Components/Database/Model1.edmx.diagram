@@ -15,6 +15,19 @@
         <AssociationConnector Association="FogOilModel.FK_CarObjects_CarModels" ManuallyRouted="false" />
         <AssociationConnector Association="FogOilModel.FK_CarObjects_CarTypes" ManuallyRouted="false" />
         <AssociationConnector Association="FogOilModel.CarProducts" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="FogOilModel.Bonus" Width="1.5" PointX="5.25" PointY="4.875" />
+        <EntityTypeShape EntityType="FogOilModel.Location" Width="1.5" PointX="7.5" PointY="6" />
+        <EntityTypeShape EntityType="FogOilModel.Password" Width="1.5" PointX="5.25" PointY="9.625" />
+        <EntityTypeShape EntityType="FogOilModel.UserNick" Width="1.5" PointX="5.25" PointY="7.25" />
+        <EntityTypeShape EntityType="FogOilModel.User" Width="1.5" PointX="7.5" PointY="1.125" />
+        <EntityTypeShape EntityType="FogOilModel.UserProduct" Width="1.5" PointX="9.75" PointY="1.5" />
+        <AssociationConnector Association="FogOilModel.FK_Users_Bonuses" />
+        <AssociationConnector Association="FogOilModel.FK_UserProducts_Locations" />
+        <AssociationConnector Association="FogOilModel.FK_Users_Passwords" />
+        <AssociationConnector Association="FogOilModel.FK_UserProducts_Products" />
+        <AssociationConnector Association="FogOilModel.FK_Users_UserNicks" />
+        <AssociationConnector Association="FogOilModel.FK_UserProducts_Users" />
+        <AssociationConnector Association="FogOilModel.Basket" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

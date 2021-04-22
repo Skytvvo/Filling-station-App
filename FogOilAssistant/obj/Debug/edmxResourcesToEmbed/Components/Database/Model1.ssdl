@@ -1,5 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Хранилище FogOilModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "FogOil.dbo.Basket" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="Basket">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="ProductId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Bonuses">
+    <Key>
+      <PropertyRef Name="BonusId" />
+    </Key>
+    <Property Name="BonusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Bonus" Type="float" Nullable="false" />
+  </EntityType>
   <EntityType Name="CarBrands">
     <Key>
       <PropertyRef Name="BrandId" />
@@ -41,6 +58,21 @@
     <Property Name="TypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
+  <EntityType Name="Locations">
+    <Key>
+      <PropertyRef Name="LocationId" />
+    </Key>
+    <Property Name="Latitude" Type="float" Nullable="false" />
+    <Property Name="Longitude" Type="float" Nullable="false" />
+    <Property Name="LocationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Passwords">
+    <Key>
+      <PropertyRef Name="PasswordId" />
+    </Key>
+    <Property Name="PasswordId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="200" Nullable="false" />
+  </EntityType>
   <EntityType Name="Products">
     <Key>
       <PropertyRef Name="ProductId" />
@@ -61,6 +93,58 @@
     <Property Name="version" Type="int" />
     <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
+  <EntityType Name="UserNicks">
+    <Key>
+      <PropertyRef Name="NickId" />
+    </Key>
+    <Property Name="NickId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nick" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "FogOil.dbo.UserProducts" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="UserProducts">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="ProductId" />
+      <PropertyRef Name="LocationId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="ProductId" Type="int" Nullable="false" />
+    <Property Name="LocationId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Bonus" Type="int" Nullable="false" />
+    <Property Name="Password" Type="int" Nullable="false" />
+    <Property Name="Nick" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Basket_Products">
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
+    <End Role="Basket" Type="Self.Basket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="Basket">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Basket_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Basket" Type="Self.Basket" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Basket">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_CarObjects_CarBrands">
     <End Role="CarBrands" Type="Self.CarBrands" Multiplicity="1" />
     <End Role="CarObjects" Type="Self.CarObjects" Multiplicity="*" />
@@ -121,6 +205,78 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_UserProducts_Locations">
+    <End Role="Locations" Type="Self.Locations" Multiplicity="1" />
+    <End Role="UserProducts" Type="Self.UserProducts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Locations">
+        <PropertyRef Name="LocationId" />
+      </Principal>
+      <Dependent Role="UserProducts">
+        <PropertyRef Name="LocationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserProducts_Products">
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
+    <End Role="UserProducts" Type="Self.UserProducts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="UserProducts">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserProducts_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="UserProducts" Type="Self.UserProducts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserProducts">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_Bonuses">
+    <End Role="Bonuses" Type="Self.Bonuses" Multiplicity="1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bonuses">
+        <PropertyRef Name="BonusId" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="Bonus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_Passwords">
+    <End Role="Passwords" Type="Self.Passwords" Multiplicity="1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Passwords">
+        <PropertyRef Name="PasswordId" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="Password" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_UserNicks">
+    <End Role="UserNicks" Type="Self.UserNicks" Multiplicity="1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserNicks">
+        <PropertyRef Name="NickId" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="Nick" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
   <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -153,18 +309,44 @@
   </Function>
   <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="Хранилище FogOilModelContainer">
+    <EntitySet Name="Bonuses" EntityType="Self.Bonuses" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CarBrands" EntityType="Self.CarBrands" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CarModels" EntityType="Self.CarModels" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CarObjects" EntityType="Self.CarObjects" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CarTypes" EntityType="Self.CarTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Locations" EntityType="Self.Locations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Passwords" EntityType="Self.Passwords" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserNicks" EntityType="Self.UserNicks" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Basket" EntityType="Self.Basket" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Basket].[UserId] AS [UserId], 
+    [Basket].[ProductId] AS [ProductId]
+    FROM [dbo].[Basket] AS [Basket]</DefiningQuery>
+    </EntitySet>
     <EntitySet Name="CarProducts" EntityType="Self.CarProducts" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [CarProducts].[Product] AS [Product], 
     [CarProducts].[Car] AS [Car]
     FROM [dbo].[CarProducts] AS [CarProducts]</DefiningQuery>
     </EntitySet>
+    <EntitySet Name="UserProducts" EntityType="Self.UserProducts" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [UserProducts].[UserId] AS [UserId], 
+    [UserProducts].[ProductId] AS [ProductId], 
+    [UserProducts].[LocationId] AS [LocationId]
+    FROM [dbo].[UserProducts] AS [UserProducts]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Basket_Products" Association="Self.FK_Basket_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Basket" EntitySet="Basket" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Basket_Users" Association="Self.FK_Basket_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Basket" EntitySet="Basket" />
+    </AssociationSet>
     <AssociationSet Name="FK_CarObjects_CarBrands" Association="Self.FK_CarObjects_CarBrands">
       <End Role="CarBrands" EntitySet="CarBrands" />
       <End Role="CarObjects" EntitySet="CarObjects" />
@@ -184,6 +366,30 @@
     <AssociationSet Name="FK_CarProducts_Products" Association="Self.FK_CarProducts_Products">
       <End Role="Products" EntitySet="Products" />
       <End Role="CarProducts" EntitySet="CarProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserProducts_Locations" Association="Self.FK_UserProducts_Locations">
+      <End Role="Locations" EntitySet="Locations" />
+      <End Role="UserProducts" EntitySet="UserProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserProducts_Products" Association="Self.FK_UserProducts_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="UserProducts" EntitySet="UserProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserProducts_Users" Association="Self.FK_UserProducts_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="UserProducts" EntitySet="UserProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_Bonuses" Association="Self.FK_Users_Bonuses">
+      <End Role="Bonuses" EntitySet="Bonuses" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_Passwords" Association="Self.FK_Users_Passwords">
+      <End Role="Passwords" EntitySet="Passwords" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_UserNicks" Association="Self.FK_Users_UserNicks">
+      <End Role="UserNicks" EntitySet="UserNicks" />
+      <End Role="Users" EntitySet="Users" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

@@ -48,6 +48,8 @@
     <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Img" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="CarObjects" Relationship="Self.CarProducts" FromRole="Products" ToRole="CarObjects" />
+    <NavigationProperty Name="UserProducts" Relationship="FogOilModel.FK_UserProducts_Products" FromRole="Product" ToRole="UserProduct" />
+    <NavigationProperty Name="Users" Relationship="FogOilModel.Basket" FromRole="Product" ToRole="User" />
   </EntityType>
   <EntityType Name="sysdiagram">
     <Key>
@@ -152,6 +154,40 @@
       <Parameter Name="new_diagramname" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="sp_upgraddiagrams" />
+    <EntitySet Name="Bonuses" EntityType="FogOilModel.Bonus" />
+    <EntitySet Name="Locations" EntityType="FogOilModel.Location" />
+    <EntitySet Name="Passwords" EntityType="FogOilModel.Password" />
+    <EntitySet Name="UserNicks" EntityType="FogOilModel.UserNick" />
+    <EntitySet Name="Users" EntityType="FogOilModel.User" />
+    <EntitySet Name="UserProducts" EntityType="FogOilModel.UserProduct" />
+    <AssociationSet Name="FK_Users_Bonuses" Association="FogOilModel.FK_Users_Bonuses">
+      <End Role="Bonus" EntitySet="Bonuses" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserProducts_Locations" Association="FogOilModel.FK_UserProducts_Locations">
+      <End Role="Location" EntitySet="Locations" />
+      <End Role="UserProduct" EntitySet="UserProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_Passwords" Association="FogOilModel.FK_Users_Passwords">
+      <End Role="Password" EntitySet="Passwords" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserProducts_Products" Association="FogOilModel.FK_UserProducts_Products">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="UserProduct" EntitySet="UserProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_UserNicks" Association="FogOilModel.FK_Users_UserNicks">
+      <End Role="UserNick" EntitySet="UserNicks" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserProducts_Users" Association="FogOilModel.FK_UserProducts_Users">
+      <End Role="User" EntitySet="Users" />
+      <End Role="UserProduct" EntitySet="UserProducts" />
+    </AssociationSet>
+    <AssociationSet Name="Basket" Association="FogOilModel.Basket">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="sp_helpdiagramdefinition_Result">
     <Property Type="Int32" Name="version" Nullable="true" />
@@ -164,4 +200,140 @@
     <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
     <Property Type="Int32" Name="OwnerID" Nullable="false" />
   </ComplexType>
+  <EntityType Name="Bonus">
+    <Key>
+      <PropertyRef Name="BonusId" />
+    </Key>
+    <Property Name="BonusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Bonus1" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Users" Relationship="FogOilModel.FK_Users_Bonuses" FromRole="Bonus" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Location">
+    <Key>
+      <PropertyRef Name="LocationId" />
+    </Key>
+    <Property Name="Latitude" Type="Double" Nullable="false" />
+    <Property Name="Longitude" Type="Double" Nullable="false" />
+    <Property Name="LocationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="UserProducts" Relationship="FogOilModel.FK_UserProducts_Locations" FromRole="Location" ToRole="UserProduct" />
+  </EntityType>
+  <EntityType Name="Password">
+    <Key>
+      <PropertyRef Name="PasswordId" />
+    </Key>
+    <Property Name="PasswordId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Password1" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Users" Relationship="FogOilModel.FK_Users_Passwords" FromRole="Password" ToRole="User" />
+  </EntityType>
+  <EntityType Name="UserNick">
+    <Key>
+      <PropertyRef Name="NickId" />
+    </Key>
+    <Property Name="NickId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nick" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Users" Relationship="FogOilModel.FK_Users_UserNicks" FromRole="UserNick" ToRole="User" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Bonus" Type="Int32" Nullable="false" />
+    <Property Name="Password" Type="Int32" Nullable="false" />
+    <Property Name="Nick" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Bonus1" Relationship="FogOilModel.FK_Users_Bonuses" FromRole="User" ToRole="Bonus" />
+    <NavigationProperty Name="Password1" Relationship="FogOilModel.FK_Users_Passwords" FromRole="User" ToRole="Password" />
+    <NavigationProperty Name="UserNick" Relationship="FogOilModel.FK_Users_UserNicks" FromRole="User" ToRole="UserNick" />
+    <NavigationProperty Name="UserProducts" Relationship="FogOilModel.FK_UserProducts_Users" FromRole="User" ToRole="UserProduct" />
+    <NavigationProperty Name="Products" Relationship="FogOilModel.Basket" FromRole="User" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="UserProduct">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="ProductId" />
+      <PropertyRef Name="LocationId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="ProductId" Type="Int32" Nullable="false" />
+    <Property Name="LocationId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Location" Relationship="FogOilModel.FK_UserProducts_Locations" FromRole="UserProduct" ToRole="Location" />
+    <NavigationProperty Name="Product" Relationship="FogOilModel.FK_UserProducts_Products" FromRole="UserProduct" ToRole="Product" />
+    <NavigationProperty Name="User" Relationship="FogOilModel.FK_UserProducts_Users" FromRole="UserProduct" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_Users_Bonuses">
+    <End Type="FogOilModel.Bonus" Role="Bonus" Multiplicity="1" />
+    <End Type="FogOilModel.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bonus">
+        <PropertyRef Name="BonusId" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="Bonus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserProducts_Locations">
+    <End Type="FogOilModel.Location" Role="Location" Multiplicity="1" />
+    <End Type="FogOilModel.UserProduct" Role="UserProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="LocationId" />
+      </Principal>
+      <Dependent Role="UserProduct">
+        <PropertyRef Name="LocationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_Passwords">
+    <End Type="FogOilModel.Password" Role="Password" Multiplicity="1" />
+    <End Type="FogOilModel.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Password">
+        <PropertyRef Name="PasswordId" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="Password" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserProducts_Products">
+    <End Type="FogOilModel.Product" Role="Product" Multiplicity="1" />
+    <End Type="FogOilModel.UserProduct" Role="UserProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="UserProduct">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_UserNicks">
+    <End Type="FogOilModel.UserNick" Role="UserNick" Multiplicity="1" />
+    <End Type="FogOilModel.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserNick">
+        <PropertyRef Name="NickId" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="Nick" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserProducts_Users">
+    <End Type="FogOilModel.User" Role="User" Multiplicity="1" />
+    <End Type="FogOilModel.UserProduct" Role="UserProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserProduct">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Basket">
+    <End Type="FogOilModel.Product" Role="Product" Multiplicity="*" />
+    <End Type="FogOilModel.User" Role="User" Multiplicity="*" />
+  </Association>
 </Schema>

@@ -33,6 +33,12 @@ namespace FogOilAssistant.Components.Database
         public virtual DbSet<CarType> CarTypes { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<Bonus> Bonuses { get; set; }
+        public virtual DbSet<Location> Locations { get; set; }
+        public virtual DbSet<Password> Passwords { get; set; }
+        public virtual DbSet<UserNick> UserNicks { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UserProduct> UserProducts { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
