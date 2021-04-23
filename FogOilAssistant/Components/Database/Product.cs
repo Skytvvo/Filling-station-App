@@ -17,9 +17,9 @@ namespace FogOilAssistant.Components.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
-            this.CarObjects = new HashSet<CarObject>();
+            this.Baskets = new HashSet<Basket>();
             this.UserProducts = new HashSet<UserProduct>();
-            this.Users = new HashSet<User>();
+            this.CarObjects = new HashSet<CarObject>();
         }
     
         public int ProductId { get; set; }
@@ -29,10 +29,10 @@ namespace FogOilAssistant.Components.Database
         public string Img { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CarObject> CarObjects { get; set; }
+        public virtual ICollection<Basket> Baskets { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserProduct> UserProducts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<CarObject> CarObjects { get; set; }
     }
 }

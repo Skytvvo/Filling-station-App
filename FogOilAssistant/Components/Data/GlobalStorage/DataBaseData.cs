@@ -17,7 +17,6 @@ namespace FogOilAssistant.Components.Data.GlobalStorage
     {
         private static DataBaseData instance;
         
-        private FogOilAssistant.Components.Database.FogOilEntities DB = new FogOilAssistant.Components.Database.FogOilEntities(); 
 
         public List<Database.Product> Products = new List<Database.Product>();
         
@@ -29,20 +28,31 @@ namespace FogOilAssistant.Components.Data.GlobalStorage
 
         public ObservableCollection<Database.Product> basketProducts = new ObservableCollection<Database.Product>();
         
-       
+        public string Login { get; set; }
 
 
         private DataBaseData()
         {
-            this.Products = DB.Products.ToList<Database.Product>();
-            this.basketProducts = new ObservableCollection<Database.Product>();
+            try
+            {
+                using (FogOilAssistant.Components.Database.FogOilEntities DB = new FogOilAssistant.Components.Database.FogOilEntities())
+                {
+                    this.Products = DB.Products.ToList<Database.Product>();
+                    this.basketProducts = new ObservableCollection<Database.Product>();
 
 
-            this.CarTypes = DB.CarTypes.ToList<CarType>();
-            this.CarBrands = DB.CarBrands.ToList<CarBrand>();
-            this.CarModels = DB.CarModels.ToList<CarModel>();
+                    this.CarTypes = DB.CarTypes.ToList<CarType>();
+                    this.CarBrands = DB.CarBrands.ToList<CarBrand>();
+                    this.CarModels = DB.CarModels.ToList<CarModel>();
 
-            this.CarObjects = DB.CarObjects.ToList<CarObject>();
+                    this.CarObjects = DB.CarObjects.ToList<CarObject>();
+                }
+            }
+            catch(Exception e)
+            {
+
+            }
+            
         }
 
         public static DataBaseData getInstance()

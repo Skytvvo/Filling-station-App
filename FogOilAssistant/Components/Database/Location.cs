@@ -23,6 +23,7 @@ namespace FogOilAssistant.Components.Database
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public int LocationId { get; set; }
+        public string Adress { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserProduct> UserProducts { get; set; }

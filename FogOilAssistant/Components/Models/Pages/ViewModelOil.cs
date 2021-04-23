@@ -35,7 +35,7 @@ namespace FogOilAssistant.Components.Models.Pages
         }
 
         #endregion
-
+            
         #region Select parts
         List<FogOilAssistant.Components.Database.CarType> carTypes;
 

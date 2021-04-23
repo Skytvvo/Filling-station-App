@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
 using FogOilAssistant.Components.Data;
+using FogOilAssistant.Components.Data.GlobalStorage;
+using FogOilAssistant.Components.Database;
 
 namespace FogOilAssistant.Components.Models.Pages
 {
@@ -16,6 +19,15 @@ namespace FogOilAssistant.Components.Models.Pages
 
 
         #region Commands
+
+        public string GetHash(string input)
+        {
+            var md5 = MD5.Create();
+            var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(input));
+
+            return Convert.ToBase64String(hash);
+        }
+
         public CommandViewModel Switch_SignIn { get => new CommandViewModel(switch_signUp); }
         public CommandViewModel Switch_SignUp { get => new CommandViewModel(switch_signIn); }
         CommandViewModel sign;
@@ -146,7 +158,7 @@ namespace FogOilAssistant.Components.Models.Pages
         }
 
         //password input
-        string password = "";
+        string password;
         public string Password {
             get => password; 
             set
@@ -213,12 +225,72 @@ namespace FogOilAssistant.Components.Models.Pages
 
         void signIn()
         {
-            MessageBox.Show((Login+Password));
+            try
+            {
+                using (FogOilEntities db = new FogOilEntities())
+                {
+                    
+                    if (db.Users.Find(login)==null)
+                    {
+                        //Notify if user don't exist 
+                        MessageBox.Show("Not exist");
+                        return;
+                    }
+
+                    if(!db.Users.Find(login).Password.Equals(GetHash(password)))
+                    {
+                        MessageBox.Show("Fail");
+
+                    }
+                    MessageBox.Show("Success");
+                    DataBaseData.getInstance().Login = login;
+                    GoToShopPage();
+
+                }
+            }
+            catch(Exception e)
+            {
+
+            }
         }
         
         void signUp()
         {
-            MessageBox.Show(Login + Password);
+            try
+            {
+                using (FogOilEntities db = new FogOilEntities())
+                {
+                    if (db.Users.Find(login) != null)
+                    {
+                        //make notify if user exists
+                        MessageBox.Show("User is exists");
+                        return;
+                    }
+
+                    db.Users.Add(new User() { Bonus = 0.0, Nick = Login, Password = GetHash(password), Root = 0 });
+                    db.SaveChanges();
+                    MessageBox.Show("Registered");
+                    DataBaseData.getInstance().Login = login;
+                    GoToShopPage();
+
+                }
+            }
+            catch(Exception e)
+            {
+            }
+        }
+
+        private FogOilAssistant.MainWindow GoToShopPage()
+        {
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window.GetType() == typeof(FogOilAssistant.MainWindow))
+                {
+                    (window as FogOilAssistant.MainWindow).Frame.Navigate(new Uri(string.Format("{0}{1}{2}", "/Components/View/Pages/", "Shop", ".xaml"), UriKind.RelativeOrAbsolute));
+
+                }
+            }
+            return null;
         }
 
         private static Timer Timer;

@@ -14,24 +14,12 @@ namespace FogOilAssistant.Components.Database
     
     public partial class User
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User()
-        {
-            this.UserProducts = new HashSet<UserProduct>();
-            this.Products = new HashSet<Product>();
-        }
-    
         public int UserId { get; set; }
-        public int Bonus { get; set; }
-        public int Password { get; set; }
-        public int Nick { get; set; }
+        public double Bonus { get; set; }
+        public string Password { get; set; }
+        public string Nick { get; set; }
+        public int Root { get; set; }
     
-        public virtual Bonus Bonus1 { get; set; }
-        public virtual Password Password1 { get; set; }
-        public virtual UserNick UserNick { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserProduct> UserProducts { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual Root Root1 { get; set; }
     }
 }

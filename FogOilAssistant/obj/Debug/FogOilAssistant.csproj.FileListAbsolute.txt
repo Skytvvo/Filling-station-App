@@ -84,3 +84,5 @@ C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\ru\EntityFramework.resources.d
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\BasketProducts.g.cs
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\BasketProducts.baml
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\Dictionary\BasketProductsDictionary.baml
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\BindablePasswordBox.g.cs
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\BindablePasswordBox.baml

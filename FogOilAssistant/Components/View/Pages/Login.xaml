@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
       xmlns:local="clr-namespace:FogOilAssistant.Components.View.Pages" xmlns:vm="clr-namespace:FogOilAssistant.Components.Models.Pages" xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
+      xmlns:view="clr-namespace:FogOilAssistant.Components.View"
       mc:Ignorable="d" 
       Title="Login">
 
@@ -88,12 +89,9 @@
                 </Grid>
 
                 <StackPanel Grid.Row="1">
-
-                    <TextBox Text="{Binding Password}"  Style="{StaticResource  form_input}"  >
-                        <TextBox.Effect>
-                            <BlurEffect Radius="{Binding Blur}"/>    
-                        </TextBox.Effect>
-                    </TextBox>
+                    <!---->
+                    <view:BindablePasswordBox Password="{Binding Password}"/>   
+                    
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="30">
  
                         <TextBlock FontWeight="Bold" Foreground="#fff" Text="Show password"/>

@@ -13,10 +13,11 @@ using FogOilAssistant.Components.Data;
 namespace FogOilAssistant.Components.Models.MainWindow
 {
     //MW == MainWindow
+
     class ViewModelMW : INotifyPropertyChanged
     {
-
-    
+       
+        
         public ViewModelMW()
         {
         }
