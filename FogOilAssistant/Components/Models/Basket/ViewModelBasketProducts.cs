@@ -87,12 +87,15 @@ namespace FogOilAssistant.Components.Models.Basket
 
         private void Buy()
         {
-            //operations for db or message for user
-
-            //
-
-            //clear basket
-            clear_basket();
+            if (DataBaseData.getInstance().UserId != 0 && DataBaseData.getInstance().Login != null)
+                if (moveBasketToPurchase())
+                    clear_basket();
+            /*
+             Description:
+                1) if user is signing in or up => 2
+                2) if products from basket was moved to purchase table => 3
+                3) then clear basket (from app and database)
+             */
         }
 
         private void Remove(object item_id)
@@ -109,11 +112,41 @@ namespace FogOilAssistant.Components.Models.Basket
         #endregion
 
         #region Methods
-
-        private void clear_basket()
+        private bool moveBasketToPurchase()
         {
-            DataBaseData.getInstance().basketProducts.Clear();
+            try
+            {
+                using (FogOilEntities db = new FogOilEntities())
+                {
+                    foreach (var item in db.Users.Find(DataBaseData.getInstance().UserId).Baskets)
+                        db.Users.Find(DataBaseData.getInstance().UserId).UserProducts.Add(new UserProduct() { ProductId = item.ProductId, LocationId = 1 });
+                    db.SaveChanges();
+                }
+                return true;
+            }
+            catch(Exception e)
+            {
+                return false;
+            }
         }
+        private bool clear_basket()
+        {
+           try
+            {
+                using (FogOilEntities db = new FogOilEntities())
+                {
+                    DataBaseData.getInstance().basketProducts.Clear();
+                    db.Baskets.RemoveRange(db.Users.Find(DataBaseData.getInstance().UserId).Baskets);
+                    db.SaveChanges();
+                }
+                return true;
+            }
+            catch(Exception e)
+            {
+                return false;
+            }
+        }
+
 
         #endregion
         #region Events

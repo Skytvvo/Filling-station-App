@@ -608,7 +608,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserProducts_Locations">
-          <End Type="FogOilModel.Location" Role="Location" Multiplicity="1" />
+          <End Type="FogOilModel.Location" Role="Location" Multiplicity="1" >
+          </End>
           <End Type="FogOilModel.UserProduct" Role="UserProduct" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Location">
@@ -620,7 +621,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserProducts_Products">
-          <End Type="FogOilModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="FogOilModel.Product" Role="Product" Multiplicity="1" >
+          </End>
           <End Type="FogOilModel.UserProduct" Role="UserProduct" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
@@ -644,7 +646,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserProducts_Users">
-          <End Type="FogOilModel.User" Role="User" Multiplicity="1" />
+          <End Type="FogOilModel.User" Role="User" Multiplicity="1" >
+          </End>
           <End Type="FogOilModel.UserProduct" Role="UserProduct" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
