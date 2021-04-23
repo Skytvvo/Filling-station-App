@@ -29,7 +29,7 @@ namespace FogOilAssistant.Components.Data.GlobalStorage
         public ObservableCollection<Database.Product> basketProducts = new ObservableCollection<Database.Product>();
         
         public string Login { get; set; }
-
+        public int UserId { get; set; }
 
         private DataBaseData()
         {
@@ -39,7 +39,7 @@ namespace FogOilAssistant.Components.Data.GlobalStorage
                 {
                     this.Products = DB.Products.ToList<Database.Product>();
                     this.basketProducts = new ObservableCollection<Database.Product>();
-
+                    
 
                     this.CarTypes = DB.CarTypes.ToList<CarType>();
                     this.CarBrands = DB.CarBrands.ToList<CarBrand>();

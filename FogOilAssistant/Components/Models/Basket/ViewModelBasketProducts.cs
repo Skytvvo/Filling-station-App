@@ -32,7 +32,8 @@ namespace FogOilAssistant.Components.Models.Basket
                     this.Total = 0;
                     this.baskedProducts.ForEach(item =>
                     {
-                        this.Total += item.Price;
+                        if(item!=null)
+                            this.Total += item.Price;
                     });
                     OnPropertyChanged("BaskedProducts");
                 }
@@ -129,6 +130,7 @@ namespace FogOilAssistant.Components.Models.Basket
             void Basket_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
             {
                 this.BaskedProducts = DataBaseData.getInstance().basketProducts.ToList();
+                MessageBox.Show("Collection was updated");
             }
         #endregion
 

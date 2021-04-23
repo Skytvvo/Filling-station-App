@@ -27,6 +27,7 @@ namespace FogOilAssistant.Components.Database
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Basket> Baskets { get; set; }
         public virtual DbSet<CarBrand> CarBrands { get; set; }
         public virtual DbSet<CarModel> CarModels { get; set; }
         public virtual DbSet<CarObject> CarObjects { get; set; }
@@ -35,9 +36,8 @@ namespace FogOilAssistant.Components.Database
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Root> Roots { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<Basket> Baskets { get; set; }
         public virtual DbSet<UserProduct> UserProducts { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

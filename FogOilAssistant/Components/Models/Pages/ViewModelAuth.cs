@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
@@ -229,23 +230,36 @@ namespace FogOilAssistant.Components.Models.Pages
             {
                 using (FogOilEntities db = new FogOilEntities())
                 {
+                    var user = db.Users.FirstOrDefault(item => item.Nick == login);
+
+                    //Notify if user don't exist
+                    if (user == null)
+                    { MessageBox.Show("Not exist"); return; }
                     
-                    if (db.Users.Find(login)==null)
-                    {
-                        //Notify if user don't exist 
-                        MessageBox.Show("Not exist");
-                        return;
-                    }
+                    //save userid
+                    int userId = DataBaseData.getInstance().UserId = user.UserId;
 
-                    if(!db.Users.Find(login).Password.Equals(GetHash(password)))
-                    {
-                        MessageBox.Show("Fail");
 
-                    }
-                    MessageBox.Show("Success");
+                    if (!db.Users.Find(userId).Password.Equals(GetHash(password)))
+                    { MessageBox.Show("Fail"); return; }
+
                     DataBaseData.getInstance().Login = login;
-                    GoToShopPage();
 
+                    foreach(Product item in DataBaseData.getInstance().basketProducts)
+                    {
+                        Database.Basket userBasket = new Database.Basket() {  ProductId = item.ProductId, UserId = userId };
+                        db.Baskets.Add(userBasket);
+                        db.SaveChanges();
+                    }
+
+                    DataBaseData.getInstance().basketProducts.Clear();
+                    
+                    foreach (Database.Basket item in db.Users.Find(userId).Baskets)
+                    {
+                        DataBaseData.getInstance().basketProducts.Add(item.Product);
+                    }
+
+                    GoToShopPage();
                 }
             }
             catch(Exception e)
@@ -260,23 +274,37 @@ namespace FogOilAssistant.Components.Models.Pages
             {
                 using (FogOilEntities db = new FogOilEntities())
                 {
-                    if (db.Users.Find(login) != null)
+                    var user = db.Users.FirstOrDefault(item => item.Nick == login);
+
+                    if (user != null)
                     {
                         //make notify if user exists
                         MessageBox.Show("User is exists");
                         return;
                     }
 
-                    db.Users.Add(new User() { Bonus = 0.0, Nick = Login, Password = GetHash(password), Root = 0 });
+                    User newUser = new User() { Bonus = 0.0, Nick = Login, Password = GetHash(password), Root = 1 };
+                    db.Users.Add(newUser);
                     db.SaveChanges();
-                    MessageBox.Show("Registered");
-                    DataBaseData.getInstance().Login = login;
-                    GoToShopPage();
 
+                    int userId = DataBaseData.getInstance().UserId = db.Users.FirstOrDefault(item => item.Nick == login).UserId;
+
+                    DataBaseData.getInstance().UserId = newUser.UserId;
+                    DataBaseData.getInstance().Login = login;
+
+                    foreach (Product item in DataBaseData.getInstance().basketProducts)
+                    {
+                        Database.Basket basket = new Database.Basket() { ProductId = item.ProductId, UserId = userId };
+                        db.Baskets.Add(basket);
+                        db.SaveChanges();
+                    }
+
+                    GoToShopPage();
                 }
             }
             catch(Exception e)
             {
+
             }
         }
 

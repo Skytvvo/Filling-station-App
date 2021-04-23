@@ -17,8 +17,10 @@ namespace FogOilAssistant.Components.Database
         public int UserId { get; set; }
         public int ProductId { get; set; }
         public int LocationId { get; set; }
+        public int UserProductsId { get; set; }
     
         public virtual Location Location { get; set; }
         public virtual Product Product { get; set; }
+        public virtual User User { get; set; }
     }
 }
