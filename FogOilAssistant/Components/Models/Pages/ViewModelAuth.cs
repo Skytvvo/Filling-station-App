@@ -247,18 +247,20 @@ namespace FogOilAssistant.Components.Models.Pages
 
                     foreach(Product item in DataBaseData.getInstance().basketProducts)
                     {
-                        Database.Basket userBasket = new Database.Basket() {  ProductId = item.ProductId, UserId = userId };
+                        Database.Basket userBasket = new Database.Basket() {  ProductId = item.ProductId, UserId = userId, Product = item };
                         db.Baskets.Add(userBasket);
                         db.SaveChanges();
                     }
 
                     DataBaseData.getInstance().basketProducts.Clear();
-                    
-                    foreach (Database.Basket item in db.Users.Find(userId).Baskets)
+                    //here bug
+                    var fromNotSorted = db.Users.Find(userId).Baskets;
+                    var fromDB = fromNotSorted.OrderBy(item => item.ProductId);
+                    foreach (Database.Basket item in fromDB)
                     {
                         DataBaseData.getInstance().basketProducts.Add(item.Product);
                     }
-
+                    
                     GoToShopPage();
                 }
             }

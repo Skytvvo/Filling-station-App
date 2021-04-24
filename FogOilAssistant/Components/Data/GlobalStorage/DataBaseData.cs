@@ -62,6 +62,57 @@ namespace FogOilAssistant.Components.Data.GlobalStorage
             return instance;
         }
 
+        public bool userAuthChecker()
+        {
+            if (UserId != 0 && Login != null)
+                return true;
+            return false;
+        }
+
+        // only UI basket
+        private bool addToAppBasket(int id)
+        {
+            var product = Products.FirstOrDefault(item => item.ProductId == id);
+            if (product != null)
+            {
+                var result = basketProducts.FirstOrDefault(item => item.ProductId > id);
+                if (result == null)
+                    basketProducts.Add(product);
+                else
+                    basketProducts.Insert(basketProducts.IndexOf(result), product);
+                return true;
+            }
+            else
+                return false;
+        }
+
+        // to UI and DB baskets
+        public bool AddToUserBasket(int id)
+        {
+            try
+            {
+                using(FogOilEntities db = new FogOilEntities())
+                {
+                    if(!addToAppBasket(id))
+                        throw new Exception("Unknown productId");
+
+                    if (!userAuthChecker())
+                        throw new Exception("Unsigned user");
+
+                    db.Users.Find(UserId).Baskets.Add(new Basket() { ProductId = id });
+                    db.SaveChanges();
+                }
+
+                return true;
+            }
+            catch( Exception e)
+            {
+                return false;
+            }
+        }
+
+    
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]

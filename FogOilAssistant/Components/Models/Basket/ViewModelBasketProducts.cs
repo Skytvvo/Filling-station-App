@@ -87,12 +87,12 @@ namespace FogOilAssistant.Components.Models.Basket
 
         private void Buy()
         {
-            if (DataBaseData.getInstance().UserId != 0 && DataBaseData.getInstance().Login != null)
+            if (DataBaseData.getInstance().userAuthChecker())
                 if (moveBasketToPurchase())
                     clear_basket();
             /*
              Description:
-                1) if user is signing in or up => 2
+                1) if user signing in or up => 2
                 2) if products from basket was moved to purchase table => 3
                 3) then clear basket (from app and database)
              */
@@ -100,18 +100,33 @@ namespace FogOilAssistant.Components.Models.Basket
 
         private void Remove(object item_id)
         {
-            //use DB COMMANDS FOR BACK
-            
-            DataBaseData.getInstance().basketProducts.Remove(
+            try
+            {
                 //remove element, where productId equals item_id
-                this.BaskedProducts.First(item => item.ProductId == (int) item_id)
-            );
+                DataBaseData.getInstance().basketProducts.Remove(
+                this.BaskedProducts.FirstOrDefault(item => item.ProductId == (int)item_id));
 
+                if(DataBaseData.getInstance().userAuthChecker()) //auth: true => continue
+                    using (FogOilEntities db = new FogOilEntities())
+                    {
+                        db.Baskets.Remove(db.Users.Find(DataBaseData.getInstance().UserId).Baskets.FirstOrDefault(item => item.ProductId == (int)item_id));
+                        db.SaveChanges();
+                    
+                    }
+
+               
+            }
+            catch(Exception e)
+            {
+                return;
+            }
         }
 
         #endregion
 
         #region Methods
+
+       
         private bool moveBasketToPurchase()
         {
             try
