@@ -20,6 +20,7 @@ namespace FogOilAssistant.Components.Models.Basket
 
         #region Props
         //purchase
+
         private List<Product> baskedProducts;
         public List<Product> BaskedProducts
         {
@@ -53,20 +54,79 @@ namespace FogOilAssistant.Components.Models.Basket
             get => total;
             set
             {
-                total = value;
+              
+                if(DataBaseData.getInstance().userAuthChecker())
+                {
+                   try
+                    {
+                        using (FogOilEntities db = new FogOilEntities())
+                        {
+                            total = Math.Round(
+                                (
+                                value * db.Users.Find(
+                                    DataBaseData.getInstance().UserId
+                                    ).Bonus + value 
+                                ),2);
+                        }
+                    }
+                    catch(Exception e)
+                    {
+                        
+                    }
+                }
+                else
+                    total = Math.Round(value,2);
                 OnPropertyChanged("Total");
             }
         }
+
+        //Locations
+        private int selectedLocation = 0;
+        public int SelectedLocation
+        { 
+            get => selectedLocation; 
+            set
+            {
+                selectedLocation = value;
+                OnPropertyChanged("SelectedLocation");
+            }
+        }
+
+
+
+
+        private List<Location> locations;
+        public List<Location> Locations 
+        {
+            get => locations; 
+            set
+            {
+                locations = value;
+                OnPropertyChanged("Locations");
+            }
+        }
+
         #endregion
 
 
         #region Constructor
-       
+
         public ViewModelBasketProducts()
         {
             this.BaskedProducts = DataBaseData.getInstance().basketProducts.ToList();
             DataBaseData.getInstance().basketProducts.CollectionChanged += this.Basket_CollectionChanged;
-            
+            try
+            {
+                using (FogOilEntities db = new FogOilEntities())
+                {
+                    this.Locations = db.Locations.ToList();
+                }
+
+            }
+            catch(Exception e)
+            {
+
+            }
         }
 
         #endregion
@@ -134,7 +194,11 @@ namespace FogOilAssistant.Components.Models.Basket
                 using (FogOilEntities db = new FogOilEntities())
                 {
                     foreach (var item in db.Users.Find(DataBaseData.getInstance().UserId).Baskets)
-                        db.Users.Find(DataBaseData.getInstance().UserId).UserProducts.Add(new UserProduct() { ProductId = item.ProductId, LocationId = 1 });
+                        db.Users.Find(DataBaseData.getInstance().UserId).UserProducts.Add(
+                            new UserProduct() {
+                                ProductId = item.ProductId, 
+                                LocationId = this.Locations[SelectedLocation].LocationId 
+                            });
                     db.SaveChanges();
                 }
                 return true;

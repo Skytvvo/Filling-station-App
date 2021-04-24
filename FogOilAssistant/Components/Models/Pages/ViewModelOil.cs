@@ -124,9 +124,7 @@ namespace FogOilAssistant.Components.Models.Pages
         {
             get => new RelayCommand(productId =>
             {
-                DataBaseData.getInstance().basketProducts.Add(
-                    DataBaseData.getInstance().Products.First(item => item.ProductId == (int)productId)
-                );
+                  DataBaseData.getInstance().AddToUserBasket((int)productId);
             });
         }
         #endregion

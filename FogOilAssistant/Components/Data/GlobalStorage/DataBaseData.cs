@@ -26,26 +26,27 @@ namespace FogOilAssistant.Components.Data.GlobalStorage
 
         public List<CarObject> CarObjects = new List<CarObject>();
 
+
         public ObservableCollection<Database.Product> basketProducts = new ObservableCollection<Database.Product>();
         
         public string Login { get; set; }
         public int UserId { get; set; }
-
         private DataBaseData()
         {
             try
             {
-                using (FogOilAssistant.Components.Database.FogOilEntities DB = new FogOilAssistant.Components.Database.FogOilEntities())
+                using (FogOilEntities DB = new FogOilEntities())
                 {
-                    this.Products = DB.Products.ToList<Database.Product>();
+                    this.Products = DB.Products.ToList();
                     this.basketProducts = new ObservableCollection<Database.Product>();
-                    
 
-                    this.CarTypes = DB.CarTypes.ToList<CarType>();
-                    this.CarBrands = DB.CarBrands.ToList<CarBrand>();
-                    this.CarModels = DB.CarModels.ToList<CarModel>();
 
-                    this.CarObjects = DB.CarObjects.ToList<CarObject>();
+
+                    this.CarTypes = DB.CarTypes.ToList();
+                    this.CarBrands = DB.CarBrands.ToList();
+                    this.CarModels = DB.CarModels.ToList();
+
+                    this.CarObjects = DB.CarObjects.ToList();
                 }
             }
             catch(Exception e)

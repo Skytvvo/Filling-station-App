@@ -289,17 +289,20 @@ namespace FogOilAssistant.Components.Models.Pages
                     db.Users.Add(newUser);
                     db.SaveChanges();
 
+
                     int userId = DataBaseData.getInstance().UserId = db.Users.FirstOrDefault(item => item.Nick == login).UserId;
 
                     DataBaseData.getInstance().UserId = newUser.UserId;
                     DataBaseData.getInstance().Login = login;
 
+
                     foreach (Product item in DataBaseData.getInstance().basketProducts)
                     {
-                        Database.Basket basket = new Database.Basket() { ProductId = item.ProductId, UserId = userId };
-                        db.Baskets.Add(basket);
+                        Database.Basket userBasket = new Database.Basket() { ProductId = item.ProductId, UserId = userId, Product = item };
+                        db.Baskets.Add(userBasket);
                         db.SaveChanges();
                     }
+                  
 
                     GoToShopPage();
                 }

@@ -76,7 +76,13 @@
                         </Grid.ColumnDefinitions>
                         
                         <TextBlock Text="Location: " Style="{StaticResource product_name}" Grid.Column="0"></TextBlock>
-                        <ComboBox Style="{StaticResource ComboBoxTest2}" Grid.Column="1"></ComboBox>
+                        <ComboBox 
+                            Style="{StaticResource ComboBoxTest2}"
+                            ItemsSource="{Binding Locations}"
+                            Grid.Column="1"
+                            SelectedIndex="{Binding SelectedLocation}"
+                            DisplayMemberPath="Adress"
+                            ></ComboBox>
                         <Grid Grid.Column="2">
                             <Grid.ColumnDefinitions>
                                     <ColumnDefinition></ColumnDefinition>
