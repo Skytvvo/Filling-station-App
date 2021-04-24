@@ -11,6 +11,7 @@ using FogOilAssistant.Components.Data;
 using FogOilAssistant.Components.Data.GlobalStorage;
 using FogOilAssistant.Components.Data.Pages.Oil;
 using FogOilAssistant.Components.Data.Product;
+using FogOilAssistant.Components.Database;
 using Application = System.Windows.Application;
 using CarBrand = FogOilAssistant.Components.Database.CarBrand;
 using CarModel = FogOilAssistant.Components.Database.CarModel;
@@ -93,20 +94,27 @@ namespace FogOilAssistant.Components.Models.Pages
         public CommandViewModel Select { get => new CommandViewModel(select); }
         
         
-        private void select()
+        private async void select()
         {
 
             try
             {
-                this.Products = DataBaseData.getInstance().CarObjects.FindAll(item =>
-                    item.CarBrand1.BrandId == this.CarBrands[SelectedBrandIndex].BrandId &&
-                    item.CarType1.TypeId == this.CarType.TypeId &&
-                    item.CarModel1.ModelId == this.CarModels[SelectedModelIndex].ModelId
-                ).SelectMany(item => item.Products).ToList() as List<Product>;
+                using(FogOilEntities db = new FogOilEntities())
+                {
+                    foreach (var item in DataBaseData.getInstance().CarObjects)
+                    {
+                        //this shit doesn't want to work with linq 
+                        var result = db.CarObjects.Find(item.CarId);
+                        if (result.CarType == this.CarType.TypeId)
+                            if (result.CarBrand == this.CarBrands[SelectedBrandIndex].BrandId)
+                                if (result.CarModel == this.CarModels[SelectedModelIndex].ModelId)
+                                    this.Products = new List<Product>(result.Products);
+                    }
+                }
             }
             catch (Exception e)
             {
-                this.Products = new List<Product>();
+
             }
           
         }

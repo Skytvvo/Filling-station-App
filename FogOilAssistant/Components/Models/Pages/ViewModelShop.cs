@@ -67,6 +67,7 @@ namespace FogOilAssistant.Components.Models.Pages
                 finish.Add(product);
             this.Products = finish;
         }
+
         //Name
         public CommandViewModel SortByName { get => new CommandViewModel(sortByName); }
         public void sortByName()
@@ -92,7 +93,8 @@ namespace FogOilAssistant.Components.Models.Pages
         {
             get => new RelayCommand(productId =>
             {
-                    DataBaseData.getInstance().AddToUserBasket((int)productId);
+                DataBaseData.getInstance().basketProducts.Add(
+                  DataBaseData.getInstance().Products.First(item => item.ProductId == (int)productId));
             });
         }
 
