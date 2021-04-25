@@ -11,6 +11,7 @@ using System.Timers;
 using System.Windows;
 using FogOilAssistant.Components.Data;
 using FogOilAssistant.Components.Data.GlobalStorage;
+using FogOilAssistant.Components.Data.MenuButton;
 using FogOilAssistant.Components.Database;
 
 namespace FogOilAssistant.Components.Models.Pages
@@ -204,6 +205,47 @@ namespace FogOilAssistant.Components.Models.Pages
             }
         }
 
+
+        //notify visibility
+
+        private bool passwordRejectVisibility = false;
+        public bool PasswordRejectVisibility 
+        { 
+            get => passwordRejectVisibility; 
+            set
+            {
+                passwordRejectVisibility = value;
+                OnPropertyChanged("PasswordRejectVisibility");
+            }
+        }
+
+
+        //notify color
+        private string notifyColor = "#ffffff";
+        public string NotifyColor 
+        { 
+            get => notifyColor; 
+            set
+            {
+                notifyColor = value;
+                OnPropertyChanged("NotifyColor");
+            }
+        }
+
+
+        //notify message
+        private string notifyMessage = "Welcome";
+        public string NotifyMessage
+        { 
+            get => notifyMessage; 
+            set
+            {
+                notifyMessage = value;
+                OnPropertyChanged("NotifyMessage");
+            }
+        }
+
+
         #endregion
         public ViewModelAuth()
         {
@@ -216,7 +258,12 @@ namespace FogOilAssistant.Components.Models.Pages
             Timer.Interval = 5000;
             Timer.Elapsed += OnTimedEvent;
             Timer.Enabled = true;
+
+            notifyTimer = new Timer();
+            notifyTimer.Interval = 3000;
+            notifyTimer.Elapsed += showNotify;
         }
+
 
 
         #region Events
@@ -234,14 +281,14 @@ namespace FogOilAssistant.Components.Models.Pages
 
                     //Notify if user don't exist
                     if (user == null)
-                    { MessageBox.Show("Not exist"); return; }
+                    { throw new Exception("User doesn't exist"); }
                     
                     //save userid
                     int userId = DataBaseData.getInstance().UserId = user.UserId;
 
 
                     if (!db.Users.Find(userId).Password.Equals(GetHash(password)))
-                    { MessageBox.Show("Fail"); return; }
+                    { throw new Exception("Incorrect Password"); }
 
                     DataBaseData.getInstance().Login = login;
 
@@ -261,15 +308,20 @@ namespace FogOilAssistant.Components.Models.Pages
                         DataBaseData.getInstance().basketProducts.Add(item.Product);
                     }
                     
+
+                    AddMenuItem(user.Root);
+
                     GoToShopPage();
                 }
             }
             catch(Exception e)
             {
-
+                callNotify(e.Message, "#ff0000");
             }
         }
         
+
+       
         void signUp()
         {
             try
@@ -281,8 +333,7 @@ namespace FogOilAssistant.Components.Models.Pages
                     if (user != null)
                     {
                         //make notify if user exists
-                        MessageBox.Show("User is exists");
-                        return;
+                        throw new Exception("This user exists");
                     }
 
                     User newUser = new User() { Bonus = 0.0, Nick = Login, Password = GetHash(password), Root = 1 };
@@ -302,15 +353,24 @@ namespace FogOilAssistant.Components.Models.Pages
                         db.Baskets.Add(userBasket);
                         db.SaveChanges();
                     }
-                  
 
+                    AddMenuItem(newUser.Root);
                     GoToShopPage();
                 }
             }
             catch(Exception e)
             {
-
+                callNotify(e.Message, "#FFF800");
             }
+        }
+
+        private void callNotify(string message, string color)
+        {
+            notifyTimer.Stop();
+            this.NotifyMessage = message;
+            this.NotifyColor = color;
+            this.PasswordRejectVisibility = true;
+            notifyTimer.Start();
         }
 
         private FogOilAssistant.MainWindow GoToShopPage()
@@ -326,19 +386,52 @@ namespace FogOilAssistant.Components.Models.Pages
             return null;
         }
 
-        private static Timer Timer;
+
+        private void AddMenuItem(int id)
+        {
+            DataBaseData.getInstance().MenuList.Remove(DataBaseData.getInstance().MenuList.Last());
+
+            switch (id)
+            {
+                case 1:
+                    {
+                        DataBaseData.getInstance().MenuList.Add(new ButtonMenu() { text = "Profile", Path = "/Components/Images/ViewModels/Signed/user.svg" });
+                        break;
+                    }
+                case 2:
+                    {
+                        DataBaseData.getInstance().MenuList.Add(new ButtonMenu() { text = "Employee", Path = "/Components/Images/ViewModels/Signed/employee.svg" });
+                        break;
+                    }
+                case 3:
+                    {
+                        DataBaseData.getInstance().MenuList.Add(new ButtonMenu() { text = "Admin", Path = "/Components/Images/ViewModels/Signed/user.svg" });
+                        break;
+                    }
+            }
+        }
+
+
+
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
-
+        private static Timer Timer;
         private void OnTimedEvent(Object source, System.Timers.ElapsedEventArgs e)
         {
             if (counter == 3)
                 counter = 0;
             this.ImgPath = $"/Components/Images/Auth/auth_{++counter}.jpg";
+        }
+
+        private static Timer notifyTimer;
+        private void showNotify(Object source, System.Timers.ElapsedEventArgs e)
+        {
+            this.PasswordRejectVisibility = false;
+            notifyTimer.Stop();
         }
         #endregion
     }

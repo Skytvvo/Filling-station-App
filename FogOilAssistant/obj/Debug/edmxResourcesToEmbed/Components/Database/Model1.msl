@@ -79,6 +79,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="OrderStatus">
+      <EntityTypeMapping TypeName="FogOilModel.OrderStatu">
+        <MappingFragment StoreEntitySet="OrderStatus">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Products">
       <EntityTypeMapping TypeName="FogOilModel.Product">
         <MappingFragment StoreEntitySet="Products">
@@ -112,6 +120,7 @@
     <EntitySetMapping Name="UserProducts">
       <EntityTypeMapping TypeName="FogOilModel.UserProduct">
         <MappingFragment StoreEntitySet="UserProducts">
+          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="UserProductsId" ColumnName="UserProductsId" />
           <ScalarProperty Name="LocationId" ColumnName="LocationId" />
           <ScalarProperty Name="ProductId" ColumnName="ProductId" />
@@ -122,6 +131,7 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="FogOilModel.User">
         <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Oil" ColumnName="Oil" />
           <ScalarProperty Name="Root" ColumnName="Root" />
           <ScalarProperty Name="Nick" ColumnName="Nick" />
           <ScalarProperty Name="Password" ColumnName="Password" />

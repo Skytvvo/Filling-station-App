@@ -58,6 +58,13 @@
     <Property Name="LocationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Adress" Type="varchar" MaxLength="100" Nullable="false" />
   </EntityType>
+  <EntityType Name="OrderStatus">
+    <Key>
+      <PropertyRef Name="StatusId" />
+    </Key>
+    <Property Name="StatusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Status" Type="varchar" MaxLength="10" Nullable="false" />
+  </EntityType>
   <EntityType Name="Products">
     <Key>
       <PropertyRef Name="ProductId" />
@@ -93,6 +100,7 @@
     <Property Name="ProductId" Type="int" Nullable="false" />
     <Property Name="LocationId" Type="int" Nullable="false" />
     <Property Name="UserProductsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Users">
     <Key>
@@ -103,6 +111,7 @@
     <Property Name="Password" Type="varchar" MaxLength="500" Nullable="false" />
     <Property Name="Nick" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Root" Type="int" Nullable="false" />
+    <Property Name="Oil" Type="float" Nullable="false" />
   </EntityType>
   <Association Name="FK_Basket_Products">
     <End Role="Products" Type="Self.Products" Multiplicity="1" />
@@ -200,6 +209,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_UserProducts_OrderStatus">
+    <End Role="OrderStatus" Type="Self.OrderStatus" Multiplicity="1" />
+    <End Role="UserProducts" Type="Self.UserProducts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrderStatus">
+        <PropertyRef Name="StatusId" />
+      </Principal>
+      <Dependent Role="UserProducts">
+        <PropertyRef Name="Status" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_UserProducts_Products">
     <End Role="Products" Type="Self.Products" Multiplicity="1" />
     <End Role="UserProducts" Type="Self.UserProducts" Multiplicity="*" />
@@ -274,6 +295,7 @@
     <EntitySet Name="CarObjects" EntityType="Self.CarObjects" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CarTypes" EntityType="Self.CarTypes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Locations" EntityType="Self.Locations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderStatus" EntityType="Self.OrderStatus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Root" EntityType="Self.Root" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
@@ -315,6 +337,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_UserProducts_Locations" Association="Self.FK_UserProducts_Locations">
       <End Role="Locations" EntitySet="Locations" />
+      <End Role="UserProducts" EntitySet="UserProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserProducts_OrderStatus" Association="Self.FK_UserProducts_OrderStatus">
+      <End Role="OrderStatus" EntitySet="OrderStatus" />
       <End Role="UserProducts" EntitySet="UserProducts" />
     </AssociationSet>
     <AssociationSet Name="FK_UserProducts_Products" Association="Self.FK_UserProducts_Products">

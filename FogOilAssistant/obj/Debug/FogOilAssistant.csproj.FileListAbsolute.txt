@@ -86,3 +86,11 @@ C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\BasketProducts
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\Dictionary\BasketProductsDictionary.baml
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\BindablePasswordBox.g.cs
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\BindablePasswordBox.baml
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\App.baml
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\Admin.g.cs
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\Employee.g.cs
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\Profile.g.cs
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\Admin.baml
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\Employee.baml
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\Profile.baml
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\Dictionary\Pages\Signed\ProfileDictionary.baml

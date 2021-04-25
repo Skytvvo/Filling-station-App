@@ -63,6 +63,13 @@
           <Property Name="LocationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Adress" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
+        <EntityType Name="OrderStatus">
+          <Key>
+            <PropertyRef Name="StatusId" />
+          </Key>
+          <Property Name="StatusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
         <EntityType Name="Products">
           <Key>
             <PropertyRef Name="ProductId" />
@@ -98,6 +105,7 @@
           <Property Name="ProductId" Type="int" Nullable="false" />
           <Property Name="LocationId" Type="int" Nullable="false" />
           <Property Name="UserProductsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -108,6 +116,7 @@
           <Property Name="Password" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="Nick" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Root" Type="int" Nullable="false" />
+          <Property Name="Oil" Type="float" Nullable="false" />
         </EntityType>
         <Association Name="FK_Basket_Products">
           <End Role="Products" Type="Self.Products" Multiplicity="1" />
@@ -205,6 +214,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserProducts_OrderStatus">
+          <End Role="OrderStatus" Type="Self.OrderStatus" Multiplicity="1" />
+          <End Role="UserProducts" Type="Self.UserProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatus">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="UserProducts">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UserProducts_Products">
           <End Role="Products" Type="Self.Products" Multiplicity="1" />
           <End Role="UserProducts" Type="Self.UserProducts" Multiplicity="*" />
@@ -279,6 +300,7 @@
           <EntitySet Name="CarObjects" EntityType="Self.CarObjects" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CarTypes" EntityType="Self.CarTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Locations" EntityType="Self.Locations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderStatus" EntityType="Self.OrderStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Root" EntityType="Self.Root" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
@@ -320,6 +342,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_UserProducts_Locations" Association="Self.FK_UserProducts_Locations">
             <End Role="Locations" EntitySet="Locations" />
+            <End Role="UserProducts" EntitySet="UserProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProducts_OrderStatus" Association="Self.FK_UserProducts_OrderStatus">
+            <End Role="OrderStatus" EntitySet="OrderStatus" />
             <End Role="UserProducts" EntitySet="UserProducts" />
           </AssociationSet>
           <AssociationSet Name="FK_UserProducts_Products" Association="Self.FK_UserProducts_Products">
@@ -376,6 +402,7 @@
           <EntitySet Name="CarObjects" EntityType="FogOilModel.CarObject" />
           <EntitySet Name="CarTypes" EntityType="FogOilModel.CarType" />
           <EntitySet Name="Locations" EntityType="FogOilModel.Location" />
+          <EntitySet Name="OrderStatus" EntityType="FogOilModel.OrderStatu" />
           <EntitySet Name="Products" EntityType="FogOilModel.Product" />
           <EntitySet Name="Roots" EntityType="FogOilModel.Root" />
           <EntitySet Name="sysdiagrams" EntityType="FogOilModel.sysdiagram" />
@@ -403,6 +430,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_UserProducts_Locations" Association="FogOilModel.FK_UserProducts_Locations">
             <End Role="Location" EntitySet="Locations" />
+            <End Role="UserProduct" EntitySet="UserProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProducts_OrderStatus" Association="FogOilModel.FK_UserProducts_OrderStatus">
+            <End Role="OrderStatu" EntitySet="OrderStatus" />
             <End Role="UserProduct" EntitySet="UserProducts" />
           </AssociationSet>
           <AssociationSet Name="FK_UserProducts_Products" Association="FogOilModel.FK_UserProducts_Products">
@@ -491,6 +522,14 @@
           <Property Name="Adress" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="UserProducts" Relationship="FogOilModel.FK_UserProducts_Locations" FromRole="Location" ToRole="UserProduct" />
         </EntityType>
+        <EntityType Name="OrderStatu">
+          <Key>
+            <PropertyRef Name="StatusId" />
+          </Key>
+          <Property Name="StatusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UserProducts" Relationship="FogOilModel.FK_UserProducts_OrderStatus" FromRole="OrderStatu" ToRole="UserProduct" />
+        </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="ProductId" />
@@ -530,7 +569,9 @@
           <Property Name="ProductId" Type="Int32" Nullable="false" />
           <Property Name="LocationId" Type="Int32" Nullable="false" />
           <Property Name="UserProductsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Location" Relationship="FogOilModel.FK_UserProducts_Locations" FromRole="UserProduct" ToRole="Location" />
+          <NavigationProperty Name="OrderStatu" Relationship="FogOilModel.FK_UserProducts_OrderStatus" FromRole="UserProduct" ToRole="OrderStatu" />
           <NavigationProperty Name="Product" Relationship="FogOilModel.FK_UserProducts_Products" FromRole="UserProduct" ToRole="Product" />
           <NavigationProperty Name="User" Relationship="FogOilModel.FK_UserProducts_Users" FromRole="UserProduct" ToRole="User" />
         </EntityType>
@@ -543,6 +584,7 @@
           <Property Name="Password" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Nick" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Root" Type="Int32" Nullable="false" />
+          <Property Name="Oil" Type="Double" Nullable="false" />
           <NavigationProperty Name="Baskets" Relationship="FogOilModel.FK_Basket_Users" FromRole="User" ToRole="Basket" />
           <NavigationProperty Name="Root1" Relationship="FogOilModel.FK_Users_Root" FromRole="User" ToRole="Root" />
           <NavigationProperty Name="UserProducts" Relationship="FogOilModel.FK_UserProducts_Users" FromRole="User" ToRole="UserProduct" />
@@ -608,8 +650,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserProducts_Locations">
-          <End Type="FogOilModel.Location" Role="Location" Multiplicity="1" >
-          </End>
+          <End Type="FogOilModel.Location" Role="Location" Multiplicity="1" />
           <End Type="FogOilModel.UserProduct" Role="UserProduct" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Location">
@@ -620,9 +661,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserProducts_OrderStatus">
+          <End Type="FogOilModel.OrderStatu" Role="OrderStatu" Multiplicity="1" />
+          <End Type="FogOilModel.UserProduct" Role="UserProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatu">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="UserProduct">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UserProducts_Products">
-          <End Type="FogOilModel.Product" Role="Product" Multiplicity="1" >
-          </End>
+          <End Type="FogOilModel.Product" Role="Product" Multiplicity="1" />
           <End Type="FogOilModel.UserProduct" Role="UserProduct" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
@@ -646,8 +698,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserProducts_Users">
-          <End Type="FogOilModel.User" Role="User" Multiplicity="1" >
-          </End>
+          <End Type="FogOilModel.User" Role="User" Multiplicity="1" />
           <End Type="FogOilModel.UserProduct" Role="UserProduct" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
@@ -746,6 +797,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="OrderStatus">
+            <EntityTypeMapping TypeName="FogOilModel.OrderStatu">
+              <MappingFragment StoreEntitySet="OrderStatus">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="FogOilModel.Product">
               <MappingFragment StoreEntitySet="Products">
@@ -779,6 +838,7 @@
           <EntitySetMapping Name="UserProducts">
             <EntityTypeMapping TypeName="FogOilModel.UserProduct">
               <MappingFragment StoreEntitySet="UserProducts">
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="UserProductsId" ColumnName="UserProductsId" />
                 <ScalarProperty Name="LocationId" ColumnName="LocationId" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
@@ -789,6 +849,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="FogOilModel.User">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Oil" ColumnName="Oil" />
                 <ScalarProperty Name="Root" ColumnName="Root" />
                 <ScalarProperty Name="Nick" ColumnName="Nick" />
                 <ScalarProperty Name="Password" ColumnName="Password" />

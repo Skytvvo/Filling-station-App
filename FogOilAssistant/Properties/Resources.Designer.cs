@@ -101,6 +101,16 @@ namespace FogOilAssistant.Properties {
         }
         
         /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
+        internal static byte[] admin {
+            get {
+                object obj = ResourceManager.GetObject("admin", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap auth_1 {
@@ -176,6 +186,16 @@ namespace FogOilAssistant.Properties {
         internal static byte[] delete {
             get {
                 object obj = ResourceManager.GetObject("delete", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
+        internal static byte[] employee {
+            get {
+                object obj = ResourceManager.GetObject("employee", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -356,6 +376,16 @@ namespace FogOilAssistant.Properties {
         internal static byte[] trash {
             get {
                 object obj = ResourceManager.GetObject("trash", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
+        internal static byte[] user {
+            get {
+                object obj = ResourceManager.GetObject("user", resourceCulture);
                 return ((byte[])(obj));
             }
         }

@@ -1,0 +1,72 @@
+﻿<Page x:Class="FogOilAssistant.Components.View.Pages.Signed.Profile"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:Signed="clr-namespace:FogOilAssistant.Components.Models.Pages.Signed" xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
+      mc:Ignorable="d" 
+      Title="Profile">
+    <Page.Resources>
+        <ResourceDictionary Source="/Components/Dictionary/Pages/Signed/ProfileDictionary.xaml"/>
+    </Page.Resources>
+    <Page.DataContext>
+        <Signed:ViewModelProfile/>
+    </Page.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!--Basket-->
+            <Button Command="{Binding ShowBasket}" Style="{StaticResource profile_btn_style}">
+                <TextBlock Text="{Binding BasketProductsInfo}" Style="{StaticResource profile_btn_blocktext_style}" />
+            </Button>
+            <!--Orders-->
+            <Button Command="{Binding ShowOrders}" Grid.Column="1" Style="{StaticResource profile_btn_style}">
+                <TextBlock Text="{Binding OrdersInfo}" Style="{StaticResource profile_btn_blocktext_style}" />
+            </Button>
+            <!--History-->
+            <Button Command="{Binding ShowHistory}" Grid.Row="1" Style="{StaticResource profile_btn_style}">
+                <TextBlock Text="{Binding HistoryInfo}" Style="{StaticResource profile_btn_blocktext_style}" />
+            </Button>
+            <!--Delivered-->
+            <Button Command="{Binding ShowDelivered}" Grid.Column="1" Grid.Row="1" Style="{StaticResource profile_btn_style}">
+                <TextBlock Text="{Binding DeliveredInfo}" Style="{StaticResource profile_btn_blocktext_style}" />
+            </Button>
+            <!--Bonus-->
+            <Button Command="{Binding AboutBonus}" Grid.Column="2" Style="{StaticResource profile_btn_style}">
+                <TextBlock Text="{Binding BonusInfo}" Style="{StaticResource profile_btn_blocktext_style}" />
+            </Button>
+            <!--Total Oil-->
+            <Button Command="{Binding TotallOil}" Grid.Column="2" Grid.Row="1" Style="{StaticResource profile_btn_style}">
+                <TextBlock Text="{Binding TotalOilInfo}" Style="{StaticResource profile_btn_blocktext_style}" />
+            </Button>
+
+            <!--Nick-->
+            <TextBlock Text="{Binding RootInfo}" Grid.Column="3" Grid.ColumnSpan="2" Style="{StaticResource profile_btn_blocktext_style}" />
+            
+            <!--Root-->
+            <TextBlock Text="{Binding RootInfo}" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="1" Style="{StaticResource profile_btn_blocktext_style}" />
+            
+            <!--Avatar-->
+            <Grid HorizontalAlignment="Left" VerticalAlignment="Center"  Grid.Column="5" Grid.RowSpan="2">
+                <svgc:SvgViewbox Margin="30" Source="/Components/Images/ViewModels/Signed/user.svg"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

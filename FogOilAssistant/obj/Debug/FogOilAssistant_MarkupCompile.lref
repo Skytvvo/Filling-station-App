@@ -1,5 +1,5 @@
 ﻿
-
+FC:\data\FogOilAssistant\FogOilAssistant\App.xaml;;
 FC:\data\FogOilAssistant\FogOilAssistant\Components\Dictionary\MainWindowDictionary.xaml;;
 FC:\data\FogOilAssistant\FogOilAssistant\Components\Dictionary\Pages\OilDictionary.xaml;;
 FC:\data\FogOilAssistant\FogOilAssistant\Components\Dictionary\Pages\ShopDictionary.xaml;;
@@ -11,6 +11,9 @@ FC:\data\FogOilAssistant\FogOilAssistant\Components\View\Pages\Login.xaml;;
 FC:\data\FogOilAssistant\FogOilAssistant\Components\View\Pages\Oil.xaml;;
 FC:\data\FogOilAssistant\FogOilAssistant\Components\View\Pages\Refueling map.xaml;;
 FC:\data\FogOilAssistant\FogOilAssistant\Components\View\Pages\Shop.xaml;;
+FC:\data\FogOilAssistant\FogOilAssistant\Components\View\Pages\Admin.xaml;;
+FC:\data\FogOilAssistant\FogOilAssistant\Components\View\Pages\Employee.xaml;;
+FC:\data\FogOilAssistant\FogOilAssistant\Components\View\Pages\Profile.xaml;;
 FC:\data\FogOilAssistant\FogOilAssistant\Components\View\Pages\Support.xaml;;
 FC:\data\FogOilAssistant\FogOilAssistant\Components\View\ToggleMenu.xaml;;
 FC:\data\FogOilAssistant\FogOilAssistant\Components\View\ToggleMenuExpander.xaml;;

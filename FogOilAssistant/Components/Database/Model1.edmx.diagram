@@ -5,23 +5,25 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="1d14d6e43f5c4f4798be79ec9939759c" Name="Diagram1">
-        <EntityTypeShape EntityType="FogOilModel.Basket" Width="1.5" PointX="7.5" PointY="0.75" />
-        <EntityTypeShape EntityType="FogOilModel.CarBrand" Width="1.5" PointX="0.75" PointY="4" />
-        <EntityTypeShape EntityType="FogOilModel.CarModel" Width="1.5" PointX="0.75" PointY="7.125" />
-        <EntityTypeShape EntityType="FogOilModel.CarObject" Width="1.5" PointX="3" PointY="3.375" />
-        <EntityTypeShape EntityType="FogOilModel.CarType" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="FogOilModel.Location" Width="1.5" PointX="5.25" PointY="10.75" />
-        <EntityTypeShape EntityType="FogOilModel.Product" Width="1.5" PointX="5.25" PointY="3.5" />
-        <EntityTypeShape EntityType="FogOilModel.Root" Width="1.5" PointX="3" PointY="7.5" />
-        <EntityTypeShape EntityType="FogOilModel.sysdiagram" Width="1.5" PointX="7.75" PointY="6.875" />
-        <EntityTypeShape EntityType="FogOilModel.UserProduct" Width="1.5" PointX="7.5" PointY="3.5" />
-        <EntityTypeShape EntityType="FogOilModel.User" Width="1.5" PointX="5.25" PointY="7" />
+        <EntityTypeShape EntityType="FogOilModel.Basket" Width="1.5" PointX="7.5" PointY="3.875" />
+        <EntityTypeShape EntityType="FogOilModel.CarBrand" Width="1.5" PointX="0.75" PointY="4.125" />
+        <EntityTypeShape EntityType="FogOilModel.CarModel" Width="1.5" PointX="0.75" PointY="1" />
+        <EntityTypeShape EntityType="FogOilModel.CarObject" Width="1.5" PointX="3" PointY="3.5" />
+        <EntityTypeShape EntityType="FogOilModel.CarType" Width="1.5" PointX="0.75" PointY="7.25" />
+        <EntityTypeShape EntityType="FogOilModel.Location" Width="1.5" PointX="8.25" PointY="0.75" />
+        <EntityTypeShape EntityType="FogOilModel.OrderStatu" Width="1.5" PointX="8.25" PointY="7.5" />
+        <EntityTypeShape EntityType="FogOilModel.Product" Width="1.5" PointX="5.25" PointY="3.625" />
+        <EntityTypeShape EntityType="FogOilModel.Root" Width="1.5" PointX="3" PointY="9.125" />
+        <EntityTypeShape EntityType="FogOilModel.sysdiagram" Width="1.5" PointX="7.75" PointY="10.875" />
+        <EntityTypeShape EntityType="FogOilModel.UserProduct" Width="1.5" PointX="10.5" PointY="3.5" />
+        <EntityTypeShape EntityType="FogOilModel.User" Width="1.5" PointX="5.25" PointY="8.5" />
         <AssociationConnector Association="FogOilModel.FK_Basket_Products" />
         <AssociationConnector Association="FogOilModel.FK_Basket_Users" />
         <AssociationConnector Association="FogOilModel.FK_CarObjects_CarBrands" />
         <AssociationConnector Association="FogOilModel.FK_CarObjects_CarModels" />
         <AssociationConnector Association="FogOilModel.FK_CarObjects_CarTypes" />
         <AssociationConnector Association="FogOilModel.FK_UserProducts_Locations" />
+        <AssociationConnector Association="FogOilModel.FK_UserProducts_OrderStatus" />
         <AssociationConnector Association="FogOilModel.FK_UserProducts_Products" />
         <AssociationConnector Association="FogOilModel.FK_Users_Root" />
         <AssociationConnector Association="FogOilModel.FK_UserProducts_Users" />

@@ -197,7 +197,7 @@ namespace FogOilAssistant.Components.Models.Basket
                         db.Users.Find(DataBaseData.getInstance().UserId).UserProducts.Add(
                             new UserProduct() {
                                 ProductId = item.ProductId, 
-                                LocationId = this.Locations[SelectedLocation].LocationId 
+                                LocationId = this.Locations[SelectedLocation].LocationId , Status =1 
                             });
                     db.SaveChanges();
                 }
@@ -215,6 +215,7 @@ namespace FogOilAssistant.Components.Models.Basket
                 using (FogOilEntities db = new FogOilEntities())
                 {
                     DataBaseData.getInstance().basketProducts.Clear();
+                    
                     db.Baskets.RemoveRange(db.Users.Find(DataBaseData.getInstance().UserId).Baskets);
                     db.SaveChanges();
                 }

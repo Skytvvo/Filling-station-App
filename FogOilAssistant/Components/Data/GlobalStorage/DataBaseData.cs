@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using FogOilAssistant.Annotations;
+using FogOilAssistant.Components.Data.MenuButton;
 using FogOilAssistant.Components.Database;
 
 namespace FogOilAssistant.Components.Data.GlobalStorage
@@ -18,16 +19,17 @@ namespace FogOilAssistant.Components.Data.GlobalStorage
         private static DataBaseData instance;
         
 
-        public List<Database.Product> Products = new List<Database.Product>();
+        public List<Database.Product> Products;
         
-        public List<CarBrand> CarBrands = new List<CarBrand>();
-        public List<CarModel> CarModels = new List<CarModel>();
-        public List<CarType> CarTypes = new List<CarType>();
+        public List<CarBrand> CarBrands;
+        public List<CarModel> CarModels;
+        public List<CarType> CarTypes;
 
-        public List<CarObject> CarObjects = new List<CarObject>();
+        public List<CarObject> CarObjects;
 
+        public ObservableCollection<ButtonMenu> MenuList;
 
-        public ObservableCollection<Database.Product> basketProducts = new ObservableCollection<Database.Product>();
+        public ObservableCollection<Database.Product> basketProducts;
         
         public string Login { get; set; }
         public int UserId { get; set; }
@@ -41,6 +43,14 @@ namespace FogOilAssistant.Components.Data.GlobalStorage
                     this.basketProducts = new ObservableCollection<Database.Product>();
 
 
+                    this.MenuList = new ObservableCollection<ButtonMenu>(){
+                    new ButtonMenu { Path = "/Components/Images/support.svg", Text = "Support" },
+                    new ButtonMenu { Path = "/Components/Images/sHOP.svg", Text = "Shop" },
+                    new ButtonMenu { Path = "/Components/Images/oil-bottle.svg", Text = "Oil" },
+                    new ButtonMenu { Path = "/Components/Images/location.svg", Text = "Refueling map" },
+                    new ButtonMenu { Path = "/Components/Images/login.svg", Text = "Login" }
+                    };
+                    
 
                     this.CarTypes = DB.CarTypes.ToList();
                     this.CarBrands = DB.CarBrands.ToList();

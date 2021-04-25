@@ -37,6 +37,7 @@
     <EntitySet Name="CarObjects" EntityType="FogOilModel.CarObject" />
     <EntitySet Name="CarTypes" EntityType="FogOilModel.CarType" />
     <EntitySet Name="Locations" EntityType="FogOilModel.Location" />
+    <EntitySet Name="OrderStatus" EntityType="FogOilModel.OrderStatu" />
     <EntitySet Name="Products" EntityType="FogOilModel.Product" />
     <EntitySet Name="Roots" EntityType="FogOilModel.Root" />
     <EntitySet Name="sysdiagrams" EntityType="FogOilModel.sysdiagram" />
@@ -64,6 +65,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_UserProducts_Locations" Association="FogOilModel.FK_UserProducts_Locations">
       <End Role="Location" EntitySet="Locations" />
+      <End Role="UserProduct" EntitySet="UserProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserProducts_OrderStatus" Association="FogOilModel.FK_UserProducts_OrderStatus">
+      <End Role="OrderStatu" EntitySet="OrderStatus" />
       <End Role="UserProduct" EntitySet="UserProducts" />
     </AssociationSet>
     <AssociationSet Name="FK_UserProducts_Products" Association="FogOilModel.FK_UserProducts_Products">
@@ -152,6 +157,14 @@
     <Property Name="Adress" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="UserProducts" Relationship="FogOilModel.FK_UserProducts_Locations" FromRole="Location" ToRole="UserProduct" />
   </EntityType>
+  <EntityType Name="OrderStatu">
+    <Key>
+      <PropertyRef Name="StatusId" />
+    </Key>
+    <Property Name="StatusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Status" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="UserProducts" Relationship="FogOilModel.FK_UserProducts_OrderStatus" FromRole="OrderStatu" ToRole="UserProduct" />
+  </EntityType>
   <EntityType Name="Product">
     <Key>
       <PropertyRef Name="ProductId" />
@@ -191,7 +204,9 @@
     <Property Name="ProductId" Type="Int32" Nullable="false" />
     <Property Name="LocationId" Type="Int32" Nullable="false" />
     <Property Name="UserProductsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Location" Relationship="FogOilModel.FK_UserProducts_Locations" FromRole="UserProduct" ToRole="Location" />
+    <NavigationProperty Name="OrderStatu" Relationship="FogOilModel.FK_UserProducts_OrderStatus" FromRole="UserProduct" ToRole="OrderStatu" />
     <NavigationProperty Name="Product" Relationship="FogOilModel.FK_UserProducts_Products" FromRole="UserProduct" ToRole="Product" />
     <NavigationProperty Name="User" Relationship="FogOilModel.FK_UserProducts_Users" FromRole="UserProduct" ToRole="User" />
   </EntityType>
@@ -204,6 +219,7 @@
     <Property Name="Password" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="Nick" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="Root" Type="Int32" Nullable="false" />
+    <Property Name="Oil" Type="Double" Nullable="false" />
     <NavigationProperty Name="Baskets" Relationship="FogOilModel.FK_Basket_Users" FromRole="User" ToRole="Basket" />
     <NavigationProperty Name="Root1" Relationship="FogOilModel.FK_Users_Root" FromRole="User" ToRole="Root" />
     <NavigationProperty Name="UserProducts" Relationship="FogOilModel.FK_UserProducts_Users" FromRole="User" ToRole="UserProduct" />
@@ -277,6 +293,18 @@
       </Principal>
       <Dependent Role="UserProduct">
         <PropertyRef Name="LocationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserProducts_OrderStatus">
+    <End Type="FogOilModel.OrderStatu" Role="OrderStatu" Multiplicity="1" />
+    <End Type="FogOilModel.UserProduct" Role="UserProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrderStatu">
+        <PropertyRef Name="StatusId" />
+      </Principal>
+      <Dependent Role="UserProduct">
+        <PropertyRef Name="Status" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
