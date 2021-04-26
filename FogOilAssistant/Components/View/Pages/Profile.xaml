@@ -255,11 +255,11 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                            <Button Command="{ Binding ElementName=user_page_context, Path=DataContext.CloseAbout}" Margin="15" Style="{StaticResource profile_btn_style}">
+                            <Button  Command="{ Binding ElementName=user_page_context, Path=DataContext.CloseAbout}" Margin="15" Style="{StaticResource profile_btn_style}">
                                 <TextBlock Text="Close" Style="{StaticResource profile_btn_blocktext_style}"/>
                             </Button>
                             <Button Grid.Column="1" Grid.ColumnSpan="2" BorderBrush="{Binding Color}" Margin="15" 
-                                    Visibility="{Binding ElementName=user_page_context, Path=DataContext.BtnVisibility}"
+                                    Visibility="{Binding ElementName=user_page_context, Path=DataContext.BtnVisibility,Converter={StaticResource BooleanToVisibilityConverter}}"
                                     Style="{StaticResource profile_btn_style}"
                                     Command="{Binding ElementName=user_page_context, Path=DataContext.ImplementAction}"
                                     CommandParameter="{Binding}"

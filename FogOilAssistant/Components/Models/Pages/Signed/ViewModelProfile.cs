@@ -204,6 +204,8 @@ namespace FogOilAssistant.Components.Models.Pages.Signed
                 CloseAbout.Execute(null);
                 callUpdate((obj as ProductPresenter).StatusId);
                 preloadAll(DataBaseData.getInstance().UserId);
+                BtnVisibility = false;
+
             }
             catch
             {
@@ -216,6 +218,7 @@ namespace FogOilAssistant.Components.Models.Pages.Signed
             try
             {
                 AboutVisibility = true;
+                BtnVisibility = false;
                 SelectedProduct = obj as ProductPresenter;
                 if(SelectedProduct.StatusId == 0)
                 {
@@ -232,6 +235,7 @@ namespace FogOilAssistant.Components.Models.Pages.Signed
                     BtnVisibility = true;
                     BtnText = "Undo";
                 }
+                
             }
             catch(Exception e)
             {
