@@ -102,6 +102,7 @@ namespace FogOilAssistant.Components.Data.Pages.Signed
         {
             this.ProductPresenter.latitude = location.Latitude;
             this.ProductPresenter.longitude = location.Longitude;
+            this.ProductPresenter.Addres = location.Adress;
         }
 
         public override void BuildColor(string color = "#fff")
@@ -130,12 +131,18 @@ namespace FogOilAssistant.Components.Data.Pages.Signed
         {
             this.ProductPresenter.latitude = location.Latitude;
             this.ProductPresenter.longitude = location.Longitude;
+            this.ProductPresenter.Addres = location.Adress;
+
         }
 
         public override void BuildStatus(OrderStatu status = null)
         {
-            this.ProductPresenter.Status = "Delivering" ;
-            this.ProductPresenter.StatusId = 4;
+            if (status.StatusId == 1)
+                this.ProductPresenter.Status = "Processing";
+            else
+                this.ProductPresenter.Status = "Delivering";
+
+            this.ProductPresenter.StatusId = status.StatusId;
         }
     }
 
@@ -158,6 +165,8 @@ namespace FogOilAssistant.Components.Data.Pages.Signed
         {
             this.ProductPresenter.latitude = location.Latitude;
             this.ProductPresenter.longitude = location.Longitude;
+            this.ProductPresenter.Addres = location.Adress;
+
         }
 
         public override void BuildStatus(OrderStatu status = null)

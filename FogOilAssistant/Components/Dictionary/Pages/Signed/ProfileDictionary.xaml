@@ -27,5 +27,7 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Foreground" Value="#FFF"/>
         <Setter Property="IsEnabled" Value="False"/>
+        <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
     </Style>
 </ResourceDictionary>

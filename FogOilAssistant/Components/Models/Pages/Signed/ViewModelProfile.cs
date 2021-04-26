@@ -18,6 +18,7 @@ namespace FogOilAssistant.Components.Models.Pages.Signed
     public class ViewModelProfile : INotifyPropertyChanged
     {
         #region Props
+        static object locker = new object();
 
         private static string defaultValue = "Loading...";
 
@@ -132,6 +133,29 @@ namespace FogOilAssistant.Components.Models.Pages.Signed
 
         private UserProductsBuilder CollectionControl;
 
+        //Slected product
+        private ProductPresenter selectedProduct;
+        public ProductPresenter SelectedProduct
+        { 
+            get => selectedProduct; 
+            set
+            {
+                selectedProduct = value;
+                OnPropertyChanged("SelectedProduct");
+            }
+        }
+        //about action => container
+        private bool aboutVisibility = false;
+        public bool AboutVisibility
+        {
+            get => aboutVisibility;
+            set
+            {
+                aboutVisibility = value;
+                OnPropertyChanged("AboutVisibility");
+            }
+        }
+
         #endregion
 
 
@@ -145,7 +169,20 @@ namespace FogOilAssistant.Components.Models.Pages.Signed
         public CommandViewModel AboutBonus { get => new CommandViewModel(aboutBonus); }
         public CommandViewModel TotallOil { get => new CommandViewModel(totalOil); }
 
-            
+        public RelayCommand AboutAction { get => new RelayCommand(obj=>
+        {
+            try
+            {
+                AboutVisibility = true;
+                SelectedProduct = obj as ProductPresenter;
+            }
+            catch(Exception e)
+            {
+                AboutVisibility = false;
+            }
+
+        }); }
+
         #region Commands Methods
         private async void showBassket()
         {
@@ -153,14 +190,13 @@ namespace FogOilAssistant.Components.Models.Pages.Signed
             {
                 using(FogOilEntities db = new FogOilEntities())
                 {
+                  
                     var userData = (await db.Users.FindAsync(DataBaseData.getInstance().UserId));
-                    List<ProductPresenter> newList = new List<ProductPresenter>();
-                    userData.Baskets.ToList().ForEach(item =>
-                    {
-                        Product prod = item.Product;
-                        newList.Add(CollectionControl.GetProduct(new BasketProductBuilder(), prod));
-                    });
-                    Products = newList;
+                    Products = userData.Baskets
+                        .Select((prod) => CollectionControl
+                        .GetProduct(new BasketProductBuilder(), prod.Product))
+                        .ToList();
+                    BasketProductsInfo = $"Basket({Products.Count()})";
                 }
             }
             catch(Exception e)
@@ -176,13 +212,13 @@ namespace FogOilAssistant.Components.Models.Pages.Signed
                 using (FogOilEntities db = new FogOilEntities())
                 {
                     var userData = (await db.Users.FindAsync(DataBaseData.getInstance().UserId));
-                    List<ProductPresenter> newList = new List<ProductPresenter>();
-                    userData.Baskets.ToList().ForEach(item =>
-                    {
-                        Product prod = item.Product;
-                        newList.Add(CollectionControl.GetProduct(new BasketProductBuilder(), prod));
-                    });
-                    Products = newList;
+                    Products = userData.UserProducts
+                        .Where(prod => prod.Status == 1 || prod.Status == 4)
+                        .Select((prod) => CollectionControl
+                        .GetProduct(new OrderBuilder(), prod.Product, prod.OrderStatu, prod.Location))
+                        .ToList();
+                    OrdersInfo = $"Orders({Products.Count()})";
+
                 }
             }
             catch (Exception e)
@@ -191,14 +227,47 @@ namespace FogOilAssistant.Components.Models.Pages.Signed
             }
         }
 
-        private void showHistory()
+        private async void showHistory()
         {
-            MessageBox.Show("history");
+            try
+            {
+                using (FogOilEntities db = new FogOilEntities())
+                {
+                   
+                    Products = (await db.Users.FindAsync(DataBaseData.getInstance().UserId)).UserProducts
+                        .Select((prod) => CollectionControl
+                        .GetProduct(new HistoryBuilder(), prod.Product, prod.OrderStatu, prod.Location))
+                        .ToList();
+                    HistoryInfo = $"History({Products.Count()})";
+
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
         }
 
-        private void showDelivered()
+        private async void showDelivered()
         {
-            MessageBox.Show("Delivered");
+            try
+            {
+                using (FogOilEntities db = new FogOilEntities())
+                {
+                    var userData = (await db.Users.FindAsync(DataBaseData.getInstance().UserId));
+                    Products = userData.UserProducts
+                        .Where(prod => prod.Status == 3)
+                        .Select((prod) => CollectionControl
+                        .GetProduct(new DeliveredBuilder(), prod.Product, prod.OrderStatu, prod.Location))
+                        .ToList();
+                    DeliveredInfo = $"Delivered({Products.Count()})";
+
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
         }
 
         private void aboutBonus()
@@ -207,8 +276,8 @@ namespace FogOilAssistant.Components.Models.Pages.Signed
         }
         
         private void totalOil()
-        { 
-            MessageBox.Show("totaloil");
+        {
+            
         }
         #endregion
 
