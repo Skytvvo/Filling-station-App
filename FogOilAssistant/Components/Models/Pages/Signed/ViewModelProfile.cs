@@ -156,6 +156,27 @@ namespace FogOilAssistant.Components.Models.Pages.Signed
             }
         }
 
+        private bool btnVisibility = false;
+        public bool BtnVisibility
+        {
+            get => btnVisibility;
+            set
+            {
+                btnVisibility = value;
+                OnPropertyChanged("BtnVisibility");
+            }
+        }
+
+        private string btnText;
+        public string BtnText
+        {
+            get => btnText;
+            set
+            {
+                btnText = value;
+                OnPropertyChanged("BtnText");
+            }
+        }
         #endregion
 
 
@@ -168,13 +189,49 @@ namespace FogOilAssistant.Components.Models.Pages.Signed
         public CommandViewModel ShowDelivered { get => new CommandViewModel(showDelivered); }
         public CommandViewModel AboutBonus { get => new CommandViewModel(aboutBonus); }
         public CommandViewModel TotallOil { get => new CommandViewModel(totalOil); }
+        public CommandViewModel CloseAbout { get => new CommandViewModel(() =>
+          {
+              AboutVisibility = false;
+              BtnVisibility = false;
+          });
+        }
 
+        public RelayCommand ImplementAction { get => new RelayCommand((obj) =>
+        {
+            try
+            {
+                (obj as ProductPresenter).ActionCommand.Execute((obj as ProductPresenter).ID);
+                CloseAbout.Execute(null);
+                callUpdate((obj as ProductPresenter).StatusId);
+                preloadAll(DataBaseData.getInstance().UserId);
+            }
+            catch
+            {
+
+            }
+        });
+        }
         public RelayCommand AboutAction { get => new RelayCommand(obj=>
         {
             try
             {
                 AboutVisibility = true;
                 SelectedProduct = obj as ProductPresenter;
+                if(SelectedProduct.StatusId == 0)
+                {
+                    BtnVisibility = true;
+                    BtnText = "Remove";
+                }
+                if (SelectedProduct.StatusId == 4 || SelectedProduct.StatusId == 1)
+                {
+                    BtnVisibility = true;
+                    BtnText = "Reject";
+                }
+                if( SelectedProduct.StatusId == 5)
+                {
+                    BtnVisibility = true;
+                    BtnText = "Undo";
+                }
             }
             catch(Exception e)
             {
@@ -194,7 +251,7 @@ namespace FogOilAssistant.Components.Models.Pages.Signed
                     var userData = (await db.Users.FindAsync(DataBaseData.getInstance().UserId));
                     Products = userData.Baskets
                         .Select((prod) => CollectionControl
-                        .GetProduct(new BasketProductBuilder(), prod.Product))
+                        .GetProduct(prod.BasketId,new BasketProductBuilder(), prod.Product))
                         .ToList();
                     BasketProductsInfo = $"Basket({Products.Count()})";
                 }
@@ -215,7 +272,7 @@ namespace FogOilAssistant.Components.Models.Pages.Signed
                     Products = userData.UserProducts
                         .Where(prod => prod.Status == 1 || prod.Status == 4)
                         .Select((prod) => CollectionControl
-                        .GetProduct(new OrderBuilder(), prod.Product, prod.OrderStatu, prod.Location))
+                        .GetProduct(prod.UserProductsId,new OrderBuilder(), prod.Product, prod.OrderStatu, prod.Location))
                         .ToList();
                     OrdersInfo = $"Orders({Products.Count()})";
 
@@ -235,8 +292,9 @@ namespace FogOilAssistant.Components.Models.Pages.Signed
                 {
                    
                     Products = (await db.Users.FindAsync(DataBaseData.getInstance().UserId)).UserProducts
+                        .Where(item => item.Status == 2 || item.Status == 3 || item.Status == 5)
                         .Select((prod) => CollectionControl
-                        .GetProduct(new HistoryBuilder(), prod.Product, prod.OrderStatu, prod.Location))
+                        .GetProduct(prod.UserProductsId,new HistoryBuilder(), prod.Product, prod.OrderStatu, prod.Location))
                         .ToList();
                     HistoryInfo = $"History({Products.Count()})";
 
@@ -258,7 +316,7 @@ namespace FogOilAssistant.Components.Models.Pages.Signed
                     Products = userData.UserProducts
                         .Where(prod => prod.Status == 3)
                         .Select((prod) => CollectionControl
-                        .GetProduct(new DeliveredBuilder(), prod.Product, prod.OrderStatu, prod.Location))
+                        .GetProduct(prod.UserProductsId,new DeliveredBuilder(), prod.Product, prod.OrderStatu, prod.Location))
                         .ToList();
                     DeliveredInfo = $"Delivered({Products.Count()})";
 
@@ -290,13 +348,33 @@ namespace FogOilAssistant.Components.Models.Pages.Signed
             {
                 var user = await db.Users.FindAsync(id);
                 NickInfo = $"Nickname: {user.Nick}";
-                HistoryInfo = $"History({user.UserProducts.Count})";
+                HistoryInfo = $"History({user.UserProducts.Where(item => item.Status == 2 || item.Status == 3 || item.Status == 5).Count()})";
                 RootInfo = $"Root: {user.Root1.Name}";
                 OrdersInfo = $"Orders({user.UserProducts.Where(item => item.Status == 1 || item.Status == 4).Count()})";
                 DeliveredInfo = $"Delivered({user.UserProducts.Where(item => item.Status == 3).Count()})";
                 BonusInfo = $"Discount({Math.Round(user.Bonus,2)}%)";
                 BasketProductsInfo = $"Basket({user.Baskets.Count()})";
                 TotalOilInfo = $"{Math.Round(user.Oil,2)} L";
+            }
+        }
+        #endregion
+
+        #region Methods
+        private void callUpdate(int id)
+        {
+            switch(id)
+            {
+                case 4:
+                case 1:
+                    showOrders();
+                    break;
+                case 5:
+                    showHistory();
+                    break;
+
+                default:
+                    showBassket();
+                    break;
             }
         }
         #endregion

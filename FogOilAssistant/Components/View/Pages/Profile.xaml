@@ -191,7 +191,7 @@
         
         
         <!--About-->
-        <Grid Grid.RowSpan="2">
+        <Grid Grid.RowSpan="2" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.15*"/>
                 <ColumnDefinition Width="0.7*"/>
@@ -244,7 +244,31 @@
                         </StackPanel>
                     </ScrollViewer>
                         <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
                             
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                            <Button Command="{ Binding ElementName=user_page_context, Path=DataContext.CloseAbout}" Margin="15" Style="{StaticResource profile_btn_style}">
+                                <TextBlock Text="Close" Style="{StaticResource profile_btn_blocktext_style}"/>
+                            </Button>
+                            <Button Grid.Column="1" Grid.ColumnSpan="2" BorderBrush="{Binding Color}" Margin="15" 
+                                    Visibility="{Binding ElementName=user_page_context, Path=DataContext.BtnVisibility}"
+                                    Style="{StaticResource profile_btn_style}"
+                                    Command="{Binding ElementName=user_page_context, Path=DataContext.ImplementAction}"
+                                    CommandParameter="{Binding}"
+                                    >
+                                <TextBlock Text="{Binding ElementName=user_page_context, Path=DataContext.BtnText}" Style="{StaticResource profile_btn_blocktext_style}"/>
+                            </Button>
+
+
+                        </Grid>
                         </Grid>
                        
                     </Grid>

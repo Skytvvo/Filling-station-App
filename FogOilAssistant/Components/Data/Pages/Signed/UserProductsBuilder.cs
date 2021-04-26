@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media;
+using FogOilAssistant.Components.Data.GlobalStorage;
 using FogOilAssistant.Components.Database;
 namespace FogOilAssistant.Components.Data.Pages.Signed
 {
     public class UserProductsBuilder
     {
-        public ProductPresenter GetProduct(PresentedBuilder builder, Database.Product product, Database.OrderStatu status = null, Database.Location location = null)
+        public ProductPresenter GetProduct(int ID,PresentedBuilder builder, Database.Product product, Database.OrderStatu status = null, Database.Location location = null)
         {
-            builder.BuildProduct(product);
+            builder.BuildProduct(product,ID);
             builder.BuildStatus(status);
             builder.BuildLocation(location);
             builder.BuildColor();
@@ -21,7 +23,7 @@ namespace FogOilAssistant.Components.Data.Pages.Signed
 
     public class ProductPresenter
     {
-       
+        public int ID { get; set; }
         public string Description { get; set; }
         public string Price { get; set; }
         public string Img { get; set; }
@@ -34,7 +36,8 @@ namespace FogOilAssistant.Components.Data.Pages.Signed
         public string Status { get; set; }
         public int StatusId { get; set; }
 
-
+   
+        public RelayCommand ActionCommand { get; set; }
 
         public SolidColorBrush Color { get; set; }
 
@@ -76,7 +79,7 @@ namespace FogOilAssistant.Components.Data.Pages.Signed
             }
         }
 
-        public abstract void BuildProduct(Database.Product product = null);
+        public abstract void BuildProduct(Database.Product product = null, int ID = 0);
         public abstract void BuildStatus(Database.OrderStatu status = null);
         public abstract void BuildLocation(Database.Location location = null);
         public abstract void BuildColor(string color = "#fff");
@@ -85,13 +88,13 @@ namespace FogOilAssistant.Components.Data.Pages.Signed
 
     public class HistoryBuilder : PresentedBuilder
     {
-        public override void BuildProduct(Database.Product product = null)
+        public override void BuildProduct(Database.Product product = null, int ID = 0)
         {
             this.ProductPresenter.Img = product.Img;
             this.ProductPresenter.Name = product.Name;
             this.ProductPresenter.Description = product.Description;
             this.ProductPresenter.Price = product.Price + " BYN";
-
+            this.ProductPresenter.ID = ID;
         }
         public override void BuildStatus(Database.OrderStatu status = null)
         {
@@ -109,22 +112,54 @@ namespace FogOilAssistant.Components.Data.Pages.Signed
         {
 
             this.ProductPresenter.Color = GetColor(ProductPresenter.StatusId);
+            this.ProductPresenter.ActionCommand = new RelayCommand(async (obj) =>
+            {
+                try
+                {
+                    using (FogOilEntities db = new FogOilEntities())
+                    {
+                        (await db.UserProducts.FindAsync((int)obj)).Status = 1;
+                        await db.SaveChangesAsync();
+                    }
+                }
+                catch (Exception E)
+                {
+
+                }
+            });
+
         }
     }
 
     public class OrderBuilder : PresentedBuilder
     {
-        public override void BuildProduct(Database.Product product = null)
+        public override void BuildProduct(Database.Product product = null, int ID = 0)
         {
             this.ProductPresenter.Img = product.Img;
             this.ProductPresenter.Name = product.Name;
             this.ProductPresenter.Description = product.Description;
             this.ProductPresenter.Price = product.Price + " BYN";
+            this.ProductPresenter.ID = ID;
         }
 
         public override void BuildColor(string color = "#fff")
         {
             this.ProductPresenter.Color = GetColor(ProductPresenter.StatusId);
+            this.ProductPresenter.ActionCommand = new RelayCommand(async (obj) =>
+            {
+                try
+                {
+                    using(FogOilEntities db = new FogOilEntities())
+                    {
+                        (await db.UserProducts.FindAsync((int)obj)).Status = 5;
+                        await db.SaveChangesAsync();
+                    }
+                }
+                catch(Exception E)
+                {
+
+                }
+            });
         }
 
         public override void BuildLocation(Location location = null)
@@ -148,17 +183,19 @@ namespace FogOilAssistant.Components.Data.Pages.Signed
 
     public class DeliveredBuilder : PresentedBuilder
     {
-        public override void BuildProduct(Database.Product product = null)
+        public override void BuildProduct(Database.Product product = null, int ID = 0)
         {
             this.ProductPresenter.Img = product.Img;
             this.ProductPresenter.Name = product.Name;
             this.ProductPresenter.Description = product.Description;
             this.ProductPresenter.Price = product.Price + " BYN";
+            this.ProductPresenter.ID = ID;
         }
 
         public override void BuildColor(string color = "#fff")
         {
             this.ProductPresenter.Color = GetColor(ProductPresenter.StatusId);
+           
         }
 
         public override void BuildLocation(Location location = null)
@@ -178,17 +215,36 @@ namespace FogOilAssistant.Components.Data.Pages.Signed
 
     public class BasketProductBuilder : PresentedBuilder
     {
-        public override void BuildProduct(Database.Product product = null)
+        public override void BuildProduct(Database.Product product = null, int ID = 0)
         {
             this.ProductPresenter.Img = product.Img;
             this.ProductPresenter.Name = product.Name;
             this.ProductPresenter.Description = product.Description;
             this.ProductPresenter.Price = product.Price + " BYN";
+            this.ProductPresenter.ID = ID;
         }
 
         public override void BuildColor(string color = "#FFFFFF")
         {
             this.ProductPresenter.Color = GetSolidColorBrush(255,0,0);
+            this.ProductPresenter.ActionCommand = new RelayCommand( async (obj) =>
+            {
+                try
+                {
+                    using(FogOilEntities db = new FogOilEntities())
+                    {
+                        db.Baskets.Remove(
+                            (await db.Baskets.FindAsync((int)obj))
+                            );
+                    
+                        await db.SaveChangesAsync();
+                    }
+                }
+                catch(Exception e)
+                {
+
+                }
+            });
         }
 
         public override void BuildLocation(Location location = null)
