@@ -58,7 +58,7 @@
             </Button>
 
             <!--Nick-->
-            <TextBlock Text="{Binding RootInfo}" Grid.Column="3" Grid.ColumnSpan="2" Style="{StaticResource profile_btn_blocktext_style}" />
+            <TextBlock Text="{Binding NickInfo}" Grid.Column="3" Grid.ColumnSpan="2" Style="{StaticResource profile_btn_blocktext_style}" />
             
             <!--Root-->
             <TextBlock Text="{Binding RootInfo}" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="1" Style="{StaticResource profile_btn_blocktext_style}" />
@@ -68,5 +68,119 @@
                 <svgc:SvgViewbox Margin="30" Source="/Components/Images/ViewModels/Signed/user.svg"/>
             </Grid>
         </Grid>
+        <Border Grid.Row="1" BorderBrush="#ff0000" BorderThickness="0,2,0,0">
+            <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                <ItemsControl ItemsSource="{Binding Products}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border  Margin="10" Width="300" Height="400">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.25*"/>
+                                        <ColumnDefinition Width="0.5*"/>
+                                        <ColumnDefinition Width="0.25*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="0.4*"/>
+                                        <RowDefinition Height="0.2*"/>
+                                        <RowDefinition Height="0.4*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid Grid.ColumnSpan="3" Grid.RowSpan="3" Background="#212122" x:Name="product_card">
+                                        <Grid.Style>
+                                            <Style TargetType="Grid">
+                                                <Style.Triggers >
+                                                    <Trigger Property="IsMouseOver" Value="True" >
+                                                        <Setter Property="Effect">
+                                                            <Setter.Value>
+                                                                <BlurEffect Radius="20" KernelType="Gaussian"/>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </Trigger>
+                                                    <DataTrigger Binding="{Binding ElementName=product_card_btn, Path=IsMouseOver}" Value="True">
+                                                        <Setter Property="Effect">
+                                                            <Setter.Value>
+                                                                <BlurEffect Radius="20" KernelType="Gaussian"/>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Grid.Style>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="0.4*"/>
+                                            <RowDefinition Height="0.2*"/>
+                                            <RowDefinition Height="0.2*"/>
+                                            <RowDefinition Height="0.2*"/>
+                                        </Grid.RowDefinitions>
+
+
+                                        <Image Source="{Binding Img}" Margin="10"/>
+                                        <TextBlock 
+                                                Text="{Binding Name}" 
+                                                Style="{StaticResource profile_btn_blocktext_style}"
+                                                Grid.Row="1"
+                                                />
+
+                                        <TextBlock 
+                                                Text="{Binding Price}"
+                                                Style="{StaticResource profile_btn_blocktext_style}"
+                                                Grid.Row="2"
+                                                />
+                                        <TextBlock 
+                                                Text="{Binding Status}"
+                                                Style="{StaticResource profile_btn_blocktext_style}"
+                                                Grid.Row="3"
+                                                Foreground="{Binding Color}"
+                                                />
+                                    </Grid>
+                                    <Button x:Name="product_card_btn" Grid.Column="1" Grid.Row="1">
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Setter Property="Opacity" Value="0"/>
+
+                                                <Setter Property="Background" Value="#212122"/>
+                                                <Setter Property="Cursor" Value="Hand"/>
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="Button">
+                                                            <Border BorderBrush="{Binding Color}" BorderThickness="2" Background="{TemplateBinding Background}">
+                                                                <ContentPresenter   VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                            </Border>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Opacity" Value="1"/>
+                                                        <Setter Property="Background" Value="{Binding Color}"/>
+                                                    </Trigger>
+                                                    <DataTrigger Binding="{Binding ElementName=product_card, Path=IsMouseOver}" Value="True" >
+                                                        <Setter Property="Opacity" Value="1"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                        <TextBlock Text="About" Style="{StaticResource profile_btn_blocktext_style}"/>
+                                    </Button>
+                                </Grid>
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Setter Property="BorderBrush" Value="{Binding Color}"/>
+                                        <Setter Property="BorderThickness" Value="2"/>
+                                    </Style>
+                                </Border.Style>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Border>
+        
     </Grid>
 </Page>

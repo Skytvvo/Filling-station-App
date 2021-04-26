@@ -243,7 +243,6 @@ namespace FogOilAssistant.Components.Models.Basket
             void Basket_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
             {
                 this.BaskedProducts = DataBaseData.getInstance().basketProducts.ToList();
-                MessageBox.Show("Collection was updated");
             }
         #endregion
 

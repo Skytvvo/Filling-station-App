@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using System.Timers;
 using FogOilAssistant.Components.Data;
 using FogOilAssistant.Components.Data.GlobalStorage;
-using FogOilAssistant.Components.Data.Product;
 
 namespace FogOilAssistant.Components.Models.Pages
 {

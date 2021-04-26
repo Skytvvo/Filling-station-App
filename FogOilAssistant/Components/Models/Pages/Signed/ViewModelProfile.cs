@@ -9,6 +9,8 @@ using System.Windows;
 using FogOilAssistant.Components.Data;
 using FogOilAssistant.Components.Data.GlobalStorage;
 using FogOilAssistant.Components.Database;
+using FogOilAssistant.Components.Data.Pages.Signed;
+using System.Threading;
 
 namespace FogOilAssistant.Components.Models.Pages.Signed
 {
@@ -115,6 +117,21 @@ namespace FogOilAssistant.Components.Models.Pages.Signed
             }
         }
 
+
+        //Selected collection
+        private List<ProductPresenter> products;
+        public List<ProductPresenter>  Products
+        { 
+            get => products;
+            set
+            {
+                products = value;
+                OnPropertyChanged("Products");
+            }
+        }
+
+        private UserProductsBuilder CollectionControl;
+
         #endregion
 
 
@@ -128,16 +145,50 @@ namespace FogOilAssistant.Components.Models.Pages.Signed
         public CommandViewModel AboutBonus { get => new CommandViewModel(aboutBonus); }
         public CommandViewModel TotallOil { get => new CommandViewModel(totalOil); }
 
-
+            
         #region Commands Methods
-        private void showBassket()
+        private async void showBassket()
         {
-            MessageBox.Show("Basket");
+            try
+            {
+                using(FogOilEntities db = new FogOilEntities())
+                {
+                    var userData = (await db.Users.FindAsync(DataBaseData.getInstance().UserId));
+                    List<ProductPresenter> newList = new List<ProductPresenter>();
+                    userData.Baskets.ToList().ForEach(item =>
+                    {
+                        Product prod = item.Product;
+                        newList.Add(CollectionControl.GetProduct(new BasketProductBuilder(), prod));
+                    });
+                    Products = newList;
+                }
+            }
+            catch(Exception e)
+            {
+
+            }
         }
 
-        private void showOrders()
+        private async void showOrders()
         {
-            MessageBox.Show("orders");
+            try
+            {
+                using (FogOilEntities db = new FogOilEntities())
+                {
+                    var userData = (await db.Users.FindAsync(DataBaseData.getInstance().UserId));
+                    List<ProductPresenter> newList = new List<ProductPresenter>();
+                    userData.Baskets.ToList().ForEach(item =>
+                    {
+                        Product prod = item.Product;
+                        newList.Add(CollectionControl.GetProduct(new BasketProductBuilder(), prod));
+                    });
+                    Products = newList;
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
         }
 
         private void showHistory()
@@ -164,25 +215,6 @@ namespace FogOilAssistant.Components.Models.Pages.Signed
         #endregion
 
         #region assync methods
-        //private void callPreloader()
-        //{
-           
-        //}
-        //private Task usePreloader(int id)
-        //{
-        //    try
-        //    {
-                
-        //    }
-        //    catch(Exception e)
-        //    {
-        //        return false;
-        //    }
-
-        //    return true;
-        //}
-
-
         private async void preloadAll(int id)
         {
             using (FogOilEntities db = new FogOilEntities())
@@ -203,7 +235,7 @@ namespace FogOilAssistant.Components.Models.Pages.Signed
         #region Constructor
         public ViewModelProfile()
         {
-            //callPreloader();
+            this.CollectionControl = new UserProductsBuilder();
             this.preloadAll(DataBaseData.getInstance().UserId);
         }
 

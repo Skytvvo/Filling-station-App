@@ -9,8 +9,6 @@ using System.Windows;
 using System.Windows.Forms;
 using FogOilAssistant.Components.Data;
 using FogOilAssistant.Components.Data.GlobalStorage;
-using FogOilAssistant.Components.Data.Pages.Oil;
-using FogOilAssistant.Components.Data.Product;
 using FogOilAssistant.Components.Database;
 using Application = System.Windows.Application;
 using CarBrand = FogOilAssistant.Components.Database.CarBrand;
