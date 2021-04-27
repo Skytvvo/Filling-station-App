@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:FogOilAssistant.Components.View.Pages.EmployeeControls"
+             xmlns:local="clr-namespace:FogOilAssistant.Components.View.Pages.EmployeeControls" xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
              mc:Ignorable="d" 
             >
 
@@ -16,27 +16,32 @@
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.4*"/>
-            <ColumnDefinition Width="0.6*"/>
+            <ColumnDefinition Width="0.7*"/>
+            <ColumnDefinition Width="0.3*"/>
         </Grid.ColumnDefinitions>
 
         <!--user options-->
         <ItemsControl ItemsSource="{Binding ActionProp, RelativeSource={RelativeSource AncestorType=UserControl}}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Button Command="{Binding}" CommandParameter="{Binding}" Style="{StaticResource profile_btn_style}" Margin="10">
-                        <TextBlock Text="123"/>
+                    <Button Command="{Binding Action}" CommandParameter="{Binding}" Style="{StaticResource profile_btn_style}" Margin="5,20">
+                        <TextBlock Margin="20,0" Text="{Binding Name}" Style="{StaticResource profile_btn_blocktext_style}"/>
                     </Button>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
         <!--genaral options-->
         <Grid Grid.Column="1">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Text="Root: " Style="{StaticResource profile_btn_blocktext_style}"></TextBlock>
+                <TextBlock Text="{Binding Root, RelativeSource={RelativeSource AncestorType=UserControl}}" Style="{StaticResource profile_btn_blocktext_style}"/>
+                <svgc:SvgViewbox Margin="10" Height="50"  Source= "{Binding  SvgPath, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+            </StackPanel>
         </Grid>
     </Grid>
 </UserControl>

@@ -20,6 +20,8 @@
         </Grid.RowDefinitions>
 
         <options:Options ActionProp="{Binding CommandList}"/>
-        
+        <Frame Grid.Row="1" Source="{Binding SelectedPage}">
+            
+        </Frame>
     </Grid>
 </Page>

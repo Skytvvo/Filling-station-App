@@ -58,6 +58,12 @@ namespace FogOilAssistant.Components.Data
         }
     }
 
+
+    public class ArgRelayCommand
+    {
+        public RelayCommand Action { get; set; }
+        public string Name { get; set; }
+    }
    
 
 }

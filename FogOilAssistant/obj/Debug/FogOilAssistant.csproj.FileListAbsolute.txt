@@ -97,3 +97,14 @@ C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\Dictionary\Pages\Si
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\Dictionary\Pages\Signed\EmployeeDictionary.baml
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\EmployeeControls\Options.g.cs
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\EmployeeControls\Options.baml
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\EmployeeControls\Frames\DataBaseManagment.g.cs
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\EmployeeControls\Frames\OrderManagment.g.cs
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\EmployeeControls\Frames\ProductManagment.g.cs
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\EmployeeControls\Frames\UserManagment.g.cs
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\EmployeeControls\Frames\DataBaseManagment.baml
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\EmployeeControls\Frames\OrderManagment.baml
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\EmployeeControls\Frames\ProductManagment.baml
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\EmployeeControls\Frames\UserManagment.baml
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\Dictionary\Pages\Signed\RefualingPageDictionary.baml
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\EmployeeControls\Frames\Refueling.g.cs
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\EmployeeControls\Frames\Refueling.baml

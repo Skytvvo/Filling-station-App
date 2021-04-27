@@ -54,6 +54,14 @@
           <Property Name="TypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Fuel">
+          <Key>
+            <PropertyRef Name="FuelId" />
+          </Key>
+          <Property Name="FuelId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Price" Type="float" Nullable="false" />
+        </EntityType>
         <EntityType Name="Locations">
           <Key>
             <PropertyRef Name="LocationId" />
@@ -299,6 +307,7 @@
           <EntitySet Name="CarModels" EntityType="Self.CarModels" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CarObjects" EntityType="Self.CarObjects" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CarTypes" EntityType="Self.CarTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fuel" EntityType="Self.Fuel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Locations" EntityType="Self.Locations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderStatus" EntityType="Self.OrderStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
@@ -401,6 +410,7 @@
           <EntitySet Name="CarModels" EntityType="FogOilModel.CarModel" />
           <EntitySet Name="CarObjects" EntityType="FogOilModel.CarObject" />
           <EntitySet Name="CarTypes" EntityType="FogOilModel.CarType" />
+          <EntitySet Name="Fuels" EntityType="FogOilModel.Fuel" />
           <EntitySet Name="Locations" EntityType="FogOilModel.Location" />
           <EntitySet Name="OrderStatus" EntityType="FogOilModel.OrderStatu" />
           <EntitySet Name="Products" EntityType="FogOilModel.Product" />
@@ -511,6 +521,14 @@
           <Property Name="TypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CarObjects" Relationship="FogOilModel.FK_CarObjects_CarTypes" FromRole="CarType" ToRole="CarObject" />
+        </EntityType>
+        <EntityType Name="Fuel">
+          <Key>
+            <PropertyRef Name="FuelId" />
+          </Key>
+          <Property Name="FuelId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
         </EntityType>
         <EntityType Name="Location">
           <Key>
@@ -784,6 +802,15 @@
               <MappingFragment StoreEntitySet="CarTypes">
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fuels">
+            <EntityTypeMapping TypeName="FogOilModel.Fuel">
+              <MappingFragment StoreEntitySet="Fuel">
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FuelId" ColumnName="FuelId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

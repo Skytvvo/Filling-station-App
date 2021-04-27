@@ -7,6 +7,11 @@ FC:\data\FogOilAssistant\FogOilAssistant\Components\Dictionary\Pages\SupportDict
 FC:\data\FogOilAssistant\FogOilAssistant\Components\Dictionary\ToggleMenuExpanderDictionary.xaml;;
 FC:\data\FogOilAssistant\FogOilAssistant\Components\View\BasketProducts.xaml;;
 FC:\data\FogOilAssistant\FogOilAssistant\Components\View\BindablePasswordBox.xaml;;
+FC:\data\FogOilAssistant\FogOilAssistant\Components\View\Pages\EmployeeControls\Frames\DataBaseManagment.xaml;;
+FC:\data\FogOilAssistant\FogOilAssistant\Components\View\Pages\EmployeeControls\Frames\OrderManagment.xaml;;
+FC:\data\FogOilAssistant\FogOilAssistant\Components\View\Pages\EmployeeControls\Frames\ProductManagment.xaml;;
+FC:\data\FogOilAssistant\FogOilAssistant\Components\View\Pages\EmployeeControls\Frames\Refueling.xaml;;
+FC:\data\FogOilAssistant\FogOilAssistant\Components\View\Pages\EmployeeControls\Frames\UserManagment.xaml;;
 FC:\data\FogOilAssistant\FogOilAssistant\Components\View\Pages\EmployeeControls\Options.xaml;;
 FC:\data\FogOilAssistant\FogOilAssistant\Components\View\Pages\Login.xaml;;
 FC:\data\FogOilAssistant\FogOilAssistant\Components\View\Pages\Oil.xaml;;

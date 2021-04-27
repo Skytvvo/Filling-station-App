@@ -184,6 +184,9 @@
   <data name="PENRITE_OW_20" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Components\Images\Products\PENRITE_OW-20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="refuel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Components\Images\ViewModels\Signed\refuel.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="Shel_HELIX_HX3_20W_50" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Components\Images\Products\Shel_HELIX_HX3_20W-50.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

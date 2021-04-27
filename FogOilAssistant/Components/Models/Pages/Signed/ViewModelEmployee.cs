@@ -7,15 +7,40 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using FogOilAssistant.Components.Data;
+using FogOilAssistant.Components.Data.GlobalStorage;
 
 namespace FogOilAssistant.Components.Models.Pages.Signed
 {
     
+
     public class ViewModelEmployee: INotifyPropertyChanged
     {
-        private List<RelayCommand> commandList;
 
-        public List<RelayCommand> CommandList
+        #region Pages
+        private List<string> pages;
+
+
+        private string selectedPage = "/Components/View/Pages/EmployeeControls/Frames/ProductManagment.xaml";
+        public string SelectedPage 
+        { 
+            get => selectedPage;
+            set 
+            {
+                selectedPage = value;
+                OnPropertyChanged("SelectedPage");
+            }
+        }
+
+
+        #endregion
+
+        #region Commands
+
+        #endregion
+
+        private List<ArgRelayCommand> commandList;
+
+        public List<ArgRelayCommand> CommandList
         {
             get => commandList;
             set
@@ -24,25 +49,58 @@ namespace FogOilAssistant.Components.Models.Pages.Signed
                 OnPropertyChanged("CommandList");
             }
         }
+        #region getCommands
+        private List<ArgRelayCommand> GetCommands()
+        {
+            return new List<ArgRelayCommand>()
+            {
+                //refueling
+                new ArgRelayCommand(){
+                     Action = new RelayCommand((obj)=>{
+                         SelectedPage = pages[0];
+                     }),
+                     Name = "Refueling"
+
+                },
+                //products
+                new ArgRelayCommand(){
+                     Action = new RelayCommand((obj)=>{
+                         SelectedPage = pages[1];
+                     }),
+                     Name = "Products"
+
+                },
+                //orders
+                new ArgRelayCommand(){
+                     Action = new RelayCommand((obj)=>{
+                         SelectedPage = pages[2];
+                         }),
+                     Name = "Orders"
+
+                },
+                 new ArgRelayCommand(){
+                     Action = new RelayCommand((obj)=>{
+                            DataBaseData.getInstance().Exit();
+                            DataBaseData.getInstance().GoToShopPage();
+                         }),
+                     Name = "Exit"
+
+                },
+            };
+        }
+        #endregion
+
         public ViewModelEmployee()
         {
-            CommandList = new List<RelayCommand>()
+            pages = new List<string>()
             {
-                new RelayCommand((obj) =>
-                {
-                    MessageBox.Show("1");
-                }),
-                new RelayCommand((obj) =>
-                {
-                    MessageBox.Show("2");
-
-                }),
-                new RelayCommand((obj) =>
-                {
-                    MessageBox.Show("3");
-
-                })
+                "/Components/View/Pages/EmployeeControls/Frames/Refueling.xaml",
+                "/Components/View/Pages/EmployeeControls/Frames/ProductManagment.xaml",
+                "/Components/View/Pages/EmployeeControls/Frames/OrderManagment.xaml"
             };
+            CommandList = GetCommands();
+            SelectedPage = pages[0];
+            
         }
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
