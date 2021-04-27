@@ -3,11 +3,23 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:FogOilAssistant.Components.View.Pages.Signed"
+      xmlns:local="clr-namespace:FogOilAssistant.Components.View.Pages.Signed" xmlns:vm="clr-namespace:FogOilAssistant.Components.Models.Pages.Signed" xmlns:options="clr-namespace:FogOilAssistant.Components.View.Pages.EmployeeControls"
       mc:Ignorable="d" 
       Title="Employee">
 
+    <Page.DataContext>
+        <vm:ViewModelEmployee/>
+    </Page.DataContext>
+    <Page.Resources>
+        <ResourceDictionary Source="/Components/Dictionary/Pages/Signed/EmployeeDictionary.xaml"/>
+    </Page.Resources>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <options:Options ActionProp="{Binding CommandList}"/>
         
     </Grid>
 </Page>

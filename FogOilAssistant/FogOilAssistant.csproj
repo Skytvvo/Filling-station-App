@@ -132,6 +132,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Components\Dictionary\Pages\Signed\EmployeeDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Components\Dictionary\Pages\Signed\ProfileDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -154,6 +158,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Components\View\BindablePasswordBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\View\Pages\EmployeeControls\Options.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -271,6 +279,7 @@
     <Compile Include="Components\Models\Basket\ViewModelBasketProducts.cs" />
     <Compile Include="Components\Models\MainWindow\MWICommand.cs" />
     <Compile Include="Components\Models\MainWindow\ViewModelMW.cs" />
+    <Compile Include="Components\Models\Pages\Signed\ViewModelEmployee.cs" />
     <Compile Include="Components\Models\Pages\Signed\ViewModelProfile.cs" />
     <Compile Include="Components\Models\Pages\ViewModelAuth.cs" />
     <Compile Include="Components\Models\Pages\ViewModelMap.cs" />
@@ -283,6 +292,9 @@
     </Compile>
     <Compile Include="Components\View\BindablePasswordBox.xaml.cs">
       <DependentUpon>BindablePasswordBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\View\Pages\EmployeeControls\Options.xaml.cs">
+      <DependentUpon>Options.xaml</DependentUpon>
     </Compile>
     <Compile Include="Components\View\Pages\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
@@ -457,7 +469,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Components\Models\Pages\NotifyViewModel\" />
-    <Folder Include="Components\View\Pages\NotifyView\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

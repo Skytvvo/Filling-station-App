@@ -94,3 +94,6 @@ C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\Admin.ba
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\Employee.baml
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\Profile.baml
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\Dictionary\Pages\Signed\ProfileDictionary.baml
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\Dictionary\Pages\Signed\EmployeeDictionary.baml
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\EmployeeControls\Options.g.cs
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\EmployeeControls\Options.baml
