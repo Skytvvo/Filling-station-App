@@ -122,7 +122,27 @@ namespace FogOilAssistant.Components.Data.GlobalStorage
             }
         }
 
-    
+        public void Exit()
+        {
+            this.MenuList.Remove(MenuList.Last());
+            MenuList.Add(new ButtonMenu { Path = "/Components/Images/login.svg", Text = "Login" });
+            UserId = 0;
+            Login = null;
+            basketProducts.Clear();
+        }
+        public void GoToShopPage()
+        {
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window.GetType() == typeof(FogOilAssistant.MainWindow))
+                {
+                    (window as FogOilAssistant.MainWindow).Frame.Navigate(new Uri(string.Format("{0}{1}{2}", "/Components/View/Pages/", "Shop", ".xaml"), UriKind.RelativeOrAbsolute));
+
+                }
+            }
+
+        }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 

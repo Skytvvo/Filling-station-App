@@ -187,7 +187,6 @@ namespace FogOilAssistant.Components.Models.Pages.Signed
         public CommandViewModel ShowOrders { get => new CommandViewModel(showOrders); }
         public CommandViewModel ShowHistory { get => new CommandViewModel(showHistory); }
         public CommandViewModel ShowDelivered { get => new CommandViewModel(showDelivered); }
-        public CommandViewModel AboutBonus { get => new CommandViewModel(aboutBonus); }
         public CommandViewModel TotallOil { get => new CommandViewModel(totalOil); }
         public CommandViewModel CloseAbout { get => new CommandViewModel(() =>
           {
@@ -195,7 +194,12 @@ namespace FogOilAssistant.Components.Models.Pages.Signed
               BtnVisibility = false;
           });
         }
-
+        public CommandViewModel Exit { get => new CommandViewModel(() =>
+         {
+             DataBaseData.getInstance().Exit();
+             DataBaseData.getInstance().GoToShopPage();
+         });
+        }
         public RelayCommand ImplementAction { get => new RelayCommand((obj) =>
         {
             try
@@ -332,10 +336,7 @@ namespace FogOilAssistant.Components.Models.Pages.Signed
             }
         }
 
-        private void aboutBonus()
-        {
-            MessageBox.Show("Bonus");
-        }
+      
         
         private void totalOil()
         {

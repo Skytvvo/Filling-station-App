@@ -51,7 +51,7 @@
                 <TextBlock Text="{Binding DeliveredInfo}" Style="{StaticResource profile_btn_blocktext_style}" />
             </Button>
             <!--Bonus-->
-            <Button Command="{Binding AboutBonus}" Grid.Column="2" Style="{StaticResource profile_btn_style}">
+            <Button Grid.Column="2" Style="{StaticResource profile_btn_style}">
                 <TextBlock Text="{Binding BonusInfo}" Style="{StaticResource profile_btn_blocktext_style}" />
             </Button>
             <!--Total Oil-->
@@ -59,11 +59,14 @@
                 <TextBlock Text="{Binding TotalOilInfo}" Style="{StaticResource profile_btn_blocktext_style}" />
             </Button>
 
+            <Button  Grid.Row="1" Grid.Column="3" Style="{StaticResource profile_btn_style}" Command="{Binding Exit}">
+                <TextBlock Text="Exit" Style="{StaticResource profile_btn_blocktext_style}"/>
+            </Button>
             <!--Nick-->
-            <TextBlock Text="{Binding NickInfo}" Grid.Column="3" Grid.ColumnSpan="2" Style="{StaticResource profile_btn_blocktext_style}" />
+            <TextBlock Text="{Binding NickInfo}" Grid.Column="4" Style="{StaticResource profile_btn_blocktext_style}" />
             
             <!--Root-->
-            <TextBlock Text="{Binding RootInfo}" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="1" Style="{StaticResource profile_btn_blocktext_style}" />
+            <TextBlock Text="{Binding RootInfo}" Grid.Column="4"  Grid.Row="1" Style="{StaticResource profile_btn_blocktext_style}" />
             
             <!--Avatar-->
             <Grid HorizontalAlignment="Left" VerticalAlignment="Center"  Grid.Column="5" Grid.RowSpan="2">

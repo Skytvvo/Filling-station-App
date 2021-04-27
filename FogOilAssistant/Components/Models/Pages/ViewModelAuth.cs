@@ -311,7 +311,7 @@ namespace FogOilAssistant.Components.Models.Pages
 
                     AddMenuItem(user.Root);
 
-                    GoToShopPage();
+                    DataBaseData.getInstance().GoToShopPage();
                 }
             }
             catch(Exception e)
@@ -355,7 +355,7 @@ namespace FogOilAssistant.Components.Models.Pages
                     }
 
                     AddMenuItem(newUser.Root);
-                    GoToShopPage();
+                    DataBaseData.getInstance().GoToShopPage();
                 }
             }
             catch(Exception e)
@@ -373,18 +373,7 @@ namespace FogOilAssistant.Components.Models.Pages
             notifyTimer.Start();
         }
 
-        private FogOilAssistant.MainWindow GoToShopPage()
-        {
-            foreach (Window window in Application.Current.Windows)
-            {
-                if (window.GetType() == typeof(FogOilAssistant.MainWindow))
-                {
-                    (window as FogOilAssistant.MainWindow).Frame.Navigate(new Uri(string.Format("{0}{1}{2}", "/Components/View/Pages/", "Shop", ".xaml"), UriKind.RelativeOrAbsolute));
-
-                }
-            }
-            return null;
-        }
+        
 
 
         private void AddMenuItem(int id)
