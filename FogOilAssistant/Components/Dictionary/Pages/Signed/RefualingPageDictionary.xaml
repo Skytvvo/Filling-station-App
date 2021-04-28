@@ -24,4 +24,52 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style x:Key="product_item_behind" TargetType="Grid">
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Background" Value="#1E1E1E"/>
+                
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <BlurEffect Radius="20" KernelType="Gaussian"/>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <DataTrigger Binding="{Binding ElementName=over_btn, Path=IsMouseOver}" Value="True">
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <BlurEffect Radius="20" KernelType="Gaussian"/>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="about_btn_style" TargetType="Button">
+        <Setter Property="Background" Value="#1E1E1E"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Opacity" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border BorderBrush="#FF0000" BorderThickness="2" Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FF0000"/>
+                <Setter Property="Opacity" Value="1"/>
+            </Trigger>
+            <DataTrigger Binding="{Binding ElementName=behind_block, Path=IsMouseOver}" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>

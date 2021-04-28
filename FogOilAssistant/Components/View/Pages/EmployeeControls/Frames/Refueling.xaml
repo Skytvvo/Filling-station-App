@@ -76,20 +76,28 @@
                                 <ColumnDefinition Width="0.3*"/>
                                 <ColumnDefinition Width="0.7*"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Text="Volume: " Style="{StaticResource description_text}"/>
+                            <TextBlock Text="Volume: "  Style="{StaticResource description_text}"/>
                             <Border Grid.Column="1" BorderBrush="#ff0000" BorderThickness="2">
-                                <TextBox BorderThickness="2" BorderBrush="#ff0000"  Margin="0" Text="{Binding Volume}" Style="{StaticResource user_input}" />
+                                <TextBox BorderThickness="2" BorderBrush="#ff0000"  Margin="0" Text="{Binding Volume, Mode=TwoWay, 
+                        UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource user_input}" />
                             </Border>
                         </Grid>
-                        <Button Height="50" Style="{StaticResource  profile_btn_style}" Margin="0,20">
-                            <TextBlock Text="Refuel" Style="{StaticResource description_text}"/>
+                        <Button 
+                            IsEnabled="{Binding BtnEnabled}"
+                            Height="50"
+                            Command="{Binding RefuelUser}"
+                            Style="{StaticResource  profile_btn_style}" 
+                            Margin="0,20"
+                            Opacity="{Binding BtnOpacity}"
+                            >
+                            <TextBlock IsEnabled="False" Text="Refuel" Style="{StaticResource description_text}"/>
                         </Button>
                     </StackPanel>
                 </Grid>
             </Grid>
             
             <!--Products-->
-                <Grid Grid.Column="1">
+                <Grid Grid.Column="1" x:Name="externel_item">
                 <ScrollViewer   VerticalScrollBarVisibility="Hidden">
 
                     <ItemsControl ItemsSource="{Binding Purchase}" >
@@ -100,11 +108,11 @@
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Border>
+                                <Border  >
                                     <Border.Style>
                                         <Style TargetType="Border">
                                             <!--Trouble with color binding-->
-                                            <Setter Property="BorderBrush" Value="Red"/>
+                                            <Setter Property="BorderBrush" Value="{Binding Color}"/>
                                             <Setter Property="BorderThickness" Value="2"/>
                                             <Setter Property="Width" Value="180"/>
                                             <Setter Property="Height" Value="180"/>
@@ -112,23 +120,36 @@
                                         </Style>
                                     </Border.Style>
                                     <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="0.5*"/>
-                                            <RowDefinition Height="0.3*"/>
-                                            <RowDefinition Height="0.2*"/>
-                                        </Grid.RowDefinitions>
-                                        <Grid  HorizontalAlignment="Center" VerticalAlignment="Center">
-                                            <Image Source="{Binding Img}" Margin="5"/>
+                                        <Grid x:Name="behind_block" Style="{StaticResource product_item_behind}">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="0.5*"/>
+                                                <RowDefinition Height="0.3*"/>
+                                                <RowDefinition Height="0.2*"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid  IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <Image Source="{Binding Img}" Margin="5"/>
+                                            </Grid>
+                                            <TextBlock  IsEnabled="False" Grid.Row="1" TextAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource description_text}" Text="{Binding Name}"/>
+                                            <Grid  IsEnabled="False" Grid.Row="2">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="0.5*"/>
+                                                    <ColumnDefinition Width="0.5*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Text="ID:" Style="{StaticResource description_text}" HorizontalAlignment="Right"/>
+                                                <TextBlock Grid.Column="1" Style="{StaticResource description_text}" Text="{Binding ID}" HorizontalAlignment="Left"/>
+                                            </Grid>
                                         </Grid>
-                                        <TextBlock Grid.Row="1" TextAlignment="Center" Style="{StaticResource description_text}" Text="{Binding Name}"/>
-                                        <Grid Grid.Row="2">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="0.5*"/>
-                                                <ColumnDefinition Width="0.5*"/>
-                                            </Grid.ColumnDefinitions>
-                                            <TextBlock Text="ID:" Style="{StaticResource description_text}" HorizontalAlignment="Right"/>
-                                            <TextBlock Grid.Column="1" Style="{StaticResource description_text}" Text="{Binding ID}" HorizontalAlignment="Left"/>
-                                        </Grid>
+                                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <Button 
+                                                x:Name="over_btn"  
+                                                Style="{StaticResource  about_btn_style}"
+                                                Command="{Binding ElementName=externel_item, Path=DataContext.ShowAbout}"
+                                                CommandParameter="{Binding}"
+                                                >
+                                                <TextBlock Margin="20,10" Style="{StaticResource description_text}" Text="About"></TextBlock>
+                                            </Button>
+                                        </StackPanel>
+
                                     </Grid>
                                     
                                 </Border>
@@ -137,6 +158,91 @@
                     </ItemsControl>
                 </ScrollViewer>
             </Grid>
+        </Grid>
+        <Grid Grid.RowSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.15*"/>
+                <ColumnDefinition Width="0.7*"/>
+                <ColumnDefinition Width="0.15*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.85*"/>
+                <RowDefinition Height="0.15*"/>
+            </Grid.RowDefinitions>
+            <Border BorderBrush="#ff0000"  Visibility="{Binding AboutVisibility, Converter={StaticResource BooleanToVisibilityConverter}}" BorderThickness="2" Background="#212122"  Grid.Column="1">
+
+                <Grid DataContext="{Binding SelectedProduct}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.3*"/>
+                        <ColumnDefinition Width="0.7*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.7*"/>
+                        <RowDefinition Height="0.3*"/>
+                    </Grid.RowDefinitions>
+                    <Grid HorizontalAlignment="Center" VerticalAlignment="Top">
+                        <Image Source="{Binding Img}" Margin="20"/>
+                    </Grid>
+
+                    <ScrollViewer  Grid.RowSpan="2"  Grid.Column="1"  HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
+                        <StackPanel HorizontalAlignment="Center" Grid.RowSpan="2"  Grid.Column="1" Orientation="Vertical" >
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <TextBlock Margin="20"  Style="{StaticResource profile_btn_blocktext_style}" Text="Product:" />
+                                <TextBlock Margin="20" Text="{Binding Name}" Style="{StaticResource profile_btn_blocktext_style}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <TextBlock Margin="20"  Style="{StaticResource profile_btn_blocktext_style}" Text="ID:" />
+                                <TextBlock Margin="20"  Text="{Binding ID}" Style="{StaticResource profile_btn_blocktext_style}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <TextBlock Margin="20"  Style="{StaticResource profile_btn_blocktext_style}" Text="Price:" />
+                                <TextBlock Margin="20"  Text="{Binding Price}" Style="{StaticResource profile_btn_blocktext_style}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <TextBlock Margin="20" Foreground="{Binding Color}"  Text="{Binding Status}" Style="{StaticResource profile_btn_blocktext_style}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Margin="20"  Text="{Binding Addres}" Style="{StaticResource profile_btn_blocktext_style}"/>
+
+                            </StackPanel>
+                            <StackPanel HorizontalAlignment="Left">
+                                <TextBlock Margin="20"  Style="{StaticResource profile_btn_blocktext_style}" Text="Descripion:" />
+                            </StackPanel>
+                            <TextBlock Margin="20" MaxWidth="450"  Text="{Binding Description}" Style="{StaticResource profile_btn_blocktext_style}"/>
+                            
+
+                        </StackPanel>
+                    </ScrollViewer>
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button  Command="{ Binding ElementName=externel_item, Path=DataContext.CloseAbout}" Margin="15" Style="{StaticResource profile_btn_style}">
+                                <TextBlock Text="Close" Style="{StaticResource profile_btn_blocktext_style}"/>
+                            </Button>
+                            <Button Grid.Column="1" Grid.ColumnSpan="2" BorderBrush="{ Binding Color}" Margin="15" 
+                                    Visibility="{Binding ElementName=externel_item, Path=DataContext.BtnVisibility,Converter={StaticResource BooleanToVisibilityConverter}}"
+                                    Style="{StaticResource profile_btn_style}"
+                                    Command="{Binding ElementName=externel_item, Path=DataContext.ProductAction}"
+                                    
+                                    >
+                                <TextBlock Text="{Binding ElementName=externel_item, Path=DataContext.ProductBtnText}" Style="{StaticResource profile_btn_blocktext_style}"/>
+                            </Button>
+
+
+                        </Grid>
+                    </Grid>
+
+                </Grid>
+            </Border>
         </Grid>
     </Grid>
 </Page>

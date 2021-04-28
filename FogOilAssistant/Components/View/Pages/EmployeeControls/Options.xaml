@@ -37,7 +37,7 @@
         </ItemsControl>
         <!--genaral options-->
         <Grid Grid.Column="1">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                 <TextBlock Text="Root: " Style="{StaticResource profile_btn_blocktext_style}"></TextBlock>
                 <TextBlock Text="{Binding Root, RelativeSource={RelativeSource AncestorType=UserControl}}" Style="{StaticResource profile_btn_blocktext_style}"/>
                 <svgc:SvgViewbox Margin="10" Height="50"  Source= "{Binding  SvgPath, RelativeSource={RelativeSource AncestorType=UserControl}}"/>

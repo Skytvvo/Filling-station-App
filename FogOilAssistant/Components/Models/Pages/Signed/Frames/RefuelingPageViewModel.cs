@@ -4,7 +4,10 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Media;
 using FogOilAssistant.Components.Data;
 using FogOilAssistant.Components.Data.Pages.Signed;
 using FogOilAssistant.Components.Database;
@@ -13,6 +16,46 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
 {
     public class RefuelingPageViewModel : INotifyPropertyChanged
     {
+        #region refuel callback
+            
+
+
+        private bool btnEnabled = false;
+        public bool BtnEnabled
+        {
+            get => btnEnabled;
+            set
+            {
+                btnEnabled = value;
+                OnPropertyChanged("BtnEnabled");
+            }
+        }
+
+        private double btnOpacity = 0.3;
+        public double BtnOpacity
+        {
+            get => btnOpacity;
+            set
+            {
+                btnOpacity = value;
+                OnPropertyChanged("BtnOpacity");
+            }
+        }
+
+        private void EnableButton()
+        {
+            BtnOpacity = 1;
+            BtnEnabled = true;
+        }
+        private void DisableButton()
+        {
+            Volume = "";
+
+            BtnOpacity = 0.3;
+            BtnEnabled = false;
+        }
+        #endregion
+
         #region user prop
         private string nick;
         public string Nick 
@@ -51,14 +94,18 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
         }
 
 
-        private string volume = "0";
+        private string volume = "";
         public string Volume 
         { 
             get => volume; 
             set
             {
-                volume = value;
-                OnPropertyChanged("Volume");
+                if (Regex.IsMatch(value, @"^[0-9]*(?:\.[0-9]*)?$")) 
+                {
+                    volume = value;
+                    EnableButton();
+                    OnPropertyChanged("Volume");
+                }
             }
         }
 
@@ -88,11 +135,20 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
             {
                 using (FogOilEntities db = new FogOilEntities())
                 {
-                    await Task.Run(() =>
-                    {
+                   
                         userId = db.Users.First(_user => _user.Nick == Nick).UserId;
-                        loadPurchase(userId);
+                         
+                    
+                    //loadPurchase(userId);
+                    await System.Windows.Threading.Dispatcher.CurrentDispatcher.InvokeAsync(() => {
+                        Purchase = (db.Users.Find(userId)).UserProducts
+                            .Where(product => product.OrderStatu.Status == "Ready" || product.OrderStatu.Status == "WishReject")
+                            .Select((prod) => builder
+                            .GetProduct(prod.UserProductsId, new HistoryBuilder(), prod.Product, prod.OrderStatu, prod.Location))
+                            .ToList();
                     });
+                    toAccess();
+
                 }
             }
             catch (Exception e)
@@ -101,25 +157,7 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
             }
         }
 
-        private async void loadPurchase(int id)
-        {
-            try
-            {
-                using (FogOilEntities db = new FogOilEntities())
-                {
-                    Purchase = (await db.Users.FindAsync(userId)).UserProducts
-                            .Where(product => product.OrderStatu.Status == "Ready")
-                            .Select((prod) => builder
-                            .GetProduct(prod.UserProductsId, new HistoryBuilder(), prod.Product, prod.OrderStatu, prod.Location))
-                            .ToList();
-                }
-                toAccess();
-            }
-            catch (Exception e)
-            {
-                toDeny();
-            }
-        }
+        
 
         
         #endregion
@@ -141,13 +179,130 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
         #endregion
 
 
-        #region Commands
-        public CommandViewModel FindUser { get => new CommandViewModel(findUser); }
+        #region Commands Methods
+        private async void rejectProduct()
+        {
+            try
+            {
+                using (FogOilEntities db = new FogOilEntities())
+                {
+                    (await db.UserProducts.FindAsync(SelectedProduct.ID)).Status = 2;
+                    await db.SaveChangesAsync();
+                }
+                closeAbout();
+                findUser();
+                
+            }
+            catch(Exception e)
+            {
+                DisableButton();
+            }
+        }
+
+        private async void completeOrder()
+        {
+            try
+            {
+                using (FogOilEntities db = new FogOilEntities())
+                {
+                    (await db.UserProducts.FindAsync(SelectedProduct.ID)).Status = 6;
+                    await db.SaveChangesAsync();
+                }
+                closeAbout();
+                findUser();
+
+            }
+            catch (Exception e)
+            {
+                DisableButton();
+            }
+        }
         #endregion
 
-        #region oil prop
+        #region Commands
+        public CommandViewModel FindUser { get => new CommandViewModel(findUser); }
+        public CommandViewModel RefuelUser { get => new CommandViewModel(async ()=> {
+            try
+            {
+                using(FogOilEntities db = new FogOilEntities())
+                {
+                    (await db.Users.FindAsync(userId)).Oil += Math.Round((Convert.ToDouble(volume)* Fuels[SelectedIndex].Price),2);
+                    var result = (await db.Users.FindAsync(userId)).Oil;
+                    if (result > 5000)
+                    {
+                        result -= 5000;
+                    }
+                    (await db.Users.FindAsync(userId)).Bonus = Math.Round((result / 100), 2);
+                    await db.SaveChangesAsync();
 
-        private bool functionAccess = false;
+
+
+                }
+                DisableButton();
+            }
+            catch(Exception e)
+            {
+
+            }
+        }); }
+
+        public RelayCommand ShowAbout { get => new RelayCommand((obj)=> {
+
+            try
+            {
+                SelectedProduct = Purchase.First(item=> item.ID == (obj as ProductPresenter).ID);
+                AboutVisibility = true;
+                BtnVisibility = true;
+                if((obj as ProductPresenter).StatusId == 5)
+                {
+                    //change color for border
+                    //add event
+                    ProductBtnText = "Reject";
+                    ProductAction = new CommandViewModel(rejectProduct);
+
+                }
+                if ((obj as ProductPresenter).StatusId == 3)
+                {
+                    ProductBtnText = "Complete";
+                    ProductAction = new CommandViewModel(completeOrder);
+                }
+                
+
+            }
+            catch (Exception e)
+            {
+                AboutVisibility = false;
+                BtnVisibility = false;
+
+            }
+        }); }
+
+        private CommandViewModel productAction;
+        public CommandViewModel ProductAction {
+            get
+            {
+                return productAction;
+            }
+            set
+            {
+                productAction = value;
+                OnPropertyChanged("ProductAction");
+            }
+        
+        }
+        public CommandViewModel CloseAbout { get => new CommandViewModel(closeAbout); }
+        private void closeAbout()
+        {
+            AboutVisibility = false;
+            BtnVisibility = false;
+
+        }
+
+    #endregion
+
+    #region oil prop
+
+    private bool functionAccess = false;
         public bool FunctionAccess 
         { 
             get => functionAccess;
@@ -176,7 +331,8 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
 
         #region user purchase
         private UserProductsBuilder builder = new UserProductsBuilder();
-
+        
+        //collection
         private List<ProductPresenter> purchase;
         public List<ProductPresenter> Purchase 
         { 
@@ -188,6 +344,66 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
             }
         }
 
+        private ProductPresenter selectedProduct;
+        public ProductPresenter SelectedProduct
+        {
+            get => selectedProduct;
+            set
+            {
+                selectedProduct = value;
+                OnPropertyChanged("SelectedProduct");
+            }
+        }
+
+        private bool aboutVisibility = false;
+        public bool AboutVisibility
+        {
+            get => aboutVisibility;
+            set
+            {
+                aboutVisibility = value;
+                OnPropertyChanged("AboutVisibility");
+            }
+        }
+
+        private bool btnVisibility = false;
+        public bool BtnVisibility
+        {
+            get => btnVisibility;
+            set
+            {
+                btnVisibility = value;
+                OnPropertyChanged("BtnVisibility");
+            }
+        }
+
+        //private SolidColorBrush color = new SolidColorBrush(Colors.White);
+        //public SolidColorBrush Color
+        //{
+        //    get
+        //    {
+        //        return color;
+        //    }
+        //    set
+        //    {
+        //        color = value;
+        //        OnPropertyChanged("Color");
+        //    }
+        //}
+
+        private string productBtnText = "Loading...";
+        public string ProductBtnText
+        {
+            get
+            {
+                return productBtnText;
+            }
+            set
+            {
+                productBtnText = value;
+                OnPropertyChanged("ProductBtnText");
+            }
+        }
 
         #endregion
 
@@ -202,6 +418,7 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
         #region constructor
         public RefuelingPageViewModel()
         {
+            
             getFuel();
         }
         #endregion
