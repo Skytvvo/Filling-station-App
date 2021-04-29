@@ -127,7 +127,7 @@
                                                 <RowDefinition Height="0.2*"/>
                                             </Grid.RowDefinitions>
                                             <Grid  IsEnabled="False" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <Image Source="{Binding Img}" Margin="5"/>
+                                                <Image Source="{Binding ImgCode, Converter={StaticResource ImageSourceConvertor}}" Margin="5"/>
                                             </Grid>
                                             <TextBlock  IsEnabled="False" Grid.Row="1" TextAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource description_text}" Text="{Binding Name}"/>
                                             <Grid  IsEnabled="False" Grid.Row="2">
@@ -181,7 +181,7 @@
                         <RowDefinition Height="0.3*"/>
                     </Grid.RowDefinitions>
                     <Grid HorizontalAlignment="Center" VerticalAlignment="Top">
-                        <Image Source="{Binding Img}" Margin="20"/>
+                        <Image Source="{Binding ImgCode, Converter={StaticResource ImageSourceConvertor}}" Margin="20"/>
                     </Grid>
 
                     <ScrollViewer  Grid.RowSpan="2"  Grid.Column="1"  HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">

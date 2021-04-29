@@ -117,8 +117,12 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
 
-                                      
-                                        <Image Grid.Column="0"   Style="{StaticResource product_img}" Source="{Binding Img}" />
+
+                                        <Image Grid.Column="0"     Style="{StaticResource product_img}" Source="{Binding ImgCode, Converter={StaticResource ImageSourceConvertor}}" >
+                                            <!--<Image.Source>
+                                                <BitmapImage DecodePixelWidth="200" StreamSource="{Binding ImgCode}"/>
+                                            </Image.Source>-->
+                                        </Image>
                                         <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource product_name}" Text="{Binding Name}"/>
                                         <TextBlock Grid.Column="3" Grid.ColumnSpan="2" Style="{StaticResource product_price}" Text="{Binding Price}" TextWrapping="Wrap" TextTrimming="WordEllipsis"/>
                                         <!--Symbols limit - 695-->

@@ -182,7 +182,7 @@
     <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Price" Type="Double" Nullable="false" />
     <Property Name="Description" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
-    <Property Name="Img" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ImgCode" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
     <NavigationProperty Name="Baskets" Relationship="FogOilModel.FK_Basket_Products" FromRole="Product" ToRole="Basket" />
     <NavigationProperty Name="UserProducts" Relationship="FogOilModel.FK_UserProducts_Products" FromRole="Product" ToRole="UserProduct" />
     <NavigationProperty Name="CarObjects" Relationship="FogOilModel.CarProducts" FromRole="Product" ToRole="CarObject" />

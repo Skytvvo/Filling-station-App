@@ -86,7 +86,7 @@
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Price" Type="float" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="300" Nullable="false" />
-          <Property Name="Img" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ImgCode" Type="varbinary(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Root">
           <Key>
@@ -556,7 +556,7 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Price" Type="Double" Nullable="false" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Name="Img" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ImgCode" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="Baskets" Relationship="FogOilModel.FK_Basket_Products" FromRole="Product" ToRole="Basket" />
           <NavigationProperty Name="UserProducts" Relationship="FogOilModel.FK_UserProducts_Products" FromRole="Product" ToRole="UserProduct" />
           <NavigationProperty Name="CarObjects" Relationship="FogOilModel.CarProducts" FromRole="Product" ToRole="CarObject" />
@@ -835,7 +835,7 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="FogOilModel.Product">
               <MappingFragment StoreEntitySet="Products">
-                <ScalarProperty Name="Img" ColumnName="Img" />
+                <ScalarProperty Name="ImgCode" ColumnName="ImgCode" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Name" ColumnName="Name" />

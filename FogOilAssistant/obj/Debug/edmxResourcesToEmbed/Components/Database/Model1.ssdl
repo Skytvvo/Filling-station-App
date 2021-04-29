@@ -81,7 +81,7 @@
     <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Price" Type="float" Nullable="false" />
     <Property Name="Description" Type="varchar" MaxLength="300" Nullable="false" />
-    <Property Name="Img" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="ImgCode" Type="varbinary(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Root">
     <Key>

@@ -298,6 +298,7 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Components\Data\Commands.cs" />
+    <Compile Include="Components\Data\Convertor\ImageConvertor.cs" />
     <Compile Include="Components\Data\GlobalStorage\DataBaseData.cs" />
     <Compile Include="Components\Data\MenuButton\ButtonMenu.cs" />
     <Compile Include="Components\Data\Pages\Signed\UserProductsBuilder.cs" />
@@ -307,6 +308,7 @@
     <Compile Include="Components\Models\MainWindow\MWICommand.cs" />
     <Compile Include="Components\Models\MainWindow\ViewModelMW.cs" />
     <Compile Include="Components\Models\Pages\Signed\Frames\RefuelingPageViewModel.cs" />
+    <Compile Include="Components\Models\Pages\Signed\Frames\ViewModelProductManagment.cs" />
     <Compile Include="Components\Models\Pages\Signed\ViewModelEmployee.cs" />
     <Compile Include="Components\Models\Pages\Signed\ViewModelProfile.cs" />
     <Compile Include="Components\Models\Pages\ViewModelAuth.cs" />

@@ -38,7 +38,7 @@
                                     <ColumnDefinition Width="*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
 
-                                <Image Margin="5" Source="{Binding Img}"></Image>
+                                <Image Margin="5" Source="{Binding  ImgCode, Converter={StaticResource ImageSourceConvertor}}"></Image>
                                 <TextBlock Grid.Column="1" Text="{Binding Name}" Style="{StaticResource product_name}"></TextBlock>
                                 <TextBlock Grid.Column="2" Text="{Binding Price}" Style="{StaticResource product_name}"></TextBlock>
                                 <TextBlock Grid.Column="3" Text="{Binding Description}" Style="{StaticResource product_name}"></TextBlock>

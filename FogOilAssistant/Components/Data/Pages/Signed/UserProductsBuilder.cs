@@ -26,7 +26,7 @@ namespace FogOilAssistant.Components.Data.Pages.Signed
         public int ID { get; set; }
         public string Description { get; set; }
         public string Price { get; set; }
-        public string Img { get; set; }
+        public Byte[] ImgCode { get; set; }
         public string Name { get; set; }
 
         public double latitude { get; set; }
@@ -90,11 +90,12 @@ namespace FogOilAssistant.Components.Data.Pages.Signed
     {
         public override void BuildProduct(Database.Product product = null, int ID = 0)
         {
-            this.ProductPresenter.Img = product.Img;
             this.ProductPresenter.Name = product.Name;
             this.ProductPresenter.Description = product.Description;
             this.ProductPresenter.Price = product.Price + " BYN";
             this.ProductPresenter.ID = ID;
+            this.ProductPresenter.ImgCode = product.ImgCode;
+
         }
         public override void BuildStatus(Database.OrderStatu status = null)
         {
@@ -135,7 +136,7 @@ namespace FogOilAssistant.Components.Data.Pages.Signed
     {
         public override void BuildProduct(Database.Product product = null, int ID = 0)
         {
-            this.ProductPresenter.Img = product.Img;
+            this.ProductPresenter.ImgCode = product.ImgCode;
             this.ProductPresenter.Name = product.Name;
             this.ProductPresenter.Description = product.Description;
             this.ProductPresenter.Price = product.Price + " BYN";
@@ -185,7 +186,7 @@ namespace FogOilAssistant.Components.Data.Pages.Signed
     {
         public override void BuildProduct(Database.Product product = null, int ID = 0)
         {
-            this.ProductPresenter.Img = product.Img;
+            this.ProductPresenter.ImgCode = product.ImgCode;
             this.ProductPresenter.Name = product.Name;
             this.ProductPresenter.Description = product.Description;
             this.ProductPresenter.Price = product.Price + " BYN";
@@ -217,7 +218,7 @@ namespace FogOilAssistant.Components.Data.Pages.Signed
     {
         public override void BuildProduct(Database.Product product = null, int ID = 0)
         {
-            this.ProductPresenter.Img = product.Img;
+            this.ProductPresenter.ImgCode = product.ImgCode;
             this.ProductPresenter.Name = product.Name;
             this.ProductPresenter.Description = product.Description;
             this.ProductPresenter.Price = product.Price + " BYN";

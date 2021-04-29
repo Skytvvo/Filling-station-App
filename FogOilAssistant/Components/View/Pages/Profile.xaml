@@ -125,7 +125,7 @@
                                         </Grid.RowDefinitions>
 
 
-                                        <Image Source="{Binding Img}" Margin="10"/>
+                                        <Image Source="{Binding ImgCode, Converter={StaticResource ImageSourceConvertor}}" Margin="10"/>
                                         <TextBlock 
                                                 Text="{Binding Name}" 
                                                 Style="{StaticResource profile_btn_blocktext_style}"
@@ -217,7 +217,7 @@
                             <RowDefinition Height="0.3*"/>
                         </Grid.RowDefinitions>
                         <Grid HorizontalAlignment="Center" VerticalAlignment="Top">
-                            <Image Source="{Binding Img}" Margin="20"/>
+                        <Image Source="{Binding ImgCode, Converter={StaticResource ImageSourceConvertor}}" Margin="20"/>
                         </Grid>
 
                     <ScrollViewer  Grid.RowSpan="2"  Grid.Column="1"  HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">

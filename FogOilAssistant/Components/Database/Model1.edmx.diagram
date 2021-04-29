@@ -6,10 +6,10 @@
     <edmx:Diagrams>
       <Diagram DiagramId="1d14d6e43f5c4f4798be79ec9939759c" Name="Diagram1">
         <EntityTypeShape EntityType="FogOilModel.Basket" Width="1.5" PointX="7.5" PointY="3.875" />
-        <EntityTypeShape EntityType="FogOilModel.CarBrand" Width="1.5" PointX="0.75" PointY="4.125" />
-        <EntityTypeShape EntityType="FogOilModel.CarModel" Width="1.5" PointX="0.75" PointY="7.25" />
+        <EntityTypeShape EntityType="FogOilModel.CarBrand" Width="1.5" PointX="0.75" PointY="1" />
+        <EntityTypeShape EntityType="FogOilModel.CarModel" Width="1.5" PointX="0.75" PointY="4.125" />
         <EntityTypeShape EntityType="FogOilModel.CarObject" Width="1.5" PointX="3" PointY="3.5" />
-        <EntityTypeShape EntityType="FogOilModel.CarType" Width="1.5" PointX="0.75" PointY="1" />
+        <EntityTypeShape EntityType="FogOilModel.CarType" Width="1.5" PointX="0.75" PointY="7.25" />
         <EntityTypeShape EntityType="FogOilModel.Fuel" Width="1.5" PointX="7.75" PointY="10.875" />
         <EntityTypeShape EntityType="FogOilModel.Location" Width="1.5" PointX="8.25" PointY="0.75" />
         <EntityTypeShape EntityType="FogOilModel.OrderStatu" Width="1.5" PointX="8.25" PointY="7.5" />

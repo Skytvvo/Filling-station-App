@@ -99,7 +99,7 @@
     <EntitySetMapping Name="Products">
       <EntityTypeMapping TypeName="FogOilModel.Product">
         <MappingFragment StoreEntitySet="Products">
-          <ScalarProperty Name="Img" ColumnName="Img" />
+          <ScalarProperty Name="ImgCode" ColumnName="ImgCode" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="Name" ColumnName="Name" />
