@@ -13,7 +13,7 @@ namespace FogOilAssistant.Components.Data.Convertor
 {
     public class ImageConvertor : IValueConverter
     {
-        public BitmapImage ConvertByteArrayToBitMapImage(byte[] imageByteArray)
+        public static BitmapImage ConvertByteArrayToBitMapImage(byte[] imageByteArray)
         {
             var image = new BitmapImage();
             using (var mem = new MemoryStream(imageByteArray))

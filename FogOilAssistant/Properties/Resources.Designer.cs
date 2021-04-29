@@ -393,6 +393,16 @@ namespace FogOilAssistant.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
+        internal static byte[] upload {
+            get {
+                object obj = ResourceManager.GetObject("upload", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
         internal static byte[] user {
             get {
                 object obj = ResourceManager.GetObject("user", resourceCulture);

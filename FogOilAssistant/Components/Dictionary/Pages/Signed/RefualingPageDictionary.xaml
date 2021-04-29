@@ -72,4 +72,33 @@
             </DataTrigger>
         </Style.Triggers>
     </Style>
+
+    <Style x:Key="product_behind" TargetType="Grid" BasedOn="{StaticResource product_item_behind}">
+        <Setter Property="Background" Value="#FF222121"/>
+        <Setter Property="Height" Value="200"/>
+        <Setter Property="Margin" Value="15"/>
+    </Style>
+
+    <Style x:Key="change_picture" TargetType="Button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Opacity" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border BorderBrush="#FF0000" BorderThickness="2" Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding ElementName=changing_picture, Path=IsMouseOver}" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+            </DataTrigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>

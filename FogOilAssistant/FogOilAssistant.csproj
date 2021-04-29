@@ -485,6 +485,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Resource Include="Components\Images\upload.svg" />
     <Resource Include="Components\Images\ViewModels\Signed\refuel.svg" />
     <Resource Include="Components\Images\ViewModels\Signed\user.svg" />
     <Resource Include="Components\Images\ViewModels\Signed\employee.svg" />
