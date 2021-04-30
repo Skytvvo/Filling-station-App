@@ -185,6 +185,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Components\View\Pages\EmployeeControls\ModifinedTextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Components\View\Pages\EmployeeControls\Options.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -301,6 +305,7 @@
     <Compile Include="Components\Data\Convertor\ImageConvertor.cs" />
     <Compile Include="Components\Data\GlobalStorage\DataBaseData.cs" />
     <Compile Include="Components\Data\MenuButton\ButtonMenu.cs" />
+    <Compile Include="Components\Data\Pages\Signed\TextBoxProp.cs" />
     <Compile Include="Components\Data\Pages\Signed\UserProductsBuilder.cs" />
     <Compile Include="Components\Data\Pages\Support\Feedback.cs" />
     <Compile Include="Components\Data\Pages\Support\Item.cs" />
@@ -337,6 +342,9 @@
     </Compile>
     <Compile Include="Components\View\Pages\EmployeeControls\Frames\UserManagment.xaml.cs">
       <DependentUpon>UserManagment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\View\Pages\EmployeeControls\ModifinedTextBox.xaml.cs">
+      <DependentUpon>ModifinedTextBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Components\View\Pages\EmployeeControls\Options.xaml.cs">
       <DependentUpon>Options.xaml</DependentUpon>

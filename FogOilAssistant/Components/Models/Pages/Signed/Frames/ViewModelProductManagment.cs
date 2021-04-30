@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Media.Imaging;
 using FogOilAssistant.Components.Data;
 using FogOilAssistant.Components.Data.Convertor;
+using FogOilAssistant.Components.Data.Pages.Signed;
 using FogOilAssistant.Components.Database;
 
 namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
@@ -53,21 +54,23 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
                 OnPropertyChanged("ProductName");
             }
         }
-
-        private string productDescription;
-        public string ProductDescription
+        //description
+       
+        private TextBoxProp description = new TextBoxProp();
+        public TextBoxProp Description
         {
             get
             {
-                return productDescription;
+                return description;
             }
             set
             {
-                productDescription = value;
-                OnPropertyChanged("ProductDescription");
+                description = value;
+                OnPropertyChanged("Description");
             }
         }
 
+        //==============
         public double productPrice;
         public string ProductPrice
         {
@@ -108,6 +111,19 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
             }
         }
 
+        private int caretIndex = 0;
+        public int DescIndex
+        {
+            get
+            {
+                return caretIndex;
+            }
+            set
+            {
+                caretIndex = value;
+                OnPropertyChanged("DescIndex");
+            }
+        }
         #endregion
 
         #region Products
@@ -150,11 +166,10 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
         #region
         public RelayCommand EditProduct { get => new RelayCommand((obj)=> {
             SelectedProduct = (obj as Product);
-            ProductDescription = SelectedProduct.Description;
             ProductImage = ImageConvertor.ConvertByteArrayToBitMapImage(SelectedProduct.ImgCode);
             ProductName = SelectedProduct.Name;
             ProductPrice = SelectedProduct.Price.ToString();
-
+            Description = new TextBoxProp() { Index = 0, Text = SelectedProduct.Description };
             EditVisibility = true;
         }); 
         }
@@ -167,9 +182,7 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
 
         public CommandViewModel DeleteSelected { get => new CommandViewModel(deleteSelected); }
 
-        public CommandViewModel EnteringEnter { get => new CommandViewModel(() => {
-            ProductDescription = ProductDescription + '\n';
-        }); }
+        
 
         #endregion
 

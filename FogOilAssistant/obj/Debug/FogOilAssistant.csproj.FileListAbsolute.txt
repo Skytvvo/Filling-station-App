@@ -108,3 +108,5 @@ C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\Employee
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\Dictionary\Pages\Signed\RefualingPageDictionary.baml
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\EmployeeControls\Frames\Refueling.g.cs
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\EmployeeControls\Frames\Refueling.baml
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\EmployeeControls\ModifinedTextBox.g.cs
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\EmployeeControls\ModifinedTextBox.baml

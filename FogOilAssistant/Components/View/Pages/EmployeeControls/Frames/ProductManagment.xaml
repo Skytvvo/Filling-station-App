@@ -3,7 +3,9 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:FogOilAssistant.Components.View.Pages.EmployeeControls.Frames" xmlns:vm="clr-namespace:FogOilAssistant.Components.Models.Pages.Signed.Frames" xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
+      xmlns:local="clr-namespace:FogOilAssistant.Components.View.Pages.EmployeeControls.Frames" 
+      xmlns:vm="clr-namespace:FogOilAssistant.Components.Models.Pages.Signed.Frames" xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
+      xmlns:modtextbox="clr-namespace:FogOilAssistant.Components.View.Pages.EmployeeControls"
       mc:Ignorable="d" 
       Title="ProductManagment">
 
@@ -141,9 +143,9 @@
 
                             <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="1">
                                 <TextBlock Text="Name:" Style="{StaticResource description_text}" Margin="0,10"/>
-                                <TextBox Text="{Binding ProductName, Mode=TwoWay}" Style="{StaticResource user_input}" Margin="0,10"/>
+                                <TextBox Text="{Binding ProductName, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource user_input}" Margin="0,10"/>
                                 <TextBlock Text="Price:" Style="{StaticResource description_text}" Margin="0,10" />
-                                <TextBox Text="{Binding ElementName=product_m_page,Path=DataContext.ProductPrice, Mode=TwoWay}" Style="{StaticResource user_input}" Margin="0,10"/>
+                                <TextBox  Text="{Binding ElementName=product_m_page,Path=DataContext.ProductPrice, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource user_input}" Margin="0,10"/>
                                 <WrapPanel HorizontalAlignment="Stretch">
                                     <Button Command="{Binding CloseEditor}" Style="{StaticResource profile_btn_style}" >
                                         <TextBlock Text="Cancel" Style="{StaticResource description_text}"/>
@@ -164,11 +166,7 @@
                               
                                 
                                 <TextBlock Text="Description:" Style="{StaticResource description_text}"/>
-                                <TextBox TextWrapping="Wrap"  Text="{Binding ProductDescription, Mode=TwoWay}" Style="{StaticResource user_input}">
-                                    <TextBox.InputBindings>
-                                        <KeyBinding Command="{Binding Path=EnteringEnter}" Key="Enter" />
-                                    </TextBox.InputBindings>
-                                </TextBox>
+                                <modtextbox:ModifinedTextBox Description="{Binding Description}"/>
 
                             </StackPanel>
                         </ScrollViewer>
