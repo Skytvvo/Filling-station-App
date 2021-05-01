@@ -23,6 +23,11 @@ namespace FogOilAssistant.Components.Data.Pages.Signed
 
     public class ProductPresenter
     {
+        public int userID { get; set; }
+        public string userNick { get; set; }
+
+        public int tempID { get; set; }
+
         public int ID { get; set; }
         public string Description { get; set; }
         public string Price { get; set; }
@@ -163,6 +168,7 @@ namespace FogOilAssistant.Components.Data.Pages.Signed
             });
         }
 
+
         public override void BuildLocation(Location location = null)
         {
             this.ProductPresenter.latitude = location.Latitude;
@@ -182,6 +188,35 @@ namespace FogOilAssistant.Components.Data.Pages.Signed
         }
     }
 
+    public class EmployeeOrder : OrderBuilder
+    {
+        public override void BuildStatus(OrderStatu status = null)
+        {
+            if (status.StatusId == 1)
+                this.ProductPresenter.Status = "Processing";
+            else
+                this.ProductPresenter.Status = "Delivering";
+            try
+            {
+                this.ProductPresenter.userID = status.UserProducts.FirstOrDefault().UserId;
+                this.ProductPresenter.userNick = status.UserProducts.FirstOrDefault().User.Nick;
+            }
+            catch
+            {
+
+            }
+            this.ProductPresenter.StatusId = status.StatusId;
+        }
+        public override void BuildProduct(Database.Product product = null, int ID = 0)
+        {
+            this.ProductPresenter.ImgCode = product.ImgCode;
+            this.ProductPresenter.Name = product.Name;
+            this.ProductPresenter.Description = product.Description;
+            this.ProductPresenter.Price = product.Price + " BYN";
+            this.ProductPresenter.ID = ID;
+            this.ProductPresenter.tempID = product.ProductId;
+        }
+    }
     public class DeliveredBuilder : PresentedBuilder
     {
         public override void BuildProduct(Database.Product product = null, int ID = 0)

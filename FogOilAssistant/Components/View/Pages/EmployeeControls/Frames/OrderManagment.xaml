@@ -1,13 +1,150 @@
-﻿<Page x:Class="FogOilAssistant.Components.View.Pages.EmployeeControls.Frames.OrderManagment"
+﻿<Page x:Name="user_page_context" x:Class="FogOilAssistant.Components.View.Pages.EmployeeControls.Frames.OrderManagment"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:FogOilAssistant.Components.View.Pages.EmployeeControls.Frames"
+      xmlns:local="clr-namespace:FogOilAssistant.Components.View.Pages.EmployeeControls.Frames" xmlns:viewmodel="clr-namespace:FogOilAssistant.Components.Models.Pages.Signed.Frames"
       mc:Ignorable="d" 
       Title="OrderManagment">
-
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Components/Dictionary/Pages/Signed/ProfileDictionary.xaml"/>
+                <ResourceDictionary Source="/Components/Dictionary/Pages/Signed/RefualingPageDictionary.xaml"/>
+                <ResourceDictionary Source="/Components/Dictionary/Pages/OilDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+    <Page.DataContext>
+        <viewmodel:OrderManagmentViewModel/>
+    </Page.DataContext>
     <Grid>
-        
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+            <ItemsControl  ItemsSource="{Binding Products}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel  />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="{Binding Color}" BorderThickness="2" Width="300" Margin="10" Height="400">
+                            <Grid>
+                                <Grid Height="Auto" Width="Auto" Margin="0" x:Name="behind_block" Style="{StaticResource product_behind}">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="3*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid>
+                                        <Image Source="{Binding ImgCode, Converter={StaticResource ImageSourceConvertor}}" Margin="15"/>
+                                    </Grid>
+                                    <Grid Grid.Row="2">
+                                        <TextBlock Text="{Binding Path=Status}" Foreground="{Binding Color}" HorizontalAlignment="Center" Style="{StaticResource description_text}" TextWrapping="WrapWithOverflow"/>
+                                    </Grid>
+                                    <Grid Grid.Row="1">
+                                        <TextBlock Text="{Binding Path=ID, StringFormat=Order id: {0}}" HorizontalAlignment="Center" Style="{StaticResource description_text}" TextWrapping="WrapWithOverflow"/>
+                                    </Grid>
+                                  
+                                </Grid>
+
+                                <!--Over button-->
+                                <Grid >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="0.2*"/>
+                                        <ColumnDefinition Width="0.6*"/>
+                                        <ColumnDefinition Width="0.2*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="0.4*"/>
+                                        <RowDefinition Height="0.2*"/>
+                                        <RowDefinition Height="0.4*"/>
+                                    </Grid.RowDefinitions>
+                                    <Button x:Name="over_btn" 
+                                            Command="{Binding ElementName=user_page_context, Path=DataContext.ProcessOrder}"
+                                            CommandParameter="{Binding}"
+                                            Grid.Row="1" Grid.Column="1" Style="{StaticResource about_btn_style}">
+                                        <TextBlock Text="Process" Style="{StaticResource description_text}"/>
+                                    </Button>
+                                </Grid>
+                            </Grid>
+
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.15*"/>
+                <ColumnDefinition Width="0.7*"/>
+                <ColumnDefinition Width="0.15*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.95*"/>
+                <RowDefinition Height="0.05*"/>
+            </Grid.RowDefinitions>
+            <Border BorderBrush="#ff0000"  Visibility="{Binding AboutVisibility, Converter={StaticResource BooleanToVisibilityConverter}}" BorderThickness="2" Background="#212122" Grid.Column="1">
+
+                <Grid DataContext="{Binding SelectedOrder}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.4*"/>
+                        <ColumnDefinition Width="0.7*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.7*"/>
+                        <RowDefinition Height="0.3*"/>
+                    </Grid.RowDefinitions>
+                    <Grid HorizontalAlignment="Center" VerticalAlignment="Top">
+                        <Image Source="{Binding ImgCode, Converter={StaticResource ImageSourceConvertor}}" Margin="20"/>
+                    </Grid>
+
+                        <ScrollViewer Margin="20,0,0,0"  Grid.RowSpan="2"  Grid.Column="1"  HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
+                        <StackPanel HorizontalAlignment="Left" Grid.RowSpan="2"  Grid.Column="1" Orientation="Vertical" >
+                            <TextBlock Margin="20,20,20,0" HorizontalAlignment="Left" Text="{Binding Name, StringFormat=Product: {0}}" Style="{StaticResource profile_btn_blocktext_style}"/>
+                            <TextBlock Margin="20,0,20,20" HorizontalAlignment="Left" Text="{Binding tempID, StringFormat=Product id: {0}}" Style="{StaticResource profile_btn_blocktext_style}"/>
+                            <TextBlock Margin="20" HorizontalAlignment="Left"  Text="{Binding Price,StringFormat=Price: }" Style="{StaticResource profile_btn_blocktext_style}"/>
+                            <TextBlock Margin="20,20,20,0" HorizontalAlignment="Left" Foreground="{Binding Color}"  Text="{Binding Status}" Style="{StaticResource profile_btn_blocktext_style}"/>
+                            <TextBlock Margin="20,0,20,20" HorizontalAlignment="Left" Foreground="{Binding Color}"   Text="{Binding Addres,StringFormat=Adress: {0}}" Style="{StaticResource profile_btn_blocktext_style}"/>
+
+                            <TextBlock Foreground="{Binding Color}" Margin="20,20,20,0" HorizontalAlignment="Left"  Text="{Binding Path=userNick, StringFormat=Client: {0}}" Style="{StaticResource profile_btn_blocktext_style}"/>
+                            <TextBlock Foreground="{Binding Color}" Margin="20,0,20,0" HorizontalAlignment="Left"  Text="{Binding Path=userID, StringFormat=Client id: {0}}" Style="{StaticResource profile_btn_blocktext_style}"/>
+                            <TextBlock Foreground="{Binding Color}" Margin="20,0,20,20" HorizontalAlignment="Left"  Text="{Binding Path=ID, StringFormat=Order id: {0}}" Style="{StaticResource profile_btn_blocktext_style}"/>
+                            
+                            <TextBlock Margin="20,20,20,0" HorizontalAlignment="Left"  Style="{StaticResource profile_btn_blocktext_style}" Text="Descripion:" />
+                            <TextBlock Margin="20,0,20,20" MaxWidth="450"  Text="{Binding Description}" Style="{StaticResource profile_btn_blocktext_style}"/>
+
+
+                        </StackPanel>
+                    </ScrollViewer>
+                    <Grid Grid.Row="1">
+                       
+
+                        <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center"   Grid.Row="1">
+                            <Button  Command="{ Binding ElementName=user_page_context, Path=DataContext.CloseEditor}" Margin="5" Style="{StaticResource profile_btn_style}">
+                                <TextBlock Margin="15,5" Text="Close" Style="{StaticResource profile_btn_blocktext_style}"/>
+                            </Button>
+                            <Button   BorderBrush="{Binding Color}" Margin="5" 
+                                    Style="{StaticResource profile_btn_style}"
+                                    Command="{Binding ElementName=user_page_context, Path=DataContext.ImplementAction}"
+                                    CommandParameter="{Binding}"
+                                    >
+                                <TextBlock Margin="15,5" Text="{Binding ElementName=user_page_context, Path=DataContext.BtnText}" Style="{StaticResource profile_btn_blocktext_style}"/>
+                            </Button>
+                            <Button   BorderBrush="{Binding Color}" Margin="5" 
+                                    Style="{StaticResource profile_btn_style}"
+                                    Command="{Binding ElementName=user_page_context, Path=DataContext.RejectSelected}"
+                                    CommandParameter="{Binding}"
+                                    >
+                                <TextBlock Margin="15,5" Text="Reject" Style="{StaticResource profile_btn_blocktext_style}"/>
+                            </Button>
+
+                        </WrapPanel>
+                    </Grid>
+
+                </Grid>
+            </Border>
+            <!---->
+        </Grid>
     </Grid>
 </Page>
