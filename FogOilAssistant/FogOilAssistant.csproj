@@ -312,6 +312,7 @@
     <Compile Include="Components\Models\Basket\ViewModelBasketProducts.cs" />
     <Compile Include="Components\Models\MainWindow\MWICommand.cs" />
     <Compile Include="Components\Models\MainWindow\ViewModelMW.cs" />
+    <Compile Include="Components\Models\Pages\Signed\Frames\OrderManagmentViewModel.cs" />
     <Compile Include="Components\Models\Pages\Signed\Frames\RefuelingPageViewModel.cs" />
     <Compile Include="Components\Models\Pages\Signed\Frames\ViewModelProductManagment.cs" />
     <Compile Include="Components\Models\Pages\Signed\ViewModelEmployee.cs" />

@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Media.Imaging;
 using FogOilAssistant.Components.Data;
 using FogOilAssistant.Components.Data.Convertor;
@@ -148,14 +150,17 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
 
         #region Queries
 
-        private void updateProducts()
+        private async void updateProducts()
         {
             try
             {
-                using (FogOilEntities db = new FogOilEntities())
+                await Task.Run(() =>
                 {
-                    Products = db.Products.ToList();
-                }
+                    using (FogOilEntities db = new FogOilEntities())
+                    {
+                        Products = db.Products.ToList();
+                    }
+                });
             }
             catch(Exception e)
             {
@@ -168,17 +173,27 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
             SelectedProduct = (obj as Product);
             ProductImage = ImageConvertor.ConvertByteArrayToBitMapImage(SelectedProduct.ImgCode);
             ProductName = SelectedProduct.Name;
-            ProductPrice = SelectedProduct.Price.ToString();
+            productPrice = SelectedProduct.Price;
+            OnPropertyChanged("ProductPrice");
+            
             Description = new TextBoxProp() { Index = 0, Text = SelectedProduct.Description };
             EditVisibility = true;
         }); 
         }
         public CommandViewModel UploadImage { get => new CommandViewModel(()=> {
-
+            var dialog = new OpenFileDialog();
+            dialog.Filter = "(Png files *.png)|*.png";
+            var result = dialog.ShowDialog();
+            if (result != DialogResult.OK)
+                return;
+            byte[] buffer = File.ReadAllBytes(dialog.FileName);
+            ProductImage = ImageConvertor.ConvertByteArrayToBitMapImage(buffer);
         }); }
 
         public CommandViewModel CloseEditor { get => new CommandViewModel(closeEditor);}
-        public CommandViewModel SaveSelected { get => new CommandViewModel(saveSelected); }
+        public CommandViewModel SaveSelected { get => new CommandViewModel(saveSelected); 
+            
+        }
 
         public CommandViewModel DeleteSelected { get => new CommandViewModel(deleteSelected); }
 
@@ -195,13 +210,42 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
             EditVisibility = false;
         }
 
-        private void saveSelected()
+        private async void saveSelected()
         {
-            MessageBox.Show("SAVE");
+            try
+            {
+                using(FogOilEntities db = new FogOilEntities())
+                {
+                    closeEditor();
+                    (await db.Products.FindAsync(SelectedProduct.ProductId)).Description = Description.Text;
+                    (await db.Products.FindAsync(SelectedProduct.ProductId)).Price = productPrice;
+                    (await db.Products.FindAsync(SelectedProduct.ProductId)).Name = ProductName;
+                   
+                    using(var stream = new MemoryStream())
+                    {
+                        var encoder = new PngBitmapEncoder();
+                        encoder.Frames.Add(BitmapFrame.Create(ProductImage));
+                        encoder.Save(stream);
+
+                        (await db.Products.FindAsync(SelectedProduct.ProductId)).ImgCode = 
+                        stream.ToArray();
+                    }
+                    await db.SaveChangesAsync();
+                    await Task.Run(() =>
+                    {
+                        Products = db.Products.ToList();
+
+                    });
+                }
+            }
+            catch(Exception e)
+            {
+
+            }
         }
         private void deleteSelected()
         {
-            MessageBox.Show("DELETE");
+            System.Windows.MessageBox.Show("DELETE");
         }
 
 
