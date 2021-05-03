@@ -75,7 +75,6 @@ C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\Microsoft.Toolkit.Win32.UI.Xam
 C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\Microsoft.Toolkit.Wpf.UI.Controls.xml
 C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\Microsoft.Toolkit.Wpf.UI.XamlHost.xml
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\Dictionary\Pages\AuthDictionary.baml
-C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\FogOilAssistant.csprojAssemblyReference.cache
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\FogOilAssistant_Content.g.cs
 C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\EntityFramework.SqlServer.dll
 C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\EntityFramework.dll
@@ -110,3 +109,6 @@ C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\Employee
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\EmployeeControls\Frames\Refueling.baml
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\EmployeeControls\ModifinedTextBox.g.cs
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\EmployeeControls\ModifinedTextBox.baml
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\EmployeeControls\Frames\LocationManagment.g.cs
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\EmployeeControls\Frames\LocationManagment.baml
+C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\FogOilAssistant.csprojAssemblyReference.cache

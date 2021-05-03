@@ -96,7 +96,9 @@ namespace FogOilAssistant.Components.Models.Pages.Signed
             {
                 "/Components/View/Pages/EmployeeControls/Frames/Refueling.xaml",
                 "/Components/View/Pages/EmployeeControls/Frames/ProductManagment.xaml",
-                "/Components/View/Pages/EmployeeControls/Frames/OrderManagment.xaml"
+                "/Components/View/Pages/EmployeeControls/Frames/OrderManagment.xaml",
+                "/Components/View/Pages/EmployeeControls/Frames/LocationManagment.xaml",
+                "/Components/View/Pages/EmployeeControls/Frames/UserManagment.xaml",
             };
             CommandList = GetCommands();
             SelectedPage = pages[0];
