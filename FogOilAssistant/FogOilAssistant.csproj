@@ -86,6 +86,7 @@
     <Reference Include="System.Net" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows" />
     <Reference Include="System.Windows.Controls.Ribbon" />
     <Reference Include="System.Windows.Forms" />
@@ -504,6 +505,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Resource Include="Components\Images\Products\DEFAULT.png" />
     <Resource Include="Components\Images\upload.svg" />
     <Resource Include="Components\Images\ViewModels\Signed\refuel.svg" />
     <Resource Include="Components\Images\ViewModels\Signed\user.svg" />

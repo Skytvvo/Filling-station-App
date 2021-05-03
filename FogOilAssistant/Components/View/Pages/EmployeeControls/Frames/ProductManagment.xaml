@@ -175,5 +175,10 @@
                 </Border>
             </Grid>
         </Grid>
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom">
+            <Button Command="{Binding AddProduct}" Style="{StaticResource profile_btn_style}">
+                <TextBlock Text="Add" Style="{StaticResource description_text}"/>
+            </Button>
+        </StackPanel>
     </Grid>
 </Page>

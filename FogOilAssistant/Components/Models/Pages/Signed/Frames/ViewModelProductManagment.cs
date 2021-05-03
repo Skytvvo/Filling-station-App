@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Media.Imaging;
@@ -19,6 +20,23 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
 {
     public class ViewModelProductManagment : INotifyPropertyChanged
     {
+        #region Add
+        public CommandViewModel AddProduct { get => new CommandViewModel(()=> {
+            SelectedProduct = new Product();
+            ProductName = "";
+
+            ProductImage = ImageConvertor.ConvertByteArrayToBitMapImage( 
+                File.ReadAllBytes(
+                    Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()))+
+                    "/Components/Images/Products/DEFAULT.png"
+                    ));
+
+            
+            ProductPrice = "0";
+            
+            EditVisibility = true;
+        }); }
+        #endregion
 
         #region Selected
         private Product selectedProduct;
@@ -217,6 +235,30 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
                 using(FogOilEntities db = new FogOilEntities())
                 {
                     closeEditor();
+                    var findProduct = await db.Products.FindAsync(SelectedProduct.ProductId);
+                    if (findProduct == null)
+                    {
+                        Product product = new Product();
+                        product.Description = Description.Text;
+                        product.Price = productPrice;
+                        using (var stream = new MemoryStream())
+                        {
+                            var encoder = new PngBitmapEncoder();
+                            encoder.Frames.Add(BitmapFrame.Create(ProductImage));
+                            encoder.Save(stream);
+                            product.ImgCode = stream.ToArray();
+                        }
+                        product.Name = ProductName;
+                        db.Products.Add(product);
+                        await db.SaveChangesAsync();
+                        await Task.Run(() =>
+                        {
+                            Products = db.Products.ToList();
+
+                        });
+                        return;
+                    }
+
                     (await db.Products.FindAsync(SelectedProduct.ProductId)).Description = Description.Text;
                     (await db.Products.FindAsync(SelectedProduct.ProductId)).Price = productPrice;
                     (await db.Products.FindAsync(SelectedProduct.ProductId)).Name = ProductName;
@@ -243,9 +285,32 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
 
             }
         }
-        private void deleteSelected()
+        private async void deleteSelected()
         {
-            System.Windows.MessageBox.Show("DELETE");
+            try
+            {
+                using (FogOilEntities db = new FogOilEntities())
+                {
+                    closeEditor();
+                    var findProduct = await db.Products.FindAsync(SelectedProduct.ProductId);
+                    if (findProduct == null)
+                    {
+                        return;
+                    }
+                    db.Products.Remove(findProduct);
+
+                    await db.SaveChangesAsync();
+                    await Task.Run(() =>
+                    {
+                        Products = db.Products.ToList();
+
+                    });
+                }
+            }
+            catch(Exception e)
+            {
+                System.Windows.MessageBox.Show("This product in use");
+            }
         }
 
 
