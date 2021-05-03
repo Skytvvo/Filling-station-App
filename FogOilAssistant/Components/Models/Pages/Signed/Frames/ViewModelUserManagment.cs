@@ -8,6 +8,8 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using FogOilAssistant.Components.Data;
+using FogOilAssistant.Components.Data.GlobalStorage;
+using FogOilAssistant.Components.Data.Pages.Signed;
 using FogOilAssistant.Components.Database;
 
 namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
@@ -16,10 +18,10 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
     {
         #region users
         private List<User> users;
-        public List<User> Users 
-        { 
+        public List<User> Users
+        {
             get => users;
-            set 
+            set
             {
                 users = value;
                 OnPropertyChanged("Users");
@@ -38,6 +40,22 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
                 editorVisibility = value;
                 OnPropertyChanged("EditorVisibility");
             }
+        }
+
+        private bool aboutVisibility;
+        public bool AboutVisibility
+        {
+            get => aboutVisibility;
+            set
+            {
+                aboutVisibility = value;
+                OnPropertyChanged("AboutVisibility");
+            }
+        }
+
+        private void closeAbout()
+        {
+            AboutVisibility = false;
         }
         #endregion
 
@@ -117,30 +135,137 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
 
         #endregion
 
+        #region History of User
+
+        private UserProductsBuilder UserProductsBuilder = new UserProductsBuilder();
+
+        private List<ProductPresenter> products;
+        public List<ProductPresenter> Products
+        {
+            get => products;
+            set
+            {
+                products = value;
+                OnPropertyChanged("Products");
+            }
+        }
+        #endregion
+
         #region Async
         private async void loadUsers()
         {
             try
             {
-                using(FogOilEntities db = new FogOilEntities())
+                using (FogOilEntities db = new FogOilEntities())
                 {
-                    await Task.Run(()=> {
-                        Users =  db.Users.ToList();
+                    await Task.Run(() => {
+                        var id = DataBaseData.getInstance().UserId;
+                        var res = db.Users;
+                        Users = res.Where(item => item.UserId != id).ToList();
                         Root = db.Roots.Select(item => item.Name).ToList();
 
                     });
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
 
             }
 
         }
 
-        
+
         #endregion
 
+        #region About panel
+        private string writtenUser;
+        public string WrittenUser
+        {
+            get => writtenUser;
+            set
+            {
+                writtenUser = value;
+                OnPropertyChanged("WrittenUser");
+            }
+        }
+
+
+        private ProductPresenter selectedProduct;
+        public ProductPresenter SelectedProduct
+        {
+            get => selectedProduct;
+            set
+            {
+                selectedProduct = value;
+                OnPropertyChanged("SelectedProduct");
+            }
+        }
+
+
+        #endregion
+
+        #region Sort
+        private int selectedTypeOfSort;
+        public int SelectedTypeOfSort
+        {
+            get => selectedTypeOfSort;
+            set
+            {
+                selectedTypeOfSort = value;
+                reloadProducts(value);
+                OnPropertyChanged("SelectedTypeOfSort");
+            }
+        }
+
+        private List<string> typesOfSort;
+        public List<string> TypesOfSort
+        {
+            get => typesOfSort;
+            set
+            {
+                typesOfSort = value;
+
+                OnPropertyChanged("TypesOfSort");
+            }
+        }
+
+        private void reloadProducts(int selected)
+        {
+            switch (selected)
+            {
+                case 0:
+                    loadUserProducts();
+                    break;
+                case 1:
+                    sortByStatus();
+                    break;
+                case 2:
+                    sortByDate();
+                    break;
+                case 3:
+                    sortById();
+                    break;
+            }
+        }
+
+        private async void sortByStatus()
+        {
+            await Task.Run(()=> { 
+                Products = Products.OrderBy(item => item.StatusId).ToList();
+            });
+        }
+        private async void sortById()
+        {
+            await Task.Run(()=> { 
+            Products = Products.OrderBy(item => item.ID).ToList();
+            });
+        }
+        private async void sortByDate()
+        {
+            MessageBox.Show("Not bug, seriously");
+        }
+
+        #endregion
         #region Methods
         private void openEditor(object obj)
         {
@@ -154,12 +279,33 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
                 Bonus = user.Bonus.ToString();
                 Oils = user.Oil.ToString();
                 SelectedUserId = user.UserId;
-
+                loadUserProducts();
                 EditorVisibility = true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 closeEditor();
+            }
+        }
+
+        private async void loadUserProducts()
+        {
+            try
+            {
+                using (FogOilEntities db = new FogOilEntities())
+                {
+                    Products = (await db.Users.FindAsync(SelectedUserId)).UserProducts
+                         .Select(item =>
+                         UserProductsBuilder.GetProduct(item.UserProductsId,
+                         new AllOrdersBuilder(),
+                         item.Product,
+                         item.OrderStatu,
+                         item.Location)).ToList();
+                }
+            }
+            catch (Exception e)
+            {
+
             }
         }
         private void closeEditor()
@@ -202,9 +348,9 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
         {
             try
             {
-                using(FogOilEntities db = new FogOilEntities())
+                using (FogOilEntities db = new FogOilEntities())
                 {
-                    (await db.Users.FindAsync(SelectedUserId)).Root = SelectedIndex+1;
+                    (await db.Users.FindAsync(SelectedUserId)).Root = SelectedIndex + 1;
                     (await db.Users.FindAsync(SelectedUserId)).Nick = Nick;
                     (await db.Users.FindAsync(SelectedUserId)).Bonus = Convert.ToDouble(Bonus);
                     (await db.Users.FindAsync(SelectedUserId)).Oil = Convert.ToDouble(Oils);
@@ -214,7 +360,7 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
                 loadUsers();
                 closeEditor();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 closeEditor();
             }
@@ -224,9 +370,39 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
         #region Commands
 
 
+        public RelayCommand SelectProduct { get => new RelayCommand((obj) => { 
+            try
+            {
+                SelectedProduct = obj as ProductPresenter;
+                AboutVisibility = true;
+            }
+            catch(Exception e)
+            {
+                closeAbout();
+            }
+        }); }
         public RelayCommand OpenEditor { get => new RelayCommand(openEditor); }
 
+        public CommandViewModel CloseSelectedAbout { get => new CommandViewModel(() => {
+            closeAbout();
+        }); }
+        public CommandViewModel FindUser { get => new CommandViewModel(async ()=> {
+            try
+            {
+                using (FogOilEntities db = new FogOilEntities())
+                {
+                    await Task.Run(() => {
+                        var users = db.Users;
+                        Users = users.Where(item => item.Nick.StartsWith(WrittenUser)).ToList();
+                        WrittenUser = "";
+                    });
+                }
+            }
+            catch(Exception e)
+            {
 
+            }
+        }); }
         private List<ButtonDescription> actionsList;
         public List<ButtonDescription> ActionsList
         {
@@ -241,6 +417,13 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
         #endregion
         public ViewModelUserManagment()
         {
+            TypesOfSort = new List<string>()
+            {
+                "Default",
+                "Status",
+                "Date",
+                "ID"
+            };
             ActionsList = new List<ButtonDescription>()
             {
               new ButtonDescription(){ act = new CommandViewModel(closeEditor), Text="Cancel"},

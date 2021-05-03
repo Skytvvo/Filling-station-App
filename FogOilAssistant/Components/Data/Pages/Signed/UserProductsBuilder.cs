@@ -137,6 +137,8 @@ namespace FogOilAssistant.Components.Data.Pages.Signed
         }
     }
 
+
+
     public class OrderBuilder : PresentedBuilder
     {
         public override void BuildProduct(Database.Product product = null, int ID = 0)
@@ -294,4 +296,12 @@ namespace FogOilAssistant.Components.Data.Pages.Signed
         }
     }
 
+
+    public class AllOrdersBuilder : HistoryBuilder
+    {
+        public override void BuildColor(string color = "#fff")
+        {
+            this.ProductPresenter.Color = GetColor(ProductPresenter.StatusId);
+        }
+    }
 }

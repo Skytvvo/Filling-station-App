@@ -54,41 +54,58 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom">
+            <StackPanel  Orientation="Horizontal">
+                <TextBox Margin="5,10" Text="{Binding WrittenUser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="#353535" Width="200" Style="{StaticResource user_input}"/>
+                <Button Command="{Binding FindUser}" Margin="0,10" Style="{StaticResource profile_btn_style}">
+                    <TextBlock Text="Find" Style="{StaticResource description_text}"/>
+                </Button>
+
+            </StackPanel>
+        </StackPanel>
         <Grid Visibility="{Binding EditorVisibility, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.1*"/>
-                <ColumnDefinition Width="0.8*"/>
-                <ColumnDefinition Width="0.1*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.95*"/>
-                <RowDefinition Height="0.05*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Border Background="#FF222121" Grid.Column="1" BorderBrush="#ff0000" BorderThickness="2">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="0.3*"/>
+                        <ColumnDefinition Width="0.7*"/>
                     </Grid.ColumnDefinitions>
                     <Grid >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="0.8*"/>
-                            <RowDefinition Height="0.2*"/>
+                            <RowDefinition Height="0.1*"/>
                         </Grid.RowDefinitions>
-                        <StackPanel Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                            <StackPanel  Margin="20" Orientation="Vertical" HorizontalAlignment="Stretch">
-                                <TextBlock Text="Nick:" Style="{StaticResource description_text}"/>
-                                <TextBox Margin="0" Text="{Binding Nick, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource user_input}"/>
+                        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                <StackPanel  Margin="10" Orientation="Vertical" HorizontalAlignment="Stretch">
+                                    <TextBlock Text="Nick:" Style="{StaticResource description_text}"/>
+                                    <TextBox Margin="0" Text="{Binding Nick, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource user_input}"/>
+                                </StackPanel>
+                                <StackPanel  Margin="10" Orientation="Vertical" HorizontalAlignment="Stretch">
+                                    <TextBlock Text="ID:" Style="{StaticResource description_text}"/>
+                                    <TextBlock  Margin="0" Text="{Binding SelectedUserId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource description_text}"/>
+                                </StackPanel>
+                                <StackPanel  Margin="10" Orientation="Vertical" HorizontalAlignment="Stretch">
+                                    <TextBlock Text="Bonus:" Style="{StaticResource description_text}"/>
+                                    <TextBox  Margin="0" MaxLength="4" Text="{Binding Bonus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource user_input}"/>
+                                </StackPanel>
+                                <TextBlock Text="Root:" Style="{StaticResource description_text}"/>
+                                <ComboBox Margin="10" Style="{StaticResource ComboBoxTest2}" ItemsSource="{Binding Root}" SelectedIndex="{Binding SelectedIndex}"/>
+                                <StackPanel Orientation="Vertical" Margin="10">
+                                    <TextBlock Text="Oils:" Style="{StaticResource description_text}"/>
+                                    <TextBox Margin="0" MaxLength="7" Text="{Binding Oils, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource user_input}"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical" Margin="0,20">
+
+                                </StackPanel>
                             </StackPanel>
-                            <StackPanel  Margin="20" Orientation="Vertical" HorizontalAlignment="Stretch">
-                                <TextBlock Text="ID:" Style="{StaticResource description_text}"/>
-                                <TextBlock  Margin="0" Text="{Binding SelectedUserId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource description_text}"/>
-                            </StackPanel>
-                            <StackPanel  Margin="20" Orientation="Vertical" HorizontalAlignment="Stretch">
-                                <TextBlock Text="Bonus:" Style="{StaticResource description_text}"/>
-                                <TextBox  Margin="0" MaxLength="4" Text="{Binding Bonus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource user_input}"/>
-                            </StackPanel>
-                        </StackPanel>
+                        </ScrollViewer>
 
                         <ItemsControl Grid.Row="1" ItemsSource="{Binding ActionsList}">
                             <ItemsControl.ItemsPanel>
@@ -105,16 +122,119 @@
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
                     </Grid>
-                    <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20">
-                        <ComboBox Margin="0,20" Style="{StaticResource ComboBoxTest2}" ItemsSource="{Binding Root}" SelectedIndex="{Binding SelectedIndex}"/>
-                        <StackPanel Orientation="Vertical" Margin="0,20">
-                            <TextBlock Text="Oils:" Style="{StaticResource description_text}"/>
-                            <TextBox Margin="0" MaxLength="7" Text="{Binding Oils, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource user_input}"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Vertical" Margin="0,20">
-                            
-                        </StackPanel>
-                    </StackPanel>
+                    <Grid Grid.Column="1">
+                        <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel Background="red" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                                    <ComboBox Margin="0" ItemsSource="{Binding TypesOfSort}" SelectedIndex="{Binding SelectedTypeOfSort}" Style="{StaticResource ComboBoxTest2}"/>
+                                </StackPanel>
+                                <ItemsControl ItemsSource="{Binding Products}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel HorizontalAlignment="Center"/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border  Margin="10" BorderBrush="{Binding Color}" BorderThickness="3">
+                                                <Grid Height="200" Width="200">
+                                                    <Grid Background="#FF222121" Margin="0" x:Name="behind_block" Style="{StaticResource product_behind}">
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="3*"/>
+                                                            <RowDefinition Height="*"/>
+                                                        </Grid.RowDefinitions>
+                                                        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                            <Image Margin="5" Source="{Binding ImgCode, Converter={StaticResource ImageSourceConvertor}}"/>
+                                                        </Grid>
+                                                        <TextBlock 
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Grid.Row="1"
+                                                Foreground="{Binding Color}" 
+                                                Style="{StaticResource description_text}" 
+                                                Text="{Binding ID,StringFormat=ID: {0}}"
+                                                />
+                                                    </Grid>
+                                                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                        <Button
+                                                        Command="{Binding ElementName=this_page, Path=DataContext.SelectProduct}"
+                                                    x:Name="over_btn" Style="{StaticResource about_btn_style}"
+                                                    CommandParameter="{Binding}"
+                                                    >
+                                                            <TextBlock Text="About" Style="{StaticResource description_text}"/>
+                                                        </Button>
+                                                    </Grid>
+
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </ScrollViewer>
+                        <Grid Visibility="{Binding AboutVisibility, Converter={StaticResource BooleanToVisibilityConverter}}" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.3*"/>
+                                <ColumnDefinition Width="0.6*"/>
+                                <ColumnDefinition Width="0.3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.05*"/>
+                                <RowDefinition Height="0.9*"/>
+                                <RowDefinition Height="0.05*"/>
+                            </Grid.RowDefinitions>
+                            <Border Grid.Row="1" Grid.Column="1" Background="#FF222121" BorderBrush="#ff0000" BorderThickness="2">
+                                <Grid>
+                                    <ScrollViewer Grid.Row="1" Grid.Column="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+                                        <StackPanel Orientation="Vertical" DataContext="{Binding SelectedProduct}">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="0.2*"/>
+                                                    <ColumnDefinition Width="0.6*"/>
+                                                    <ColumnDefinition Width="0.2*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="0.3*"/>
+                                                    <RowDefinition Height="0.4*"/>
+                                                    <RowDefinition Height="0.3*"/>
+                                                </Grid.RowDefinitions>
+                                                <Image Grid.Column="1" Grid.Row="1" Source="{Binding ImgCode, Converter={StaticResource ImageSourceConvertor}}"/>
+                                            </Grid>
+                                            <StackPanel Orientation="Vertical" Margin="10">
+                                                <TextBlock Margin="0" Style="{StaticResource description_text}" Text="Product:"></TextBlock>
+                                                <TextBlock TextWrapping="WrapWithOverflow" TextTrimming="WordEllipsis" Margin="0" Text="{Binding Name}" Style="{StaticResource description_text}"/>
+                                            </StackPanel>
+                                            <TextBlock Margin="10" Style="{StaticResource description_text}" Text="{Binding ID, StringFormat=ID: {0}}"></TextBlock>
+                                            <StackPanel Orientation="Vertical" Margin="10">
+                                                <TextBlock Margin="0" Style="{StaticResource description_text}" Text="Price:"></TextBlock>
+                                                <TextBlock TextWrapping="WrapWithOverflow" TextTrimming="WordEllipsis" Margin="0" Text="{Binding Price}" Style="{StaticResource description_text}"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Vertical" Margin="10">
+                                                <TextBlock Margin="0" Style="{StaticResource description_text}" Text="Status:"></TextBlock>
+                                                <TextBlock TextWrapping="WrapWithOverflow" Foreground="{Binding Color}" TextTrimming="WordEllipsis" Margin="0" Text="{Binding Status}" Style="{StaticResource description_text}"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Vertical" Margin="10">
+                                                <TextBlock Margin="0" Style="{StaticResource description_text}" Text="Addres:"></TextBlock>
+                                                <TextBlock TextWrapping="WrapWithOverflow" TextTrimming="WordEllipsis" Margin="0" Text="{Binding Addres}" Style="{StaticResource description_text}"/>
+                                                <TextBlock TextWrapping="WrapWithOverflow" TextTrimming="WordEllipsis" Margin="0" Text="{Binding latitude,StringFormat=Latitude: {0}}" Style="{StaticResource description_text}"/>
+                                                <TextBlock TextWrapping="WrapWithOverflow" TextTrimming="WordEllipsis" Margin="0" Text="{Binding longitude,StringFormat=Longitude: {0}}" Style="{StaticResource description_text}"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Vertical" Margin="10">
+                                                <TextBlock Margin="0" Style="{StaticResource description_text}" Text="Description:"></TextBlock>
+                                                <TextBlock TextWrapping="WrapWithOverflow" TextTrimming="WordEllipsis" Margin="0" Text="{Binding Description}" Style="{StaticResource description_text}"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </ScrollViewer>
+                                    <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top">
+                                        <Button Style="{StaticResource profile_btn_style}" Command="{Binding CloseSelectedAbout}">
+                                            <TextBlock Text="Close" Style="{StaticResource description_text}"/>
+                                        </Button>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </Grid>
+
                 </Grid>
             </Border>
         </Grid>
