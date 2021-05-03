@@ -29,7 +29,7 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Button Command="{Binding Action}" CommandParameter="{Binding}" Style="{StaticResource profile_btn_style}" Margin="5,20">
+                    <Button Command="{Binding Action, Mode=TwoWay}" CommandParameter="{Binding}" Style="{StaticResource profile_btn_style}" Margin="5,20">
                         <TextBlock Margin="20,0" Text="{Binding Name}" Style="{StaticResource profile_btn_blocktext_style}"/>
                     </Button>
                 </DataTemplate>

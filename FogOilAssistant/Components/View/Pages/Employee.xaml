@@ -20,7 +20,7 @@
         </Grid.RowDefinitions>
 
         <options:Options ActionProp="{Binding CommandList}"/>
-        <Frame Grid.Row="1" Source="{Binding SelectedPage}">
+        <Frame Grid.Row="1"   Source="{Binding SelectedPage, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
             
         </Frame>
     </Grid>

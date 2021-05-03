@@ -165,7 +165,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Components\View\Pages\EmployeeControls\Frames\CarManagment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Components\View\Pages\EmployeeControls\Frames\DataBaseManagment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\View\Pages\EmployeeControls\Frames\LocationManagment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -312,6 +320,7 @@
     <Compile Include="Components\Models\Basket\ViewModelBasketProducts.cs" />
     <Compile Include="Components\Models\MainWindow\MWICommand.cs" />
     <Compile Include="Components\Models\MainWindow\ViewModelMW.cs" />
+    <Compile Include="Components\Models\Pages\Signed\ViewModelAdmin.cs" />
     <Compile Include="Components\Models\Pages\Signed\Frames\OrderManagmentViewModel.cs" />
     <Compile Include="Components\Models\Pages\Signed\Frames\RefuelingPageViewModel.cs" />
     <Compile Include="Components\Models\Pages\Signed\Frames\ViewModelProductManagment.cs" />
@@ -329,8 +338,14 @@
     <Compile Include="Components\View\BindablePasswordBox.xaml.cs">
       <DependentUpon>BindablePasswordBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Components\View\Pages\EmployeeControls\Frames\CarManagment.xaml.cs">
+      <DependentUpon>CarManagment.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Components\View\Pages\EmployeeControls\Frames\DataBaseManagment.xaml.cs">
       <DependentUpon>DataBaseManagment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\View\Pages\EmployeeControls\Frames\LocationManagment.xaml.cs">
+      <DependentUpon>LocationManagment.xaml</DependentUpon>
     </Compile>
     <Compile Include="Components\View\Pages\EmployeeControls\Frames\OrderManagment.xaml.cs">
       <DependentUpon>OrderManagment.xaml</DependentUpon>

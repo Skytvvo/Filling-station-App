@@ -92,7 +92,7 @@ namespace FogOilAssistant.Components.View.Pages.EmployeeControls
         }
         private string GetPathById(int id)
         {
-            if (id == 2)
+            if (id == 2 )
                 return "/Components/Images/ViewModels/Signed/employee.svg";
             return "/Components/Images/ViewModels/Signed/admin.svg";
         }

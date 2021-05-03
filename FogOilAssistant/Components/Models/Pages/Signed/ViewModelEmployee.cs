@@ -17,10 +17,10 @@ namespace FogOilAssistant.Components.Models.Pages.Signed
     {
 
         #region Pages
-        private List<string> pages;
+        protected List<string> pages;
 
 
-        private string selectedPage = "/Components/View/Pages/EmployeeControls/Frames/ProductManagment.xaml";
+        protected string selectedPage = "/Components/View/Pages/EmployeeControls/Frames/ProductManagment.xaml";
         public string SelectedPage 
         { 
             get => selectedPage;
@@ -38,7 +38,7 @@ namespace FogOilAssistant.Components.Models.Pages.Signed
 
         #endregion
 
-        private List<ArgRelayCommand> commandList;
+        protected List<ArgRelayCommand> commandList;
 
         public List<ArgRelayCommand> CommandList
         {
@@ -50,7 +50,7 @@ namespace FogOilAssistant.Components.Models.Pages.Signed
             }
         }
         #region getCommands
-        private List<ArgRelayCommand> GetCommands()
+        protected List<ArgRelayCommand> GetCommands()
         {
             return new List<ArgRelayCommand>()
             {
