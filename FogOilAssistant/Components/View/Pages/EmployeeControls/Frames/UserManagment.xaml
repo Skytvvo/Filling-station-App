@@ -1,13 +1,123 @@
-﻿<Page x:Class="FogOilAssistant.Components.View.Pages.EmployeeControls.Frames.UserManagment"
+﻿<Page x:Name="this_page" x:Class="FogOilAssistant.Components.View.Pages.EmployeeControls.Frames.UserManagment"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:FogOilAssistant.Components.View.Pages.EmployeeControls.Frames"
+      xmlns:local="clr-namespace:FogOilAssistant.Components.View.Pages.EmployeeControls.Frames" xmlns:vm="clr-namespace:FogOilAssistant.Components.Models.Pages.Signed.Frames"
       mc:Ignorable="d" 
       Title="UserManagment">
-
+    <Page.DataContext>
+        <vm:ViewModelUserManagment/>
+    </Page.DataContext>
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Components/Dictionary/Pages/Signed/ProfileDictionary.xaml"/>
+                <ResourceDictionary Source="/Components/Dictionary/Pages/Signed/RefualingPageDictionary.xaml"/>
+                <ResourceDictionary Source="/Components/Dictionary/Pages/OilDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
     <Grid>
-        
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+            <ItemsControl ItemsSource="{Binding Users}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel HorizontalAlignment="Center"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="10"  BorderBrush="#ff0000" BorderThickness="2" Width="200" Height="200">
+                            <Grid>
+                                <Grid Background="#FF222121" Margin="0" x:Name="behind_block" Style="{StaticResource product_behind}">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding Nick, StringFormat=Nick: {0}}" Style="{StaticResource description_text}" TextWrapping="WrapWithOverflow"/>
+                                    <TextBlock HorizontalAlignment="Center" Grid.Row="1" Text="{Binding Root, StringFormat=Root: {0}}" Style="{StaticResource description_text}" TextWrapping="WrapWithOverflow"/>
+                                </Grid>
+                                <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Button 
+                                        Command="{Binding ElementName=this_page, Path=DataContext.OpenEditor}" 
+                                        x:Name="over_btn" 
+                                        Style="{StaticResource about_btn_style}" 
+                                        CommandParameter="{Binding}"
+                                        >
+                                        <TextBlock Text="Edit" Style="{StaticResource description_text}" Margin="15,10"/>
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+        <Grid Visibility="{Binding EditorVisibility, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.1*"/>
+                <ColumnDefinition Width="0.8*"/>
+                <ColumnDefinition Width="0.1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.95*"/>
+                <RowDefinition Height="0.05*"/>
+            </Grid.RowDefinitions>
+            <Border Background="#FF222121" Grid.Column="1" BorderBrush="#ff0000" BorderThickness="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.8*"/>
+                            <RowDefinition Height="0.2*"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                            <StackPanel  Margin="20" Orientation="Vertical" HorizontalAlignment="Stretch">
+                                <TextBlock Text="Nick:" Style="{StaticResource description_text}"/>
+                                <TextBox Margin="0" Text="{Binding Nick, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource user_input}"/>
+                            </StackPanel>
+                            <StackPanel  Margin="20" Orientation="Vertical" HorizontalAlignment="Stretch">
+                                <TextBlock Text="ID:" Style="{StaticResource description_text}"/>
+                                <TextBlock  Margin="0" Text="{Binding SelectedUserId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource description_text}"/>
+                            </StackPanel>
+                            <StackPanel  Margin="20" Orientation="Vertical" HorizontalAlignment="Stretch">
+                                <TextBlock Text="Bonus:" Style="{StaticResource description_text}"/>
+                                <TextBox  Margin="0" MaxLength="4" Text="{Binding Bonus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource user_input}"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <ItemsControl Grid.Row="1" ItemsSource="{Binding ActionsList}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel  Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Style="{StaticResource profile_btn_style}" Command="{Binding act}">
+                                        <TextBlock Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource description_text}" Margin="15,10"/>
+                                    </Button>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+                    <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20">
+                        <ComboBox Margin="0,20" Style="{StaticResource ComboBoxTest2}" ItemsSource="{Binding Root}" SelectedIndex="{Binding SelectedIndex}"/>
+                        <StackPanel Orientation="Vertical" Margin="0,20">
+                            <TextBlock Text="Oils:" Style="{StaticResource description_text}"/>
+                            <TextBox Margin="0" MaxLength="7" Text="{Binding Oils, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource user_input}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Margin="0,20">
+                            
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+       
     </Grid>
 </Page>

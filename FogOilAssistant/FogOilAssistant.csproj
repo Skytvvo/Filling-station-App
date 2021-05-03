@@ -317,6 +317,7 @@
     <Compile Include="Components\Models\MainWindow\MWICommand.cs" />
     <Compile Include="Components\Models\MainWindow\ViewModelMW.cs" />
     <Compile Include="Components\Models\Pages\Signed\Frames\ViewModelLocation.cs" />
+    <Compile Include="Components\Models\Pages\Signed\Frames\ViewModelUserManagment.cs" />
     <Compile Include="Components\Models\Pages\Signed\ViewModelAdmin.cs" />
     <Compile Include="Components\Models\Pages\Signed\Frames\OrderManagmentViewModel.cs" />
     <Compile Include="Components\Models\Pages\Signed\Frames\RefuelingPageViewModel.cs" />
