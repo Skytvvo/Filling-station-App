@@ -157,7 +157,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_CarObjects_CarModels">
+  <Association Name="FK_CarObjects_CarModels1">
     <End Role="CarModels" Type="Self.CarModels" Multiplicity="1" />
     <End Role="CarObjects" Type="Self.CarObjects" Multiplicity="*" />
     <ReferentialConstraint>
@@ -328,7 +328,7 @@
       <End Role="CarBrands" EntitySet="CarBrands" />
       <End Role="CarObjects" EntitySet="CarObjects" />
     </AssociationSet>
-    <AssociationSet Name="FK_CarObjects_CarModels" Association="Self.FK_CarObjects_CarModels">
+    <AssociationSet Name="FK_CarObjects_CarModels1" Association="Self.FK_CarObjects_CarModels1">
       <End Role="CarModels" EntitySet="CarModels" />
       <End Role="CarObjects" EntitySet="CarObjects" />
     </AssociationSet>

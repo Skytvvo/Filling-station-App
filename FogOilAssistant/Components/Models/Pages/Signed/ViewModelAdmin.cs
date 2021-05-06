@@ -15,16 +15,16 @@ namespace FogOilAssistant.Components.Models.Pages.Signed
         
         public ViewModelAdmin():base()
         {
-            CommandList.Insert(3, new ArgRelayCommand() {
+            CommandList.Insert(4, new ArgRelayCommand() {
                 Action = new RelayCommand((obj) => {
-                    SelectedPage = pages[3];
+                    SelectedPage = pages[4];
                 }),
                 Name = "Locations"
             });
-            CommandList.Insert(4, new ArgRelayCommand()
+            CommandList.Insert(5, new ArgRelayCommand()
             {
                 Action = new RelayCommand((obj) => {
-                    SelectedPage = pages[4];
+                    SelectedPage = pages[5];
                 }),
                 Name = "Users"
             });

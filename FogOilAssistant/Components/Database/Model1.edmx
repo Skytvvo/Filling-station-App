@@ -162,7 +162,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_CarObjects_CarModels">
+        <Association Name="FK_CarObjects_CarModels1">
           <End Role="CarModels" Type="Self.CarModels" Multiplicity="1" />
           <End Role="CarObjects" Type="Self.CarObjects" Multiplicity="*" />
           <ReferentialConstraint>
@@ -333,7 +333,7 @@
             <End Role="CarBrands" EntitySet="CarBrands" />
             <End Role="CarObjects" EntitySet="CarObjects" />
           </AssociationSet>
-          <AssociationSet Name="FK_CarObjects_CarModels" Association="Self.FK_CarObjects_CarModels">
+          <AssociationSet Name="FK_CarObjects_CarModels1" Association="Self.FK_CarObjects_CarModels1">
             <End Role="CarModels" EntitySet="CarModels" />
             <End Role="CarObjects" EntitySet="CarObjects" />
           </AssociationSet>
@@ -430,7 +430,7 @@
             <End Role="CarBrand" EntitySet="CarBrands" />
             <End Role="CarObject" EntitySet="CarObjects" />
           </AssociationSet>
-          <AssociationSet Name="FK_CarObjects_CarModels" Association="FogOilModel.FK_CarObjects_CarModels">
+          <AssociationSet Name="FK_CarObjects_CarModels1" Association="FogOilModel.FK_CarObjects_CarModels1">
             <End Role="CarModel" EntitySet="CarModels" />
             <End Role="CarObject" EntitySet="CarObjects" />
           </AssociationSet>
@@ -498,7 +498,7 @@
           </Key>
           <Property Name="ModelId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="CarObjects" Relationship="FogOilModel.FK_CarObjects_CarModels" FromRole="CarModel" ToRole="CarObject" />
+          <NavigationProperty Name="CarObjects" Relationship="FogOilModel.FK_CarObjects_CarModels1" FromRole="CarModel" ToRole="CarObject" />
         </EntityType>
         <EntityType Name="CarObject">
           <Key>
@@ -510,7 +510,7 @@
           <Property Name="CarProduct" Type="Int32" Nullable="false" />
           <Property Name="CarBrand" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CarBrand1" Relationship="FogOilModel.FK_CarObjects_CarBrands" FromRole="CarObject" ToRole="CarBrand" />
-          <NavigationProperty Name="CarModel1" Relationship="FogOilModel.FK_CarObjects_CarModels" FromRole="CarObject" ToRole="CarModel" />
+          <NavigationProperty Name="CarModel1" Relationship="FogOilModel.FK_CarObjects_CarModels1" FromRole="CarObject" ToRole="CarModel" />
           <NavigationProperty Name="CarType1" Relationship="FogOilModel.FK_CarObjects_CarTypes" FromRole="CarObject" ToRole="CarType" />
           <NavigationProperty Name="Products" Relationship="FogOilModel.CarProducts" FromRole="CarObject" ToRole="Product" />
         </EntityType>
@@ -643,7 +643,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_CarObjects_CarModels">
+        <Association Name="FK_CarObjects_CarModels1">
           <End Type="FogOilModel.CarModel" Role="CarModel" Multiplicity="1" />
           <End Type="FogOilModel.CarObject" Role="CarObject" Multiplicity="*" />
           <ReferentialConstraint>

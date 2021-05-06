@@ -78,6 +78,13 @@ namespace FogOilAssistant.Components.Models.Pages.Signed
                      Name = "Orders"
 
                 },
+                new ArgRelayCommand(){
+                     Action = new RelayCommand((obj)=>{
+                         SelectedPage = pages[3];
+                         }),
+                     Name = "Cars"
+
+                },
                  new ArgRelayCommand(){
                      Action = new RelayCommand((obj)=>{
                             DataBaseData.getInstance().Exit();
@@ -97,6 +104,7 @@ namespace FogOilAssistant.Components.Models.Pages.Signed
                 "/Components/View/Pages/EmployeeControls/Frames/Refueling.xaml",
                 "/Components/View/Pages/EmployeeControls/Frames/ProductManagment.xaml",
                 "/Components/View/Pages/EmployeeControls/Frames/OrderManagment.xaml",
+                "/Components/View/Pages/EmployeeControls/Frames/CarManagment.xaml",
                 "/Components/View/Pages/EmployeeControls/Frames/LocationManagment.xaml",
                 "/Components/View/Pages/EmployeeControls/Frames/UserManagment.xaml",
             };

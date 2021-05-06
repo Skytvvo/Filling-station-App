@@ -47,6 +47,8 @@
         </Style.Triggers>
     </Style>
 
+    
+    
     <Style x:Key="about_btn_style" TargetType="Button">
         <Setter Property="Background" Value="#1E1E1E"/>
         <Setter Property="Cursor" Value="Hand"/>
@@ -73,12 +75,34 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="about_btn_style_add" TargetType="Button" BasedOn="{StaticResource about_btn_style}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border BorderBrush="#25ff00" BorderThickness="2" Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#25ff00"/>
+                <Setter Property="Opacity" Value="1"/>
+            </Trigger>
+            <DataTrigger Binding="{Binding ElementName=behind_block, Path=IsMouseOver}" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    
     <Style x:Key="product_behind" TargetType="Grid" BasedOn="{StaticResource product_item_behind}">
         <Setter Property="Background" Value="#FF222121"/>
         <Setter Property="Height" Value="200"/>
         <Setter Property="Margin" Value="15"/>
     </Style>
 
+    
     <Style x:Key="change_picture" TargetType="Button">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Cursor" Value="Hand"/>

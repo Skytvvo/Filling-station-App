@@ -1,0 +1,193 @@
+﻿<Page x:Name="this_page" x:Class="FogOilAssistant.Components.View.Pages.EmployeeControls.Frames.CarManagment"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FogOilAssistant.Components.View.Pages.EmployeeControls.Frames" xmlns:vm="clr-namespace:FogOilAssistant.Components.Models.Pages.Signed.Frames"
+      mc:Ignorable="d" 
+      Title="CarManagment">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Components/Dictionary/Pages/Signed/ProfileDictionary.xaml"/>
+                <ResourceDictionary Source="/Components/Dictionary/Pages/Signed/RefualingPageDictionary.xaml"/>
+                <ResourceDictionary Source="/Components/Dictionary/Pages/OilDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+    <Page.DataContext>
+        <vm:ViewModelCarManagment/>
+    </Page.DataContext>
+
+    
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition  Height="50"/>
+                <RowDefinition  Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.7*"/>
+                    <ColumnDefinition Width="0.3*"/>
+                    <ColumnDefinition Width="0.15*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Background="#353535" Grid.Column="1" Margin="5,0" Style="{StaticResource user_input}" Text="{Binding SearchInput}"/>
+                <StackPanel Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                    <Button Style="{StaticResource profile_btn_style}" Margin="5,0">
+                        <TextBlock Text="Search" Style="{StaticResource description_text}"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        <Grid Grid.Row="1">
+            <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+                <ItemsControl  Grid.Row="1" ItemsSource="{Binding Cars}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel HorizontalAlignment="Center"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="#ff0000" Margin="10" BorderThickness="2">
+                                <Grid>
+                                    <Grid Style="{StaticResource product_behind}" x:Name="behind_block" Margin="0" Background="#FF222121" Height="300" Width="300">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock HorizontalAlignment="Center" DataContext="{Binding CarModel1}" Text="{Binding Name}" Style="{StaticResource description_text}" />
+                                        <TextBlock HorizontalAlignment="Center" DataContext="{Binding CarBrand1}" Text="{Binding Name}" Style="{StaticResource description_text}" Grid.Row="1"/>
+                                        <TextBlock HorizontalAlignment="Center" DataContext="{Binding CarType1}" Text="{Binding Name}" Style="{StaticResource description_text}" Grid.Row="2"/>
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding CarId}" Style="{StaticResource description_text}" Grid.Row="3"/>
+                                    </Grid>
+                                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <Button 
+                                            Command="{Binding ElementName=this_page, Path=DataContext.OpenEditor}"
+                                            CommandParameter="{Binding}"
+                                            x:Name="over_btn" 
+                                            Style="{StaticResource about_btn_style}"
+                                            >
+                                            <TextBlock Text="Edit" Margin="15,10" Style="{StaticResource description_text}">
+                                                
+                                            </TextBlock>
+                                        </Button>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+            
+        </Grid>
+        <Grid Grid.RowSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.1*"/>
+                <ColumnDefinition Width="0.8*"/>
+                <ColumnDefinition Width="0.1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.95*"/>
+                <RowDefinition Height="0.05*"/>
+            </Grid.RowDefinitions>
+            <Border BorderBrush="#ff0000" Background="#FF222121" BorderThickness="2" Grid.Column="1" Visibility="{Binding EditorVisibility,Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.3*"/>
+                        <ColumnDefinition Width="0.7*"/>
+                    </Grid.ColumnDefinitions>
+                        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+                            <StackPanel Margin="10" >
+                                <TextBlock Margin="0,10"  DataContext="{Binding SelectedCar}" Text="{Binding CarId,StringFormat=Car id: {0}}" Style="{StaticResource description_text}"/>
+                                <TextBox Margin="0,10" Text="{Binding SelectedModel}" Style="{StaticResource user_input}"/>
+                                <ComboBox Margin="0,10" ItemsSource="{Binding CarTypes}" DisplayMemberPath="Name" Style="{StaticResource ComboBoxTest2}" SelectedIndex="{Binding SelectedType}"/>
+                                <ComboBox Margin="0,10" ItemsSource="{Binding CarBrands}" DisplayMemberPath="Name" Style="{StaticResource ComboBoxTest2}" SelectedIndex="{Binding SelectedBrand}"/>
+
+                                <Button Style="{StaticResource profile_btn_style}">
+                                    <TextBlock Text="Save" Style="{StaticResource description_text}"/>
+                                </Button>
+                                <Button Style="{StaticResource profile_btn_style}">
+                                    <TextBlock Text="Close" Style="{StaticResource description_text}"/>
+                                </Button>
+                                <Button Style="{StaticResource profile_btn_style}">
+                                    <TextBlock Text="Remove" Style="{StaticResource description_text}"/>
+                                </Button>
+                            </StackPanel>
+                        </ScrollViewer>
+                    <ScrollViewer HorizontalScrollBarVisibility="Disabled" Grid.Column="1" VerticalScrollBarVisibility="Hidden">
+                        <StackPanel Orientation="Vertical">
+                            <ItemsControl   ItemsSource="{Binding UsedProducts}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel HorizontalAlignment="Center"></WrapPanel>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border  Margin="15" BorderThickness="2" BorderBrush="#25ff00">
+                                            <Grid Width="200" Height="200">
+                                                <Grid Margin="0" x:Name="behind_block" Style="{StaticResource product_behind}">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="3.5*"/>
+                                                        <RowDefinition Height="*"/>
+                                                        <RowDefinition Height="*"/>
+                                                    </Grid.RowDefinitions>
+                                                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                        <Image Source="{Binding ImgCode, Converter={StaticResource ImageSourceConvertor}}" Margin="2"/>
+                                                    </Grid>
+                                                    <TextBlock TextTrimming="CharacterEllipsis" Grid.Row="1" Margin="0" Text="{Binding Name}" HorizontalAlignment="Center" Style="{StaticResource description_text}"/>
+                                                    <TextBlock Grid.Row="2" Margin="0" Text="{Binding ProductId, StringFormat=ID: {0}}" HorizontalAlignment="Center" Style="{StaticResource description_text}"/>
+                                                </Grid>
+                                                <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                    <Button Style="{StaticResource about_btn_style}" x:Name="over_btn">
+                                                        <TextBlock Margin="15,5" Text="Remove" Style="{StaticResource description_text}"/>
+                                                    </Button>
+                                                </Grid>
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <ItemsControl ItemsSource="{Binding UnusedProducts}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel HorizontalAlignment="Center"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border  Margin="15" BorderThickness="2" BorderBrush="#ff0000">
+                                            <Grid Width="200" Height="200">
+                                                <Grid  Margin="0" x:Name="behind_block" Style="{StaticResource product_behind}">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="3.5*"/>
+                                                        <RowDefinition Height="*"/>
+                                                        <RowDefinition Height="*"/>
+                                                    </Grid.RowDefinitions>
+                                                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                        <Image Source="{Binding ImgCode, Converter={StaticResource ImageSourceConvertor}}" Margin="2"/>
+                                                    </Grid>
+                                                    <TextBlock TextTrimming="CharacterEllipsis" Grid.Row="1" Margin="0" Text="{Binding Name}" HorizontalAlignment="Center" Style="{StaticResource description_text}"/>
+                                                    <TextBlock Grid.Row="2" Margin="0" Text="{Binding ProductId, StringFormat=ID: {0}}" HorizontalAlignment="Center" Style="{StaticResource description_text}"/>
+                                                </Grid>
+                                                <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                    <Button x:Name="over_btn" Style="{StaticResource about_btn_style_add}">
+                                                        <TextBlock Margin="15,5" Text="Add" Style="{StaticResource description_text}"/>
+                                                    </Button>
+                                                </Grid>
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+    
+</Page>

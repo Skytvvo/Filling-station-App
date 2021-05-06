@@ -132,6 +132,8 @@ namespace FogOilAssistant.Components.Data.GlobalStorage
             Login = null;
             basketProducts.Clear();
         }
+
+
         public void GoToShopPage()
         {
             foreach (Window window in Application.Current.Windows)
@@ -144,8 +146,6 @@ namespace FogOilAssistant.Components.Data.GlobalStorage
             }
 
         }
-
-        
 
         public event PropertyChangedEventHandler PropertyChanged;
 
