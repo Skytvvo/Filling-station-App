@@ -17,7 +17,7 @@ namespace FogOilAssistant.Components.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CarObject()
         {
-            this.Products = new HashSet<Product>();
+            this.CarProducts = new HashSet<CarProduct>();
         }
     
         public int CarId { get; set; }
@@ -30,6 +30,6 @@ namespace FogOilAssistant.Components.Database
         public virtual CarModel CarModel1 { get; set; }
         public virtual CarType CarType1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<CarProduct> CarProducts { get; set; }
     }
 }

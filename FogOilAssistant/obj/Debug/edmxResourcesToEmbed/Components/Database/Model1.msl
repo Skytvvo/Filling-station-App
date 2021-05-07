@@ -61,6 +61,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="CarProducts">
+      <EntityTypeMapping TypeName="FogOilModel.CarProduct">
+        <MappingFragment StoreEntitySet="CarProducts">
+          <ScalarProperty Name="CarProductsId" ColumnName="CarProductsId" />
+          <ScalarProperty Name="Car" ColumnName="Car" />
+          <ScalarProperty Name="Product" ColumnName="Product" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="CarTypes">
       <EntityTypeMapping TypeName="FogOilModel.CarType">
         <MappingFragment StoreEntitySet="CarTypes">
@@ -149,13 +158,5 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="CarProducts" TypeName="FogOilModel.CarProducts" StoreEntitySet="CarProducts">
-      <EndProperty Name="Product">
-        <ScalarProperty Name="ProductId" ColumnName="Product" />
-      </EndProperty>
-      <EndProperty Name="CarObject">
-        <ScalarProperty Name="CarId" ColumnName="Car" />
-      </EndProperty>
-    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

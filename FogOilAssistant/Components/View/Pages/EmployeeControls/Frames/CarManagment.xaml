@@ -105,21 +105,46 @@
                                 <TextBox Margin="0,10" Text="{Binding SelectedModel}" Style="{StaticResource user_input}"/>
                                 <ComboBox Margin="0,10" ItemsSource="{Binding CarTypes}" DisplayMemberPath="Name" Style="{StaticResource ComboBoxTest2}" SelectedIndex="{Binding SelectedType}"/>
                                 <ComboBox Margin="0,10" ItemsSource="{Binding CarBrands}" DisplayMemberPath="Name" Style="{StaticResource ComboBoxTest2}" SelectedIndex="{Binding SelectedBrand}"/>
-
-                                <Button Style="{StaticResource profile_btn_style}">
+                                <TextBlock Text="Products:" Style="{StaticResource description_text}"/>
+                                <Grid Margin="10" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                    <Button Command="{Binding SwitchToUsed}" Margin="0" Cursor="Hand" Opacity="{Binding UsedCollectionOpacity}" Background="#ff0000" Style="{StaticResource profile_btn_style}">
+                                        <TextBlock Text="Remove" Style="{StaticResource description_text}"/>
+                                    </Button>
+                                <Button Background="#25ff00" Grid.Column="1" Command="{Binding SwitchToUnused}" Cursor="Hand" Opacity="{Binding UnusedCollectionOpacity}">
+                                    <Button.Style>
+                                        <Style TargetType="Button">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="Button">
+                                                        <Border Background="{TemplateBinding Background}" BorderBrush="#25ff00" BorderThickness="2">
+                                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </Button.Style>
+                                        <TextBlock Text="Add" Style="{StaticResource description_text}"/>
+                                    </Button>
+                                </Grid>
+                                <Button Command="{Binding SaveChanges}" Style="{StaticResource profile_btn_style}">
                                     <TextBlock Text="Save" Style="{StaticResource description_text}"/>
                                 </Button>
-                                <Button Style="{StaticResource profile_btn_style}">
+                                <Button Command="{Binding CloseEditor}" Style="{StaticResource profile_btn_style}">
                                     <TextBlock Text="Close" Style="{StaticResource description_text}"/>
                                 </Button>
-                                <Button Style="{StaticResource profile_btn_style}">
+                                <Button Command="{Binding RemoveCar}" Style="{StaticResource profile_btn_style}">
                                     <TextBlock Text="Remove" Style="{StaticResource description_text}"/>
                                 </Button>
                             </StackPanel>
                         </ScrollViewer>
                     <ScrollViewer HorizontalScrollBarVisibility="Disabled" Grid.Column="1" VerticalScrollBarVisibility="Hidden">
                         <StackPanel Orientation="Vertical">
-                            <ItemsControl   ItemsSource="{Binding UsedProducts}">
+                            <ItemsControl   ItemsSource="{Binding CollectionUI, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <WrapPanel HorizontalAlignment="Center"></WrapPanel>
@@ -127,7 +152,7 @@
                                 </ItemsControl.ItemsPanel>
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <Border  Margin="15" BorderThickness="2" BorderBrush="#25ff00">
+                                        <Border  Margin="15" BorderThickness="2" BorderBrush="{Binding ElementName=this_page, Path=DataContext.UICollectionBrush}">
                                             <Grid Width="200" Height="200">
                                                 <Grid Margin="0" x:Name="behind_block" Style="{StaticResource product_behind}">
                                                     <Grid.RowDefinitions>
@@ -142,7 +167,34 @@
                                                     <TextBlock Grid.Row="2" Margin="0" Text="{Binding ProductId, StringFormat=ID: {0}}" HorizontalAlignment="Center" Style="{StaticResource description_text}"/>
                                                 </Grid>
                                                 <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                    <Button Style="{StaticResource about_btn_style}" x:Name="over_btn">
+                                                    <Button Command="{Binding ElementName=this_page, Path=DataContext.ProductAction, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" CommandParameter="{Binding}"  x:Name="over_btn">
+                                                        <Button.Style>
+                                                            <Style TargetType="Button">
+                                                                <Setter Property="Background" Value="#1E1E1E"/>
+                                                                <Setter Property="Cursor" Value="Hand"/>
+                                                                <Setter Property="Opacity" Value="0"/>
+                                                                <Setter Property="Template">
+                                                                    <Setter.Value>
+                                                                        <ControlTemplate TargetType="Button">
+                                                                            <Border BorderBrush="{Binding ElementName=this_page, Path=DataContext.UICollectionBrush}" BorderThickness="2" Background="{TemplateBinding Background}">
+                                                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                            </Border>
+                                                                        </ControlTemplate>
+                                                                    </Setter.Value>
+                                                                </Setter>
+
+
+                                                                <Style.Triggers>
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Setter Property="Background" Value="{Binding ElementName=this_page, Path=DataContext.UICollectionBrush}"/>
+                                                                        <Setter Property="Opacity" Value="1"/>
+                                                                    </Trigger>
+                                                                    <DataTrigger Binding="{Binding ElementName=behind_block, Path=IsMouseOver}" Value="True">
+                                                                        <Setter Property="Opacity" Value="1"/>
+                                                                    </DataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </Button.Style>
                                                         <TextBlock Margin="15,5" Text="Remove" Style="{StaticResource description_text}"/>
                                                     </Button>
                                                 </Grid>
@@ -151,38 +203,7 @@
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
-                            <ItemsControl ItemsSource="{Binding UnusedProducts}">
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <WrapPanel HorizontalAlignment="Center"/>
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <Border  Margin="15" BorderThickness="2" BorderBrush="#ff0000">
-                                            <Grid Width="200" Height="200">
-                                                <Grid  Margin="0" x:Name="behind_block" Style="{StaticResource product_behind}">
-                                                    <Grid.RowDefinitions>
-                                                        <RowDefinition Height="3.5*"/>
-                                                        <RowDefinition Height="*"/>
-                                                        <RowDefinition Height="*"/>
-                                                    </Grid.RowDefinitions>
-                                                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                        <Image Source="{Binding ImgCode, Converter={StaticResource ImageSourceConvertor}}" Margin="2"/>
-                                                    </Grid>
-                                                    <TextBlock TextTrimming="CharacterEllipsis" Grid.Row="1" Margin="0" Text="{Binding Name}" HorizontalAlignment="Center" Style="{StaticResource description_text}"/>
-                                                    <TextBlock Grid.Row="2" Margin="0" Text="{Binding ProductId, StringFormat=ID: {0}}" HorizontalAlignment="Center" Style="{StaticResource description_text}"/>
-                                                </Grid>
-                                                <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                    <Button x:Name="over_btn" Style="{StaticResource about_btn_style_add}">
-                                                        <TextBlock Margin="15,5" Text="Add" Style="{StaticResource description_text}"/>
-                                                    </Button>
-                                                </Grid>
-                                            </Grid>
-                                        </Border>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
+                            
                         </StackPanel>
                     </ScrollViewer>
                 </Grid>

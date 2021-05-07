@@ -31,6 +31,7 @@ namespace FogOilAssistant.Components.Database
         public virtual DbSet<CarBrand> CarBrands { get; set; }
         public virtual DbSet<CarModel> CarModels { get; set; }
         public virtual DbSet<CarObject> CarObjects { get; set; }
+        public virtual DbSet<CarProduct> CarProducts { get; set; }
         public virtual DbSet<CarType> CarTypes { get; set; }
         public virtual DbSet<Fuel> Fuels { get; set; }
         public virtual DbSet<Location> Locations { get; set; }

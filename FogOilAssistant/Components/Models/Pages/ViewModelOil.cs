@@ -106,7 +106,7 @@ namespace FogOilAssistant.Components.Models.Pages
                         if (result.CarType == this.CarType.TypeId)
                             if (result.CarBrand == this.CarBrands[SelectedBrandIndex].BrandId)
                                 if (result.CarModel == this.CarModels[SelectedModelIndex].ModelId)
-                                    this.Products = new List<Product>(result.Products);
+                                    this.Products = new List<Product>(result.CarProducts.Select(prod => prod.Product1));
                     }
                 }
             }

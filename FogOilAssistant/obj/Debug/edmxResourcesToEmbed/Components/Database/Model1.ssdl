@@ -32,15 +32,13 @@
     <Property Name="CarProduct" Type="int" Nullable="false" />
     <Property Name="CarBrand" Type="int" Nullable="false" />
   </EntityType>
-  <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "FogOil.dbo.CarProducts" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
   <EntityType Name="CarProducts">
     <Key>
-      <PropertyRef Name="Product" />
-      <PropertyRef Name="Car" />
+      <PropertyRef Name="CarProductsId" />
     </Key>
     <Property Name="Product" Type="int" Nullable="false" />
     <Property Name="Car" Type="int" Nullable="false" />
+    <Property Name="CarProductsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityType Name="CarTypes">
     <Key>
@@ -301,6 +299,7 @@
     <EntitySet Name="CarBrands" EntityType="Self.CarBrands" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CarModels" EntityType="Self.CarModels" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CarObjects" EntityType="Self.CarObjects" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CarProducts" EntityType="Self.CarProducts" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CarTypes" EntityType="Self.CarTypes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Fuel" EntityType="Self.Fuel" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Locations" EntityType="Self.Locations" Schema="dbo" store:Type="Tables" />
@@ -310,12 +309,6 @@
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserProducts" EntityType="Self.UserProducts" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="CarProducts" EntityType="Self.CarProducts" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [CarProducts].[Product] AS [Product], 
-    [CarProducts].[Car] AS [Car]
-    FROM [dbo].[CarProducts] AS [CarProducts]</DefiningQuery>
-    </EntitySet>
     <AssociationSet Name="FK_Basket_Products" Association="Self.FK_Basket_Products">
       <End Role="Products" EntitySet="Products" />
       <End Role="Basket" EntitySet="Basket" />

@@ -262,6 +262,9 @@
     <Compile Include="Components\Database\CarObject.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Components\Database\CarProduct.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Components\Database\CarType.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

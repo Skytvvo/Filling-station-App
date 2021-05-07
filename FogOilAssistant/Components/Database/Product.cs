@@ -18,8 +18,8 @@ namespace FogOilAssistant.Components.Database
         public Product()
         {
             this.Baskets = new HashSet<Basket>();
+            this.CarProducts = new HashSet<CarProduct>();
             this.UserProducts = new HashSet<UserProduct>();
-            this.CarObjects = new HashSet<CarObject>();
         }
     
         public int ProductId { get; set; }
@@ -31,8 +31,8 @@ namespace FogOilAssistant.Components.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Basket> Baskets { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserProduct> UserProducts { get; set; }
+        public virtual ICollection<CarProduct> CarProducts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CarObject> CarObjects { get; set; }
+        public virtual ICollection<UserProduct> UserProducts { get; set; }
     }
 }
