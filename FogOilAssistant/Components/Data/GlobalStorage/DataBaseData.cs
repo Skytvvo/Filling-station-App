@@ -11,6 +11,7 @@ using System.Windows;
 using System.Windows.Media.Imaging;
 using FogOilAssistant.Annotations;
 using FogOilAssistant.Components.Data.MenuButton;
+using FogOilAssistant.Components.Data.Pages;
 using FogOilAssistant.Components.Database;
 
 namespace FogOilAssistant.Components.Data.GlobalStorage
@@ -32,7 +33,10 @@ namespace FogOilAssistant.Components.Data.GlobalStorage
         public ObservableCollection<ButtonMenu> MenuList;
 
         public ObservableCollection<Database.Product> basketProducts;
-        
+
+        public ObservableCollection<Notify> Notifies;
+
+
         public string Login { get; set; }
         public int UserId { get; set; }
         private DataBaseData()
@@ -41,6 +45,7 @@ namespace FogOilAssistant.Components.Data.GlobalStorage
             {
                 using (FogOilEntities DB = new FogOilEntities())
                 {
+                    this.Notifies = new ObservableCollection<Notify>();
                     this.Products = DB.Products.ToList();
                     this.basketProducts = new ObservableCollection<Database.Product>();
 

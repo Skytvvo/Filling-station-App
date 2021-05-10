@@ -71,6 +71,23 @@
               
             </Grid.RowDefinitions>
 
+            <Grid Panel.ZIndex="9999" Grid.ColumnSpan="2" Visibility="{Binding NotifyVisssible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Border BorderBrush="{Binding NotifyColor}" BorderThickness="0,2,10,2" CornerRadius="0,5,5,0" Background="#FF222121">
+                    <TextBlock Text="{Binding NotifyMessage}">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Foreground" Value="{Binding NotifyColor}"/>
+                                <Setter Property="FontSize" Value="25"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Border>
+            </Grid>
+
+
             <views:ToggleMenuExpander Panel.ZIndex="1999"  Grid.Row="4" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="7"/>
             
             <Frame x:Name="Frame" Grid.Column="0"

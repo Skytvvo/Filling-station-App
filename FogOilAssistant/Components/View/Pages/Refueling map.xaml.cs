@@ -19,16 +19,16 @@ namespace FogOilAssistant.Components.View.Pages
         public Refueling_map()
         {
             InitializeComponent();
-            this.DataContext = new ViewModelMap();
+          //  this.DataContext = new ViewModelMap();
             
         }
 
-        private  async void map_container_Loaded(object sender, RoutedEventArgs e)
-        {
-            BasicGeoposition basicGeoposition = new BasicGeoposition() { Latitude = 53.8144, Longitude = 28.0241 };
-            var center = new Geopoint(basicGeoposition);
-            await ((Microsoft.Toolkit.Wpf.UI.Controls.MapControl)sender).TrySetViewAsync(center, 5.8);
+        //private  async void map_container_Loaded(object sender, RoutedEventArgs e)
+        //{
+        //    BasicGeoposition basicGeoposition = new BasicGeoposition() { Latitude = 53.8144, Longitude = 28.0241 };
+        //    var center = new Geopoint(basicGeoposition);
+        //    await ((Microsoft.Toolkit.Wpf.UI.Controls.MapControl)sender).TrySetViewAsync(center, 5.8);
            
-        }
+        //}
     }
 }

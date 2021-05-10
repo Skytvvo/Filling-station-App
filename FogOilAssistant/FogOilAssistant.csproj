@@ -318,6 +318,7 @@
     <Compile Include="Components\Data\Convertor\ImageConvertor.cs" />
     <Compile Include="Components\Data\GlobalStorage\DataBaseData.cs" />
     <Compile Include="Components\Data\MenuButton\ButtonMenu.cs" />
+    <Compile Include="Components\Data\Pages\Notify.cs" />
     <Compile Include="Components\Data\Pages\Signed\TextBoxProp.cs" />
     <Compile Include="Components\Data\Pages\Signed\UserProductsBuilder.cs" />
     <Compile Include="Components\Data\Pages\Support\Feedback.cs" />

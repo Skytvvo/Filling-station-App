@@ -8,8 +8,7 @@
       Title="Refueling_map"
       xmlns:vm="clr-namespace:FogOilAssistant.Components.Models.Pages" 
       xmlns:controls="clr-namespace:Microsoft.Toolkit.Wpf.UI.Controls;assembly=Microsoft.Toolkit.Wpf.UI.Controls" 
-
-      >
+      xmlns:m="clr-namespace:MapControl;assembly=MapControl.WPF">
     
 
     <Page.Resources>
@@ -29,12 +28,8 @@
             <RowDefinition Height="0.5*"/>
         </Grid.RowDefinitions>
         <Grid  x:Name="map_grid" Grid.Row="0">
-            <controls:MapControl Loaded="map_container_Loaded"  ZoomLevel="10" x:Name="map_container"   MapServiceToken="pUMqRFcmEZp5HMoLfXlE~62S-NM4FqjCPsL_8HjYQOw~AiEE25MfdflaH5XO-kycZRiUuEPLvwo4Zh9wDHqgoVRN_11xf1dYGflVMCr0GMX7">
-                
-            </controls:MapControl>
-            <Grid Style="{StaticResource map_over}">
-                
-            </Grid>
+
+            <m:Map  ZoomLevel="6.5"/>
 
         </Grid>
         <Grid Grid.Row="1">

@@ -9,6 +9,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using FogOilAssistant.Components.Data;
+using System.Timers;
+using FogOilAssistant.Components.Data.GlobalStorage;
+using System.Collections.Specialized;
 
 namespace FogOilAssistant.Components.Models.MainWindow
 {
@@ -16,10 +19,66 @@ namespace FogOilAssistant.Components.Models.MainWindow
 
     class ViewModelMW : INotifyPropertyChanged
     {
-       
-        
+
+
+        //notify color
+        private bool notifyVisssible = false;
+        public bool NotifyVisssible
+        {
+            get => notifyVisssible;
+            set
+            {
+                notifyVisssible = value;
+                OnPropertyChanged("NotifyVisssible");
+            }
+        }
+
+
+        //notify color
+        private string notifyColor = "#ffffff";
+        public string NotifyColor
+        {
+            get => notifyColor;
+            set
+            {
+                notifyColor = value;
+                OnPropertyChanged("NotifyColor");
+            }
+        }
+
+
+        //notify message
+        private string notifyMessage = "Welcome";
+        public string NotifyMessage
+        {
+            get => notifyMessage;
+            set
+            {
+                notifyMessage = value;
+                OnPropertyChanged("NotifyMessage");
+            }
+        }
+
+        private void incomingNotify(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            try
+            {
+                NotifyMessage = DataBaseData.getInstance().Notifies.ToList()[0].Message;
+                NotifyColor = DataBaseData.getInstance().Notifies.ToList()[0].Color;
+                callNotify();
+            }
+            catch
+            {
+
+            }
+        }
+
         public ViewModelMW()
         {
+            notifyTimer = new Timer();
+            notifyTimer.Interval = 3000;
+            notifyTimer.Elapsed += showNotify;
+            DataBaseData.getInstance().Notifies.CollectionChanged += this.incomingNotify;
         }
         private Visibility basketVisibility = Visibility.Collapsed;
         public Visibility BasketVisibility
@@ -72,6 +131,7 @@ namespace FogOilAssistant.Components.Models.MainWindow
             }
         }
 
+    
 
         private void Minimize()
         {
@@ -91,10 +151,24 @@ namespace FogOilAssistant.Components.Models.MainWindow
                     (window as FogOilAssistant.MainWindow).Close();
             }
         }
-       
+
+
+
+        private void callNotify()
+        {
+            notifyTimer.Stop();
+            this.NotifyVisssible = true;
+            notifyTimer.Start();
+        }
+        private static Timer notifyTimer;
+        private void showNotify(Object source, System.Timers.ElapsedEventArgs e)
+        {
+            this.NotifyVisssible = false;
+            notifyTimer.Stop();
+        }
     }
 
 
-
+    
 
 }

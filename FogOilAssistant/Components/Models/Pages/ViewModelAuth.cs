@@ -249,6 +249,8 @@ namespace FogOilAssistant.Components.Models.Pages
         #endregion
         public ViewModelAuth()
         {
+            DataBaseData.getInstance().Notifies.Add(new Data.Pages.Notify() { Color="#ff0000", Message="Auth"});
+
             this.ImgPath = "/Components/Images/Auth/auth_1.jpg";
             this.Switch_text = "Sign in";
             
