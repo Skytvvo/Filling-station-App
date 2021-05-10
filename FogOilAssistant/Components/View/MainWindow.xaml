@@ -16,6 +16,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Components/Dictionary/MainWindowDictionary.xaml"/>
+                <ResourceDictionary Source="/Components/Dictionary/Pages/Signed/ProfileDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -29,6 +30,10 @@
 
         </Grid.RowDefinitions>
         <Grid Name="Toolbar"  MouseDown="Window_MouseDown"  Grid.Row="0" Background="#FF222121">
+            <StackPanel Orientation="Horizontal" Margin="2" HorizontalAlignment="Left">
+                <Image Source="/Components/Images/logo_transparent.png" Margin="3,0,5,0"/>
+                <TextBlock Text="FogOilAssistant" Style="{StaticResource profile_btn_blocktext_style}"/>
+            </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
                 <Button Command="{Binding MinimizeWindow}" Style="{StaticResource tool_button}" x:Name="minimize_button" >
                     <svgc:SvgViewbox Height="20" Stretch="Uniform" Source="/Components/Images/minimize.svg"/>

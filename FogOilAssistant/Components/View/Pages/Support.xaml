@@ -5,7 +5,6 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:FogOilAssistant.Components.View.Pages" xmlns:svgc="http://sharpvectors.codeplex.com/svgc/" xmlns:mv="clr-namespace:FogOilAssistant.Components.Models.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
       Title="Support">
 
     <Page.Resources>
@@ -31,7 +30,7 @@
                 <svgc:SvgViewbox Style="{StaticResource support_logo}" Source="/Components/Images/support.svg"/>
             </Grid>
             <Grid Style="{StaticResource support_description}"  Grid.Row="0" Grid.Column="2">
-                <TextBlock  Text="AWS Support provides a mix of tools and technology, people, and programs designed to proactively help you optimize performance, lower costs, and innovate faster. ">
+                <TextBlock  Text="Our Support provides a mix of tools and technology, people, and programs designed to proactively help you optimize performance, lower costs, and innovate faster. ">
                     <TextBlock.Style>
                         <Style TargetType="TextBlock">
                             <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
@@ -169,7 +168,7 @@
                                         <Border Grid.Row="0"  Grid.Column="0" Grid.ColumnSpan="8" Grid.RowSpan="5" BorderBrush="#FF0000" BorderThickness="2" />
 
                                         <Grid  Grid.Row="0" Grid.RowSpan="5" Grid.Column="2" Grid.ColumnSpan="6">
-                                            <TextBox x:Name="feedback_message">
+                                            <TextBox x:Name="feedback_message" Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                                 <TextBox.Style>
                                                     <Style TargetType="TextBox">
                                                         <Setter Property="Background" Value="Transparent"/>

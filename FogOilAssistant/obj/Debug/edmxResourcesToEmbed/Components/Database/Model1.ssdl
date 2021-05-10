@@ -107,6 +107,8 @@
     <Property Name="LocationId" Type="int" Nullable="false" />
     <Property Name="UserProductsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="OrderDate" Type="date" />
+    <Property Name="LastChangesDate" Type="date" />
   </EntityType>
   <EntityType Name="Users">
     <Key>

@@ -186,6 +186,7 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
             {
                 using (FogOilEntities db = new FogOilEntities())
                 {
+                    (await db.UserProducts.FindAsync(SelectedProduct.ID)).LastChangesDate = DateTime.Now;
                     (await db.UserProducts.FindAsync(SelectedProduct.ID)).Status = 2;
                     await db.SaveChangesAsync();
                 }
@@ -205,6 +206,7 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
             {
                 using (FogOilEntities db = new FogOilEntities())
                 {
+                    (await db.UserProducts.FindAsync(SelectedProduct.ID)).LastChangesDate = DateTime.Now;
                     (await db.UserProducts.FindAsync(SelectedProduct.ID)).Status = 6;
                     await db.SaveChangesAsync();
                 }

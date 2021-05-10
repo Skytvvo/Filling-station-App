@@ -112,6 +112,8 @@
           <Property Name="LocationId" Type="int" Nullable="false" />
           <Property Name="UserProductsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="OrderDate" Type="date" />
+          <Property Name="LastChangesDate" Type="date" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -596,6 +598,8 @@
           <Property Name="LocationId" Type="Int32" Nullable="false" />
           <Property Name="UserProductsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="OrderDate" Type="DateTime" Precision="0" />
+          <Property Name="LastChangesDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Location" Relationship="FogOilModel.FK_UserProducts_Locations" FromRole="UserProduct" ToRole="Location" />
           <NavigationProperty Name="OrderStatu" Relationship="FogOilModel.FK_UserProducts_OrderStatus" FromRole="UserProduct" ToRole="OrderStatu" />
           <NavigationProperty Name="Product" Relationship="FogOilModel.FK_UserProducts_Products" FromRole="UserProduct" ToRole="Product" />
@@ -902,6 +906,8 @@
           <EntitySetMapping Name="UserProducts">
             <EntityTypeMapping TypeName="FogOilModel.UserProduct">
               <MappingFragment StoreEntitySet="UserProducts">
+                <ScalarProperty Name="LastChangesDate" ColumnName="LastChangesDate" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="UserProductsId" ColumnName="UserProductsId" />
                 <ScalarProperty Name="LocationId" ColumnName="LocationId" />

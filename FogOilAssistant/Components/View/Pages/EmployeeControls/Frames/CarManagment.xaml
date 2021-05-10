@@ -28,13 +28,19 @@
             </Grid.RowDefinitions>
             <Grid>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.15*"/>
                     <ColumnDefinition Width="0.7*"/>
                     <ColumnDefinition Width="0.3*"/>
                     <ColumnDefinition Width="0.15*"/>
                 </Grid.ColumnDefinitions>
-                <TextBox Background="#353535" Grid.Column="1" Margin="5,0" Style="{StaticResource user_input}" Text="{Binding SearchInput}"/>
-                <StackPanel Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-                    <Button Style="{StaticResource profile_btn_style}" Margin="5,0">
+            <StackPanel  HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                <Button Command="{Binding NewCar}" Style="{StaticResource profile_btn_style}" Margin="5,0">
+                    <TextBlock Text="New" Style="{StaticResource description_text}"/>
+                </Button>
+            </StackPanel>
+            <TextBox Background="#353535" Grid.Column="2" Margin="5,0" Style="{StaticResource user_input}" Text="{Binding SearchInput}"/>
+                <StackPanel Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                <Button Command="{Binding FindCars}" Style="{StaticResource profile_btn_style}" Margin="5,0">
                         <TextBlock Text="Search" Style="{StaticResource description_text}"/>
                     </Button>
                 </StackPanel>
@@ -195,7 +201,7 @@
                                                                 </Style.Triggers>
                                                             </Style>
                                                         </Button.Style>
-                                                        <TextBlock Margin="15,5" Text="Remove" Style="{StaticResource description_text}"/>
+                                                        <TextBlock Margin="15,5" Text="{Binding ElementName=this_page, Path=DataContext.ActionText}" Style="{StaticResource description_text}"/>
                                                     </Button>
                                                 </Grid>
                                             </Grid>

@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "I1AJv8pfA5oA6wHhvWhlIPT02fgUrzz1GWbdoeOaUzuZdtYJov0NnOoxDDf18j6SL+SpZDsJzAKk2LJgaCpbhQ==",
+  "dgSpecHash": "h/ILBMYsEKMEqV0SaF3khXzCUHKZx42RCSyMPis0aDwa3fTzcFJKmHSY1U+iQe9IamXAnQRv361OzyReO4KtkQ==",
   "success": true,
   "projectFilePath": "C:\\data\\FogOilAssistant\\FogOilAssistant\\FogOilAssistant.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\sky2\\.nuget\\packages\\entityframework\\6.2.0\\entityframework.6.2.0.nupkg.sha512",
     "C:\\Users\\sky2\\.nuget\\packages\\entityframework.ru\\6.2.0\\entityframework.ru.6.2.0.nupkg.sha512",
-    "C:\\Users\\sky2\\.nuget\\packages\\microsoft.vcrtforwarders.140\\1.0.6\\microsoft.vcrtforwarders.140.1.0.6.nupkg.sha512"
+    "C:\\Users\\sky2\\.nuget\\packages\\microsoft.vcrtforwarders.140\\1.0.6\\microsoft.vcrtforwarders.140.1.0.6.nupkg.sha512",
+    "C:\\Users\\sky2\\.nuget\\packages\\xaml.mapcontrol\\5.6.0\\xaml.mapcontrol.5.6.0.nupkg.sha512"
   ],
   "logs": []
 }

@@ -19,6 +19,8 @@ namespace FogOilAssistant.Components.Database
         public int LocationId { get; set; }
         public int UserProductsId { get; set; }
         public int Status { get; set; }
+        public Nullable<System.DateTime> OrderDate { get; set; }
+        public Nullable<System.DateTime> LastChangesDate { get; set; }
     
         public virtual Location Location { get; set; }
         public virtual OrderStatu OrderStatu { get; set; }

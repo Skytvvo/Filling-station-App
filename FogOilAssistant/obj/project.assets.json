@@ -237,6 +237,19 @@
             "rid": "win10-x86"
           }
         }
+      },
+      "XAML.MapControl/5.6.0": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System.Net.Http",
+          "System.Runtime.Caching"
+        ],
+        "compile": {
+          "lib/net462/MapControl.WPF.dll": {}
+        },
+        "runtime": {
+          "lib/net462/MapControl.WPF.dll": {}
+        }
       }
     },
     ".NETFramework,Version=v4.7.2/win": {
@@ -272,6 +285,19 @@
         "type": "package",
         "build": {
           "build/net45/Microsoft.VCRTForwarders.140.targets": {}
+        }
+      },
+      "XAML.MapControl/5.6.0": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System.Net.Http",
+          "System.Runtime.Caching"
+        ],
+        "compile": {
+          "lib/net462/MapControl.WPF.dll": {}
+        },
+        "runtime": {
+          "lib/net462/MapControl.WPF.dll": {}
         }
       }
     },
@@ -309,6 +335,19 @@
         "build": {
           "build/net45/Microsoft.VCRTForwarders.140.targets": {}
         }
+      },
+      "XAML.MapControl/5.6.0": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System.Net.Http",
+          "System.Runtime.Caching"
+        ],
+        "compile": {
+          "lib/net462/MapControl.WPF.dll": {}
+        },
+        "runtime": {
+          "lib/net462/MapControl.WPF.dll": {}
+        }
       }
     },
     ".NETFramework,Version=v4.7.2/win-x86": {
@@ -344,6 +383,19 @@
         "type": "package",
         "build": {
           "build/net45/Microsoft.VCRTForwarders.140.targets": {}
+        }
+      },
+      "XAML.MapControl/5.6.0": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System.Net.Http",
+          "System.Runtime.Caching"
+        ],
+        "compile": {
+          "lib/net462/MapControl.WPF.dll": {}
+        },
+        "runtime": {
+          "lib/net462/MapControl.WPF.dll": {}
         }
       }
     }
@@ -483,13 +535,33 @@
         "runtimes/win10-x86/native/release/vcomp140_app.dll",
         "runtimes/win10-x86/native/release/vcruntime140_app.dll"
       ]
+    },
+    "XAML.MapControl/5.6.0": {
+      "sha512": "mvalh6cBRroozPAFDgg7gR7CYSoJ7AwZaIOAR+rlAkLH2NYl6xw0ZLT85TmUGiQBiSrMlxJfWOse2B1fW75cmg==",
+      "type": "package",
+      "path": "xaml.mapcontrol/5.6.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net462/MapControl.WPF.dll",
+        "lib/net48/MapControl.WPF.dll",
+        "lib/net5.0-windows7.0/MapControl.WPF.dll",
+        "lib/netcoreapp3.1/MapControl.WPF.dll",
+        "lib/uap10.0/MapControl.UWP.dll",
+        "lib/uap10.0/MapControl.UWP.pri",
+        "lib/uap10.0/MapControl.UWP/MapControl.UWP.xr.xml",
+        "lib/uap10.0/MapControl.UWP/Themes/Generic.xaml",
+        "xaml.mapcontrol.5.6.0.nupkg.sha512",
+        "xaml.mapcontrol.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
     ".NETFramework,Version=v4.7.2": [
       "EntityFramework >= 6.2.0",
       "EntityFramework.ru >= 6.2.0",
-      "Microsoft.VCRTForwarders.140 >= 1.0.6"
+      "Microsoft.VCRTForwarders.140 >= 1.0.6",
+      "XAML.MapControl >= 5.6.0"
     ]
   },
   "packageFolders": {
@@ -541,6 +613,10 @@
           "Microsoft.VCRTForwarders.140": {
             "target": "Package",
             "version": "[1.0.6, )"
+          },
+          "XAML.MapControl": {
+            "target": "Package",
+            "version": "[5.6.0, )"
           }
         },
         "imports": [

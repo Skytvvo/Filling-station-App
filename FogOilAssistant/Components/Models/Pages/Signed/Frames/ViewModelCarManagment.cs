@@ -57,20 +57,24 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
         }
         #endregion
         #region Cars loading
-        private async void loadCars()
+        private void loadCars()
         {
             try
             {
                 using (FogOilEntities db = new FogOilEntities())
                 {
-                    await Task.Run(() => {
+                  
                         Cars = db.CarObjects.ToList();
                         foreach (var item in Cars)
-                            // don't touch this, if you remove this then binding will be failure
+                        // don't touch this, if you remove this then binding will be failure
+                        {
                             _ = item.CarModel1.Name;
+                            _ = item.CarBrand1.Name;
+                            _ = item.CarType1.Name;
+                        }
                         CarTypes = db.CarTypes.ToList();
                         CarBrands = db.CarBrands.ToList();
-                    });
+                    
                 }
             }
             catch (Exception e)
@@ -183,6 +187,7 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
 
         private async void switchToUsed()
         {
+            ActionText = "Remove";
             UsedCollectionOpacity = 1;
             UnusedCollectionOpacity = 0.3;
             ProductAction = new RelayCommand(removeProduct);
@@ -195,6 +200,7 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
 
         private async void switchToUnused()
         {
+            ActionText = "Add";
             UnusedCollectionOpacity = 1;
             UsedCollectionOpacity = 0.3;
             ProductAction = new RelayCommand(addProduct);
@@ -213,6 +219,17 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
             {
                 uiCollectionBrush = value;
                 OnPropertyChanged("UICollectionBrush");
+            }
+        }
+
+        private string actionText;
+        public string ActionText
+        {
+            get => actionText;
+            set
+            {
+                actionText = value;
+                OnPropertyChanged("ActionText");
             }
         }
         #endregion
@@ -248,7 +265,8 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
         public CommandViewModel RemoveCar { get => new CommandViewModel(removeCar); }
         public CommandViewModel SwitchToUnused { get => new CommandViewModel(switchToUnused); }
         public CommandViewModel SwitchToUsed { get => new CommandViewModel(switchToUsed); }
-
+        public CommandViewModel FindCars { get => new CommandViewModel(findCars); }
+        public CommandViewModel NewCar { get => new CommandViewModel(newCar); }
         private RelayCommand productAction;
         public RelayCommand ProductAction
         {
@@ -262,6 +280,29 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
         #endregion
 
         #region Command methods
+        private void findCars()
+        {
+            try
+            {
+                using (FogOilEntities db = new FogOilEntities())
+                {
+                    var res = db.CarObjects.Where(item => item.CarModel1.Name.StartsWith(SearchInput)).ToList();
+                    foreach(var item in res)
+                    {
+                        _ = item.CarModel1.Name;
+                        _ = item.CarBrand1.Name;
+                        _ = item.CarType1.Name;
+                    }
+
+                    Cars = res;
+                }
+            }
+            catch(Exception e)
+            {
+
+            }
+        }
+
         private async void openEditor(object obj)
         {
             try
@@ -290,9 +331,28 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
 
             }
         }
+        private void newCar()
+        {
+            SelectedCar = null;
+            SelectedModel = "";
+            SelectedBrand = 0;
+            SelectedType = 0;
+            CollectionUI = new ObservableCollection<Product>();
+            UsedProducts = new List<Product>();
+            using(FogOilEntities db = new FogOilEntities())
+            {
+                UnusedProducts = db.Products.ToList();
+            }    
+            EditorVisibility = true;
+
+
+        }
         private void closeEditor()
         {
             EditorVisibility = false;
+            CollectionUI = new ObservableCollection<Product>();
+            UsedCollectionOpacity = 0.3;
+            UnusedCollectionOpacity = 0.3;
         }
 
         private async void saveChanges()
@@ -301,15 +361,52 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
             {
                 using(FogOilEntities db = new FogOilEntities())
                 {
+                    if(SelectedCar == null)
+                    {
+                        var newCar = new CarObject();
+                        newCar.CarBrand = CarBrands[selectedBrand].BrandId;
+                        newCar.CarType = CarTypes[selectedType].TypeId;
+                        newCar.CarModel =  db.CarModels.Add(new CarModel() { Name = selectedModel }).ModelId;
+                        foreach(var item in usedProducts)
+                        {
+                            newCar.CarProducts.Add(new CarProduct() { Product = item.ProductId });
+                        }
+                        db.CarObjects.Add(newCar);
+                        await db.SaveChangesAsync();
+                        closeEditor();
+                        loadCars();
+                        return;
+                    }
                     (await db.CarModels.FindAsync(SelectedCar.CarModel)).Name = SelectedModel;
                     (await db.CarObjects.FindAsync(selectedCar.CarId)).CarBrand = CarBrands[SelectedBrand].BrandId;
                     (await db.CarObjects.FindAsync(selectedCar.CarId)).CarType = CarTypes[SelectedType].TypeId;
-                    var res = UsedProducts.Select(prod => new CarProduct() { Car = SelectedCar.CarId, Product = prod.ProductId });
-                    (await db.CarObjects.FindAsync(selectedCar.CarId)).CarProducts = res.ToList();
 
+                    var prod = (db.CarProducts.Where(item => item.Car == SelectedCar.CarId)).ToList();
+
+                    foreach(var item in prod)
+                    {
+                        if(usedProducts.Contains(item.Product1))
+                        {
+                            usedProducts.Remove(item.Product1);
+                        }
+                        else
+                        {
+                            db.CarProducts.Remove(item);
+                        }
+                    }
+
+                    foreach(var item in usedProducts)
+                    {
+                        db.CarProducts.Add(new CarProduct() { Car = SelectedCar.CarId, Product = item.ProductId }); 
+                    }
 
                     await db.SaveChangesAsync();
-                    loadCars();
+                 
+                        loadCars();
+                    
+                    CollectionUI = new ObservableCollection<Product>();
+                    UnusedCollectionOpacity = 0.3;
+                    UsedCollectionOpacity = 0.3;
                     closeEditor();
                 }
             }

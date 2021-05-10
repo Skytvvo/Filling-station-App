@@ -41,7 +41,10 @@ namespace FogOilAssistant.Components.Data.Pages.Signed
         public string Status { get; set; }
         public int StatusId { get; set; }
 
-   
+        
+        public DateTime OrderDate { get; set; }
+        public DateTime LastStatusDate { get; set; }
+
         public RelayCommand ActionCommand { get; set; }
 
         public SolidColorBrush Color { get; set; }
@@ -302,6 +305,28 @@ namespace FogOilAssistant.Components.Data.Pages.Signed
         public override void BuildColor(string color = "#fff")
         {
             this.ProductPresenter.Color = GetColor(ProductPresenter.StatusId);
+        }
+
+        public override void BuildProduct(Database.Product product = null, int ID = 0)
+        {
+            this.ProductPresenter.Name = product.Name;
+            this.ProductPresenter.Description = product.Description;
+            this.ProductPresenter.Price = product.Price + " BYN";
+            this.ProductPresenter.ID = ID;
+            this.ProductPresenter.ImgCode = product.ImgCode;
+            try
+            {
+                using(FogOilEntities db = new FogOilEntities())
+                {
+                    var prod = db.UserProducts.Find(ID);
+                    this.ProductPresenter.OrderDate = (DateTime)prod.OrderDate;
+                    this.ProductPresenter.LastStatusDate = (DateTime)prod.LastChangesDate;
+                }
+            }
+            catch(Exception e)
+            {
+
+            }
         }
     }
 }

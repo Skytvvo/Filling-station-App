@@ -6,5 +6,6 @@
     <Application.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <imgconvert:ImageConvertor x:Key="ImageSourceConvertor"/>
+        <imgconvert:DateTimeToDateConverter x:Key="DateConvertor"/>
     </Application.Resources>
 </Application>

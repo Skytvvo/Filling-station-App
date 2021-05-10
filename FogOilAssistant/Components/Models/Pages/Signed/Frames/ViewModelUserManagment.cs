@@ -393,7 +393,7 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
                 {
                     await Task.Run(() => {
                         var users = db.Users;
-                        Users = users.Where(item => item.Nick.StartsWith(WrittenUser)).ToList();
+                        Users = users.Where(item => item.Nick.StartsWith(WrittenUser) && !item.Nick.Equals(Nick)).ToList();
                         WrittenUser = "";
                     });
                 }

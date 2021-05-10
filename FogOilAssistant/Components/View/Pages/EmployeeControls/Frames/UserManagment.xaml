@@ -219,6 +219,17 @@
                                                 <TextBlock TextWrapping="WrapWithOverflow" TextTrimming="WordEllipsis" Margin="0" Text="{Binding latitude,StringFormat=Latitude: {0}}" Style="{StaticResource description_text}"/>
                                                 <TextBlock TextWrapping="WrapWithOverflow" TextTrimming="WordEllipsis" Margin="0" Text="{Binding longitude,StringFormat=Longitude: {0}}" Style="{StaticResource description_text}"/>
                                             </StackPanel>
+
+                                            <StackPanel Orientation="Vertical" Margin="10">
+                                                <TextBlock Margin="0" Style="{StaticResource description_text}" Text="Order date:"></TextBlock>
+                                                <TextBlock TextWrapping="WrapWithOverflow"  TextTrimming="WordEllipsis" Margin="0" Text="{Binding Path=OrderDate,Converter={StaticResource DateConvertor}}" Style="{StaticResource description_text}"/>
+                                            </StackPanel>
+                                            
+                                            <StackPanel Orientation="Vertical" Margin="10">
+                                                <TextBlock Margin="0" Style="{StaticResource description_text}" Text="Last changes date:"></TextBlock>
+                                                <TextBlock TextWrapping="WrapWithOverflow" TextTrimming="WordEllipsis" Margin="0" Text="{Binding Path=LastStatusDate, Converter={StaticResource DateConvertor}}" Style="{StaticResource description_text}"/>
+                                            </StackPanel>
+                                            
                                             <StackPanel Orientation="Vertical" Margin="10">
                                                 <TextBlock Margin="0" Style="{StaticResource description_text}" Text="Description:"></TextBlock>
                                                 <TextBlock TextWrapping="WrapWithOverflow" TextTrimming="WordEllipsis" Margin="0" Text="{Binding Description}" Style="{StaticResource description_text}"/>

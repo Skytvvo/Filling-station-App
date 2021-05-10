@@ -89,7 +89,10 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
             {
                 using (FogOilEntities db = new FogOilEntities())
                 {
-                    db.UserProducts.Remove(await db.UserProducts.FindAsync(selectedOrder.ID));
+                    (await db.UserProducts.FindAsync(selectedOrder.ID)).LastChangesDate = DateTime.Now;
+                    (await db.UserProducts.FindAsync(selectedOrder.ID)).Status = 2;
+
+                    //db.UserProducts.Remove(await db.UserProducts.FindAsync(selectedOrder.ID));
                     await db.SaveChangesAsync();
                 }
             }
@@ -107,6 +110,7 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
             {
                 using (FogOilEntities db = new FogOilEntities())
                 {
+                    (await db.UserProducts.FindAsync(selectedOrder.ID)).LastChangesDate = DateTime.Now;
                     (await db.UserProducts.FindAsync(selectedOrder.ID)).Status = 4;
                     await db.SaveChangesAsync();
                 }
@@ -125,6 +129,7 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
                 using (FogOilEntities db = new FogOilEntities())
                 {
                     (await db.UserProducts.FindAsync(selectedOrder.ID)).Status = 3;
+                    (await db.UserProducts.FindAsync(selectedOrder.ID)).LastChangesDate = DateTime.Now;
                     await db.SaveChangesAsync();
                 }
             }

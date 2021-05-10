@@ -114,3 +114,4 @@ C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\Employee
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\FogOilAssistant.csprojAssemblyReference.cache
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\EmployeeControls\Frames\CarManagment.g.cs
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\EmployeeControls\Frames\CarManagment.baml
+C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\MapControl.WPF.dll

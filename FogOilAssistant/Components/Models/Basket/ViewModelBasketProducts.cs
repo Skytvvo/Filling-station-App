@@ -197,8 +197,10 @@ namespace FogOilAssistant.Components.Models.Basket
                         db.Users.Find(DataBaseData.getInstance().UserId).UserProducts.Add(
                             new UserProduct() {
                                 ProductId = item.ProductId, 
-                                LocationId = this.Locations[SelectedLocation].LocationId , Status =1 
-                            });
+                                LocationId = this.Locations[SelectedLocation].LocationId , Status =1 ,
+                                OrderDate = DateTime.Now,
+                                LastChangesDate = DateTime.Now
+                            });;
                     db.SaveChanges();
                 }
                 return true;

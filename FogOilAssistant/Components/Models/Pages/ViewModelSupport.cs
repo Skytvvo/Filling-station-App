@@ -4,6 +4,10 @@ using FogOilAssistant.Components.Data;
 using FogOilAssistant.Components.Data.Pages.Support;
 using System.Windows;
 using System.Windows.Controls;
+using System.Net.Mail;
+using System.Net;
+using FogOilAssistant.Components.Data.GlobalStorage;
+using System;
 
 namespace FogOilAssistant.Components.Models.Pages
 {
@@ -26,6 +30,16 @@ namespace FogOilAssistant.Components.Models.Pages
             }
         }
 
+        private string text;
+        public string Text
+        {
+            get => text;
+            set
+            {
+                text = value;
+                OnPropertyChanged("Text");
+            }
+        }
 
         public ViewModelSupport()
         {
@@ -39,8 +53,9 @@ namespace FogOilAssistant.Components.Models.Pages
         public string CollapsePanel { get => "/Components/Images/exp_btn.svg"; }
 
 
+        
 
-        public void sendFeedback()
+        public async void sendFeedback()
         {
 
             foreach (Window window in Application.Current.Windows)
@@ -63,7 +78,22 @@ namespace FogOilAssistant.Components.Models.Pages
                             return;
                         feedback.Message = support_content.feedback_message.Text;
 
-                        MessageBox.Show(feedback.Header + "\n" + feedback.Message);
+                        try
+                        {
+                            MailAddress from = new MailAddress("fogoilsender@mail.ru", DataBaseData.getInstance().Login);
+                            MailAddress to = new MailAddress("fogoilsender@mail.ru");
+                            MailMessage m = new MailMessage(from, to);
+                            m.Subject = feedback.Header;
+                            m.Body = text;
+                            SmtpClient smtp = new SmtpClient("smtp.mail.ru", 2525);
+                            smtp.Credentials = new NetworkCredential("fogoilsender@mail.ru", "RrP_ttuAEp32");
+                            smtp.EnableSsl = true;
+                            await smtp.SendMailAsync(m);
+                        }
+                        catch(Exception e)
+                        {
+
+                        }
                     }
                 }
             }
