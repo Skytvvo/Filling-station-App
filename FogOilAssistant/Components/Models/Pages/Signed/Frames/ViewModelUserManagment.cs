@@ -10,6 +10,7 @@ using System.Windows;
 using FogOilAssistant.Components.Data;
 using FogOilAssistant.Components.Data.GlobalStorage;
 using FogOilAssistant.Components.Data.Pages.Signed;
+using FogOilAssistant.Components.Data.UI;
 using FogOilAssistant.Components.Database;
 
 namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
@@ -262,7 +263,9 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
         }
         private async void sortByDate()
         {
-            MessageBox.Show("Not bug, seriously");
+            await Task.Run(() => {
+                Products = Products.OrderBy(item => item.OrderDate).ToList();
+            });
         }
 
         #endregion
@@ -325,7 +328,6 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
                         var removingUserBasket = db.Baskets.Where(item => item.UserId == SelectedUserId);
                         db.Baskets.RemoveRange(removingUserBasket);
                         await db.SaveChangesAsync();
-
                     }
                     if (user.UserProducts.Count != 0 || user.UserProducts != null)
                     {
@@ -334,6 +336,11 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
                         await db.SaveChangesAsync();
                     }
                     db.Users.Remove(user);
+                    DataBaseData.getInstance().CallNotify(new Data.Pages.Notify()
+                    {
+                        Message = "Removed",
+                        Color = UIData.GetColor(UIData.MessageColor.ERROR)
+                    });
                     await db.SaveChangesAsync();
                 }
                 loadUsers();
@@ -357,6 +364,11 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
                     await db.SaveChangesAsync();
 
                 }
+                DataBaseData.getInstance().CallNotify(new Data.Pages.Notify()
+                {
+                    Message = "Saved",
+                    Color = UIData.GetColor(UIData.MessageColor.SUCCESS)
+                });
                 loadUsers();
                 closeEditor();
             }

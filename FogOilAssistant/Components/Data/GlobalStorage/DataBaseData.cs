@@ -16,7 +16,6 @@ using FogOilAssistant.Components.Database;
 
 namespace FogOilAssistant.Components.Data.GlobalStorage
 {
-    
     public class DataBaseData: INotifyPropertyChanged
     {
         private static DataBaseData instance;
@@ -34,7 +33,17 @@ namespace FogOilAssistant.Components.Data.GlobalStorage
 
         public ObservableCollection<Database.Product> basketProducts;
 
-        public ObservableCollection<Notify> Notifies;
+
+        public Notify currentNotify;
+
+        public event Action onNotify;
+        
+        public void CallNotify(Notify obj)
+        {
+            currentNotify = obj;
+            onNotify();
+        }
+
 
 
         public string Login { get; set; }
@@ -45,7 +54,6 @@ namespace FogOilAssistant.Components.Data.GlobalStorage
             {
                 using (FogOilEntities DB = new FogOilEntities())
                 {
-                    this.Notifies = new ObservableCollection<Notify>();
                     this.Products = DB.Products.ToList();
                     this.basketProducts = new ObservableCollection<Database.Product>();
 

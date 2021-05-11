@@ -7,7 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using FogOilAssistant.Components.Data;
+using FogOilAssistant.Components.Data.GlobalStorage;
 using FogOilAssistant.Components.Data.Pages.Signed;
+using FogOilAssistant.Components.Data.UI;
 using FogOilAssistant.Components.Database;
 
 namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
@@ -94,6 +96,11 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
 
                     //db.UserProducts.Remove(await db.UserProducts.FindAsync(selectedOrder.ID));
                     await db.SaveChangesAsync();
+                    DataBaseData.getInstance().CallNotify(new Data.Pages.Notify()
+                    {
+                        Message = "Rejected",
+                        Color = UIData.GetColor(UIData.MessageColor.ERROR)
+                    });
                 }
             }
             catch (Exception e)
@@ -113,6 +120,10 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
                     (await db.UserProducts.FindAsync(selectedOrder.ID)).LastChangesDate = DateTime.Now;
                     (await db.UserProducts.FindAsync(selectedOrder.ID)).Status = 4;
                     await db.SaveChangesAsync();
+                    DataBaseData.getInstance().CallNotify(new Data.Pages.Notify(){
+                        Message = "Accepted for delivery",
+                        Color = UIData.GetColor(UIData.MessageColor.SUCCESS)
+                    });
                 }
             }
             catch(Exception e)
@@ -131,6 +142,11 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
                     (await db.UserProducts.FindAsync(selectedOrder.ID)).Status = 3;
                     (await db.UserProducts.FindAsync(selectedOrder.ID)).LastChangesDate = DateTime.Now;
                     await db.SaveChangesAsync();
+                    DataBaseData.getInstance().CallNotify(new Data.Pages.Notify()
+                    {
+                        Message = "Product moved to warehouse",
+                        Color = UIData.GetColor(UIData.MessageColor.SUCCESS)
+                    });
                 }
             }
             catch (Exception e)

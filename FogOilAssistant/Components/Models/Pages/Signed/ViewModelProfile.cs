@@ -11,6 +11,7 @@ using FogOilAssistant.Components.Data.GlobalStorage;
 using FogOilAssistant.Components.Database;
 using FogOilAssistant.Components.Data.Pages.Signed;
 using System.Threading;
+using FogOilAssistant.Components.Data.UI;
 
 namespace FogOilAssistant.Components.Models.Pages.Signed
 {
@@ -209,7 +210,11 @@ namespace FogOilAssistant.Components.Models.Pages.Signed
                 callUpdate((obj as ProductPresenter).StatusId);
                 preloadAll(DataBaseData.getInstance().UserId);
                 BtnVisibility = false;
-
+                DataBaseData.getInstance().CallNotify(new Data.Pages.Notify()
+                {
+                    Message = "Action completed",
+                    Color = UIData.GetColor(UIData.MessageColor.SUCCESS)
+                });
             }
             catch
             {

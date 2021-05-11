@@ -8,6 +8,8 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using FogOilAssistant.Components.Data;
+using FogOilAssistant.Components.Data.GlobalStorage;
+using FogOilAssistant.Components.Data.UI;
 using FogOilAssistant.Components.Database;
 
 namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
@@ -121,6 +123,13 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
                         await db.SaveChangesAsync();
                         loadLocation();
                         closeEditor();
+
+                        DataBaseData.getInstance().CallNotify(new Data.Pages.Notify()
+                        {
+                            Message = "Successfully created",
+                            Color = UIData.GetColor(UIData.MessageColor.SUCCESS)
+                        });
+
                         return;
                     }
                     (await db.Locations.FindAsync(selectedLocation.LocationId)).Latitude =
@@ -132,7 +141,11 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
                     await db.SaveChangesAsync();
                     loadLocation();
                     closeEditor();
-
+                    DataBaseData.getInstance().CallNotify(new Data.Pages.Notify()
+                    {
+                        Message = "Successfully saved",
+                        Color = UIData.GetColor(UIData.MessageColor.SUCCESS)
+                    });
                 }
             }
             catch(Exception e)
@@ -164,7 +177,11 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
                     await db.SaveChangesAsync();
                     loadLocation();
                     closeEditor();
-
+                    DataBaseData.getInstance().CallNotify(new Data.Pages.Notify()
+                    {
+                        Message = "Deleted",
+                        Color = UIData.GetColor(UIData.MessageColor.ERROR)
+                    });
                 }
             }
             catch(Exception e)

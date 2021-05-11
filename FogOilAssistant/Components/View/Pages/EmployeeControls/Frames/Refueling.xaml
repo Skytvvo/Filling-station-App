@@ -78,7 +78,7 @@
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="Volume: "  Style="{StaticResource description_text}"/>
                             <Border Grid.Column="1" BorderBrush="#ff0000" BorderThickness="2">
-                                <TextBox BorderThickness="2" BorderBrush="#ff0000"  Margin="0" Text="{Binding Volume, Mode=TwoWay, 
+                                <TextBox BorderThickness="2" BorderBrush="#ff0000"  Margin="0" MaxLength="3" Text="{Binding Volume, Mode=TwoWay, 
                         UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource user_input}" />
                             </Border>
                         </Grid>

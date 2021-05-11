@@ -13,7 +13,9 @@ using System.Windows.Forms;
 using System.Windows.Media.Imaging;
 using FogOilAssistant.Components.Data;
 using FogOilAssistant.Components.Data.Convertor;
+using FogOilAssistant.Components.Data.GlobalStorage;
 using FogOilAssistant.Components.Data.Pages.Signed;
+using FogOilAssistant.Components.Data.UI;
 using FogOilAssistant.Components.Database;
 
 namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
@@ -256,6 +258,11 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
                             Products = db.Products.ToList();
 
                         });
+                        DataBaseData.getInstance().CallNotify(new Data.Pages.Notify()
+                        {
+                            Message = "Successfuly created",
+                            Color = UIData.GetColor(UIData.MessageColor.SUCCESS)
+                        });
                         return;
                     }
 
@@ -276,7 +283,11 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
                     await Task.Run(() =>
                     {
                         Products = db.Products.ToList();
-
+                        DataBaseData.getInstance().CallNotify(new Data.Pages.Notify()
+                        {
+                            Message = "Successfully saved",
+                            Color = UIData.GetColor(UIData.MessageColor.SUCCESS)
+                        });
                     });
                 }
             }
@@ -300,6 +311,11 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
                     db.Products.Remove(findProduct);
 
                     await db.SaveChangesAsync();
+                    DataBaseData.getInstance().CallNotify(new Data.Pages.Notify()
+                    {
+                        Message = "Deleted",
+                        Color = UIData.GetColor(UIData.MessageColor.ERROR)
+                    });
                     await Task.Run(() =>
                     {
                         Products = db.Products.ToList();

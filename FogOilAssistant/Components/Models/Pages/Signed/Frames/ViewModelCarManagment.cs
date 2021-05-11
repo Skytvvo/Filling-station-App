@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using FogOilAssistant.Components.Data;
+using FogOilAssistant.Components.Data.GlobalStorage;
+using FogOilAssistant.Components.Data.UI;
 using FogOilAssistant.Components.Database;
 
 namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
@@ -373,6 +375,13 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
                         }
                         db.CarObjects.Add(newCar);
                         await db.SaveChangesAsync();
+
+                        DataBaseData.getInstance().CallNotify(new Data.Pages.Notify()
+                        {
+                            Message = "Car created",
+                            Color = UIData.GetColor(UIData.MessageColor.SUCCESS)
+                        });
+
                         closeEditor();
                         loadCars();
                         return;
@@ -407,6 +416,11 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
                     CollectionUI = new ObservableCollection<Product>();
                     UnusedCollectionOpacity = 0.3;
                     UsedCollectionOpacity = 0.3;
+                    DataBaseData.getInstance().CallNotify(new Data.Pages.Notify()
+                    {
+                        Message = "Successfully saved",
+                        Color = UIData.GetColor(UIData.MessageColor.SUCCESS)
+                    });
                     closeEditor();
                 }
             }
@@ -424,6 +438,11 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
                     
                     db.CarObjects.Remove(await db.CarObjects.FindAsync(SelectedCar.CarId));
                     await db.SaveChangesAsync();
+                    DataBaseData.getInstance().CallNotify(new Data.Pages.Notify()
+                    {
+                        Message = "Car removed",
+                        Color = UIData.GetColor(UIData.MessageColor.ERROR)
+                    });
                     loadCars();
                     closeEditor();
                 }
@@ -447,6 +466,11 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
                     CollectionUI = new ObservableCollection<Product> (unusedProducts);
                 else
                     CollectionUI = new ObservableCollection<Product>( usedProducts);
+                DataBaseData.getInstance().CallNotify(new Data.Pages.Notify()
+                {
+                    Message = "Product removed",
+                    Color = UIData.GetColor(UIData.MessageColor.ERROR)
+                });
             }
             catch (Exception e)
             {
@@ -464,7 +488,11 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
                     CollectionUI = new ObservableCollection<Product>( unusedProducts);
                 else
                     CollectionUI = new ObservableCollection<Product>( usedProducts);
-
+                DataBaseData.getInstance().CallNotify(new Data.Pages.Notify()
+                {
+                    Message = $"Product {ActionText}ed",
+                    Color = UIData.GetColor(UIData.MessageColor.SUCCESS)
+                });
             }
             catch (Exception e)
             {

@@ -12,6 +12,7 @@ using System.Windows;
 using FogOilAssistant.Components.Data;
 using FogOilAssistant.Components.Data.GlobalStorage;
 using FogOilAssistant.Components.Data.MenuButton;
+using FogOilAssistant.Components.Data.UI;
 using FogOilAssistant.Components.Database;
 
 namespace FogOilAssistant.Components.Models.Pages
@@ -249,8 +250,6 @@ namespace FogOilAssistant.Components.Models.Pages
         #endregion
         public ViewModelAuth()
         {
-            DataBaseData.getInstance().Notifies.Add(new Data.Pages.Notify() { Color="#ff0000", Message="Auth"});
-
             this.ImgPath = "/Components/Images/Auth/auth_1.jpg";
             this.Switch_text = "Sign in";
             
@@ -261,9 +260,6 @@ namespace FogOilAssistant.Components.Models.Pages
             Timer.Elapsed += OnTimedEvent;
             Timer.Enabled = true;
 
-            notifyTimer = new Timer();
-            notifyTimer.Interval = 3000;
-            notifyTimer.Elapsed += showNotify;
         }
 
 
@@ -312,13 +308,17 @@ namespace FogOilAssistant.Components.Models.Pages
                     
 
                     AddMenuItem(user.Root);
-
+                    DataBaseData.getInstance().CallNotify(new Data.Pages.Notify() { 
+                        Message = "Welcome", Color = UIData.GetColor(UIData.MessageColor.SUCCESS) 
+                    });
                     DataBaseData.getInstance().GoToShopPage();
                 }
             }
             catch(Exception e)
             {
-                callNotify(e.Message, "#ff0000");
+                DataBaseData.getInstance().CallNotify(new Data.Pages.Notify() {
+                    Message = e.Message, Color = UIData.GetColor(UIData.MessageColor.ERROR) 
+                });
             }
         }
         
@@ -357,23 +357,23 @@ namespace FogOilAssistant.Components.Models.Pages
                     }
 
                     AddMenuItem(newUser.Root);
+                    DataBaseData.getInstance().CallNotify(new Data.Pages.Notify()
+                    {
+                        Message = "Welcome",
+                        Color = UIData.GetColor(UIData.MessageColor.SUCCESS)
+                    });
                     DataBaseData.getInstance().GoToShopPage();
                 }
             }
             catch(Exception e)
             {
-                callNotify(e.Message, "#FFF800");
+                DataBaseData.getInstance().CallNotify(new Data.Pages.Notify() {
+                    Message = e.Message, Color = UIData.GetColor(UIData.MessageColor.ERROR)
+                });
             }
         }
 
-        private void callNotify(string message, string color)
-        {
-            notifyTimer.Stop();
-            this.NotifyMessage = message;
-            this.NotifyColor = color;
-            this.PasswordRejectVisibility = true;
-            notifyTimer.Start();
-        }
+      
 
         
 
@@ -418,12 +418,6 @@ namespace FogOilAssistant.Components.Models.Pages
             this.ImgPath = $"/Components/Images/Auth/auth_{++counter}.jpg";
         }
 
-        private static Timer notifyTimer;
-        private void showNotify(Object source, System.Timers.ElapsedEventArgs e)
-        {
-            this.PasswordRejectVisibility = false;
-            notifyTimer.Stop();
-        }
         #endregion
     }
 }

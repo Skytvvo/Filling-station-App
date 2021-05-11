@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Forms;
 using FogOilAssistant.Components.Data;
 using FogOilAssistant.Components.Data.GlobalStorage;
+using FogOilAssistant.Components.Data.UI;
 using FogOilAssistant.Components.Database;
 using Application = System.Windows.Application;
 using CarBrand = FogOilAssistant.Components.Database.CarBrand;
@@ -122,6 +123,11 @@ namespace FogOilAssistant.Components.Models.Pages
         {
             get => new RelayCommand(productId =>
             {
+                DataBaseData.getInstance().CallNotify(new Data.Pages.Notify()
+                {
+                    Message = "Product moved to basket",
+                    Color = UIData.GetColor(UIData.MessageColor.WARMING)
+                });
                   DataBaseData.getInstance().AddToUserBasket((int)productId);
             });
         }

@@ -11,6 +11,7 @@ using System.Windows;
 using FogOilAssistant.Annotations;
 using FogOilAssistant.Components.Data;
 using FogOilAssistant.Components.Data.GlobalStorage;
+using FogOilAssistant.Components.Data.UI;
 using FogOilAssistant.Components.Database;
 
 namespace FogOilAssistant.Components.Models.Basket
@@ -148,8 +149,19 @@ namespace FogOilAssistant.Components.Models.Basket
         private void Buy()
         {
             if (DataBaseData.getInstance().userAuthChecker())
+            {
                 if (moveBasketToPurchase())
                     clear_basket();
+            }
+            else
+            {
+                DataBaseData.getInstance().CallNotify(new Data.Pages.Notify()
+                {
+                    Message = "Please, sign in",
+                    Color = UIData.GetColor(UIData.MessageColor.ERROR)
+                });
+            }
+
             /*
              Description:
                 1) if user signing in or up => 2
@@ -158,7 +170,7 @@ namespace FogOilAssistant.Components.Models.Basket
              */
         }
 
-        private void Remove(object item_id)
+        private async void Remove(object item_id)
         {
             try
             {
@@ -166,14 +178,21 @@ namespace FogOilAssistant.Components.Models.Basket
                 DataBaseData.getInstance().basketProducts.Remove(
                 this.BaskedProducts.FirstOrDefault(item => item.ProductId == (int)item_id));
 
-                if(DataBaseData.getInstance().userAuthChecker()) //auth: true => continue
+                DataBaseData.getInstance().CallNotify(new Data.Pages.Notify()
+                {
+                    Message = "Removed",
+                    Color = UIData.GetColor(UIData.MessageColor.WARMING)
+                });
+
+                if (DataBaseData.getInstance().userAuthChecker()) //auth: true => continue
                     using (FogOilEntities db = new FogOilEntities())
                     {
                         db.Baskets.Remove(db.Users.Find(DataBaseData.getInstance().UserId).Baskets.FirstOrDefault(item => item.ProductId == (int)item_id));
-                        db.SaveChanges();
-                    
-                    }
+                        await db.SaveChangesAsync();
 
+                       
+                    }
+                
                
             }
             catch(Exception e)
@@ -216,6 +235,11 @@ namespace FogOilAssistant.Components.Models.Basket
             {
                 using (FogOilEntities db = new FogOilEntities())
                 {
+                    DataBaseData.getInstance().CallNotify(new Data.Pages.Notify()
+                    {
+                        Message = "Successfully purchased",
+                        Color = UIData.GetColor(UIData.MessageColor.SUCCESS)
+                    });
                     DataBaseData.getInstance().basketProducts.Clear();
                     
                     db.Baskets.RemoveRange(db.Users.Find(DataBaseData.getInstance().UserId).Baskets);

@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using System.Timers;
 using FogOilAssistant.Components.Data;
 using FogOilAssistant.Components.Data.GlobalStorage;
+using FogOilAssistant.Components.Data.UI;
+using FogOilAssistant.Components.Database;
 
 namespace FogOilAssistant.Components.Models.Pages
 {
@@ -92,6 +94,11 @@ namespace FogOilAssistant.Components.Models.Pages
         {
             get => new RelayCommand(productId =>
             {
+                DataBaseData.getInstance().CallNotify(new Data.Pages.Notify()
+                {
+                    Message = "Added to basket successfully",
+                    Color = UIData.GetColor(UIData.MessageColor.WARMING)
+                });
                 DataBaseData.getInstance().AddToUserBasket((int)productId);
             });
         }
@@ -99,6 +106,27 @@ namespace FogOilAssistant.Components.Models.Pages
         
 
         #endregion
+
+        private async void loadProducts()
+        {
+            try
+            {
+                await Task.Run(() => { 
+                    using(FogOilEntities db = new FogOilEntities())
+                    {
+                        this.Products = db.Products.ToList();
+                    }
+                });
+            }
+            catch(Exception e)
+            {
+                DataBaseData.getInstance().CallNotify(new Data.Pages.Notify()
+                {
+                    Message = e.Message,
+                    Color = UIData.GetColor(UIData.MessageColor.ERROR)
+                });
+            }
+        }
 
         #region Constructor
         public ViewModelShop()
@@ -109,8 +137,8 @@ namespace FogOilAssistant.Components.Models.Pages
             aTimer.Interval = 7000;
             aTimer.Elapsed += OnTimedEvent;
             aTimer.Enabled = true;
-
-            this.Products = DataBaseData.getInstance().Products;
+            loadProducts();
+            //this.Products = DataBaseData.getInstance().Products;
             
         }
         #endregion

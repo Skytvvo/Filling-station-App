@@ -9,7 +9,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using FogOilAssistant.Components.Data;
+using FogOilAssistant.Components.Data.GlobalStorage;
 using FogOilAssistant.Components.Data.Pages.Signed;
+using FogOilAssistant.Components.Data.UI;
 using FogOilAssistant.Components.Database;
 
 namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
@@ -189,6 +191,11 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
                     (await db.UserProducts.FindAsync(SelectedProduct.ID)).LastChangesDate = DateTime.Now;
                     (await db.UserProducts.FindAsync(SelectedProduct.ID)).Status = 2;
                     await db.SaveChangesAsync();
+                    DataBaseData.getInstance().CallNotify(new Data.Pages.Notify()
+                    {
+                        Message = "Rejected",
+                        Color = UIData.GetColor(UIData.MessageColor.DEFAULT)
+                    });
                 }
                 closeAbout();
                 findUser();
@@ -209,6 +216,11 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
                     (await db.UserProducts.FindAsync(SelectedProduct.ID)).LastChangesDate = DateTime.Now;
                     (await db.UserProducts.FindAsync(SelectedProduct.ID)).Status = 6;
                     await db.SaveChangesAsync();
+                    DataBaseData.getInstance().CallNotify(new Data.Pages.Notify()
+                    {
+                        Message = "Order was completed",
+                        Color = UIData.GetColor(UIData.MessageColor.SUCCESS)
+                    });
                 }
                 closeAbout();
                 findUser();
@@ -236,7 +248,11 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
                     }
                     (await db.Users.FindAsync(userId)).Bonus = Math.Round((result / 100), 2);
                     await db.SaveChangesAsync();
-
+                    DataBaseData.getInstance().CallNotify(new Data.Pages.Notify()
+                    {
+                        Message = "Refueled",
+                        Color = UIData.GetColor(UIData.MessageColor.SUCCESS)
+                    });
 
 
                 }
@@ -420,7 +436,6 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
         #region constructor
         public RefuelingPageViewModel()
         {
-            
             getFuel();
         }
         #endregion
