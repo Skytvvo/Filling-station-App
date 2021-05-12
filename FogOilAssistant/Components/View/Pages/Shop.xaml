@@ -118,7 +118,7 @@
                                         </Grid.ColumnDefinitions>
 
 
-                                        <Image Grid.Column="0"     Style="{StaticResource product_img}" Source="{Binding ImgCode, Converter={StaticResource ImageSourceConvertor}}" >
+                                        <Image Grid.Column="0" Style="{StaticResource product_img}" Source="{Binding ImgCode, Converter={StaticResource ImageSourceConvertor}}" >
                                             <!--<Image.Source>
                                                 <BitmapImage DecodePixelWidth="200" StreamSource="{Binding ImgCode}"/>
                                             </Image.Source>-->

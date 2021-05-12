@@ -9,10 +9,38 @@
         
         mc:Ignorable="d"
         Title="Loader" Height="500" Width="500">
-    <Window.DataContext>
-        <vm:ViewModelLoader/>
-    </Window.DataContext>
     
+
+    <Window.Resources>
+        <Style x:Key="text_style" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="Foreground" Value="#fff"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BitmapEffect">
+                <Setter.Value>
+                    <DropShadowBitmapEffect Color="Black" Direction="320" ShadowDepth="10" Opacity=".5" Softness="9" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="btn_style" TargetType="Button">
+            <Setter Property="Background" Value="#D8D8D8"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border BorderBrush="#6634E8" BorderThickness="2" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#6634E8"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid Background="Transparent">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -20,10 +48,37 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
             <RowDefinition Height="4*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Image Source="/Components/Images/logo_transparent.png" Grid.Row="1" Grid.Column="1"/>
+        <Image Source="/Components/Images/logo_transparent.png"  Grid.Column="1">
+            <Image.Style>
+                <Style TargetType="Image">
+                    <Setter Property="BitmapEffect">
+                        <Setter.Value>
+                            <DropShadowBitmapEffect Color="Black" Direction="320" ShadowDepth="10" Opacity=".5" Softness="9" />
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Image.Style>
+        </Image>
+        <StackPanel HorizontalAlignment="Center" Grid.ColumnSpan="3" Grid.Row="1" Orientation="Vertical">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="Loading " Style="{StaticResource text_style}" />
+                <TextBlock x:Name="percent" Text="{Binding Percent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource text_style}"/>
+
+            </StackPanel>
+            <TextBlock x:Name="status" Text="{Binding Status,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Style="{StaticResource text_style}"/>
+
+        </StackPanel>
+
+        <StackPanel Visibility="{Binding Visibility, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" Grid.ColumnSpan="3" >
+            <Button Command="{Binding CloseApp}" Style="{StaticResource btn_style}">
+                <TextBlock Text="Exit" Style="{StaticResource text_style}" Margin="30,10">
+                    
+                </TextBlock>
+            </Button>
+        </StackPanel>
     </Grid>
 </Window>

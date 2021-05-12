@@ -125,7 +125,7 @@
                     <!---->
                     <view:BindablePasswordBox Password="{Binding Password}"/>   
                     
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="30">
+                    <StackPanel Visibility="Hidden" Orientation="Horizontal" HorizontalAlignment="Right" Margin="30">
  
                         <TextBlock FontWeight="Bold" Foreground="#fff" Text="Show password"/>
                         <CheckBox IsChecked="{Binding IsChecked}" Style="{StaticResource checkbox_style}"  Margin="5,0,0,0" />

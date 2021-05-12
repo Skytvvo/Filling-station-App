@@ -10,7 +10,21 @@
         Height="720"
         Width="1280" MinHeight="600" 
         MinWidth="1000" 
-        AllowsTransparency="False"  WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Foreground="#FF262B26">
+        AllowsTransparency="False" WindowState="Normal" Background="Transparent"  WindowStyle="None" ResizeMode="CanResize" WindowStartupLocation="CenterScreen" Foreground="#FF262B26">
+    <Window.Style>
+        <Style TargetType="Window">
+
+            <Setter Property="WindowChrome.WindowChrome">
+                <Setter.Value>
+                    <WindowChrome CaptionHeight="0"
+            CornerRadius="2"
+            GlassFrameThickness="0"
+            NonClientFrameEdges="None"
+            ResizeBorderThickness="3"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Style>
     
     <Window.Resources>
         <ResourceDictionary>

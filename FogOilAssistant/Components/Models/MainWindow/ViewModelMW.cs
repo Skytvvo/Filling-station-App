@@ -14,6 +14,7 @@ using FogOilAssistant.Components.Data.GlobalStorage;
 using System.Collections.Specialized;
 using FogOilAssistant.Components.Database;
 using System.Threading;
+using FogOilAssistant.Components.Models.Loader;
 
 namespace FogOilAssistant.Components.Models.MainWindow
 {
@@ -80,13 +81,21 @@ namespace FogOilAssistant.Components.Models.MainWindow
             {
                 using (FogOilEntities db = new FogOilEntities())
                 {
-                    if(!db.Database.Exists())
+                    //ChangeStatus("50%",  "Trying to connect to the database");
+                    changeStatus.Invoke("50%", "Trying to connect to the database",true);
+                    Thread.Sleep(2000);
+
+                    if (!db.Database.Exists())
                     {
-                        Thread.Sleep(5000);
+                        //ChangeStatus("50%", "Cannot connect to the database. Trying to reconnect");
+                        changeStatus.Invoke("50%", "Cannot connect to the database",true);
+                        Thread.Sleep(2000);
                         checkConnection();
                     }
                     else
                     {
+                        changeStatus.Invoke("100%", "Welcome",false);
+                        Thread.Sleep(2000);
                         closeLoader();
                     }
                 }
@@ -97,20 +106,47 @@ namespace FogOilAssistant.Components.Models.MainWindow
             }
         }
 
-        private void closeLoader()
+        Thread main;
+        Thread newVisualWorldThread;
+        void closeApp()
         {
-            foreach (Window window in Application.Current.Windows)
+
+            try
             {
-                if (window.GetType() == typeof(View.LoadingWindow.Loader))
-                {
-                    (window as View.LoadingWindow.Loader).Close();
-                }
+            //    Close();
+                main.Abort();
+                Thread.CurrentThread.Abort();
+            }
+            catch(Exception e)
+            {
+
             }
         }
 
+        private void closeLoader()
+        {
+            newVisualWorldThread.Abort();
+        }
+
+        ChangeStatus changeStatus;
+
         private void runLoader()
         {
-            new View.LoadingWindow.Loader().Show();
+            main = Thread.CurrentThread;
+            newVisualWorldThread = new Thread(ThreadStartingPoint);
+            newVisualWorldThread.SetApartmentState(ApartmentState.STA);
+            newVisualWorldThread.IsBackground = true;
+            newVisualWorldThread.Start();
+
+        }
+        View.LoadingWindow.Loader loader;
+        private void ThreadStartingPoint()
+        {
+            loader = new View.LoadingWindow.Loader();
+            loader.DataContext = new ViewModelLoader(closeApp,ref changeStatus);
+            loader.Show();
+            System.Windows.Threading.Dispatcher.Run();
+           
         }
         public ViewModelMW()
         {
@@ -120,7 +156,10 @@ namespace FogOilAssistant.Components.Models.MainWindow
             notifyTimer.Interval = 3000;
             notifyTimer.Elapsed += showNotify;
             DataBaseData.getInstance().onNotify += this.incomingNotify;
+            WindowCommand = new CommandViewModel(fullscreen);
+            normal();
         }
+
         private Visibility basketVisibility = Visibility.Collapsed;
         public Visibility BasketVisibility
         {
@@ -144,6 +183,16 @@ namespace FogOilAssistant.Components.Models.MainWindow
         public ICommand MinimizeWindow { get => new WMICommand(Minimize); }
         public ICommand CloseAppWindow { get => new WMICommand(Close); }
         public ICommand OnBasket { get => new CommandViewModel(onBasket); }
+        private ICommand windowCommand;
+        public ICommand WindowCommand
+        {
+            get => windowCommand;
+            set
+            {
+                windowCommand = value;
+                OnPropertyChanged("WindowCommand");
+            }
+        }
 
         private void onBasket()
         {
@@ -176,14 +225,34 @@ namespace FogOilAssistant.Components.Models.MainWindow
 
         private void Minimize()
         {
-            foreach(Window window in Application.Current.Windows)
+            foreach (Window window in Application.Current.Windows)
             {
                 if (window.GetType() == typeof(FogOilAssistant.MainWindow))
                     (window as FogOilAssistant.MainWindow).WindowState = WindowState.Minimized;
             }
         }
 
+        private void normal()
+        {
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window.GetType() == typeof(FogOilAssistant.MainWindow))
+                    (window as FogOilAssistant.MainWindow).WindowState = WindowState.Normal;
+            }
+            WindowCommand = new CommandViewModel(fullscreen);
 
+        }
+
+        private void fullscreen()
+        {
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window.GetType() == typeof(FogOilAssistant.MainWindow))
+                    (window as FogOilAssistant.MainWindow).WindowState = WindowState.Maximized;
+            }
+            WindowCommand = new CommandViewModel(normal);
+
+        }
         private void Close()
         {
             foreach (Window window in Application.Current.Windows)
