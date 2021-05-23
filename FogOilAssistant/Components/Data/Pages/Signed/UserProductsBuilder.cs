@@ -274,11 +274,17 @@ namespace FogOilAssistant.Components.Data.Pages.Signed
                 {
                     using(FogOilEntities db = new FogOilEntities())
                     {
+                        var ele = (await db.Baskets.FindAsync((int)obj));
                         db.Baskets.Remove(
-                            (await db.Baskets.FindAsync((int)obj))
+                            ele
                             );
                     
                         await db.SaveChangesAsync();
+                        var rem =  DataBaseData.getInstance().basketProducts.FirstOrDefault(item => item.ProductId == ele.ProductId);
+                        if(rem!=null)
+                        {
+                            DataBaseData.getInstance().basketProducts.Remove(rem);
+                        }
                     }
                 }
                 catch(Exception e)

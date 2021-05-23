@@ -364,7 +364,7 @@ namespace FogOilAssistant.Components.Models.Pages.Signed
                 DeliveredInfo = $"Delivered({user.UserProducts.Where(item => item.Status == 3).Count()})";
                 BonusInfo = $"Discount({Math.Round(user.Bonus,2)}%)";
                 BasketProductsInfo = $"Basket({user.Baskets.Count()})";
-                TotalOilInfo = $"{Math.Round(user.Oil,2)} L";
+                TotalOilInfo = $"{Math.Round(user.Oil,2)} oils";
             }
         }
         #endregion

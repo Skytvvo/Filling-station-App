@@ -52,12 +52,19 @@ namespace FogOilAssistant.Components.Models.Loader
 
         event Action closeApp;
 
-
+        public void closeLoader()
+        {
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window.GetType() == typeof(FogOilAssistant.Components.View.LoadingWindow.Loader))
+                    (window as View.LoadingWindow.Loader).Close();
+            }
+        }
         public CommandViewModel CloseApp { get => new CommandViewModel(() =>
          {
+             //closeLoader();            
+            closeApp();
 
-             closeApp();
-             
          });
         }
      

@@ -113,7 +113,14 @@ C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\Employee
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\EmployeeControls\Frames\LocationManagment.baml
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\EmployeeControls\Frames\CarManagment.g.cs
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\Pages\EmployeeControls\Frames\CarManagment.baml
-C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\MapControl.WPF.dll
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\LoadingWindow\Loader.g.cs
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\Components\View\LoadingWindow\Loader.baml
 C:\data\FogOilAssistant\FogOilAssistant\obj\Debug\FogOilAssistant.csprojAssemblyReference.cache
+C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\GMap.NET.Core.dll
+C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\GMap.NET.WindowsPresentation.dll
+C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\Newtonsoft.Json.dll
+C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\System.Data.SQLite.dll
+C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\System.Data.SqlClient.dll
+C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\System.Data.SQLite.EF6.dll
+C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\System.Data.SQLite.Linq.dll
+C:\data\FogOilAssistant\FogOilAssistant\bin\Debug\System.Security.Principal.Windows.dll

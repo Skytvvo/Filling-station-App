@@ -1,13 +1,36 @@
 {
   "version": 2,
-  "dgSpecHash": "h/ILBMYsEKMEqV0SaF3khXzCUHKZx42RCSyMPis0aDwa3fTzcFJKmHSY1U+iQe9IamXAnQRv361OzyReO4KtkQ==",
+  "dgSpecHash": "GHojfb2qv4pdLA+hZruVD57/l5MTdTnbz/6UfxHQRXSohKQmpsT6uXM1va09dvRUIHLhaS32aOZhXvW7WORxhw==",
   "success": true,
   "projectFilePath": "C:\\data\\FogOilAssistant\\FogOilAssistant\\FogOilAssistant.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\sky2\\.nuget\\packages\\entityframework\\6.2.0\\entityframework.6.2.0.nupkg.sha512",
     "C:\\Users\\sky2\\.nuget\\packages\\entityframework.ru\\6.2.0\\entityframework.ru.6.2.0.nupkg.sha512",
+    "C:\\Users\\sky2\\.nuget\\packages\\gmap.net.core\\2.0.2\\gmap.net.core.2.0.2.nupkg.sha512",
+    "C:\\Users\\sky2\\.nuget\\packages\\gmap.net.winpresentation\\2.0.2\\gmap.net.winpresentation.2.0.2.nupkg.sha512",
     "C:\\Users\\sky2\\.nuget\\packages\\microsoft.vcrtforwarders.140\\1.0.6\\microsoft.vcrtforwarders.140.1.0.6.nupkg.sha512",
-    "C:\\Users\\sky2\\.nuget\\packages\\xaml.mapcontrol\\5.6.0\\xaml.mapcontrol.5.6.0.nupkg.sha512"
+    "C:\\Users\\sky2\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
+    "C:\\Users\\sky2\\.nuget\\packages\\stub.system.data.sqlite.core.netframework\\1.0.113.3\\stub.system.data.sqlite.core.netframework.1.0.113.3.nupkg.sha512",
+    "C:\\Users\\sky2\\.nuget\\packages\\system.data.sqlclient\\4.8.2\\system.data.sqlclient.4.8.2.nupkg.sha512",
+    "C:\\Users\\sky2\\.nuget\\packages\\system.data.sqlite\\1.0.113.7\\system.data.sqlite.1.0.113.7.nupkg.sha512",
+    "C:\\Users\\sky2\\.nuget\\packages\\system.data.sqlite.core\\1.0.113.7\\system.data.sqlite.core.1.0.113.7.nupkg.sha512",
+    "C:\\Users\\sky2\\.nuget\\packages\\system.data.sqlite.ef6\\1.0.113\\system.data.sqlite.ef6.1.0.113.nupkg.sha512",
+    "C:\\Users\\sky2\\.nuget\\packages\\system.data.sqlite.linq\\1.0.113\\system.data.sqlite.linq.1.0.113.nupkg.sha512",
+    "C:\\Users\\sky2\\.nuget\\packages\\system.security.principal.windows\\5.0.0\\system.security.principal.windows.5.0.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1605",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Обнаружено понижение версии пакета EntityFramework с 6.3.0.0 на 6.2.0. Чтобы выбрать другую версию, создайте ссылку на пакет напрямую из проекта. \r\n FogOilAssistant -> GMap.NET.WinPresentation 2.0.2 -> GMap.NET.Core 2.0.2 -> System.Data.SQLite 1.0.113.7 -> System.Data.SQLite.EF6 1.0.113 -> EntityFramework (>= 6.3.0) \r\n FogOilAssistant -> EntityFramework (>= 6.2.0)",
+      "libraryId": "EntityFramework",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.7.2",
+        ".NETFramework,Version=v4.7.2/win",
+        ".NETFramework,Version=v4.7.2/win-x64",
+        ".NETFramework,Version=v4.7.2/win-x86"
+      ]
+    }
+  ]
 }

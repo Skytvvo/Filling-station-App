@@ -341,6 +341,16 @@ namespace FogOilAssistant.Properties {
         }
         
         /// <summary>
+        ///   Поиск локализованного ресурса типа System.Byte[].
+        /// </summary>
+        internal static byte[] resize {
+            get {
+                object obj = ResourceManager.GetObject("resize", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Shel_HELIX_HX3_20W_50 {

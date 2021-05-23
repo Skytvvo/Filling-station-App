@@ -46,13 +46,13 @@
               "target": "Package",
               "version": "[6.2.0, )"
             },
+            "GMap.NET.WinPresentation": {
+              "target": "Package",
+              "version": "[2.0.2, )"
+            },
             "Microsoft.VCRTForwarders.140": {
               "target": "Package",
               "version": "[1.0.6, )"
-            },
-            "XAML.MapControl": {
-              "target": "Package",
-              "version": "[5.6.0, )"
             }
           },
           "imports": [

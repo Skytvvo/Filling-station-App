@@ -100,7 +100,7 @@ namespace FogOilAssistant.Components.Models.MainWindow
                     }
                 }
             }
-            catch
+            catch(Exception e)
             {
 
             }
@@ -113,7 +113,7 @@ namespace FogOilAssistant.Components.Models.MainWindow
 
             try
             {
-            //    Close();
+                //    Close();
                 main.Abort();
                 Thread.CurrentThread.Abort();
             }
@@ -125,6 +125,7 @@ namespace FogOilAssistant.Components.Models.MainWindow
 
         private void closeLoader()
         {
+
             newVisualWorldThread.Abort();
         }
 

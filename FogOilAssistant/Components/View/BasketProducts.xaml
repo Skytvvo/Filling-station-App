@@ -69,7 +69,7 @@
                     <Grid >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.125*"></ColumnDefinition>
-                            <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                            <ColumnDefinition Width="0.3*"></ColumnDefinition>
 
                             <ColumnDefinition Width="0.175*"></ColumnDefinition>
                             <ColumnDefinition Width="0.1*"></ColumnDefinition>
@@ -83,15 +83,12 @@
                             SelectedIndex="{Binding SelectedLocation}"
                             DisplayMemberPath="Adress"
                             ></ComboBox>
-                        <Grid Grid.Column="2">
-                            <Grid.ColumnDefinitions>
-                                    <ColumnDefinition></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Horizontal" Grid.Column="2">
+                            
                             <TextBlock Grid.Column="0" Text="Total:" Style="{StaticResource product_name}"></TextBlock>
                             <TextBlock Grid.Column="1" Style="{StaticResource product_name}" Text="{Binding Total}"></TextBlock>
-                            
-                        </Grid>
+                            <TextBlock Grid.Column="2" Style="{StaticResource product_name}" Text="{Binding Bonus, StringFormat=({0})}"/>
+                        </StackPanel>
                         <Grid Grid.Column="3" >
                             <Button Command="{Binding BuyItems}" Style="{StaticResource product_cancel}">
                                 <TextBlock Style="{StaticResource product_name}" Text="Buy"></TextBlock>

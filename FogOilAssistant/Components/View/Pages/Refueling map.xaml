@@ -7,8 +7,7 @@
       mc:Ignorable="d" 
       Title="Refueling_map"
       xmlns:vm="clr-namespace:FogOilAssistant.Components.Models.Pages" 
-      xmlns:controls="clr-namespace:Microsoft.Toolkit.Wpf.UI.Controls;assembly=Microsoft.Toolkit.Wpf.UI.Controls" 
-      xmlns:m="clr-namespace:MapControl;assembly=MapControl.WPF">
+      xmlns:controls="clr-namespace:Microsoft.Toolkit.Wpf.UI.Controls;assembly=Microsoft.Toolkit.Wpf.UI.Controls" xmlns:mapc="clr-namespace:GMap.NET.WindowsPresentation;assembly=GMap.NET.WindowsPresentation">
     
 
     <Page.Resources>
@@ -19,48 +18,10 @@
     
    
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="0.5*"/>
-        </Grid.RowDefinitions>
-        <Grid  x:Name="map_grid" Grid.Row="0">
+       
 
-            <m:Map  ZoomLevel="6.5"/>
+            <mapc:GMapControl Name="map" Loaded="map_Loaded"/>
 
-        </Grid>
-        <Grid Grid.Row="1">
-            <TextBlock Style="{StaticResource Header }">
-                <TextBlock.Text>
-                    Find filling stations around you
-                </TextBlock.Text>
-            </TextBlock>
-        </Grid>
-      
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
-            <Button Grid.Row="0" Grid.Column="2" Style="{StaticResource find_btn}">
-                <TextBlock Foreground="#FFFFFF" FontSize="20" FontWeight="Bold">
-                    <TextBlock.Text>
-                        Find near
-                    </TextBlock.Text>
-                </TextBlock>
-            </Button>
-        </Grid>
+       
     </Grid>
 </Page>

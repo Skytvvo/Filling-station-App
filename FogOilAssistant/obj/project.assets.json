@@ -30,6 +30,33 @@
           }
         }
       },
+      "GMap.NET.Core/2.0.2": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.3",
+          "System.Data.SQLite": "1.0.113.7",
+          "System.Data.SqlClient": "4.8.2",
+          "System.Security.Principal.Windows": "5.0.0"
+        },
+        "compile": {
+          "lib/net46/GMap.NET.Core.dll": {}
+        },
+        "runtime": {
+          "lib/net46/GMap.NET.Core.dll": {}
+        }
+      },
+      "GMap.NET.WinPresentation/2.0.2": {
+        "type": "package",
+        "dependencies": {
+          "GMap.NET.Core": "2.0.2"
+        },
+        "compile": {
+          "lib/net46/GMap.NET.WindowsPresentation.dll": {}
+        },
+        "runtime": {
+          "lib/net46/GMap.NET.WindowsPresentation.dll": {}
+        }
+      },
       "Microsoft.VCRTForwarders.140/1.0.6": {
         "type": "package",
         "build": {
@@ -238,17 +265,103 @@
           }
         }
       },
-      "XAML.MapControl/5.6.0": {
+      "Newtonsoft.Json/12.0.3": {
         "type": "package",
-        "frameworkAssemblies": [
-          "System.Net.Http",
-          "System.Runtime.Caching"
-        ],
         "compile": {
-          "lib/net462/MapControl.WPF.dll": {}
+          "lib/net45/Newtonsoft.Json.dll": {}
         },
         "runtime": {
-          "lib/net462/MapControl.WPF.dll": {}
+          "lib/net45/Newtonsoft.Json.dll": {}
+        }
+      },
+      "Stub.System.Data.SQLite.Core.NetFramework/1.0.113.3": {
+        "type": "package",
+        "compile": {
+          "lib/net46/System.Data.SQLite.dll": {}
+        },
+        "runtime": {
+          "lib/net46/System.Data.SQLite.dll": {}
+        },
+        "build": {
+          "buildTransitive/net46/Stub.System.Data.SQLite.Core.NetFramework.targets": {}
+        }
+      },
+      "System.Data.SqlClient/4.8.2": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System.Data",
+          "System.Xml",
+          "mscorlib"
+        ],
+        "compile": {
+          "ref/net461/System.Data.SqlClient.dll": {}
+        },
+        "runtime": {
+          "lib/net461/System.Data.SqlClient.dll": {}
+        },
+        "runtimeTargets": {
+          "runtimes/unix/lib/netstandard2.0/System.Data.SqlClient.dll": {
+            "assetType": "runtime",
+            "rid": "unix"
+          },
+          "runtimes/win/lib/net461/System.Data.SqlClient.dll": {
+            "assetType": "runtime",
+            "rid": "win"
+          }
+        }
+      },
+      "System.Data.SQLite/1.0.113.7": {
+        "type": "package",
+        "dependencies": {
+          "System.Data.SQLite.Core": "1.0.113.7",
+          "System.Data.SQLite.EF6": "1.0.113",
+          "System.Data.SQLite.Linq": "1.0.113"
+        }
+      },
+      "System.Data.SQLite.Core/1.0.113.7": {
+        "type": "package",
+        "dependencies": {
+          "Stub.System.Data.SQLite.Core.NetFramework": "1.0.113.3"
+        }
+      },
+      "System.Data.SQLite.EF6/1.0.113": {
+        "type": "package",
+        "dependencies": {
+          "EntityFramework": "6.3.0"
+        },
+        "compile": {
+          "lib/net46/System.Data.SQLite.EF6.dll": {}
+        },
+        "runtime": {
+          "lib/net46/System.Data.SQLite.EF6.dll": {}
+        }
+      },
+      "System.Data.SQLite.Linq/1.0.113": {
+        "type": "package",
+        "compile": {
+          "lib/net46/System.Data.SQLite.Linq.dll": {}
+        },
+        "runtime": {
+          "lib/net46/System.Data.SQLite.Linq.dll": {}
+        }
+      },
+      "System.Security.Principal.Windows/5.0.0": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System",
+          "mscorlib"
+        ],
+        "compile": {
+          "ref/net461/System.Security.Principal.Windows.dll": {}
+        },
+        "runtime": {
+          "lib/net461/System.Security.Principal.Windows.dll": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net461/System.Security.Principal.Windows.dll": {
+            "assetType": "runtime",
+            "rid": "win"
+          }
         }
       }
     },
@@ -281,23 +394,120 @@
           }
         }
       },
+      "GMap.NET.Core/2.0.2": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.3",
+          "System.Data.SQLite": "1.0.113.7",
+          "System.Data.SqlClient": "4.8.2",
+          "System.Security.Principal.Windows": "5.0.0"
+        },
+        "compile": {
+          "lib/net46/GMap.NET.Core.dll": {}
+        },
+        "runtime": {
+          "lib/net46/GMap.NET.Core.dll": {}
+        }
+      },
+      "GMap.NET.WinPresentation/2.0.2": {
+        "type": "package",
+        "dependencies": {
+          "GMap.NET.Core": "2.0.2"
+        },
+        "compile": {
+          "lib/net46/GMap.NET.WindowsPresentation.dll": {}
+        },
+        "runtime": {
+          "lib/net46/GMap.NET.WindowsPresentation.dll": {}
+        }
+      },
       "Microsoft.VCRTForwarders.140/1.0.6": {
         "type": "package",
         "build": {
           "build/net45/Microsoft.VCRTForwarders.140.targets": {}
         }
       },
-      "XAML.MapControl/5.6.0": {
+      "Newtonsoft.Json/12.0.3": {
         "type": "package",
-        "frameworkAssemblies": [
-          "System.Net.Http",
-          "System.Runtime.Caching"
-        ],
         "compile": {
-          "lib/net462/MapControl.WPF.dll": {}
+          "lib/net45/Newtonsoft.Json.dll": {}
         },
         "runtime": {
-          "lib/net462/MapControl.WPF.dll": {}
+          "lib/net45/Newtonsoft.Json.dll": {}
+        }
+      },
+      "Stub.System.Data.SQLite.Core.NetFramework/1.0.113.3": {
+        "type": "package",
+        "compile": {
+          "lib/net46/System.Data.SQLite.dll": {}
+        },
+        "runtime": {
+          "lib/net46/System.Data.SQLite.dll": {}
+        },
+        "build": {
+          "buildTransitive/net46/Stub.System.Data.SQLite.Core.NetFramework.targets": {}
+        }
+      },
+      "System.Data.SqlClient/4.8.2": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System.Data",
+          "System.Xml",
+          "mscorlib"
+        ],
+        "compile": {
+          "ref/net461/System.Data.SqlClient.dll": {}
+        },
+        "runtime": {
+          "runtimes/win/lib/net461/System.Data.SqlClient.dll": {}
+        }
+      },
+      "System.Data.SQLite/1.0.113.7": {
+        "type": "package",
+        "dependencies": {
+          "System.Data.SQLite.Core": "1.0.113.7",
+          "System.Data.SQLite.EF6": "1.0.113",
+          "System.Data.SQLite.Linq": "1.0.113"
+        }
+      },
+      "System.Data.SQLite.Core/1.0.113.7": {
+        "type": "package",
+        "dependencies": {
+          "Stub.System.Data.SQLite.Core.NetFramework": "1.0.113.3"
+        }
+      },
+      "System.Data.SQLite.EF6/1.0.113": {
+        "type": "package",
+        "dependencies": {
+          "EntityFramework": "6.3.0"
+        },
+        "compile": {
+          "lib/net46/System.Data.SQLite.EF6.dll": {}
+        },
+        "runtime": {
+          "lib/net46/System.Data.SQLite.EF6.dll": {}
+        }
+      },
+      "System.Data.SQLite.Linq/1.0.113": {
+        "type": "package",
+        "compile": {
+          "lib/net46/System.Data.SQLite.Linq.dll": {}
+        },
+        "runtime": {
+          "lib/net46/System.Data.SQLite.Linq.dll": {}
+        }
+      },
+      "System.Security.Principal.Windows/5.0.0": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System",
+          "mscorlib"
+        ],
+        "compile": {
+          "ref/net461/System.Security.Principal.Windows.dll": {}
+        },
+        "runtime": {
+          "runtimes/win/lib/net461/System.Security.Principal.Windows.dll": {}
         }
       }
     },
@@ -330,23 +540,120 @@
           }
         }
       },
+      "GMap.NET.Core/2.0.2": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.3",
+          "System.Data.SQLite": "1.0.113.7",
+          "System.Data.SqlClient": "4.8.2",
+          "System.Security.Principal.Windows": "5.0.0"
+        },
+        "compile": {
+          "lib/net46/GMap.NET.Core.dll": {}
+        },
+        "runtime": {
+          "lib/net46/GMap.NET.Core.dll": {}
+        }
+      },
+      "GMap.NET.WinPresentation/2.0.2": {
+        "type": "package",
+        "dependencies": {
+          "GMap.NET.Core": "2.0.2"
+        },
+        "compile": {
+          "lib/net46/GMap.NET.WindowsPresentation.dll": {}
+        },
+        "runtime": {
+          "lib/net46/GMap.NET.WindowsPresentation.dll": {}
+        }
+      },
       "Microsoft.VCRTForwarders.140/1.0.6": {
         "type": "package",
         "build": {
           "build/net45/Microsoft.VCRTForwarders.140.targets": {}
         }
       },
-      "XAML.MapControl/5.6.0": {
+      "Newtonsoft.Json/12.0.3": {
         "type": "package",
-        "frameworkAssemblies": [
-          "System.Net.Http",
-          "System.Runtime.Caching"
-        ],
         "compile": {
-          "lib/net462/MapControl.WPF.dll": {}
+          "lib/net45/Newtonsoft.Json.dll": {}
         },
         "runtime": {
-          "lib/net462/MapControl.WPF.dll": {}
+          "lib/net45/Newtonsoft.Json.dll": {}
+        }
+      },
+      "Stub.System.Data.SQLite.Core.NetFramework/1.0.113.3": {
+        "type": "package",
+        "compile": {
+          "lib/net46/System.Data.SQLite.dll": {}
+        },
+        "runtime": {
+          "lib/net46/System.Data.SQLite.dll": {}
+        },
+        "build": {
+          "buildTransitive/net46/Stub.System.Data.SQLite.Core.NetFramework.targets": {}
+        }
+      },
+      "System.Data.SqlClient/4.8.2": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System.Data",
+          "System.Xml",
+          "mscorlib"
+        ],
+        "compile": {
+          "ref/net461/System.Data.SqlClient.dll": {}
+        },
+        "runtime": {
+          "lib/net461/System.Data.SqlClient.dll": {}
+        }
+      },
+      "System.Data.SQLite/1.0.113.7": {
+        "type": "package",
+        "dependencies": {
+          "System.Data.SQLite.Core": "1.0.113.7",
+          "System.Data.SQLite.EF6": "1.0.113",
+          "System.Data.SQLite.Linq": "1.0.113"
+        }
+      },
+      "System.Data.SQLite.Core/1.0.113.7": {
+        "type": "package",
+        "dependencies": {
+          "Stub.System.Data.SQLite.Core.NetFramework": "1.0.113.3"
+        }
+      },
+      "System.Data.SQLite.EF6/1.0.113": {
+        "type": "package",
+        "dependencies": {
+          "EntityFramework": "6.3.0"
+        },
+        "compile": {
+          "lib/net46/System.Data.SQLite.EF6.dll": {}
+        },
+        "runtime": {
+          "lib/net46/System.Data.SQLite.EF6.dll": {}
+        }
+      },
+      "System.Data.SQLite.Linq/1.0.113": {
+        "type": "package",
+        "compile": {
+          "lib/net46/System.Data.SQLite.Linq.dll": {}
+        },
+        "runtime": {
+          "lib/net46/System.Data.SQLite.Linq.dll": {}
+        }
+      },
+      "System.Security.Principal.Windows/5.0.0": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System",
+          "mscorlib"
+        ],
+        "compile": {
+          "ref/net461/System.Security.Principal.Windows.dll": {}
+        },
+        "runtime": {
+          "lib/net461/System.Security.Principal.Windows.dll": {}
         }
       }
     },
@@ -379,23 +686,120 @@
           }
         }
       },
+      "GMap.NET.Core/2.0.2": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.3",
+          "System.Data.SQLite": "1.0.113.7",
+          "System.Data.SqlClient": "4.8.2",
+          "System.Security.Principal.Windows": "5.0.0"
+        },
+        "compile": {
+          "lib/net46/GMap.NET.Core.dll": {}
+        },
+        "runtime": {
+          "lib/net46/GMap.NET.Core.dll": {}
+        }
+      },
+      "GMap.NET.WinPresentation/2.0.2": {
+        "type": "package",
+        "dependencies": {
+          "GMap.NET.Core": "2.0.2"
+        },
+        "compile": {
+          "lib/net46/GMap.NET.WindowsPresentation.dll": {}
+        },
+        "runtime": {
+          "lib/net46/GMap.NET.WindowsPresentation.dll": {}
+        }
+      },
       "Microsoft.VCRTForwarders.140/1.0.6": {
         "type": "package",
         "build": {
           "build/net45/Microsoft.VCRTForwarders.140.targets": {}
         }
       },
-      "XAML.MapControl/5.6.0": {
+      "Newtonsoft.Json/12.0.3": {
         "type": "package",
-        "frameworkAssemblies": [
-          "System.Net.Http",
-          "System.Runtime.Caching"
-        ],
         "compile": {
-          "lib/net462/MapControl.WPF.dll": {}
+          "lib/net45/Newtonsoft.Json.dll": {}
         },
         "runtime": {
-          "lib/net462/MapControl.WPF.dll": {}
+          "lib/net45/Newtonsoft.Json.dll": {}
+        }
+      },
+      "Stub.System.Data.SQLite.Core.NetFramework/1.0.113.3": {
+        "type": "package",
+        "compile": {
+          "lib/net46/System.Data.SQLite.dll": {}
+        },
+        "runtime": {
+          "lib/net46/System.Data.SQLite.dll": {}
+        },
+        "build": {
+          "buildTransitive/net46/Stub.System.Data.SQLite.Core.NetFramework.targets": {}
+        }
+      },
+      "System.Data.SqlClient/4.8.2": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System.Data",
+          "System.Xml",
+          "mscorlib"
+        ],
+        "compile": {
+          "ref/net461/System.Data.SqlClient.dll": {}
+        },
+        "runtime": {
+          "lib/net461/System.Data.SqlClient.dll": {}
+        }
+      },
+      "System.Data.SQLite/1.0.113.7": {
+        "type": "package",
+        "dependencies": {
+          "System.Data.SQLite.Core": "1.0.113.7",
+          "System.Data.SQLite.EF6": "1.0.113",
+          "System.Data.SQLite.Linq": "1.0.113"
+        }
+      },
+      "System.Data.SQLite.Core/1.0.113.7": {
+        "type": "package",
+        "dependencies": {
+          "Stub.System.Data.SQLite.Core.NetFramework": "1.0.113.3"
+        }
+      },
+      "System.Data.SQLite.EF6/1.0.113": {
+        "type": "package",
+        "dependencies": {
+          "EntityFramework": "6.3.0"
+        },
+        "compile": {
+          "lib/net46/System.Data.SQLite.EF6.dll": {}
+        },
+        "runtime": {
+          "lib/net46/System.Data.SQLite.EF6.dll": {}
+        }
+      },
+      "System.Data.SQLite.Linq/1.0.113": {
+        "type": "package",
+        "compile": {
+          "lib/net46/System.Data.SQLite.Linq.dll": {}
+        },
+        "runtime": {
+          "lib/net46/System.Data.SQLite.Linq.dll": {}
+        }
+      },
+      "System.Security.Principal.Windows/5.0.0": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "System",
+          "mscorlib"
+        ],
+        "compile": {
+          "ref/net461/System.Security.Principal.Windows.dll": {}
+        },
+        "runtime": {
+          "lib/net461/System.Security.Principal.Windows.dll": {}
         }
       }
     }
@@ -448,6 +852,32 @@
         "lib/net45/ru/EntityFramework.SqlServer.xml",
         "lib/net45/ru/EntityFramework.resources.dll",
         "lib/net45/ru/EntityFramework.xml"
+      ]
+    },
+    "GMap.NET.Core/2.0.2": {
+      "sha512": "ChUk60KbY6nd0tHvYshb+razwQQMbmDPQsJLTTMiMc97e1v7v+u5+Gx4Nb1DWYbk0JpCUL8nNF0pLVEAjuqynA==",
+      "type": "package",
+      "path": "gmap.net.core/2.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "gmap.net.core.2.0.2.nupkg.sha512",
+        "gmap.net.core.nuspec",
+        "lib/net46/GMap.NET.Core.dll",
+        "lib/netstandard2.0/GMap.NET.Core.dll"
+      ]
+    },
+    "GMap.NET.WinPresentation/2.0.2": {
+      "sha512": "aWuGliXp2B2ZpPyztD0plQusO21JGe7cGAxvfr/a+SYULOPueVMXcF//YodTWkRhJqZkzmtVMqLVH+YNFWTP/g==",
+      "type": "package",
+      "path": "gmap.net.winpresentation/2.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "gmap.net.winpresentation.2.0.2.nupkg.sha512",
+        "gmap.net.winpresentation.nuspec",
+        "lib/net46/GMap.NET.WindowsPresentation.dll",
+        "lib/net5.0-windows7.0/GMap.NET.WindowsPresentation.dll"
       ]
     },
     "Microsoft.VCRTForwarders.140/1.0.6": {
@@ -536,23 +966,307 @@
         "runtimes/win10-x86/native/release/vcruntime140_app.dll"
       ]
     },
-    "XAML.MapControl/5.6.0": {
-      "sha512": "mvalh6cBRroozPAFDgg7gR7CYSoJ7AwZaIOAR+rlAkLH2NYl6xw0ZLT85TmUGiQBiSrMlxJfWOse2B1fW75cmg==",
+    "Newtonsoft.Json/12.0.3": {
+      "sha512": "6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
       "type": "package",
-      "path": "xaml.mapcontrol/5.6.0",
+      "path": "newtonsoft.json/12.0.3",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "lib/net462/MapControl.WPF.dll",
-        "lib/net48/MapControl.WPF.dll",
-        "lib/net5.0-windows7.0/MapControl.WPF.dll",
-        "lib/netcoreapp3.1/MapControl.WPF.dll",
-        "lib/uap10.0/MapControl.UWP.dll",
-        "lib/uap10.0/MapControl.UWP.pri",
-        "lib/uap10.0/MapControl.UWP/MapControl.UWP.xr.xml",
-        "lib/uap10.0/MapControl.UWP/Themes/Generic.xaml",
-        "xaml.mapcontrol.5.6.0.nupkg.sha512",
-        "xaml.mapcontrol.nuspec"
+        "LICENSE.md",
+        "lib/net20/Newtonsoft.Json.dll",
+        "lib/net20/Newtonsoft.Json.xml",
+        "lib/net35/Newtonsoft.Json.dll",
+        "lib/net35/Newtonsoft.Json.xml",
+        "lib/net40/Newtonsoft.Json.dll",
+        "lib/net40/Newtonsoft.Json.xml",
+        "lib/net45/Newtonsoft.Json.dll",
+        "lib/net45/Newtonsoft.Json.xml",
+        "lib/netstandard1.0/Newtonsoft.Json.dll",
+        "lib/netstandard1.0/Newtonsoft.Json.xml",
+        "lib/netstandard1.3/Newtonsoft.Json.dll",
+        "lib/netstandard1.3/Newtonsoft.Json.xml",
+        "lib/netstandard2.0/Newtonsoft.Json.dll",
+        "lib/netstandard2.0/Newtonsoft.Json.xml",
+        "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.dll",
+        "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.xml",
+        "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.dll",
+        "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.xml",
+        "newtonsoft.json.12.0.3.nupkg.sha512",
+        "newtonsoft.json.nuspec",
+        "packageIcon.png"
+      ]
+    },
+    "Stub.System.Data.SQLite.Core.NetFramework/1.0.113.3": {
+      "sha512": "HAZt6dEnKobDle4LKwnZXUa/iY8pSmKCZfpyaB3tdeNwOaPWOcClDTdrN5sv/WjYN6EmbDKX6+bBksF4K/ss4A==",
+      "type": "package",
+      "path": "stub.system.data.sqlite.core.netframework/1.0.113.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "build/net20/Stub.System.Data.SQLite.Core.NetFramework.targets",
+        "build/net20/x64/SQLite.Interop.dll",
+        "build/net20/x86/SQLite.Interop.dll",
+        "build/net40/Stub.System.Data.SQLite.Core.NetFramework.targets",
+        "build/net40/x64/SQLite.Interop.dll",
+        "build/net40/x86/SQLite.Interop.dll",
+        "build/net45/Stub.System.Data.SQLite.Core.NetFramework.targets",
+        "build/net45/x64/SQLite.Interop.dll",
+        "build/net45/x86/SQLite.Interop.dll",
+        "build/net451/Stub.System.Data.SQLite.Core.NetFramework.targets",
+        "build/net451/x64/SQLite.Interop.dll",
+        "build/net451/x86/SQLite.Interop.dll",
+        "build/net46/Stub.System.Data.SQLite.Core.NetFramework.targets",
+        "build/net46/x64/SQLite.Interop.dll",
+        "build/net46/x86/SQLite.Interop.dll",
+        "buildTransitive/net20/Stub.System.Data.SQLite.Core.NetFramework.targets",
+        "buildTransitive/net40/Stub.System.Data.SQLite.Core.NetFramework.targets",
+        "buildTransitive/net45/Stub.System.Data.SQLite.Core.NetFramework.targets",
+        "buildTransitive/net451/Stub.System.Data.SQLite.Core.NetFramework.targets",
+        "buildTransitive/net46/Stub.System.Data.SQLite.Core.NetFramework.targets",
+        "lib/net20/System.Data.SQLite.dll",
+        "lib/net20/System.Data.SQLite.dll.altconfig",
+        "lib/net20/System.Data.SQLite.xml",
+        "lib/net40/System.Data.SQLite.dll",
+        "lib/net40/System.Data.SQLite.dll.altconfig",
+        "lib/net40/System.Data.SQLite.xml",
+        "lib/net45/System.Data.SQLite.dll",
+        "lib/net45/System.Data.SQLite.dll.altconfig",
+        "lib/net45/System.Data.SQLite.xml",
+        "lib/net451/System.Data.SQLite.dll",
+        "lib/net451/System.Data.SQLite.dll.altconfig",
+        "lib/net451/System.Data.SQLite.xml",
+        "lib/net46/System.Data.SQLite.dll",
+        "lib/net46/System.Data.SQLite.dll.altconfig",
+        "lib/net46/System.Data.SQLite.xml",
+        "stub.system.data.sqlite.core.netframework.1.0.113.3.nupkg.sha512",
+        "stub.system.data.sqlite.core.netframework.nuspec"
+      ]
+    },
+    "System.Data.SqlClient/4.8.2": {
+      "sha512": "80vGtW6uLB4AkyrdVuKTXYUyuXDPAsSKbTVfvjndZaRAYxzFzWhJbvUfeAKrN+128ycWZjLIAl61dFUwWHOOTw==",
+      "type": "package",
+      "path": "system.data.sqlclient/4.8.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net451/System.Data.SqlClient.dll",
+        "lib/net46/System.Data.SqlClient.dll",
+        "lib/net461/System.Data.SqlClient.dll",
+        "lib/net461/System.Data.SqlClient.xml",
+        "lib/netcoreapp2.1/System.Data.SqlClient.dll",
+        "lib/netcoreapp2.1/System.Data.SqlClient.xml",
+        "lib/netstandard1.2/System.Data.SqlClient.dll",
+        "lib/netstandard1.2/System.Data.SqlClient.xml",
+        "lib/netstandard1.3/System.Data.SqlClient.dll",
+        "lib/netstandard1.3/System.Data.SqlClient.xml",
+        "lib/netstandard2.0/System.Data.SqlClient.dll",
+        "lib/netstandard2.0/System.Data.SqlClient.xml",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net451/System.Data.SqlClient.dll",
+        "ref/net46/System.Data.SqlClient.dll",
+        "ref/net461/System.Data.SqlClient.dll",
+        "ref/net461/System.Data.SqlClient.xml",
+        "ref/netcoreapp2.1/System.Data.SqlClient.dll",
+        "ref/netcoreapp2.1/System.Data.SqlClient.xml",
+        "ref/netstandard1.2/System.Data.SqlClient.dll",
+        "ref/netstandard1.2/System.Data.SqlClient.xml",
+        "ref/netstandard1.2/de/System.Data.SqlClient.xml",
+        "ref/netstandard1.2/es/System.Data.SqlClient.xml",
+        "ref/netstandard1.2/fr/System.Data.SqlClient.xml",
+        "ref/netstandard1.2/it/System.Data.SqlClient.xml",
+        "ref/netstandard1.2/ja/System.Data.SqlClient.xml",
+        "ref/netstandard1.2/ko/System.Data.SqlClient.xml",
+        "ref/netstandard1.2/ru/System.Data.SqlClient.xml",
+        "ref/netstandard1.2/zh-hans/System.Data.SqlClient.xml",
+        "ref/netstandard1.2/zh-hant/System.Data.SqlClient.xml",
+        "ref/netstandard1.3/System.Data.SqlClient.dll",
+        "ref/netstandard1.3/System.Data.SqlClient.xml",
+        "ref/netstandard1.3/de/System.Data.SqlClient.xml",
+        "ref/netstandard1.3/es/System.Data.SqlClient.xml",
+        "ref/netstandard1.3/fr/System.Data.SqlClient.xml",
+        "ref/netstandard1.3/it/System.Data.SqlClient.xml",
+        "ref/netstandard1.3/ja/System.Data.SqlClient.xml",
+        "ref/netstandard1.3/ko/System.Data.SqlClient.xml",
+        "ref/netstandard1.3/ru/System.Data.SqlClient.xml",
+        "ref/netstandard1.3/zh-hans/System.Data.SqlClient.xml",
+        "ref/netstandard1.3/zh-hant/System.Data.SqlClient.xml",
+        "ref/netstandard2.0/System.Data.SqlClient.dll",
+        "ref/netstandard2.0/System.Data.SqlClient.xml",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "runtimes/unix/lib/netcoreapp2.1/System.Data.SqlClient.dll",
+        "runtimes/unix/lib/netcoreapp2.1/System.Data.SqlClient.xml",
+        "runtimes/unix/lib/netstandard1.3/System.Data.SqlClient.dll",
+        "runtimes/unix/lib/netstandard2.0/System.Data.SqlClient.dll",
+        "runtimes/unix/lib/netstandard2.0/System.Data.SqlClient.xml",
+        "runtimes/win/lib/net451/System.Data.SqlClient.dll",
+        "runtimes/win/lib/net46/System.Data.SqlClient.dll",
+        "runtimes/win/lib/net461/System.Data.SqlClient.dll",
+        "runtimes/win/lib/net461/System.Data.SqlClient.xml",
+        "runtimes/win/lib/netcoreapp2.1/System.Data.SqlClient.dll",
+        "runtimes/win/lib/netcoreapp2.1/System.Data.SqlClient.xml",
+        "runtimes/win/lib/netstandard1.3/System.Data.SqlClient.dll",
+        "runtimes/win/lib/netstandard2.0/System.Data.SqlClient.dll",
+        "runtimes/win/lib/netstandard2.0/System.Data.SqlClient.xml",
+        "runtimes/win/lib/uap10.0.16299/System.Data.SqlClient.dll",
+        "runtimes/win/lib/uap10.0.16299/System.Data.SqlClient.xml",
+        "system.data.sqlclient.4.8.2.nupkg.sha512",
+        "system.data.sqlclient.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
+    "System.Data.SQLite/1.0.113.7": {
+      "sha512": "PQ9cXfM4R2iEztZb5EuO0RvXhK64fYK3GK9NfKIUj/rLcpTAIkxduEid/PJAV1KOAuP7NStCZORNeMYJStHJOA==",
+      "type": "package",
+      "path": "system.data.sqlite/1.0.113.7",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "system.data.sqlite.1.0.113.7.nupkg.sha512",
+        "system.data.sqlite.nuspec"
+      ]
+    },
+    "System.Data.SQLite.Core/1.0.113.7": {
+      "sha512": "2DKMIxfZpIVzdMfx1dj9qvTm+0m0Mx6sN6CZXMQDNytU7Sk/JKo0Ox6mvHAicfHrQgqZbUZMzMMtLXD0kwmFfg==",
+      "type": "package",
+      "path": "system.data.sqlite.core/1.0.113.7",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "system.data.sqlite.core.1.0.113.7.nupkg.sha512",
+        "system.data.sqlite.core.nuspec"
+      ]
+    },
+    "System.Data.SQLite.EF6/1.0.113": {
+      "sha512": "4EioCVv8fEsI6Xp66Q/r9QI680smaLZzlIvBDXWRxPuc1/puBA8jHm7CTY3wgAOwAuiPgLsmq6RVdAjoaVuziQ==",
+      "type": "package",
+      "path": "system.data.sqlite.ef6/1.0.113",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "content/net40/app.config.install.xdt",
+        "content/net40/app.config.transform",
+        "content/net40/web.config.install.xdt",
+        "content/net40/web.config.transform",
+        "content/net45/app.config.install.xdt",
+        "content/net45/app.config.transform",
+        "content/net45/web.config.install.xdt",
+        "content/net45/web.config.transform",
+        "content/net451/app.config.install.xdt",
+        "content/net451/app.config.transform",
+        "content/net451/web.config.install.xdt",
+        "content/net451/web.config.transform",
+        "content/net46/app.config.install.xdt",
+        "content/net46/app.config.transform",
+        "content/net46/web.config.install.xdt",
+        "content/net46/web.config.transform",
+        "lib/net40/System.Data.SQLite.EF6.dll",
+        "lib/net45/System.Data.SQLite.EF6.dll",
+        "lib/net451/System.Data.SQLite.EF6.dll",
+        "lib/net46/System.Data.SQLite.EF6.dll",
+        "lib/netstandard2.1/System.Data.SQLite.EF6.dll",
+        "system.data.sqlite.ef6.1.0.113.nupkg.sha512",
+        "system.data.sqlite.ef6.nuspec",
+        "tools/net40/install.ps1",
+        "tools/net45/install.ps1",
+        "tools/net451/install.ps1",
+        "tools/net46/install.ps1"
+      ]
+    },
+    "System.Data.SQLite.Linq/1.0.113": {
+      "sha512": "GTCVFMY9S32O6HsfjIOt8fYaAV+jb3YU9HGD7xd5LpFmPpL23NPjbY92L/hfxOZIQUmuS7SxZZMBTdq45eVvfw==",
+      "type": "package",
+      "path": "system.data.sqlite.linq/1.0.113",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "content/net20/app.config.transform",
+        "content/net20/web.config.transform",
+        "content/net40/app.config.transform",
+        "content/net40/web.config.transform",
+        "content/net45/app.config.transform",
+        "content/net45/web.config.transform",
+        "content/net451/app.config.transform",
+        "content/net451/web.config.transform",
+        "content/net46/app.config.transform",
+        "content/net46/web.config.transform",
+        "lib/net20/System.Data.SQLite.Linq.dll",
+        "lib/net40/System.Data.SQLite.Linq.dll",
+        "lib/net45/System.Data.SQLite.Linq.dll",
+        "lib/net451/System.Data.SQLite.Linq.dll",
+        "lib/net46/System.Data.SQLite.Linq.dll",
+        "system.data.sqlite.linq.1.0.113.nupkg.sha512",
+        "system.data.sqlite.linq.nuspec"
+      ]
+    },
+    "System.Security.Principal.Windows/5.0.0": {
+      "sha512": "t0MGLukB5WAVU9bO3MGzvlGnyJPgUlcwerXn1kzBRjwLKixT96XV0Uza41W49gVd8zEMFu9vQEFlv0IOrytICA==",
+      "type": "package",
+      "path": "system.security.principal.windows/5.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net46/System.Security.Principal.Windows.dll",
+        "lib/net461/System.Security.Principal.Windows.dll",
+        "lib/net461/System.Security.Principal.Windows.xml",
+        "lib/netstandard1.3/System.Security.Principal.Windows.dll",
+        "lib/netstandard2.0/System.Security.Principal.Windows.dll",
+        "lib/netstandard2.0/System.Security.Principal.Windows.xml",
+        "lib/uap10.0.16299/_._",
+        "ref/net46/System.Security.Principal.Windows.dll",
+        "ref/net461/System.Security.Principal.Windows.dll",
+        "ref/net461/System.Security.Principal.Windows.xml",
+        "ref/netcoreapp3.0/System.Security.Principal.Windows.dll",
+        "ref/netcoreapp3.0/System.Security.Principal.Windows.xml",
+        "ref/netstandard1.3/System.Security.Principal.Windows.dll",
+        "ref/netstandard1.3/System.Security.Principal.Windows.xml",
+        "ref/netstandard1.3/de/System.Security.Principal.Windows.xml",
+        "ref/netstandard1.3/es/System.Security.Principal.Windows.xml",
+        "ref/netstandard1.3/fr/System.Security.Principal.Windows.xml",
+        "ref/netstandard1.3/it/System.Security.Principal.Windows.xml",
+        "ref/netstandard1.3/ja/System.Security.Principal.Windows.xml",
+        "ref/netstandard1.3/ko/System.Security.Principal.Windows.xml",
+        "ref/netstandard1.3/ru/System.Security.Principal.Windows.xml",
+        "ref/netstandard1.3/zh-hans/System.Security.Principal.Windows.xml",
+        "ref/netstandard1.3/zh-hant/System.Security.Principal.Windows.xml",
+        "ref/netstandard2.0/System.Security.Principal.Windows.dll",
+        "ref/netstandard2.0/System.Security.Principal.Windows.xml",
+        "ref/uap10.0.16299/_._",
+        "runtimes/unix/lib/netcoreapp2.0/System.Security.Principal.Windows.dll",
+        "runtimes/unix/lib/netcoreapp2.0/System.Security.Principal.Windows.xml",
+        "runtimes/unix/lib/netcoreapp2.1/System.Security.Principal.Windows.dll",
+        "runtimes/unix/lib/netcoreapp2.1/System.Security.Principal.Windows.xml",
+        "runtimes/win/lib/net46/System.Security.Principal.Windows.dll",
+        "runtimes/win/lib/net461/System.Security.Principal.Windows.dll",
+        "runtimes/win/lib/net461/System.Security.Principal.Windows.xml",
+        "runtimes/win/lib/netcoreapp2.0/System.Security.Principal.Windows.dll",
+        "runtimes/win/lib/netcoreapp2.0/System.Security.Principal.Windows.xml",
+        "runtimes/win/lib/netcoreapp2.1/System.Security.Principal.Windows.dll",
+        "runtimes/win/lib/netcoreapp2.1/System.Security.Principal.Windows.xml",
+        "runtimes/win/lib/netstandard1.3/System.Security.Principal.Windows.dll",
+        "runtimes/win/lib/uap10.0.16299/_._",
+        "system.security.principal.windows.5.0.0.nupkg.sha512",
+        "system.security.principal.windows.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
       ]
     }
   },
@@ -560,8 +1274,8 @@
     ".NETFramework,Version=v4.7.2": [
       "EntityFramework >= 6.2.0",
       "EntityFramework.ru >= 6.2.0",
-      "Microsoft.VCRTForwarders.140 >= 1.0.6",
-      "XAML.MapControl >= 5.6.0"
+      "GMap.NET.WinPresentation >= 2.0.2",
+      "Microsoft.VCRTForwarders.140 >= 1.0.6"
     ]
   },
   "packageFolders": {
@@ -610,13 +1324,13 @@
             "target": "Package",
             "version": "[6.2.0, )"
           },
+          "GMap.NET.WinPresentation": {
+            "target": "Package",
+            "version": "[2.0.2, )"
+          },
           "Microsoft.VCRTForwarders.140": {
             "target": "Package",
             "version": "[1.0.6, )"
-          },
-          "XAML.MapControl": {
-            "target": "Package",
-            "version": "[5.6.0, )"
           }
         },
         "imports": [
@@ -637,5 +1351,20 @@
         "#import": []
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1605",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Обнаружено понижение версии пакета EntityFramework с 6.3.0.0 на 6.2.0. Чтобы выбрать другую версию, создайте ссылку на пакет напрямую из проекта. \r\n FogOilAssistant -> GMap.NET.WinPresentation 2.0.2 -> GMap.NET.Core 2.0.2 -> System.Data.SQLite 1.0.113.7 -> System.Data.SQLite.EF6 1.0.113 -> EntityFramework (>= 6.3.0) \r\n FogOilAssistant -> EntityFramework (>= 6.2.0)",
+      "libraryId": "EntityFramework",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.7.2",
+        ".NETFramework,Version=v4.7.2/win",
+        ".NETFramework,Version=v4.7.2/win-x64",
+        ".NETFramework,Version=v4.7.2/win-x86"
+      ]
+    }
+  ]
 }
