@@ -220,13 +220,17 @@ namespace FogOilAssistant.Components.Models.Basket
                 using (FogOilEntities db = new FogOilEntities())
                 {
                     foreach (var item in db.Users.Find(DataBaseData.getInstance().UserId).Baskets)
+                    {
                         db.Users.Find(DataBaseData.getInstance().UserId).UserProducts.Add(
-                            new UserProduct() {
-                                ProductId = item.ProductId, 
-                                LocationId = this.Locations[SelectedLocation].LocationId , Status =1 ,
-                                OrderDate = DateTime.Now,
-                                LastChangesDate = DateTime.Now
-                            });;
+                           new UserProduct()
+                           {
+                               ProductId = item.ProductId,
+                               LocationId = this.Locations[SelectedLocation].LocationId,
+                               Status = 1,
+                               OrderDate = DateTime.Now,
+                               LastChangesDate = DateTime.Now
+                           }); ;
+                    }
                     db.SaveChanges();
                 }
                 return true;

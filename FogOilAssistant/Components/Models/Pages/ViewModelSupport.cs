@@ -30,6 +30,9 @@ namespace FogOilAssistant.Components.Models.Pages
             }
         }
 
+
+       
+
         private string text;
         public string Text
         {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -31,8 +32,16 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
 
         #endregion
 
+        public string GetHashPAss(string input)
+        {
+            var md5 = MD5.Create();
+            var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(input));
+
+            return Convert.ToBase64String(hash);
+        }
+
         #region UI props
-        private bool editorVisibility;
+        private bool editorVisibility; 
         public bool EditorVisibility
         {
             get => editorVisibility;
@@ -116,6 +125,18 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
                     oils = value;
                     OnPropertyChanged("Oils");
                 }
+            }
+        }
+
+
+        private string newPassword = "";
+        public string NewPassword
+        {
+            get => newPassword;
+            set
+            {
+                newPassword = value;
+                OnPropertyChanged("NewPassword");
             }
         }
 
@@ -270,6 +291,19 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
 
         #endregion
         #region Methods
+
+        private void createNewUser()
+        {
+            SelectedIndex = 0;
+            Nick = "New User";
+            Bonus = "0";
+            Oils = "0";
+            SelectedUserId = 0;
+
+            Products = new List<ProductPresenter>();
+
+            EditorVisibility = true;
+        }
         private void openEditor(object obj)
         {
             try
@@ -297,6 +331,8 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
             {
                 using (FogOilEntities db = new FogOilEntities())
                 {
+                    if (selectedUserId == 0)
+                        return;
                     Products = (await db.Users.FindAsync(SelectedUserId)).UserProducts
                          .Select(item =>
                          UserProductsBuilder.GetProduct(item.UserProductsId,
@@ -357,10 +393,67 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
             {
                 using (FogOilEntities db = new FogOilEntities())
                 {
+
+                    if(db.Users.Where(item=>(item.Nick == Nick) && item.UserId != SelectedUserId).ToList().Count != 0)
+                    {
+                        DataBaseData.getInstance().CallNotify(new Data.Pages.Notify()
+                        {
+                            Message = "User exists",
+                            Color = UIData.GetColor(UIData.MessageColor.ERROR)
+                        });
+                        NewPassword = "";
+                        return;
+                    }
+                    if((await db.Users.FindAsync(selectedUserId))==null)
+                    {
+                        
+
+                        if(NewPassword.Length <4)
+                        {
+                            DataBaseData.getInstance().CallNotify(new Data.Pages.Notify()
+                            {
+                                Message = "Password must consist min 4 symbols",
+                                Color = UIData.GetColor(UIData.MessageColor.ERROR)
+                            });
+                            NewPassword = "";
+
+                            return;
+                        }
+                        User newUser = new User() { Root = (SelectedIndex + 1), Nick = Nick, Bonus = Convert.ToDouble(Bonus), Oil =  Convert.ToDouble(Oils), Password = GetHashPAss(NewPassword) };
+                        db.Users.Add(newUser);
+                        await db.SaveChangesAsync();
+                        DataBaseData.getInstance().CallNotify(new Data.Pages.Notify()
+                        {
+                            Message = "User was created",
+                            Color = UIData.GetColor(UIData.MessageColor.SUCCESS)
+                        });
+                        NewPassword = "";
+
+                        loadUsers();
+                        closeEditor();
+                        return;
+                    }
+
+                    //todo: check on exisitng user
                     (await db.Users.FindAsync(SelectedUserId)).Root = SelectedIndex + 1;
                     (await db.Users.FindAsync(SelectedUserId)).Nick = Nick;
                     (await db.Users.FindAsync(SelectedUserId)).Bonus = Convert.ToDouble(Bonus);
                     (await db.Users.FindAsync(SelectedUserId)).Oil = Convert.ToDouble(Oils);
+                    if (NewPassword.Length != 0)
+                    {
+                        if (!(NewPassword.Length < 4))
+                            (await db.Users.FindAsync(SelectedUserId)).Password = GetHashPAss(newPassword);
+                        else
+                        {
+                            DataBaseData.getInstance().CallNotify(new Data.Pages.Notify()
+                            {
+                                Message = "Password must consist min 4 symbols",
+                                Color = UIData.GetColor(UIData.MessageColor.ERROR)
+                            });
+                            NewPassword = "";
+                            return;
+                        }
+                    }
                     await db.SaveChangesAsync();
 
                 }
@@ -370,6 +463,8 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
                     Color = UIData.GetColor(UIData.MessageColor.SUCCESS)
                 });
                 loadUsers();
+                NewPassword = "";
+
                 closeEditor();
             }
             catch (Exception e)
@@ -394,7 +489,7 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
             }
         }); }
         public RelayCommand OpenEditor { get => new RelayCommand(openEditor); }
-
+        public CommandViewModel CreateNewUser { get => new CommandViewModel(createNewUser); }
         public CommandViewModel CloseSelectedAbout { get => new CommandViewModel(() => {
             closeAbout();
         }); }

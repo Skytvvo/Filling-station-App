@@ -338,6 +338,9 @@ namespace FogOilAssistant.Components.Models.Pages
                         throw new Exception("This user exists");
                     }
 
+                    if (password.Length < 4)
+                        throw new Exception("Password must consist min 4 symbols");
+
                     User newUser = new User() { Bonus = 0.0, Nick = Login, Password = GetHash(password), Root = 1 };
                     db.Users.Add(newUser);
                     db.SaveChanges();

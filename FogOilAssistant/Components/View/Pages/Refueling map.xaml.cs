@@ -41,7 +41,7 @@ namespace FogOilAssistant.Components.View.Pages
 
             this.map.ShowCenter = false;
 
-            GMaps.Instance.Mode = AccessMode.ServerOnly;
+            GMaps.Instance.Mode = AccessMode.ServerAndCache;
 
             this.map.MapProvider = GMapProviders.YandexMap;
 
@@ -64,13 +64,5 @@ namespace FogOilAssistant.Components.View.Pages
                 }
             }
         }
-
-        //private  async void map_container_Loaded(object sender, RoutedEventArgs e)
-        //{
-        //    BasicGeoposition basicGeoposition = new BasicGeoposition() { Latitude = 53.8144, Longitude = 28.0241 };
-        //    var center = new Geopoint(basicGeoposition);
-        //    await ((Microsoft.Toolkit.Wpf.UI.Controls.MapControl)sender).TrySetViewAsync(center, 5.8);
-
-        //}
     }
 }
