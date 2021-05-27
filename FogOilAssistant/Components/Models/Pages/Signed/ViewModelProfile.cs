@@ -12,10 +12,12 @@ using FogOilAssistant.Components.Database;
 using FogOilAssistant.Components.Data.Pages.Signed;
 using System.Threading;
 using FogOilAssistant.Components.Data.UI;
+using System.Text.RegularExpressions;
 
 namespace FogOilAssistant.Components.Models.Pages.Signed
 {
 
+   
     public class ViewModelProfile : INotifyPropertyChanged
     {
         #region Props
@@ -180,7 +182,7 @@ namespace FogOilAssistant.Components.Models.Pages.Signed
         }
         #endregion
 
-
+       
 
 
         #region Commands
@@ -362,7 +364,7 @@ namespace FogOilAssistant.Components.Models.Pages.Signed
                 RootInfo = $"Root: {user.Root1.Name}";
                 OrdersInfo = $"Orders({user.UserProducts.Where(item => item.Status == 1 || item.Status == 4).Count()})";
                 DeliveredInfo = $"Delivered({user.UserProducts.Where(item => item.Status == 3).Count()})";
-                BonusInfo = $"Discount({Math.Round(user.Bonus,2)}%)";
+                BonusInfo = $"Bonus({Math.Round(user.Bonus,2)})";
                 BasketProductsInfo = $"Basket({user.Baskets.Count()})";
                 TotalOilInfo = $"{Math.Round(user.Oil,2)} oils";
             }

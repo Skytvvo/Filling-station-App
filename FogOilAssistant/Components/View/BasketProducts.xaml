@@ -87,7 +87,6 @@
                             
                             <TextBlock Grid.Column="0" Text="Total:" Style="{StaticResource product_name}"></TextBlock>
                             <TextBlock Grid.Column="1" Style="{StaticResource product_name}" Text="{Binding Total}"></TextBlock>
-                            <TextBlock Grid.Column="2" Style="{StaticResource product_name}" Text="{Binding Bonus, StringFormat=({0})}"/>
                         </StackPanel>
                         <Grid Grid.Column="3" >
                             <Button Command="{Binding BuyItems}" Style="{StaticResource product_cancel}">

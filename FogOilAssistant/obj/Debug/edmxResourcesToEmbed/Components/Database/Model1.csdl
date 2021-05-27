@@ -167,7 +167,7 @@
     <Key>
       <PropertyRef Name="FuelId" />
     </Key>
-    <Property Name="FuelId" Type="Int32" Nullable="false" />
+    <Property Name="FuelId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Name="Price" Type="Double" Nullable="false" />
   </EntityType>

@@ -102,7 +102,7 @@ namespace FogOilAssistant.Components.Models.MainWindow
             }
             catch(Exception e)
             {
-
+                
             }
         }
 

@@ -47,16 +47,7 @@ namespace FogOilAssistant.Components.Models.Basket
             }
         }
 
-        private double bonuns = 0;
-        public double Bonus
-        {
-            get => bonuns;
-            set
-            {
-                bonuns = value;
-                OnPropertyChanged("Bonus");
-            }
-        }
+       
 
         //total
         private double total = 0;
@@ -74,7 +65,6 @@ namespace FogOilAssistant.Components.Models.Basket
                         using (FogOilEntities db = new FogOilEntities())
                         {
                             total = value;
-                            Bonus = Math.Round(value * db.Users.Find(DataBaseData.getInstance().UserId).Bonus/100,2);
                         }
                     }
                     catch(Exception e)

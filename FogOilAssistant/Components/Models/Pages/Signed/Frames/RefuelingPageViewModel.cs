@@ -16,11 +16,80 @@ using FogOilAssistant.Components.Database;
 
 namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
 {
+
+    public class FuelWrapper: INotifyPropertyChanged
+    {
+        public Fuel item
+        {
+            get;
+            set;
+        }
+
+        public string Price
+        {
+            get => item.Price.ToString();
+            set
+            {
+                if (value.Length == 0)
+                {
+                    item.Price = 0;
+                    OnPropertyChanged("Price");
+                    return;
+                }
+                if (Regex.IsMatch(value, @"^[0-9]*(?:\.[0-9]*)?$"))
+                {
+
+                    if (Convert.ToDouble(value) <= 100)
+                    {
+                        item.Price = Convert.ToDouble(value);
+                        OnPropertyChanged("Price");
+                        return;
+                    }
+                }
+
+                DataBaseData.getInstance().CallNotify(new Data.Pages.Notify()
+                {
+                    Message = "Invalid value",
+                    Color = UIData.GetColor(UIData.MessageColor.ERROR)
+                });
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
+    }
+
     public class RefuelingPageViewModel : INotifyPropertyChanged
     {
         #region refuel callback
-            
 
+
+        private List<FuelWrapper> fuelList = new List<FuelWrapper>();
+        public List<FuelWrapper> FuelList
+        {
+            get => fuelList;
+            set
+            {
+                fuelList = value;
+                OnPropertyChanged("FuelList");
+            }
+        }
+
+
+        private bool fuelConfigVisibility = false;
+        public bool FuelConfigVisibility
+        {
+            get => fuelConfigVisibility;
+            set
+            {
+                fuelConfigVisibility = value;
+                OnPropertyChanged("FuelConfigVisibility");
+            }
+        }
 
         private bool btnEnabled = false;
         public bool BtnEnabled
@@ -232,8 +301,34 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
             }
         }
         #endregion
+        private async void saveFuelItem(object obj)
+        {
+            FuelWrapper fuelWrapper = obj as FuelWrapper;
+            if(fuelWrapper!= null)
+            {
+                try
+                {
+                    using(FogOilEntities db = new FogOilEntities())
+                    {
+                        (await db.Fuels.FindAsync(fuelWrapper.item.FuelId)).Price = fuelWrapper.item.Price;
+                        await db.SaveChangesAsync();
+                        DataBaseData.getInstance().CallNotify(new Data.Pages.Notify()
+                        {
+                            Message = "Changed",
+                            Color = UIData.GetColor(UIData.MessageColor.SUCCESS)
+                        });
+                    }
+                }
+                catch
+                {
 
+                }
+            }
+        }
         #region Commands
+
+        public RelayCommand SaveFuelItem { get => new RelayCommand(saveFuelItem); }
+
         public CommandViewModel FindUser { get => new CommandViewModel(findUser); }
         public CommandViewModel RefuelUser { get => new CommandViewModel(async ()=> {
             try
@@ -242,11 +337,12 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
                 {
                     (await db.Users.FindAsync(userId)).Oil += Math.Round((Convert.ToDouble(volume)* Fuels[SelectedIndex].Price),2);
                     var result = (await db.Users.FindAsync(userId)).Oil;
-                    if (result > 5000)
-                    {
-                        result -= 5000;
-                    }
-                    (await db.Users.FindAsync(userId)).Bonus = Math.Round((result / 100), 2);
+                    //if (result > 5000)
+                    //{
+                    //    result -= 5000;
+                    //}
+
+                    (await db.Users.FindAsync(userId)).Bonus = (Math.Round((Convert.ToDouble(volume) * Fuels[SelectedIndex].Price), 2)+ ( await db.Users.FindAsync(userId)).Bonus);
                     await db.SaveChangesAsync();
                     DataBaseData.getInstance().CallNotify(new Data.Pages.Notify()
                     {
@@ -437,6 +533,31 @@ namespace FogOilAssistant.Components.Models.Pages.Signed.Frames
         public RefuelingPageViewModel()
         {
             getFuel();
+            InitialFuelConfig();
+        }
+
+
+        private async void InitialFuelConfig()
+        {
+            try
+            {
+                using(FogOilEntities db  = new FogOilEntities())
+                {
+                    if ((await db.Users.FindAsync(DataBaseData.getInstance().UserId))!= null)
+                    {
+                        if((await db.Users.FindAsync(DataBaseData.getInstance().UserId)).Root == 3)
+                        {
+                            FuelConfigVisibility = true;
+                            FuelList = db.Fuels.Select(item=> new FuelWrapper() { item=item}).ToList();
+                        }
+                    }
+
+                }
+            }
+            catch
+            {
+
+            }
         }
         #endregion
     }

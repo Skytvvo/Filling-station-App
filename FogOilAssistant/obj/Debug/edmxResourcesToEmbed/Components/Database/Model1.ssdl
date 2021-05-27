@@ -51,7 +51,7 @@
     <Key>
       <PropertyRef Name="FuelId" />
     </Key>
-    <Property Name="FuelId" Type="int" Nullable="false" />
+    <Property Name="FuelId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="10" Nullable="false" />
     <Property Name="Price" Type="float" Nullable="false" />
   </EntityType>

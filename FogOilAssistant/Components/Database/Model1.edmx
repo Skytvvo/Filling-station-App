@@ -56,7 +56,7 @@
           <Key>
             <PropertyRef Name="FuelId" />
           </Key>
-          <Property Name="FuelId" Type="int" Nullable="false" />
+          <Property Name="FuelId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="Price" Type="float" Nullable="false" />
         </EntityType>
@@ -536,7 +536,7 @@
           <Key>
             <PropertyRef Name="FuelId" />
           </Key>
-          <Property Name="FuelId" Type="Int32" Nullable="false" />
+          <Property Name="FuelId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Price" Type="Double" Nullable="false" />
         </EntityType>

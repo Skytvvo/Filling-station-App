@@ -8,9 +8,49 @@ using System.Net.Mail;
 using System.Net;
 using FogOilAssistant.Components.Data.GlobalStorage;
 using System;
+using FogOilAssistant.Components.Database;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using FogOilAssistant.Components.Data.UI;
 
 namespace FogOilAssistant.Components.Models.Pages
 {
+    public class FBs : INotifyPropertyChanged
+    {
+        public Fuel FuelItem { get; set; }
+
+        private string summary;
+        public string Summary
+        {
+            get => summary;
+            set
+            {
+                if(value.Length == 0)
+                {
+                    summary = "0";
+                    OnPropertyChanged("Summary");
+                    return;
+                }
+                if (Regex.IsMatch(value, @"^[0-9]*(?:\.[0-9]*)?$"))
+                {
+                    
+                    if (Convert.ToDouble(value) <= 100)
+                    {
+                        summary = Convert.ToDouble(value).ToString();
+                        OnPropertyChanged("Summary");
+                    }
+                }
+            }
+
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
+    }
+
     public class ViewModelSupport : INotifyPropertyChanged
     {
         SupportItem supportItems;
@@ -31,7 +71,19 @@ namespace FogOilAssistant.Components.Models.Pages
         }
 
 
-       
+
+        
+
+        private List<FBs> fuel_list = new List<FBs>();
+        public List<FBs> Fuel_list
+        {
+            get => fuel_list;
+            set
+            {
+                fuel_list = value;
+                OnPropertyChanged("Fuel_list");
+            }
+        }
 
         private string text;
         public string Text
@@ -47,7 +99,21 @@ namespace FogOilAssistant.Components.Models.Pages
         public ViewModelSupport()
         {
             this.SupportItems = new SupportItem() { Color = "#00E5FF", Link = "#", Name = "Feedback", Text = "Your feedback will be processe by our technical support." };
-               
+
+            List<FBs> newList = new List<FBs>();
+            using (FogOilEntities db = new FogOilEntities())
+            {
+                if (db.Users.Find(DataBaseData.getInstance().UserId) != null)
+                {
+                    if(db.Users.Find(DataBaseData.getInstance().UserId).Root == 1)
+                    foreach (var item in db.Fuels)
+                    {
+                        newList.Add(new FBs() { FuelItem = item, Summary = "0" });
+                    }
+                }
+            }
+
+            Fuel_list = newList;
             
         }
 
@@ -56,7 +122,49 @@ namespace FogOilAssistant.Components.Models.Pages
         public string CollapsePanel { get => "/Components/Images/exp_btn.svg"; }
 
 
-        
+        public RelayCommand BuyFuel { get => new RelayCommand(buyFuel); }
+        public async void buyFuel(object obj)
+        {
+            try
+            {
+
+                FBs current = (obj as FBs);
+                using (FogOilEntities db = new FogOilEntities())
+                {
+                    double price = Convert.ToDouble(current.Summary) * current.FuelItem.Price;
+                    double userBonus = (await db.Users.FindAsync(DataBaseData.getInstance().UserId)).Bonus;
+                    if (userBonus < price)
+                    {
+                        DataBaseData.getInstance().CallNotify(new Data.Pages.Notify()
+                        {
+                            Message = "Not enought bonuses",
+                            Color = UIData.GetColor(UIData.MessageColor.ERROR)
+                        });
+                    }
+                    else
+                    {
+                        (await db.Users.FindAsync(DataBaseData.getInstance().UserId)).Bonus = userBonus - price;
+                    await db.SaveChangesAsync();
+
+                        DataBaseData.getInstance().CallNotify(new Data.Pages.Notify()
+                        {
+                            Message = "Success",
+                            Color = UIData.GetColor(UIData.MessageColor.SUCCESS)
+                        });
+                    }
+                    
+                    if(fuel_list.Find(item => item.FuelItem.FuelId == current.FuelItem.FuelId)!= null)
+                    fuel_list.Find(item => item.FuelItem.FuelId == current.FuelItem.FuelId).Summary = "0";
+
+                   
+
+                }
+            }
+            catch
+            {
+
+            }
+        }
 
         public async void sendFeedback()
         {
